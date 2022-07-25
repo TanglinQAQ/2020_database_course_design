@@ -1,0 +1,6 @@
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.FirstForm.resources
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.csproj.GenerateResource.cache
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.AssemblyInfoInputs.cache
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.AssemblyInfo.cs
+C:\Users\xltx-\Desktop\Example\Meeteam\obj\Debug\netcoreapp3.1\Meeteam.csproj.CoreCompileInputs.cache

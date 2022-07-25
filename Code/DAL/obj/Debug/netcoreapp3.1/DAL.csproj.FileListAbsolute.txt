@@ -1,0 +1,5 @@
+C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.AssemblyReference.cache
+C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
+C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
+C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CoreCompileInputs.cache

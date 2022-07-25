@@ -1,0 +1,4 @@
+C:\Users\xltx-\Desktop\Example\BLL\obj\Debug\netcoreapp3.1\BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xltx-\Desktop\Example\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfoInputs.cache
+C:\Users\xltx-\Desktop\Example\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfo.cs
+C:\Users\xltx-\Desktop\Example\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CoreCompileInputs.cache
