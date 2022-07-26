@@ -12,12 +12,12 @@ namespace BLL
         {
             messageStr = "";
             bool ifsuccess = false; //state begin with "false"
-            if (userinfo.UserName.Trim().Length !=0)
+            if (userinfo.UserID.Trim().Length !=0)
             {
                 if (!userdb1.IsEqual(userinfo))
                 {
                     //no same name already
-              //      userdb1.AddUser(userinfo);
+                    userdb1.AddUser(userinfo);
                     ifsuccess = true;
                 }
                 else

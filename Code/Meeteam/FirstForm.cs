@@ -23,7 +23,7 @@ namespace Meeteam
 
         public string Loginid
         {
-            get //这块是个啥语法？
+            get
             {
                 return idbox.Text.Trim();
             }
@@ -44,13 +44,13 @@ namespace Meeteam
 
             if (id == "")
             {
-                MessageBox.Show("帐号不允许为空!");
+                MessageBox.Show("帐号不允许为空,请重新输入");
                 //MessageBox.Show("帐号不允许为空!", "CTGU在线考试系统", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             else if (pwd == "")
             {
-                MessageBox.Show("密码不允许为空!");
+                MessageBox.Show("密码不允许为空,请重新输入");
                 return false;
             }
 
@@ -63,8 +63,6 @@ namespace Meeteam
             {
                 return;
             }
-
-
             //the login button
             String inputname = Loginid;
             /*
@@ -84,9 +82,8 @@ namespace Meeteam
 
             string username = idbox.Text.Trim();
             string pwd = pwdbox.Text.Trim();
-
             UserInfo userInfo1 = new UserInfo();
-            userInfo1.UserName = username;
+            userInfo1.UserID = username;
             userInfo1.PassWord = pwd;
 
             UserDB userdb1 = new UserDB();
@@ -104,7 +101,27 @@ namespace Meeteam
         private void registerbut_Click(object sender, EventArgs e)
         {
             //the register button
+            if (!checkinput())
+            {
+                return;
+            }
 
+            string username = idbox.Text.Trim();
+            string pwd = pwdbox.Text.Trim();
+            UserInfo userInfo1 = new UserInfo();
+            userInfo1.UserID = username;
+            userInfo1.PassWord = pwd;
+
+            UserMager um1 = new UserMager();
+            string outstring= "";
+            if(um1.ifadd(userInfo1, out outstring)) //out用于返回多个参数
+            {
+                MessageBox.Show("注册成功！");
+            }
+            else
+            {
+                MessageBox.Show("注册失败："+outstring);
+            }
         }
     }
 }

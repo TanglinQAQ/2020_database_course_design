@@ -43,7 +43,7 @@ namespace DAL
                 return false;
             }
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select USER_ID,PASSWORD from USER_INFO where USER_ID='" + info.UserName + "' and PASSWORD='" + info.PassWord+ "'";
+            cmd.CommandText = "select USER_ID,PASSWORD from USER_INFO where USER_ID='" + info.UserID + "' and PASSWORD='" + info.PassWord+ "'";
 
             OracleDataReader odr = cmd.ExecuteReader();
             bool iflogin = false;
@@ -53,7 +53,7 @@ namespace DAL
                 string currusername = odr["USER_ID"].ToString();
                 string currpwd = odr["PASSWORD"].ToString();
 
-                if (currusername == info.UserName && currpwd == info.PassWord)
+                if (currusername == info.UserID && currpwd == info.PassWord)
                 {
                     iflogin = true;
                 }
@@ -66,18 +66,15 @@ namespace DAL
 
         public bool IsEqual(UserInfo info)
         {
-            /*
-             * 这块儿加连接的逻辑？
-             */
+     
             if (!connectOracle())
             {
                 return false; //true比较好？
             }
-            connectOracle();
             bool already = false;
 
             OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select USER_ID,PASSWORD from USER_INFO where USER_ID='" + info.UserName + "' and PASSWORD='" + info.PassWord;
+            cmd.CommandText = "select USER_ID from USER_INFO where USER_ID='" + info.UserID + "'";
             OracleDataReader odr = cmd.ExecuteReader();
 
             while (odr.Read())
@@ -85,7 +82,7 @@ namespace DAL
                 string currusername = odr["USER_ID"].ToString();
             //    string currpwd = odr["PASSWARD"].ToString();
 
-                if (currusername == info.UserName)
+                if (currusername == info.UserID)
                 {
                     already = true;
                 }
@@ -96,20 +93,32 @@ namespace DAL
             return already;
         }
 
-        /*
+        
         public int AddUser(UserInfo info)
         {
-
-            //the sql sentence to implement the add operation
-            // string commandline = "insert into USER_INFO(USER_ID,PASSWARD) value(@UserName,@PassWord)";
-            OracleParameter[] para = new OracleParameter[]
+            if (!connectOracle())
             {
+                return -1; 
+            }
 
-            };
-            
+            OracleCommand cmd = con.CreateCommand();
+            cmd.CommandText = "insert into USER_INFO(USER_ID,PASSWORD) values('" + info.UserID + "','" + info.PassWord + "')";
+           // OracleDataReader odr = cmd.ExecuteReader();
+
+            int result = cmd.ExecuteNonQuery();
+            if (result > 0)
+            {
+                Console.WriteLine("插入成功!");
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("插入失败！");
+                return -1;
+            }
+
 
         }
-        */
 
     }
 }

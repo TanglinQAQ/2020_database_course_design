@@ -47,7 +47,7 @@ namespace Meeteam
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(87, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(610, 57);
+            this.label1.Size = new System.Drawing.Size(598, 57);
             this.label1.TabIndex = 0;
             this.label1.Text = "This is the Meeteam System";
             // 
@@ -75,11 +75,11 @@ namespace Meeteam
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(201, 138);
+            this.label2.Location = new System.Drawing.Point(231, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 27);
+            this.label2.Size = new System.Drawing.Size(99, 27);
             this.label2.TabIndex = 3;
-            this.label2.Text = "UserName : ";
+            this.label2.Text = "User ID : ";
             // 
             // label3
             // 
@@ -105,7 +105,7 @@ namespace Meeteam
             this.pwdbox.Size = new System.Drawing.Size(222, 27);
             this.pwdbox.TabIndex = 6;
             // 
-            // Form1
+            // FirstForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,7 +117,7 @@ namespace Meeteam
             this.Controls.Add(this.registerbut);
             this.Controls.Add(this.logbut);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "FirstForm";
             this.Text = "Welcome to Meeteam!";
             this.ResumeLayout(false);
             this.PerformLayout();
