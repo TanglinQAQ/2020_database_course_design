@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\xltx-\\Desktop\\Example\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\xltx-\\Desktop\\ED\\database\\github\\Code\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\xltx-\\Desktop\\Example\\Model\\Model.csproj",
+      "projectPath": "C:\\Users\\xltx-\\Desktop\\ED\\database\\github\\Code\\Model\\Model.csproj",
       "packagesPath": "C:\\Users\\xltx-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xltx-\\Desktop\\Example\\Model\\obj\\",
+      "outputPath": "C:\\Users\\xltx-\\Desktop\\ED\\database\\github\\Code\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

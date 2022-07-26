@@ -17,7 +17,7 @@ namespace BLL
                 if (!userdb1.IsEqual(userinfo))
                 {
                     //no same name already
-                    userdb1.AddUser(userinfo);
+              //      userdb1.AddUser(userinfo);
                     ifsuccess = true;
                 }
                 else

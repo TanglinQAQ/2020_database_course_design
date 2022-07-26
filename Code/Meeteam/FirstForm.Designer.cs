@@ -37,8 +37,8 @@ namespace Meeteam
             this.registerbut = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.idbox = new System.Windows.Forms.TextBox();
+            this.pwdbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -91,27 +91,27 @@ namespace Meeteam
             this.label3.TabIndex = 4;
             this.label3.Text = "PassWord : ";
             // 
-            // textBox1
+            // idbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(357, 138);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(222, 27);
-            this.textBox1.TabIndex = 5;
+            this.idbox.Location = new System.Drawing.Point(357, 138);
+            this.idbox.Name = "idbox";
+            this.idbox.Size = new System.Drawing.Size(222, 27);
+            this.idbox.TabIndex = 5;
             // 
-            // textBox2
+            // pwdbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(357, 231);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(222, 27);
-            this.textBox2.TabIndex = 6;
+            this.pwdbox.Location = new System.Drawing.Point(357, 231);
+            this.pwdbox.Name = "pwdbox";
+            this.pwdbox.Size = new System.Drawing.Size(222, 27);
+            this.pwdbox.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pwdbox);
+            this.Controls.Add(this.idbox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.registerbut);
@@ -131,8 +131,8 @@ namespace Meeteam
         private System.Windows.Forms.Button registerbut;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox idbox;
+        private System.Windows.Forms.TextBox pwdbox;
     }
 }
 

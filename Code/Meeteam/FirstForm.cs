@@ -25,22 +25,22 @@ namespace Meeteam
         {
             get //这块是个啥语法？
             {
-                return textBox1.Text.Trim();
+                return idbox.Text.Trim();
             }
         }
         public string Pwd
         {
             get
             {
-                return textBox2.Text.Trim();
+                return pwdbox.Text.Trim();
             }
         }
 
         private bool checkinput()
             //检查输入有无问题,有问题false
         {
-            string id = textBox1.Text.Trim();
-            string pwd = textBox2.Text.Trim();
+            string id = idbox.Text.Trim();
+            string pwd = pwdbox.Text.Trim();
 
             if (id == "")
             {
@@ -57,12 +57,6 @@ namespace Meeteam
             return true;
         }
 
-        private bool Canlog()
-        {
-            string strsql = string.Format("select count(*) from {2} where NO='{0}' and Pwd='{1}'", textBox1.Text, textBox2.Text, "USER_INFO");
-            SqlCommand comm = new SqlCommand(strsql, DBHelper.connection);
-
-        }
         private void logbut_Click(object sender, EventArgs e)
         {
             if (!checkinput())
@@ -73,7 +67,6 @@ namespace Meeteam
 
             //the login button
             String inputname = Loginid;
-
             /*
             Form nextform = null;  //这里暂时不考虑之后的界面
 
@@ -88,6 +81,23 @@ namespace Meeteam
                 MessageBox.Show("登录失败,请检查帐号或密码是否有误!", "CTGU在线考试系统", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             */
+
+            string username = idbox.Text.Trim();
+            string pwd = pwdbox.Text.Trim();
+
+            UserInfo userInfo1 = new UserInfo();
+            userInfo1.UserName = username;
+            userInfo1.PassWord = pwd;
+
+            UserDB userdb1 = new UserDB();
+            if (userdb1.login(userInfo1))
+            {
+                MessageBox.Show("登录成功！", "提示"); //如果登录成功
+            }
+            else
+            {
+                MessageBox.Show("用户名或密码错误，请重新输入！", "提示");
+            }
 
         }
 

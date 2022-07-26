@@ -3,3 +3,16 @@ C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.GeneratedMSBuildE
 C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
 C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
 C:\Users\xltx-\Desktop\Example\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CoreCompileInputs.cache
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\bin\Debug\netcoreapp3.1\DAL.deps.json
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\bin\Debug\netcoreapp3.1\DAL.dll
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\bin\Debug\netcoreapp3.1\DAL.pdb
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.AssemblyReference.cache
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CoreCompileInputs.cache
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CopyComplete
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.dll
+C:\Users\xltx-\Desktop\ED\database\github\Code\DAL\obj\Debug\netcoreapp3.1\DAL.pdb
