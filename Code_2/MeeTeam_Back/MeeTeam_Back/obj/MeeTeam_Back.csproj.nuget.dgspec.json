@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZZL\\Desktop\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj": {}
+    "F:\\DB_Project\\TanglinQAQ\\2020_database_course_design\\2020_database_course_design\\Code_2\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZZL\\Desktop\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj": {
+    "F:\\DB_Project\\TanglinQAQ\\2020_database_course_design\\2020_database_course_design\\Code_2\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZZL\\Desktop\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj",
+        "projectUniqueName": "F:\\DB_Project\\TanglinQAQ\\2020_database_course_design\\2020_database_course_design\\Code_2\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj",
         "projectName": "MeeTeam_Back",
-        "projectPath": "C:\\Users\\ZZL\\Desktop\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj",
-        "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZZL\\Desktop\\MeeTeam_Back\\MeeTeam_Back\\obj\\",
+        "projectPath": "F:\\DB_Project\\TanglinQAQ\\2020_database_course_design\\2020_database_course_design\\Code_2\\MeeTeam_Back\\MeeTeam_Back\\MeeTeam_Back.csproj",
+        "packagesPath": "C:\\Users\\lxc\\.nuget\\packages\\",
+        "outputPath": "F:\\DB_Project\\TanglinQAQ\\2020_database_course_design\\2020_database_course_design\\Code_2\\MeeTeam_Back\\MeeTeam_Back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lxc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -87,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

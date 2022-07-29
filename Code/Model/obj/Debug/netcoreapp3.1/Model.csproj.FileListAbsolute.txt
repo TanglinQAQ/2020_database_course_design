@@ -18,3 +18,13 @@ C:\Users\xltx-\Desktop\ED\database\github\Code\Model\obj\Debug\netcoreapp3.1\Mod
 C:\Users\xltx-\Desktop\ED\database\github\Code\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 C:\Users\xltx-\Desktop\ED\database\github\Code\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\xltx-\Desktop\ED\database\github\Code\Model\obj\Debug\netcoreapp3.1\Model.pdb
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\bin\Debug\netcoreapp3.1\Model.deps.json
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\bin\Debug\netcoreapp3.1\Model.dll
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\bin\Debug\netcoreapp3.1\Model.pdb
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.csproj.AssemblyReference.cache
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.GeneratedMSBuildEditorConfig.editorconfig
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.dll
+F:\DB_Project\TanglinQAQ\2020_database_course_design\2020_database_course_design\Code\Model\obj\Debug\netcoreapp3.1\Model.pdb
