@@ -46,7 +46,7 @@ export default {
       }
       //请求地址,this和vm指的是全局
       var vm = this;
-      axios.get("https://localhost:44338/Login/login?ID="+this.user+"&Word="+this.pass).then(function(res){
+      axios.get("http://106.14.193.8:8090/Login/login?user_id="+this.user+"&password="+this.pass).then(function(res){
         if(res.data===false){
           vm.$message.error("登录失败");
           vm.resetForm(formName);
