@@ -6,8 +6,8 @@ import request from '@/utils/request'
       url: '/Login/login',
       method: 'get',
       params:{
-        ID:params.user,
-        Word:params.pass
+        user_id:params.user,
+        password:params.pass
       }
     })
   }

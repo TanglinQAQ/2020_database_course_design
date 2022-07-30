@@ -10,8 +10,8 @@ import store from '@/store'
 // create an axios instance
 const service = axios.create({
     //baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-    baseURL:'https://localhost:44338',
-    // baseURL:'http://106.14.193.8:8081/',这个应该是把后端部署了
+    baseURL:'https://localhost:5001',
+    //baseURL:'http://106.14.193.8:8090',//这个应该是把后端部署了
     // withCredentials: true, // send cookies when cross-domain requests
     timeout: 50000, // request timeout
     //withCredentials: true//携带cookie

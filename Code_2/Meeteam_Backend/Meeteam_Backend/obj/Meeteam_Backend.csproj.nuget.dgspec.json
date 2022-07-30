@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
+    "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
   },
   "projects": {
-    "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {
+    "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+        "projectUniqueName": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
         "projectName": "Meeteam_Backend",
-        "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+        "projectPath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
         "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
+        "outputPath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,10 @@
             "Oracle.ManagedDataAccess.Core": {
               "target": "Package",
               "version": "[3.21.61, )"
+            },
+            "Swashbuckle": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
