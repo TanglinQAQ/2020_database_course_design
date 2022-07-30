@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import {login} from '@/api/login.js'
 export default {
    name: 'LogIn',
    data() {
@@ -46,7 +46,11 @@ export default {
       }
       //请求地址,this和vm指的是全局
       var vm = this;
-      axios.get("http://106.14.193.8:8090/Login/login?user_id="+this.user+"&password="+this.pass).then(function(res){
+      let param={
+        user:vm.user,
+        pass:vm.pass
+      }
+      login(param).then(function(res){
         if(res.data===false){
           vm.$message.error("登录失败");
           vm.resetForm(formName);

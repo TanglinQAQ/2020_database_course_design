@@ -7,10 +7,10 @@ import axios from 'axios';
 import store from '@/store'
 import qs from 'qs';
 
-Vue.prototype.$qs = qs;
-Vue.prototype.$http = axios //添加实例 property
+Vue.prototype.$qs = qs; //添加实例 property
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.prototype.$http=axios;
 
 new Vue({
   router,
