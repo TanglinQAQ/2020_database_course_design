@@ -22,16 +22,10 @@ namespace MeeTeam_Back.Controllers
         {
             UserInfo info = new UserInfo();
             string real_psw = info.get_Password(user_id);
-            /* if (real_psw == null || real_psw != password)
-                 return false;
-             else 
-                 return true;*/
-            if (user_id == "admin" && password == "admin")
-            {
-                return true;
-            }
-            else
+            if (real_psw == null || real_psw != password)
                 return false;
+            else
+                return true;
         }
     }
 }
