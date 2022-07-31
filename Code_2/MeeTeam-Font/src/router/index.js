@@ -8,6 +8,7 @@ Vue.use(Router)
 import LogIn from '@/components/Login.vue'
 import InforList from '@/components/InforList.vue'
 import PostInfor from '@/components/PostInfor.vue'
+import CreatList from '@/components/CreatList.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -15,5 +16,6 @@ export default new Router({
         {path: '/users', component: LogIn},
         {path: '/users/InforList', component: InforList},
         {path: '/users/PostInfor', component: PostInfor},
+        {path: '/users/CreatList', component: CreatList},
     ],
 })

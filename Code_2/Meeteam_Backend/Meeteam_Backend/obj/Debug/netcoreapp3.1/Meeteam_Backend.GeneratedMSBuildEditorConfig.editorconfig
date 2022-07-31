@@ -1,3 +1,7 @@
 is_global = true
 build_property.RootNamespace = Meeteam_Backend
+<<<<<<< Updated upstream
 build_property.ProjectDir = D:\Users\ZZL\Documents\GitHub\2020_database_course_design\Code_2\Meeteam_Backend\Meeteam_Backend\
+=======
+build_property.ProjectDir = C:\Users\中野\Desktop\2020_database_course_design\Code_2\Meeteam_Backend\Meeteam_Backend\
+>>>>>>> Stashed changes
