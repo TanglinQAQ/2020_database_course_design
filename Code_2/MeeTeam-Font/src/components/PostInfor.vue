@@ -23,7 +23,7 @@
 
 <script>
 export default {
-name: 'InforList',
+name: 'PostInfor',
 }
 </script>
 

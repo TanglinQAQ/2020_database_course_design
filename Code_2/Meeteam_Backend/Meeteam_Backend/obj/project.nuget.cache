@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mt2IQAPOU/LJAIfQuatxZED/l1jtFnqDI4yzazIbJw36P4AFvxENQ+EAPZGQe1bMQbJXGXWU3sX1X8X+plAwwA==",
+  "dgSpecHash": "Xy/QRGdTO5Jqu/cFnu0FuTv/axHyB7ULJkchhWVClgg1ys2V1T+ebUKj/918ACJJxntYspIAjekWLgvXm3SsgA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+  "projectFilePath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code_2\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ZZL\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",
     "C:\\Users\\ZZL\\.nuget\\packages\\microsoft.aspnet.webapi.core\\4.0.20710\\microsoft.aspnet.webapi.core.4.0.20710.nupkg.sha512",
