@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k+lN/Wc9/QtZT5TJUgWL2cJwLprqbHwzyz2wkcaWTxpZJ6xc6DQkxeqYKKdmemgI6Xld3FY9Vi/rAYoT4hpdMA==",
+  "dgSpecHash": "RDxg9l9xYQxnBMJjmhd73aEUDHN2niat5508/MYGVRbV/mzT3UxOSPFEyj9lwzdRG/b8Hwv38q3pC8NJz0O0DA==",
   "success": true,
-  "projectFilePath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+  "projectFilePath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ZZL\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\ZZL\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",

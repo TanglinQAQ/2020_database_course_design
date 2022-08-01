@@ -40,22 +40,6 @@ namespace MeeTeam_Backend
         public string project_id { get; set; }
     }
     
-    [SugarTable("grouping_requirement")]
-    public class Grouping_Requirement
-    {
-        [SugarColumn(IsPrimaryKey = true)]
-        public string require_id { get; set; }
-
-        [SugarColumn(IsJson = true)]
-        public string release_time { get; set; }
-        public string purpose { get; set; }
-        public string team_type { get; set; }
-        public string team_limit { get; set; }
-        public string details { get; set; }
-        public string require_status { get; set; }
-        public string originator_id { get; set; }
-        public string project_id { get; set; }
-    }
     public class UserDB
     {
         public static string connString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=106.14.193.8)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)));Persist Security Info=True;User ID=normal;Password=TJUsoftware2020;";

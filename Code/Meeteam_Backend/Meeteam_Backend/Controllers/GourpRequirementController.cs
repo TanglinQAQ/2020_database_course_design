@@ -21,7 +21,7 @@ namespace Meeteam_Backend.Controllers
     {
         //添加组队需求
         [HttpPost]
-        public bool AddGroupRequirement(string require_id, string purpose, string team_type, string team_limit, string details, string require_status, string originator_id, string project_id)
+        public bool AddGroupRequirement(string require_id, string purpose, string team_type, string team_limit, string details, string require_status, string originator_id, string project_id,string region,string team_type_details)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -36,6 +36,8 @@ namespace Meeteam_Backend.Controllers
             pos.require_status = require_status;
             pos.originator_id = originator_id;
             pos.project_id = project_id;
+            pos.region = region;
+            pos.team_type_details = team_type_details;
             int count = db.Insertable(pos).ExecuteCommand();
             if (count == 1)
                 return true;

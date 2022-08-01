@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data; //to user the plug to introduce the 'using'
 using Oracle.ManagedDataAccess.Client;
+using System.Data.SqlClient;
+using SqlSugar;
 
 
 namespace Meeteam_Backend
 {
-    public class GroupRequirement
+    [SugarTable("grouping_requirement")]
+    public class Grouping_Requirement
     {
+        [SugarColumn(IsPrimaryKey = true)]
         public string require_id { get; set; }
+
+        [SugarColumn(IsJson = true)]
         public string release_time { get; set; }
         public string purpose { get; set; }
         public string team_type { get; set; }
@@ -18,5 +22,7 @@ namespace Meeteam_Backend
         public string require_status { get; set; }
         public string originator_id { get; set; }
         public string project_id { get; set; }
+        public string region { get; set; }
+        public string team_type_details { get; set; }
     }
 }

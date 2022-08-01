@@ -13,7 +13,9 @@ import request from '@/utils/request'
         details:params.details,      //记得加，     
         require_status:params.require_status,
         originator_id:params.originator_id,
-        project_id:params.project_id
+        project_id:params.project_id,
+        region:params.region,
+        team_type_details:params.team_type_detail,
       }
     })
   }
