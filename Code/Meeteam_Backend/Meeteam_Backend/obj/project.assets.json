@@ -7757,11 +7757,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "projectUniqueName": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
       "projectName": "Meeteam_Backend",
-      "projectPath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
       "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ZZL\\Desktop\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
+      "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",

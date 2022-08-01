@@ -24,5 +24,6 @@ namespace Meeteam_Backend
         public string project_id { get; set; }
         public string region { get; set; }
         public string team_type_details { get; set; }
+        public string requirement_name { get; set; }
     }
 }

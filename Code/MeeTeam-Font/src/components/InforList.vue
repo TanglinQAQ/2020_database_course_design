@@ -123,7 +123,7 @@ export default {
             date: '',
           }
           // console.log(item);
-          form.projectname = item.project_id;
+          form.projectname = item.requirement_name;
           form.originator_id = item.originator_id;
           form.team_type = item.team_type;
           form.details = item.details;

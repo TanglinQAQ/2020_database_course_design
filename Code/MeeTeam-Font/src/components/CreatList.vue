@@ -4,6 +4,9 @@
     <el-header>发布组队需求</el-header>
     <el-main>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="需求名称" prop="requirement_name">
+          <el-input v-model="ruleForm.requirement_name"></el-input>
+        </el-form-item>
         <el-form-item label="组队目的" prop="purpose">
           <el-input v-model="ruleForm.purpose"></el-input>
         </el-form-item>
@@ -95,6 +98,7 @@ export default {
         project_id: '',
         region: [], //地区得到的是一个数组
         team_type_detail: [],//具体的类型得到的也是一个数组
+        requirement_name:''
       },
       rules: {
         purpose: [
@@ -114,6 +118,10 @@ export default {
         region: [
           { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
         ],
+        requirement_name:[
+           { required: true, message: '请输入需求名称', trigger: 'blur' },
+          { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
+        ]
       }
     };
   },
@@ -165,6 +173,7 @@ export default {
         project_id: this.ruleForm.project_id,
         region: RegionLast,
         team_type_detail: TeamDetailLast,
+        requirement_name: this.ruleForm.requirement_name
       }
       creatlist(param).then(function (res) {
         if (res.data === false) {
