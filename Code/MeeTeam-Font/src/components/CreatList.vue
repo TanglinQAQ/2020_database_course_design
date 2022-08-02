@@ -116,7 +116,7 @@ export default {
           { required: true, message: '请选择组队人数', trigger: 'change' }
         ],
         region: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          { type: 'array', required: true, message: '请至少选择一个校区', trigger: 'change' }
         ],
         requirement_name:[
            { required: true, message: '请输入需求名称', trigger: 'blur' },

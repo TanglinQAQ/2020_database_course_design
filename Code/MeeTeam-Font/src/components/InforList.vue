@@ -103,7 +103,10 @@ export default {
   },
   methods: {
     additem: function () {
-      this.$router.push({ path: "/users/CreatList" }); //接下来进入到哪个路由
+      this.$router.push({ path: "/users/CreatList" }); //接下来进入到CreatList
+    },
+    deleteitem:function(){
+      this.$router.push({ path: "/users/MyProject" }); //接下来进入到MyProject
     },
     getlist() {
       var vm = this;//全局变量
