@@ -6,7 +6,7 @@ export function deleteteam(params) {
       url: '/GroupRequirement/deleteGroupRequirement',
       method: 'delete',
       params:{
-       
+       //还没写要传入给数据库的数据
       }
     })
   }
