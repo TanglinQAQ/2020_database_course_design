@@ -88,7 +88,6 @@ export default {
         })
       })
       var id=this.tableData[index].require_id;
-      alert(id);
       //再在数据库中删除
       let param = {
         require_id:id,

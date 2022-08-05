@@ -50,7 +50,7 @@ namespace Meeteam_Backend.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+                return false;
             }
         }
         //查询全部组队需求，返回一个对象

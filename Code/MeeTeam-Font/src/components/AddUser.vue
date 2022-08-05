@@ -154,7 +154,7 @@ export default {
                     vm.resetForm(formName);
                 } else {
                     vm.$message.success("提交成功");
-                    vm.$router.push({ path: "/users" }); //接下来进入到哪个路由
+                    vm.$router.push({ path: "/login" }); //接下来进入到哪个路由
                 }
             })
         },

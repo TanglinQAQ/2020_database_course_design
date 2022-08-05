@@ -1,7 +1,7 @@
 <template>
   <div id="login-container">
     <div style="text-align: center;height: 50px">
-      登录
+      {{toptest}}
     </div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="账号" prop="user">
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       globaltest: "管理员登陆",
+      toptest:"用户登陆",
       ifadmin: false,//当前用户是否是管理员
       user: "",
       pass: "",
@@ -41,8 +42,10 @@ export default {
       this.ifadmin = !this.ifadmin;//取反
       if (this.ifadmin == true) {
         this.globaltest = "用户登陆";
+        this.toptest="管理员登陆"
       } else {
         this.globaltest = "管理员登陆";
+        this.toptest="用户登陆"
       }
     },
     resetForm() {//重置表单
