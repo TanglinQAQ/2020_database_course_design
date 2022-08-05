@@ -46,10 +46,26 @@
 <script>
 import global_msg from '../utils/global.js'
 import { adduser } from '@/api/login.js'
-import {IsUserUni } from '@/api/login.js'
+import { isUseruni } from '@/api/login.js'
 export default {
     name: 'AddUser',
     data() {
+        var nameunique = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入您的用户名'));
+            } else {
+                let params = {
+                    user_id: value,
+                }
+                isUseruni(params).then(function (res) {
+                    if (res.data === false) {
+                        callback(new Error('此用户名已经被使用过'));
+                    } else {
+                        callback();
+                    }
+                })
+            }
+        };
         var validatePass = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入密码'));
@@ -83,8 +99,9 @@ export default {
             },
             rules: {
                 user_name: [
-                    { required: true, message: '请输入您的名称', trigger: 'blur' },
-                    { min: 2, max: 18, message: '长度在 2 到 18 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入您的用户名', trigger: 'blur' },
+                    { min: 2, max: 18, message: '长度在 2 到 18 个字符', trigger: 'blur' },
+                    { validator: nameunique, trigger: 'blur' }
                 ],
                 pass: [
                     { validator: validatePass, trigger: 'blur' }

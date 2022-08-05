@@ -133,7 +133,7 @@ namespace Meeteam_Backend.Controllers
         }
         //添加管理员
         [HttpPost]
-        public bool addadmin(string admin_id, string password, string register_time, string user_name, char gender, string contact_info)
+        public bool addadmin(string admin_id, string password, string user_name, char gender, string contact_info)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -151,7 +151,7 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
-        //删除组队需求
+        //删除用户
         [HttpDelete]
         public bool deleteUser(string user_id)
         {
@@ -160,6 +160,25 @@ namespace Meeteam_Backend.Controllers
             try
             {
                 int count = db.Deleteable<User_Info>().In(user_id).ExecuteCommand();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        //删除用户
+        [HttpDelete]
+        public bool deleteAdmin(string admin_id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                    //删除
+            try
+            {
+                int count = db.Deleteable<Administrator>().In(admin_id).ExecuteCommand();
                 if (count == 1)
                     return true;
                 else

@@ -31,6 +31,17 @@ export function login(params) {
     }
   })
 }
+export function adminlogin(params) {
+  /*登陆 */
+  return request({
+    url: '/Login/adminlogin',
+    method: 'get',
+    params: {
+      admin_id: params.user,
+      password: params.pass
+    }
+  })
+}
 export function adduser(params) {
   /*用户注册*/
   return request({
@@ -55,7 +66,7 @@ export function getuser() {
   })
 }
 
-export function IsUserUni(params) {
+export function isUseruni(params) {
   /*组队需求的表格*/
   return request({
     url: '/Login/IsUserUni',
