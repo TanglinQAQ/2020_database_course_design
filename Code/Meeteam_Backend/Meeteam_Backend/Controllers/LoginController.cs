@@ -72,22 +72,25 @@ namespace Meeteam_Backend.Controllers
         }
         //用户登陆
         [HttpGet]
-        public bool login(string user_id,string password)
+        public bool login(string user_id, string password)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            //查询
-            User_Info info = new User_Info();
-            var list = db.Queryable<User_Info>()
-                .Select(it => it.password)
-                .Where("user_id=@id", new { id = user_id })
-                .ToList();
-            if (list==null)
+            try
+            {
+                var list = db.Queryable<User_Info>()
+               .Select(it => it.password)
+               .Where("user_id=@id", new { id = user_id })
+               .ToList();
+                if (password == list[0].ToString())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
                 return false;
-            if (password == list[0].ToString())
-                return true;
-            else
-                return false;
+            }
         }
         //管理员登陆
         [HttpGet]
@@ -95,20 +98,26 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            //查询
-            Administrator info = new Administrator();
-            var list = db.Queryable<Administrator>()
+            try
+            {
+                var list = db.Queryable<Administrator>()
                 .Select(it => it.password)
                 .Where("admin_id=@id", new { id = admin_id })
                 .ToList();
-            if (password == list[0])
-                return true;
-            else
+                if (password == list[0])
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
                 return false;
+            }
+
         }
         //添加普通用户
         [HttpPost]
-        public bool addnormal(string user_id, string password,string user_name,char gender,string contact_info,string institution,string major,string introduction)
+        public bool addnormal(string user_id, string password, string user_name, char gender, string contact_info, string institution, string major, string introduction)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -117,14 +126,14 @@ namespace Meeteam_Backend.Controllers
             pos.password = password;
             pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
             pos.user_name = user_name;
-            pos.account_status ='1';
+            pos.account_status = '1';
             pos.gender = gender;
             pos.contact_info = contact_info;
             pos.institution = institution;
             pos.major = major;
             pos.grade = "0";
             pos.introduction = introduction;
-            pos.point =0;
+            pos.point = 0;
             int count = db.Insertable(pos).ExecuteCommand();
             if (count == 1)
                 return true;
