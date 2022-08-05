@@ -1,5 +1,5 @@
 <template>
-   <div id="login-container">
+  <div id="login-container">
     <div style="text-align: center;height: 50px">
       登录
     </div>
@@ -14,74 +14,90 @@
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
+      <el-button type="text" class="testleft">管理员登陆</el-button>
+      <el-button type="text" class="testright" @click="adduser">注册</el-button>
+      <el-button type="text" class="testright">找回密码</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
 import global_msg from '../utils/global.js'
-import {login} from '@/api/login.js'
+import { login } from '@/api/login.js'
 export default {
-   name: 'LogIn',
-   data() {
+  name: 'LogIn',
+  data() {
     return {
-      user: '',
-      pass: '',
-      isLogin:false
+      user: "",
+      pass: "",
+      isLogin: false
     };
   },
   methods: {
-    resetForm(formName) {//重置表单
-      this.user=''
-      this.pass=''
+    resetForm() {//重置表单
+      this.user = ''
+      this.pass = ''
     },
-     //提交表单
+    //提交表单
     submitForm(formName) {
-      if(this.user===""){
-      alert("请输入用户名")
-    
-      return;
+      var vm = this;
+      if (this.user === "") {
+        alert("请输入用户名")
+        return;
       }
-      if(this.pass===""){
+      if (this.pass === "") {
         alert("请输入密码")
         return;
       }
       //请求地址,this和vm指的是全局
-      var vm = this;
-      let param={
-        user:vm.user,
-        pass:vm.pass
+      let params = {
+        user: vm.user,
+        pass: vm.pass
       }
-      login(param).then(function(res){
-        if(res.data===false){
+      login(params).then(function (res) {
+        if (res.data === false) {
           vm.$message.error("登录失败");
           vm.resetForm(formName);
-        }else{
-          global_msg.nowuserid=vm.user;//改变全局nowuserid
+        } else {
+          global_msg.nowuserid = vm.user;//改变全局nowusername
           vm.$message.success("登录成功");
-          vm.$router.push({path: "/users/InforList"}); //接下来进入到哪个路由
+          vm.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
         }
       })
+    },
+    adduser() { //进入注册的界面
+      this.$router.push({ path: "/users/AddUser" }); //接下来进入到哪个路由
     }
   }
 }
 </script>
 
 <style>
- body{
-    margin: 0;
-  }
-  #login-container{
-    width: 400px;
-    height: 290px;
-    background: #e5e9f2;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -220px;
-    margin-top: -170px;
-    border-radius: 5px;
-    padding-top: 40px;
-    padding-right: 40px;
-  }
+body {
+  margin: 0;
+}
+
+#login-container {
+  width: 400px;
+  height: 290px;
+  background: #e5e9f2;
+  position: absolute;
+  /*绝对定位 */
+  left: 50%;
+  top: 50%;
+  margin-left: -220px;
+  margin-top: -170px;
+  border-radius: 5px;
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.testleft {
+  float: left;
+}
+
+.testright {
+  float: right;
+}
 </style>

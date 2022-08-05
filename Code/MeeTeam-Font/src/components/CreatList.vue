@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      console.log(this.ruleForm.team_type_detail);
+      // console.log(this.ruleForm.team_type_detail);
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit!');

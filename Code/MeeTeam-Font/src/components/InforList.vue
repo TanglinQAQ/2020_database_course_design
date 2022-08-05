@@ -130,6 +130,13 @@ export default {
             details: '',
             date: '',
           }
+          // let params = {
+          //   user_id: item.originator_id
+          // }
+          // alert(params.user_id);
+          // vm.getusername(params).then(function (res) {
+          //   form.originator_id = res.data;
+          // })
           // console.log(item);
           form.projectname = item.requirement_name;
           form.originator_id = item.originator_id;

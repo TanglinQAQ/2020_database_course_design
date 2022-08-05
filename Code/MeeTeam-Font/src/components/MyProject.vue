@@ -5,8 +5,6 @@
         <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
           <el-table-column prop="projectname" label="项目名称" width="140">
           </el-table-column>
-          <el-table-column prop="originator_id" label="组队发起人" width="140">
-          </el-table-column>
           <el-table-column prop="team_type" label="项目类型" width="140">
           </el-table-column>
           <el-table-column prop="region" label="所在校区" width="200">
