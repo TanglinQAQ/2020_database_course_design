@@ -27,8 +27,15 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            List<User_Info> agrlist = db.Queryable<User_Info>().ToList();
-            return agrlist;
+            try
+            {
+                List<User_Info> agrlist = db.Queryable<User_Info>().ToList();
+                return agrlist;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
         /*//得到用户名，返回用户id
         [HttpGet]
@@ -63,12 +70,19 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            List<User_Info> agrlist = db.Queryable<User_Info>().Where(it => it.user_id == user_id).ToList();
-            int len = agrlist.Count();
-            if (len == 0)
-                return true;
-            else
+            try
+            {
+                List<User_Info> agrlist = db.Queryable<User_Info>().Where(it => it.user_id == user_id).ToList();
+                int len = agrlist.Count();
+                if (len == 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
                 return false;
+            }
         }
         //用户登陆
         [HttpGet]
@@ -121,24 +135,31 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            User_Info pos = new User_Info();
-            pos.user_id = user_id;
-            pos.password = password;
-            pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
-            pos.user_name = user_name;
-            pos.account_status = '1';
-            pos.gender = gender;
-            pos.contact_info = contact_info;
-            pos.institution = institution;
-            pos.major = major;
-            pos.grade = "0";
-            pos.introduction = introduction;
-            pos.point = 0;
-            int count = db.Insertable(pos).ExecuteCommand();
-            if (count == 1)
-                return true;
-            else
+            try
+            {
+                User_Info pos = new User_Info();
+                pos.user_id = user_id;
+                pos.password = password;
+                pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
+                pos.user_name = user_name;
+                pos.account_status = '1';
+                pos.gender = gender;
+                pos.contact_info = contact_info;
+                pos.institution = institution;
+                pos.major = major;
+                pos.grade = "0";
+                pos.introduction = introduction;
+                pos.point = 0;
+                int count = db.Insertable(pos).ExecuteCommand();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch(Exception ex)
+            {
                 return false;
+            }
         }
         //添加管理员
         [HttpPost]
@@ -146,19 +167,26 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            Administrator pos = new Administrator();
-            pos.admin_id = admin_id;
-            pos.password = password;
-            pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
-            pos.user_name = user_name;
-            pos.account_status = '1';
-            pos.gender = gender;
-            pos.contact_info = contact_info;
-            int count = db.Insertable(pos).ExecuteCommand();
-            if (count == 1)
-                return true;
-            else
+            try
+            {
+                Administrator pos = new Administrator();
+                pos.admin_id = admin_id;
+                pos.password = password;
+                pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
+                pos.user_name = user_name;
+                pos.account_status = '1';
+                pos.gender = gender;
+                pos.contact_info = contact_info;
+                int count = db.Insertable(pos).ExecuteCommand();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch(Exception ex)
+            {
                 return false;
+            }
         }
         //删除用户
         [HttpDelete]
