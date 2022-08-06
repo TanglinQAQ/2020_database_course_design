@@ -1,7 +1,20 @@
 <template>
   <div id="home">
     <!--页头-->
-    <el-header>发布组队需求</el-header>
+    <el-header>
+      <span class="container" @click="goback">
+        <div class="button-wrapper">
+          <svg width="120" height="42">
+            <rect class="rectangle" width="120" height="42" />
+          </svg>
+          <div class="btn">
+            返回
+          </div>
+        </div>
+      </span>
+      发布组队需求
+    </el-header>
+
     <el-main>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="需求名称" prop="requirement_name">
@@ -98,7 +111,7 @@ export default {
         project_id: '',
         region: [], //地区得到的是一个数组
         team_type_detail: [],//具体的类型得到的也是一个数组
-        requirement_name:''
+        requirement_name: ''
       },
       rules: {
         purpose: [
@@ -118,14 +131,17 @@ export default {
         region: [
           { type: 'array', required: true, message: '请至少选择一个校区', trigger: 'change' }
         ],
-        requirement_name:[
-           { required: true, message: '请输入需求名称', trigger: 'blur' },
+        requirement_name: [
+          { required: true, message: '请输入需求名称', trigger: 'blur' },
           { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
         ]
       }
     };
   },
   methods: {
+    goback(){
+      this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
+    },
     submitForm(formName) {
       console.log(this.ruleForm.team_type_detail);
       // console.log(this.ruleForm.team_type_detail);
@@ -188,7 +204,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      this.ruleForm.team_type_detail="";
+      this.ruleForm.team_type_detail = "";
       this.detailshow = false;
     },
     teamtypecheck() {
@@ -207,13 +223,15 @@ export default {
 <style scoped>
 .el-header,
 .el-footer {
-  font-weight:900;
-  font-size:24px;
+  font-weight: 900;
+  font-size: 24px;
   background-color: #B3C0D1;
   color: #333;
   text-align: center;
   line-height: 60px;
+  font-style: normal;
 }
+
 .el-main {
   background-color: #ecf0f5;
   color: #333;
@@ -221,18 +239,77 @@ export default {
   line-height: 220px;
   height: 100%;
 }
+
 #home {
   width: 100%;
   min-height: 100vh;
   background-color: #ecf0f5;
   background-size: 100% 100%;
 }
-.demo-ruleForm >>> .el-form-item__label /*标题的字体大小 */
-{
+
+.demo-ruleForm>>>.el-form-item__label
+
+/*标题的字体大小 */
+  {
   font-size: 18px;
 }
-#checkbox >>> .el-checkbox__label /*复选框的字体大小 */
-{
+
+#checkbox>>>.el-checkbox__label
+
+/*复选框的字体大小 */
+  {
   font-size: 18px;
+}
+
+.container {
+  display: inline;
+  float: left;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 48px;
+}
+
+.button-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+}
+
+.rectangle {
+  stroke-width: 8px;
+  stroke: #ecf0f5;
+  fill: transparent;
+  /* Core part of the animation */
+  stroke-dasharray: 200 500;
+  stroke-dashoffset: -372;
+  /* 偏移负数，虚线整体右移动了372个单位 */
+}
+
+.btn {
+  color: white;
+  font-size: 24px;
+  letter-spacing: 6px;
+  position: relative;
+  top: -72px;
+  left: 30px;
+}
+
+@keyframes extend {
+  to {
+    stroke-dasharray: 600;
+    /* 属性用于创建虚线： */
+    stroke-dashoffset: 0;
+    stroke-width: 4;
+    /* 属性定义了一条线，文本或元素轮廓厚度： */
+  }
+}
+
+.button-wrapper:hover .rectangle {
+  animation: 0.5s extend linear forwards;
 }
 </style>

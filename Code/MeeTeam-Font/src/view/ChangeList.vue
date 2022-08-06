@@ -1,7 +1,19 @@
 <template>
   <div id="home">
     <!--页头-->
-    <el-header>改变组队需求</el-header>
+    <el-header>
+      <span class="container" @click="goback">
+        <div class="button-wrapper">
+          <svg width="120" height="42">
+            <rect class="rectangle" width="120" height="42" />
+          </svg>
+          <div class="btn">
+            返回
+          </div>
+        </div>
+      </span>
+      改变组队需求
+    </el-header>
     <el-main>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="需求名称" prop="requirement_name">
@@ -131,6 +143,9 @@ export default {
     this.formbegin();//一开始就填写表单
   },
   methods: {
+    goback(){
+      this.$router.push({ path: "/users/MyProject" }); //接下来进入到哪个路由
+    },
     formbegin() {
       var vm = this;
       let params = {
@@ -264,5 +279,57 @@ export default {
 /*复选框的字体大小 */
   {
   font-size: 18px;
+}
+
+.container {
+  display: inline;
+  float: left;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 48px;
+}
+
+.button-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+}
+
+.rectangle {
+  stroke-width: 8px;
+  stroke: #ecf0f5;
+  fill: transparent;
+  /* Core part of the animation */
+  stroke-dasharray: 200 500;
+  stroke-dashoffset: -372;
+  /* 偏移负数，虚线整体右移动了372个单位 */
+}
+
+.btn {
+  color: white;
+  font-size: 24px;
+  letter-spacing: 6px;
+  position: relative;
+  top: -72px;
+  left: 30px;
+}
+
+@keyframes extend {
+  to {
+    stroke-dasharray: 600;
+    /* 属性用于创建虚线： */
+    stroke-dashoffset: 0;
+    stroke-width: 4;
+    /* 属性定义了一条线，文本或元素轮廓厚度： */
+  }
+}
+
+.button-wrapper:hover .rectangle {
+  animation: 0.5s extend linear forwards;
 }
 </style>
