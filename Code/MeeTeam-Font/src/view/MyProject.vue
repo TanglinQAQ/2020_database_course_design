@@ -1,8 +1,12 @@
 <template>
-  <div id="myproject-container">
-    <el-container>
-      <el-header style="text-align: right; font-size: 15px; top:50%;">
-        <el-badge :value="0" class="item">
+  <div id="myproject-container">  
+    <el-container> 
+      <el-header  style="text-align: right; font-size: 15px; top:50%;">
+       <el-badge class="item" >
+         <!--返回按钮-->
+        <el-button @click="goBack()">返回</el-button>
+        </el-badge>
+        <el-badge :value="0" class="item" >
           <el-button>聊天</el-button>
           <!--聊天是用户聊天-->
         </el-badge>
@@ -16,6 +20,7 @@
         </el-badge>
         <span>{{ username }}</span>
       </el-header>
+      
       <el-main>
         <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
           <el-table-column prop="projectname" label="项目名称" width="140">
@@ -56,6 +61,9 @@ export default {
     this.getlist() //页面一进入就加载表格
   },
   methods: {
+    goBack() {
+            this.$router.push({ path: "/users/InforList" }); //返回
+        },
     getlist() {
       var vm = this;//全局变量
       getlistInfor().then(function (res) {
@@ -135,5 +143,8 @@ export default {
 .item {
   margin-top: 0px;
   margin-right: 10px;
+}
+.items{
+  
 }
 </style>

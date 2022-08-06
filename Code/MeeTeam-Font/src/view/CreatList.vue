@@ -1,7 +1,9 @@
 <template>
   <div id="home">
     <!--页头-->
-    <el-header>发布组队需求</el-header>
+     <el-page-header @back="goBack" content="详情页面" >
+        </el-page-header>
+        <el-header>发布组队需求</el-header>
     <el-main>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="需求名称" prop="requirement_name">
@@ -126,6 +128,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+            this.$router.push({ path: "/users/InforList" }); //返回
+        },
     submitForm(formName) {
       console.log(this.ruleForm.team_type_detail);
       // console.log(this.ruleForm.team_type_detail);
