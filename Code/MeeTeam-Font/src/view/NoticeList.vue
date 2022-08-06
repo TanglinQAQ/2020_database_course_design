@@ -10,7 +10,7 @@
       <el-container id="admin_page">
         <el-aside width="200px">
           <el-menu default-active="/Admin/NoticeList" router>
-            <el-menu-item index="/Admin/NoticeList" >
+            <el-menu-item index="/Admin/NoticeList">
               <i class="el-icon-s-order"></i>
               <span>通知总览</span>
             </el-menu-item>
@@ -23,14 +23,16 @@
         </el-aside>
         <el-container>
           <el-main>
-            <el-table :data="tableData" border>
-              <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
-              </el-table-column>
-              <el-table-column prop="admin_id" label="管理员" align="center">
-              </el-table-column>
-              <el-table-column prop="operate_time" label="上次修改时间" align="center">
-              </el-table-column>
-            </el-table>
+              <el-table :data="tableData" border @row-click="goto_ShowNotice">
+                <el-table-column v-if="false" prop="notice_id" label="公告id">
+                </el-table-column>
+                <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
+                </el-table-column>
+                <el-table-column prop="admin_id" label="管理员" align="center">
+                </el-table-column>
+                <el-table-column prop="operate_time" label="上次修改时间" align="center">
+                </el-table-column>
+              </el-table>
           </el-main>
         </el-container>
       </el-container>
@@ -39,13 +41,14 @@
 </template>
  
 <script>
-import { get_all } from '@/api/notice'
+import { get_all } from '@/api/notice.js'
 export default {
   data() {
     this.tableData = [];
     get_all().then(res => {
       Object.keys(res.data).forEach(v => {
         let o = {};
+        o.notice_id = res.data[v].notice_id;
         o.title = res.data[v].notice_title;
         o.admin_id = res.data[v].admin_id;
         o.operate_time = res.data[v].operate_time;
@@ -58,6 +61,9 @@ export default {
   methods: {
     goto_AdminSpace() {
       this.$router.push({ path: "/Admin/AdminPage" });
+    },
+    goto_ShowNotice(row) {
+      this.$router.push({ path: "/Admin/ShowNotice", query: { n_id: row.notice_id } });
     }
   }
 }
