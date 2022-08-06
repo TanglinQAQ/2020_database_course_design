@@ -14,6 +14,7 @@ import AddUser from '@/components/AddUser.vue'
 import AdminPage from '@/view/AdminPage.vue'
 import NoticeList from '@/view/NoticeList.vue'
 import ShowNotice from '@/view/ShowNotice.vue'
+import create_notice from '@/view/create_notice.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -27,5 +28,6 @@ export default new Router({
         { path: '/Admin/AdminPage', component: AdminPage },
         { path: '/Admin/NoticeList', component: NoticeList },
         {path: '/Admin/ShowNotice',component:ShowNotice},
+        {path: '/Adimin/create_notice', component:create_notice},
     ],
 })
