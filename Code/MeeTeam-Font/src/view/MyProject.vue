@@ -2,16 +2,6 @@
   <div id="myproject-container">
     <el-container>
       <el-header style="text-align: right; font-size: 15px; top:50%;">
-        <span class="container" @click="goback">
-          <div class="button-wrapper">
-            <svg width="120" height="42">
-              <rect class="rectangle" width="120" height="42" />
-            </svg>
-            <div class="btn">
-              返回
-            </div>
-          </div>
-        </span>
         <el-badge :value="0" class="item">
           <el-button>聊天</el-button>
           <!--聊天是用户聊天-->
@@ -66,9 +56,6 @@ export default {
     this.getlist() //页面一进入就加载表格
   },
   methods: {
-    goback(){
-      this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
-    },
     getlist() {
       var vm = this;//全局变量
       getlistInfor().then(function (res) {
@@ -143,64 +130,10 @@ export default {
   background-color: #B3C0D1;
   color: #333;
   line-height: 55px;
-  font-weight: 900;
-  font-size: 24px;
-  background-color: #B3C0D1;
 }
 
 .item {
   margin-top: 0px;
   margin-right: 10px;
-}
-.container {
-  display: inline;
-  float: left;
-  display: inline-block;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 48px;
-}
-
-.button-wrapper {
-  display: inline-block;
-  position: relative;
-  width: 60px;
-  height: 30px;
-  text-align: center;
-}
-
-.rectangle {
-  stroke-width: 8px;
-  stroke: #ecf0f5;
-  fill: transparent;
-  /* Core part of the animation */
-  stroke-dasharray: 200 500;
-  stroke-dashoffset: -372;
-  /* 偏移负数，虚线整体右移动了372个单位 */
-}
-
-.btn {
-  color: white;
-  font-size: 24px;
-  letter-spacing: 6px;
-  position: relative;
-  top: -72px;
-  left: 30px;
-}
-
-@keyframes extend {
-  to {
-    stroke-dasharray: 600;
-    /* 属性用于创建虚线： */
-    stroke-dashoffset: 0;
-    stroke-width: 4;
-    /* 属性定义了一条线，文本或元素轮廓厚度： */
-  }
-}
-
-.button-wrapper:hover .rectangle {
-  animation: 0.5s extend linear forwards;
 }
 </style>
