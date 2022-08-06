@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div id="myproject-container">
     <el-container>
       <el-header style="text-align: right; font-size: 15px; top:50%;">
@@ -14,16 +13,6 @@
           </div>
         </span>
         <el-badge :value="0" class="item">
-=======
-  <div id="myproject-container">  
-    <el-container> 
-      <el-header  style="text-align: right; font-size: 15px; top:50%;">
-       <el-badge class="item" >
-         <!--返回按钮-->
-        <el-button @click="goBack()">返回</el-button>
-        </el-badge>
-        <el-badge :value="0" class="item" >
->>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
           <el-button>聊天</el-button>
           <!--聊天是用户聊天-->
         </el-badge>
@@ -37,7 +26,6 @@
         </el-badge>
         <span>{{ username }}</span>
       </el-header>
-      
       <el-main>
         <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
           <el-table-column prop="projectname" label="项目名称" width="140">
@@ -78,15 +66,9 @@ export default {
     this.getlist() //页面一进入就加载表格
   },
   methods: {
-<<<<<<< HEAD
     goback(){
       this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
     },
-=======
-    goBack() {
-            this.$router.push({ path: "/users/InforList" }); //返回
-        },
->>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
     getlist() {
       var vm = this;//全局变量
       getlistInfor().then(function (res) {
@@ -170,7 +152,6 @@ export default {
   margin-top: 0px;
   margin-right: 10px;
 }
-<<<<<<< HEAD
 .container {
   display: inline;
   float: left;
@@ -221,9 +202,5 @@ export default {
 
 .button-wrapper:hover .rectangle {
   animation: 0.5s extend linear forwards;
-=======
-.items{
-  
->>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
 }
 </style>

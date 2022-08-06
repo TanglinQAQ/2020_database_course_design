@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
   },
   "projects": {
@@ -13,22 +12,9 @@
         "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
         "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
         "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
-=======
-    "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-        "projectName": "Meeteam_Backend",
-        "projectPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-        "packagesPath": "C:\\Users\\中野\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
->>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\中野\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     }
