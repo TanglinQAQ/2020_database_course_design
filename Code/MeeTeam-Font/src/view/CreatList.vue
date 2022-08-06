@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <!--页头-->
+<<<<<<< HEAD
     <el-header>
       <span class="container" @click="goback">
         <div class="button-wrapper">
@@ -15,6 +16,11 @@
       发布组队需求
     </el-header>
 
+=======
+     <el-page-header @back="goBack" content="详情页面" >
+        </el-page-header>
+        <el-header>发布组队需求</el-header>
+>>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
     <el-main>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="需求名称" prop="requirement_name">
@@ -139,9 +145,15 @@ export default {
     };
   },
   methods: {
+<<<<<<< HEAD
     goback(){
       this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
     },
+=======
+    goBack() {
+            this.$router.push({ path: "/users/InforList" }); //返回
+        },
+>>>>>>> 73c1cb54337ad4e6e4199eca2c91079e2d4d4d50
     submitForm(formName) {
       console.log(this.ruleForm.team_type_detail);
       // console.log(this.ruleForm.team_type_detail);
