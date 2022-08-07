@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using System.Data.SqlClient;
 using SqlSugar;
 
-
-namespace Meeteam_Backend.Models
+namespace Meeteam_Backend
 {
-    [SugarTable("project")]
+    [SugarTable("Project")]
     public class Project
     {
         [SugarColumn(IsPrimaryKey = true)]
@@ -19,11 +15,11 @@ namespace Meeteam_Backend.Models
         [SugarColumn(IsJson = true)]
         public string project_name { get; set; }
         public string project_background { get; set; }
-        public string project_introduction { get; set; }
+        public string project_info { get; set; }
         public string project_content { get; set; }
         public string project_status { get; set; }
-        public string create_time { get; set; }
-        public string due { get; set; }
+        public string project_stime { get; set; }
+        public string project_etime { get; set; }
         public string project_progress { get; set; }
         public string admin_id { get; set; }
         public char audit_result { get; set; }
