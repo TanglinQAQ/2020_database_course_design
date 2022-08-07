@@ -10,7 +10,11 @@
       <el-container id="admin_page">
         <el-container>
           <el-main>
-              <el-button type="text" @click="goto_create_notice(notice_id)">编辑公告</el-button>
+            <div id="app">
+              <h2 v-text="title"></h2>
+              <span v-text="content"></span>
+            </div>
+            <el-button type="text" @click="goto_create_notice()">编辑公告</el-button>
           </el-main>
         </el-container>
       </el-container>
@@ -19,29 +23,36 @@
 </template>
  
 <script>
-import { get_all } from '@/api/notice.js'
+/* global Vue */
+import { get_notice } from '@/api/notice.js'
+let not = {
+  notice_title: '',
+  notice_content: ''
+};
 export default {
   data() {
-    this.tableData = [];
-    get_all().then(res => {
-      Object.keys(res.data).forEach(v => {
-        let o = {};
-        o.notice_id = res.data[v].notice_id;
-        o.title = res.data[v].notice_title;
-        o.admin_id = res.data[v].admin_id;
-        o.operate_time = res.data[v].operate_time;
-        console.log(o);
-        this.tableData.push(o);
-      })
+    console.log("运行");
+    let para = {
+      id: this.$route.query.n_id
+    };
+    get_notice(para).then(function (res) {
+      not.notice_title = res.data.notice_title;
+      not.notice_content = res.data.notice_content;
     })
-    return {};
+    let res = {
+      title: not.notice_title,
+      content: not.notice_content
+    };
+    console.log(res);
+    return res;
   },
   methods: {
     goto_NoticeList() {
       this.$router.push({ path: "/Admin/NoticeList" });
     },
-    goto_create_notice(notice_id) {
-        this.$router.push({path: "/Admin/create_notice", query: { n_id: notice_id } });
+    goto_create_notice() {
+      var n_id = this.$route.query.n_id;
+      this.$router.push({ path: "/Admin/CreateNotice", query: { n_id: n_id } });
     }
   }
 }

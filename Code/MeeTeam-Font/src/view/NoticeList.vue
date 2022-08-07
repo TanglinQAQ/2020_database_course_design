@@ -15,7 +15,7 @@
               <span>通知总览</span>
             </el-menu-item>
             <!--此处为暂时的路径，等编辑页面做好时候再改-->
-            <el-menu-item index="/Admin/AdminPage">
+            <el-menu-item index="/Admin/CreateNotice">
               <i class="el-icon-plus"></i>
               <span>新建通知</span>
             </el-menu-item>
@@ -23,16 +23,18 @@
         </el-aside>
         <el-container>
           <el-main>
-              <el-table :data="tableData" border @row-click="goto_ShowNotice">
-                <el-table-column v-if="false" prop="notice_id" label="公告id">
-                </el-table-column>
-                <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
-                </el-table-column>
-                <el-table-column prop="admin_id" label="管理员" align="center">
-                </el-table-column>
-                <el-table-column prop="operate_time" label="上次修改时间" align="center">
-                </el-table-column>
-              </el-table>
+            <el-table :data="tableData" border @row-click="goto_ShowNotice">
+              <el-table-column v-if="false" prop="notice_id" label="公告id">
+              </el-table-column>
+              <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
+              </el-table-column>
+              <el-table-column prop="admin_id" label="管理员" align="center">
+              </el-table-column>
+              <el-table-column prop="status" label="状态" align="center">
+              </el-table-column>
+              <el-table-column prop="operate_time" label="上次修改时间" align="center">
+              </el-table-column>
+            </el-table>
           </el-main>
         </el-container>
       </el-container>
@@ -52,6 +54,12 @@ export default {
         o.title = res.data[v].notice_title;
         o.admin_id = res.data[v].admin_id;
         o.operate_time = res.data[v].operate_time;
+        if (res.data[v].operate_type == 0) {
+          o.status = '暂存';
+        }
+        else {
+          o.status = '发布';
+        }
         console.log(o);
         this.tableData.push(o);
       })
