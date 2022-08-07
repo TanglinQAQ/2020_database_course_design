@@ -1,9 +1,7 @@
 <template>
     <div class="detaildiv">
-        <el-page-header @back="goBack" content="详情页面">
-        </el-page-header>
         <el-descriptions title="" :column="2" border
-            style="margin-top: 30px;margin-left: 80px;margin-right: 80px;margin-bottom: 180px">
+            style="margin-top: 30px;margin-right: 80px;margin-bottom: 180px">
             <el-descriptions-item label="发起者" width="140">{{ originator_id }}</el-descriptions-item>
             <el-descriptions-item label="发布时间">{{ release_time }}</el-descriptions-item>
             <el-descriptions-item label="所在校区">{{ region }}</el-descriptions-item>
@@ -89,7 +87,7 @@ export default {
 
 <style>
 .detaildiv {
-    position: absolute;
+    /* position: absolute; */
     height: 100%;
     bottom: 0%;
     right: 30px;

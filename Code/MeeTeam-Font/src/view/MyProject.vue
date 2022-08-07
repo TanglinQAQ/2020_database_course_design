@@ -1,40 +1,27 @@
 <template>
   <div id="myproject-container">
     <el-container>
-      <el-header style="text-align: right; font-size: 15px; top:50%;">
-        <span class="container" @click="goback">
-          <div class="button-wrapper">
-            <svg width="120" height="42">
-              <rect class="rectangle" width="120" height="42" />
-            </svg>
-            <div class="btn">
-              返回
-            </div>
-          </div>
-        </span>
+      <!-- <el-header style="text-align: right; font-size: 15px; top:50%;">
         <el-badge :value="0" class="item">
           <el-button>聊天</el-button>
-          <!--聊天是用户聊天-->
         </el-badge>
         <el-badge :value="3" class="item">
-          <!--评论是项目评论-->
           <el-button>评论</el-button>
         </el-badge>
         <el-badge :value="1" class="item" type="primary">
-          <!--申请是需求申请-->
           <el-button>申请</el-button>
         </el-badge>
         <span>{{ username }}</span>
-      </el-header>
+      </el-header> -->
       <el-main>
         <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
-          <el-table-column prop="projectname" label="项目名称" width="140">
+          <el-table-column prop="projectname" label="需求名称" width="140">
           </el-table-column>
-          <el-table-column prop="team_type" label="项目类型" width="140">
+          <el-table-column prop="team_type" label="需求类型" width="140">
           </el-table-column>
           <el-table-column prop="region" label="所在校区" width="200">
           </el-table-column>
-          <el-table-column prop="details" label="项目简介" width="400">
+          <el-table-column prop="details" label="需求简介" width="400">
           </el-table-column>
           <el-table-column prop="date" label="发布时间" sortable>
           </el-table-column>
@@ -163,44 +150,4 @@ export default {
   height: 48px;
 }
 
-.button-wrapper {
-  display: inline-block;
-  position: relative;
-  width: 60px;
-  height: 30px;
-  text-align: center;
-}
-
-.rectangle {
-  stroke-width: 8px;
-  stroke: #ecf0f5;
-  fill: transparent;
-  /* Core part of the animation */
-  stroke-dasharray: 200 500;
-  stroke-dashoffset: -372;
-  /* 偏移负数，虚线整体右移动了372个单位 */
-}
-
-.btn {
-  color: white;
-  font-size: 24px;
-  letter-spacing: 6px;
-  position: relative;
-  top: -72px;
-  left: 30px;
-}
-
-@keyframes extend {
-  to {
-    stroke-dasharray: 600;
-    /* 属性用于创建虚线： */
-    stroke-dashoffset: 0;
-    stroke-width: 4;
-    /* 属性定义了一条线，文本或元素轮廓厚度： */
-  }
-}
-
-.button-wrapper:hover .rectangle {
-  animation: 0.5s extend linear forwards;
-}
 </style>

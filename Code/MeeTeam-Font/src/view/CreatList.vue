@@ -19,11 +19,11 @@
         <el-form-item label="需求名称" prop="requirement_name">
           <el-input v-model="ruleForm.requirement_name"></el-input>
         </el-form-item>
-        <el-form-item label="组队目的" prop="purpose">
+        <el-form-item label="需求目的" prop="purpose">
           <el-input v-model="ruleForm.purpose"></el-input>
         </el-form-item>
-        <el-form-item label="组队类型" prop="team_type">
-          <el-select v-model="ruleForm.team_type" placeholder="请选择组队类型" @change="teamtypecheck">
+        <el-form-item label="需求类型" prop="team_type">
+          <el-select v-model="ruleForm.team_type" placeholder="请选择需求类型" @change="teamtypecheck">
             <el-option label="竞赛组队" value="竞赛"></el-option>
             <el-option label="课程项目组队" value="课程项目"></el-option>
           </el-select>

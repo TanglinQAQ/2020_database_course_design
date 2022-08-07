@@ -1,16 +1,19 @@
 <template>
-  <div>
-    <!-- 路由占位符-->
-    <router-view></router-view>
+  <div id="app">
+    <div v-if="$route.meta.keepAlive">
+        <navTop></navTop>
+        <router-view></router-view>
+    </div>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
 <script>
+import navTop from '@/components/common/nav.vue';
 export default {
-  name:'TeamMeet',
+  name:"commonNav",
+  components:{
+     navTop
+  }
 }
 </script>
-
-<style lang="less" scoped>
-
-</style>
