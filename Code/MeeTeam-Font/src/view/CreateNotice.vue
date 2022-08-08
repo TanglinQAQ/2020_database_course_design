@@ -1,70 +1,83 @@
 <template>
-  <div>
+  <div id="edit">
     <div id="header">
       <el-header>
-        <el-page-header @back="goto_NoticeList()" content="编辑公告">
-        </el-page-header>
+        <span class="container" @click="goback">
+          <div class="button-wrapper">
+            <svg width="120" height="42">
+              <rect class="rectangle" width="120" height="42" />
+            </svg>
+            <div class="btn">
+              返回
+            </div>
+          </div>
+        </span>公告管理
       </el-header>
     </div>
     <div id="main_page">
-      <el-container id="edit_page">
-        <el-main>
-          <el-form ref="form">
-            <el-form-item prop="notice_title">
-              <el-input type="text" v-model="notice_title" placeholder="请输入公告标题"></el-input>
-            </el-form-item>
-            <el-form-item prop="notice_content">
-              <el-input type="text" v-model="notice_content" placeholder="请输入公告内容"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="info" @click="onSubmit(0)">暂存公告</el-button>
-              <el-button type="primary" @click="onSubmit(1)">发布公告</el-button>
-            </el-form-item>
-          </el-form>
-        </el-main>
-      </el-container>
+
+      <el-main>
+        <el-form :model="FormData" ref="FormData">
+          <el-form-item>
+            <el-input type="text" v-model="FormData.title" placeholder="请输入公告标题"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input type="text" v-model="FormData.content" placeholder="请输入公告内容"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="info" @click="onSubmit(0)">暂存公告</el-button>
+            <el-button type="primary" @click="onSubmit(1)">发布公告</el-button>
+          </el-form-item>
+        </el-form>
+      </el-main>
     </div>
   </div>
 </template>
 
 <script>
-import {get_notice} from '@/api/notice.js'
+import { get_notice } from '@/api/notice.js'
 import { create_notice } from '@/api/notice.js'
 import global_msg from '../utils/global.js'
-let form = {
-  notice_title: '',
-  notice_content: '',
-};
+
 export default {
   data() {
-    if (this.$route.query.n_id) {
-      let para = {
-        id: this.$route.query.n_id
-      };
-      get_notice(para).then(function (res) {
-        console.log(res.data);
-        form.notice_title = res.data.notice_title;
-        form.notice_content = res.data.notice_content;
-      })
-    }
-    return form;
+    return {
+      FormData: {
+        title: '',
+        content: ''
+      }
+    };
+  },
+  created() {
+    this.get_NoticeInfo();
   },
   methods: {
-    goto_NoticeList() {
+    goback() {
       this.$router.push({ path: "/Admin/NoticeList" });
     },
+    get_NoticeInfo() {
+      if (this.$route.query.n_id) {
+        let params = {
+          id: this.$route.query.n_id
+        };
+        get_notice(params).then(res => {
+          this.FormData.title = res.data.notice_title;
+          this.FormData.content = res.data.notice_content;
+        })
+      }
+    },
     onSubmit(para) {
-      form.admin_id = global_msg.nowadminid;
       let o = {
         notice_id: '',
-        notice_title: form.notice_title,
-        notice_content: form.notice_content,
+        notice_title: this.FormData.title,
+        notice_content: this.FormData.content,
         admin_id: global_msg.nowadminid,
         operate_type: para,
         operate_time: ''
       }
       var not = JSON.stringify(o);
-      //console.log(res);
+      console.log(not);
+
       create_notice(not).then(function (res) {
         if (!res) {
           alert("公告修改失败！");
@@ -85,26 +98,78 @@ export default {
 </script>
 
 <style>
-#edit_page {
-  position: absolute;
-  top: 60px;
-  left: 0%;
-  right: 0%;
-  bottom: 0%;
+#edit {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ecf0f5;
+  background-size: 100% 100%;
 }
 
-#header {
-  height: 60px;
-}
-
-.el-page-header {
-  text-align: center;
-  padding-top: 20px;
-}
-
-.el-main {
-  background-color: #E9EEF3;
+.el-header {
+  font-weight: 900;
+  font-size: 24px;
+  background-color: #B3C0D1;
   color: #333;
   text-align: center;
+  line-height: 60px;
+}
+
+.el-container {
+  background-color: #ecf0f5;
+  color: #333;
+  text-align: left;
+  height: 100%;
+}
+
+.container {
+  display: inline;
+  float: left;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 48px;
+}
+
+.button-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+}
+
+.rectangle {
+  stroke-width: 8px;
+  stroke: #ecf0f5;
+  fill: transparent;
+  /* Core part of the animation */
+  stroke-dasharray: 200 500;
+  stroke-dashoffset: -372;
+  /* 偏移负数，虚线整体右移动了372个单位 */
+}
+
+.btn {
+  color: white;
+  font-size: 24px;
+  letter-spacing: 6px;
+  position: relative;
+  top: -72px;
+  left: 30px;
+}
+
+@keyframes extend {
+  to {
+    stroke-dasharray: 600;
+    /* 属性用于创建虚线： */
+    stroke-dashoffset: 0;
+    stroke-width: 4;
+    /* 属性定义了一条线，文本或元素轮廓厚度： */
+  }
+}
+
+.button-wrapper:hover .rectangle {
+  animation: 0.5s extend linear forwards;
 }
 </style>

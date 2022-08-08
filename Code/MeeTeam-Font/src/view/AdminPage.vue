@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'admin_navigate',
+    name: 'AdminPage',
     methods: {
         goto_NoticeList() {
             this.$router.push({ path: "/Admin/NoticeList" });
