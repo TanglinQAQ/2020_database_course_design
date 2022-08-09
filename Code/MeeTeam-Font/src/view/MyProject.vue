@@ -83,8 +83,8 @@ export default {
       })
     },
     handleEdit(index, row) { //编辑操作
-      var require_id = this.tableData[index].require_id;
-      this.$router.push({ name: 'ChangeList', params: { re_id: require_id } });
+      // var require_id = this.tableData[index].require_id;
+      this.$router.push({ name: 'ChangeList', params: { re_id: row.require_id } });
       console.log(index, row);
     },
     handleDelete(index, row) {//删除操作

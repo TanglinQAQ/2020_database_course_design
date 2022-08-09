@@ -130,9 +130,9 @@ export default {
   },
   methods: {
     handleLook(index, row) {//进入项目详情页面
-      var require_id = this.tableData[index].require_id;
-      console.log(index, row);
-      this.$router.push({ name: 'RequireDetail', params: { re_id: require_id } });
+      // var require_id = this.tableData[index].require_id;
+      // console.log(index, row);
+      this.$router.push({ name: 'RequireDetail', params: { re_id: row.require_id } });
     },
     handleClick(tab, event) {
       console.log(tab, event);
