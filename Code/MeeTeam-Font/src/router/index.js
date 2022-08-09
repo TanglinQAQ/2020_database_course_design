@@ -14,6 +14,8 @@ import AdminPage from '@/view/AdminPage.vue'
 import NoticeList from '@/view/NoticeList.vue'
 import RequireDetail from '@/view/RequireDetail.vue'
 import ChangeList from '@/view/ChangeList.vue'
+import ShowNotice from '@/view/ShowNotice.vue'
+import CreateNotice from '@/view/CreateNotice.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -37,7 +39,10 @@ export default new Router({
         },
         { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
-        { path: '/Admin/AdminPage', component: AdminPage },
-        { path: '/Admin/NoticeList', component: NoticeList },
-    ],
-})
+        { path: '/Admin/AdminPage', component: AdminPage, props: true },
+        { path: '/Admin/NoticeList', component: NoticeList, props: true },
+        { path: '/Admin/ShowNotice', component: ShowNotice, props: true },
+        { path: '/Admin/CreateNotice', component: CreateNotice, props: true }
+    ]
+}
+)

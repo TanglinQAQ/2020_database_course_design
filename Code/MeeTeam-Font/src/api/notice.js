@@ -18,3 +18,12 @@ export function get_all() {
         method: 'get',
     })
 }
+
+export function create_notice(params) {
+    /*创建新公告*/
+    return request({
+        url: '/notice/post',
+        method: 'post',
+        params: { not: params }
+    })
+}

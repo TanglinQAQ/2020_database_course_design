@@ -1,7 +1,7 @@
 <template>
   <div id="creatteam-container">
     <el-container style="height: 100%; border: 1px solid #eee">
-      <!-- <el-aside width="250px" style="background-color: rgb(238, 241, 246)">
+      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>组队类型</template>
@@ -36,10 +36,25 @@
             <el-menu-item index="2-3">沪西校区</el-menu-item>
             <el-menu-item index="2-4">沪北校区</el-menu-item>
           </el-submenu>
+          <el-submenu index="3">
+            <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="3-1">选项1</el-menu-item>
+              <el-menu-item index="3-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="3-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="3-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
         </el-menu>
-      </el-aside> -->
+      </el-aside>
       <el-container>
-        <!-- <el-header style="text-align: right; font-size: 15px; top:50%;">
+        <el-header style="text-align: right; font-size: 15px; top:50%;">
           <el-button type="primary" plain @click="additem">添加项目</el-button>
           <el-button type="warning" plain @click="myitem">我的项目</el-button>
           <el-dropdown>
@@ -50,63 +65,27 @@
             </el-dropdown-menu>
           </el-dropdown>
           <span>{{ username }}</span>
-        </el-header> -->
+        </el-header>
         <el-main>
-          <div style="height: 50px;">
-            <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="需求名称"
-              @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-            <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="组队发起人"
-              @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-            <el-select v-model="value" placeholder="需求类型" style="float:left;margin-right:30px;width:150px;">
-              <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-select v-model="value" placeholder="需求具体类型" style="float:left;margin-right:30px;width:150px;">
-              <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-select v-model="value1" multiple placeholder="需求具体类型" style="float:left;margin-right:30px;width:150px;">
-              <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-select v-model="value2" multiple placeholder="所在校区" style="float:left;margin-right:30px;width:150px;">
-              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-            <el-button class="filter-item" type="primary" icon="el-icon-search" @click="searchContList"
-              style="float:left">搜索
-            </el-button>
-          </div>
-          <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="需求列表" name="需求列表">
-              <div>
-                <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
-                  <el-table-column prop="projectname" label="项目名称" width="140">
-                  </el-table-column>
-                  <el-table-column prop="originator_id" label="组队发起人" width="140">
-                  </el-table-column>
-                  <el-table-column prop="team_type" label="项目类型" width="140">
-                  </el-table-column>
-                  <el-table-column prop="region" label="所在校区" width="200">
-                  </el-table-column>
-                  <el-table-column prop="details" label="项目简介" width="200">
-                  </el-table-column>
-                  <el-table-column prop="date" label="发布时间" sortable>
-                  </el-table-column>
-                  <el-table-column label="操作">
-                    <template slot-scope="scope">
-                      <el-button size="mini" @click="handleLook(scope.$index, scope.row)">查看详情</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane label="项目列表" name="项目列表">
-              <div>
-                adae
-              </div>
-            </el-tab-pane>
-          </el-tabs>
+          <el-table :data="tableData" :default-sort="{ prop: 'date', order: 'descending' }">
+            <el-table-column prop="projectname" label="项目名称" width="140">
+            </el-table-column>
+            <el-table-column prop="originator_id" label="组队发起人" width="140">
+            </el-table-column>
+            <el-table-column prop="team_type" label="项目类型" width="140">
+            </el-table-column>
+            <el-table-column prop="region" label="所在校区" width="200">
+            </el-table-column>
+            <el-table-column prop="details" label="项目简介" width="200">
+            </el-table-column>
+            <el-table-column prop="date" label="发布时间" sortable>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleLook(scope.$index, scope.row)">查看详情</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </el-main>
       </el-container>
     </el-container>
@@ -120,7 +99,6 @@ export default {
   name: 'InforList',
   data() {
     return {
-      activeName: "需求列表",
       username: global_msg.nowuserid,
       tableData: [],
     };
@@ -129,14 +107,6 @@ export default {
     this.getlist() //页面一进入就加载表格
   },
   methods: {
-    handleLook(index, row) {//进入项目详情页面
-      var require_id = this.tableData[index].require_id;
-      console.log(index, row);
-      this.$router.push({ name: 'RequireDetail', params: { re_id: require_id } });
-    },
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
     additem: function () {
       this.$router.push({ path: "/users/CreatList" }); //接下来进入到CreatList
     },
@@ -159,7 +129,6 @@ export default {
             region: '',
             details: '',
             date: '',
-            require_id: '',
           }
           // let params = {
           //   user_id: item.originator_id
@@ -176,7 +145,6 @@ export default {
           form.date = item.release_time;
           form.date = form.date.replace("\"", "").replace("\"", "");//去掉时间格式的引号
           form.region = item.region;
-          form.require_id = item.require_id;
           vm.tableData.push(form);
           // console.log(form);
           // console.log(vm.tableData);
@@ -187,14 +155,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #creatteam-container {
-  /* position: absolute; */
+  position: relative;
+  margin: 10px 0;
   margin-left: 0px;
   height: 100%;
-  bottom: 0%;
-  right: 0px;
-  left: 0px;
 }
 
 .el-header {
