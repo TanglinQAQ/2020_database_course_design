@@ -31,7 +31,7 @@
         </el-aside>
         <el-container>
           <el-main>
-            <el-table :data="tableData" border @row-click="goto_ShowNotice">
+            <el-table :data="tableData" border @row-click="goto_ShowNotice" v-if="isAlive">
               <el-table-column v-if="false" prop="notice_id" label="公告id">
               </el-table-column>
               <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
@@ -41,6 +41,16 @@
               <el-table-column prop="status" label="状态" align="center">
               </el-table-column>
               <el-table-column prop="operate_time" label="上次修改时间" align="center">
+              </el-table-column>
+              <el-table-column label="操作" align="center">
+                <template slot-scope="scope">
+                  <el-button-group>
+                    <el-button plain icon="el-icon-edit" @click="goto_edit(scope.row)"></el-button>
+                    <el-popconfirm  @confirm=delete_not(scope.row) title="确定删除吗？">
+                      <el-button plain slot="reference" @click.native.stop icon="el-icon-delete"></el-button>
+                    </el-popconfirm>
+                  </el-button-group>
+                </template>
               </el-table-column>
             </el-table>
           </el-main>
@@ -52,6 +62,7 @@
  
 <script>
 import { get_all } from '@/api/notice.js'
+import { delete_notice } from '@/api/notice.js'
 export default {
   data() {
     this.tableData = [];
@@ -72,7 +83,9 @@ export default {
         this.tableData.push(o);
       });
     });
-    return {};
+    return {
+      isAlive: true
+    };
   },
   methods: {
     goback() {
@@ -80,6 +93,30 @@ export default {
     },
     goto_ShowNotice(row) {
       this.$router.push({ path: "/Admin/ShowNotice", query: { n_id: row.notice_id } });
+    },
+    goto_edit(row) {
+      this.$router.push({ path: "/Admin/CreateNotice", query: { n_id: row.notice_id } });
+    },
+    reload () {
+      this.isAlive = false
+      this.$nextTick(function () {
+        this.isAlive = true
+      })
+    },
+    delete_not(row) {
+      let param = {
+        id: row.notice_id
+      };
+      delete_notice(param).then(function (res) {
+        if (res.data) {
+          alert("公告删除成功");
+          this.reload();
+          //location.reload();
+        }
+        else {
+          alert("公告删除失败");
+        }
+      })
     }
   },
 }

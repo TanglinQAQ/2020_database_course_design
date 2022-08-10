@@ -22,7 +22,7 @@
             <el-input type="text" v-model="FormData.title" placeholder="请输入公告标题"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input type="text" v-model="FormData.content" placeholder="请输入公告内容"></el-input>
+            <el-input type="textarea" rows="10" v-model="FormData.content" placeholder="请输入公告内容"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="info" @click="onSubmit(0)">暂存公告</el-button>

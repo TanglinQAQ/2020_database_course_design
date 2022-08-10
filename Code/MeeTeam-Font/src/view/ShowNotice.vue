@@ -20,7 +20,6 @@
           <h2 v-text="title"></h2>
           <span v-text="content"></span>
         </div>
-        <el-button type="text" @click="goto_create_notice()">编辑公告</el-button>
       </el-main>
     </div>
   </div>
@@ -29,10 +28,6 @@
 <script>
 /* global Vue */
 import { get_notice } from '@/api/notice.js'
-let not = {
-  notice_title: '',
-  notice_content: ''
-};
 export default {
   data() {
     return {
@@ -70,6 +65,10 @@ export default {
   min-height: 100vh;
   background-color: #ecf0f5;
   background-size: 100% 100%;
+}
+
+#app{
+  text-align: center;
 }
 
 .el-header {

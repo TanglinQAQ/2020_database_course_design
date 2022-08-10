@@ -27,3 +27,13 @@ export function create_notice(params) {
         params: { not: params }
     })
 }
+
+export function delete_notice(params) {
+    return request({
+        url: '/notice/delete_by_id',
+        method: 'delete',
+        params: {
+            id: params.id
+        }
+    })
+}
