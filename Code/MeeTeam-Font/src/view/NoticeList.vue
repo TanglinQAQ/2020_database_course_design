@@ -1,61 +1,30 @@
 <template>
-  <div id="admin">
-    <div id="header">
-      <el-header>
-        <span class="container" @click="goback">
-          <div class="button-wrapper">
-            <svg width="120" height="42">
-              <rect class="rectangle" width="120" height="42" />
-            </svg>
-            <div class="btn">
-              返回
-            </div>
-          </div>
-        </span>公告管理
-      </el-header>
-    </div>
+  <div id="NoticeList">
     <div id="body">
-      <el-container>
-        <el-aside width="200px">
-          <el-menu default-active="/Admin/NoticeList" router>
-            <el-menu-item index="/Admin/NoticeList">
-              <i class="el-icon-s-order"></i>
-              <span>通知总览</span>
-            </el-menu-item>
-            <!--此处为暂时的路径，等编辑页面做好时候再改-->
-            <el-menu-item index="/Admin/CreateNotice">
-              <i class="el-icon-plus"></i>
-              <span>新建通知</span>
-            </el-menu-item>
-          </el-menu>
-        </el-aside>
-        <el-container>
-          <el-main>
-            <el-table :data="tableData" border @row-click="goto_ShowNotice" v-if="isAlive">
-              <el-table-column v-if="false" prop="notice_id" label="公告id">
-              </el-table-column>
-              <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
-              </el-table-column>
-              <el-table-column prop="admin_id" label="管理员" align="center">
-              </el-table-column>
-              <el-table-column prop="status" label="状态" align="center">
-              </el-table-column>
-              <el-table-column prop="operate_time" label="上次修改时间" align="center">
-              </el-table-column>
-              <el-table-column label="操作" align="center">
-                <template slot-scope="scope">
-                  <el-button-group>
-                    <el-button plain icon="el-icon-edit" @click="goto_edit(scope.row)"></el-button>
-                    <el-popconfirm  @confirm=delete_not(scope.row) title="确定删除吗？">
-                      <el-button plain slot="reference" @click.native.stop icon="el-icon-delete"></el-button>
-                    </el-popconfirm>
-                  </el-button-group>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-main>
-        </el-container>
-      </el-container>
+      <el-main>
+        <el-table :data="tableData" border @row-click="goto_ShowNotice" v-if="isAlive">
+          <el-table-column v-if="false" prop="notice_id" label="公告id">
+          </el-table-column>
+          <el-table-column prop="title" label="公告标题" align="left" style="margin: 50px;">
+          </el-table-column>
+          <el-table-column prop="admin_id" label="管理员" align="center">
+          </el-table-column>
+          <el-table-column prop="status" label="状态" align="center">
+          </el-table-column>
+          <el-table-column prop="operate_time" label="上次修改时间" align="center">
+          </el-table-column>
+          <el-table-column label="操作" align="center">
+            <template slot-scope="scope">
+              <el-button-group>
+                <el-button plain icon="el-icon-edit" @click="goto_edit(scope.row)"></el-button>
+                <el-popconfirm @confirm=delete_not(scope.row) title="确定删除吗？">
+                  <el-button plain slot="reference" @click.native.stop icon="el-icon-delete"></el-button>
+                </el-popconfirm>
+              </el-button-group>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
     </div>
   </div>
 </template>
@@ -97,12 +66,6 @@ export default {
     goto_edit(row) {
       this.$router.push({ path: "/Admin/CreateNotice", query: { n_id: row.notice_id } });
     },
-    reload () {
-      this.isAlive = false
-      this.$nextTick(function () {
-        this.isAlive = true
-      })
-    },
     delete_not(row) {
       let param = {
         id: row.notice_id
@@ -110,8 +73,7 @@ export default {
       delete_notice(param).then(function (res) {
         if (res.data) {
           alert("公告删除成功");
-          this.reload();
-          //location.reload();
+          location.reload();
         }
         else {
           alert("公告删除失败");
@@ -123,84 +85,13 @@ export default {
 </script>
 
 <style>
-#admin {
-  width: 100%;
+.el-main {
+  margin-left: 8%;
+}
+
+#body {
+  position: relative;
   min-height: 100vh;
-  background-color: #ecf0f5;
-  background-size: 100% 100%;
-}
-
-.el-header {
-  font-weight: 900;
-  font-size: 24px;
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-
-.el-aside {
-  background-color: #D3DCE6;
-  color: #333;
-  text-align: center;
-}
-
-.el-container {
-  background-color: #ecf0f5;
-  color: #333;
-  text-align: left;
   height: 100%;
-}
-
-.container {
-  display: inline;
-  float: left;
-  display: inline-block;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 48px;
-}
-
-.button-wrapper {
-  display: inline-block;
-  position: relative;
-  width: 60px;
-  height: 30px;
-  text-align: center;
-}
-
-.rectangle {
-  stroke-width: 8px;
-  stroke: #ecf0f5;
-  fill: transparent;
-  /* Core part of the animation */
-  stroke-dasharray: 200 500;
-  stroke-dashoffset: -372;
-  /* 偏移负数，虚线整体右移动了372个单位 */
-}
-
-.btn {
-  color: white;
-  font-size: 24px;
-  letter-spacing: 6px;
-  position: relative;
-  top: -72px;
-  left: 30px;
-}
-
-@keyframes extend {
-  to {
-    stroke-dasharray: 600;
-    /* 属性用于创建虚线： */
-    stroke-dashoffset: 0;
-    stroke-width: 4;
-    /* 属性定义了一条线，文本或元素轮廓厚度： */
-  }
-}
-
-.button-wrapper:hover .rectangle {
-  animation: 0.5s extend linear forwards;
 }
 </style>

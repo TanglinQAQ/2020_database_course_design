@@ -39,10 +39,14 @@ export default new Router({
         },
         { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
-        { path: '/Admin/AdminPage', component: AdminPage, props: true },
-        { path: '/Admin/NoticeList', component: NoticeList, props: true },
-        { path: '/Admin/ShowNotice', component: ShowNotice, props: true },
-        { path: '/Admin/CreateNotice', component: CreateNotice, props: true }
+        {
+            path: '/Admin/AdminPage', component: AdminPage,
+            children: [
+                { path: '/Admin/NoticeList', component: NoticeList },
+                { path: '/Admin/CreateNotice', component: CreateNotice },
+                { path: '/Admin/ShowNotice', component: ShowNotice}
+            ], props: true
+        },
     ]
 }
 )
