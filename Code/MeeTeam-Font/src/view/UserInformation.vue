@@ -18,8 +18,82 @@
         </el-menu>
       </el-aside>
       <el-container>
-       
-       
+        <el-main>          
+        <el-descriptions class="margin-top" title="个人信息" :column="3" :size="size" border>
+    <template slot="extra">
+    </template>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-user"></i>
+        用户名
+      </template>
+      {{username}}
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-postcard"></i>
+        昵称
+      </template>
+      111
+    </el-descriptions-item>
+     <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-s-custom"></i>
+        性别
+      </template>
+      男
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-mobile-phone"></i>
+        手机号
+      </template>
+      18100000000
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-location-outline"></i>
+        就读院校
+      </template>
+      软件学院
+    </el-descriptions-item>
+     <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-office-building"></i>
+        专业
+      </template>
+      软件工程
+    </el-descriptions-item>
+     <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-reading"></i>
+        年级
+      </template>
+      大二
+    </el-descriptions-item>
+     <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-coin"></i>
+        积分
+      </template>
+      11
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-date"></i>
+        注册时间
+      </template>
+      2022-08-02
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template slot="label">
+        <i class="el-icon-tickets"></i>
+        个人简介
+      </template>
+      123444123asd
+    </el-descriptions-item> 
+  </el-descriptions>
+       </el-main>
       </el-container>
     </el-container>
   </div>
@@ -55,11 +129,7 @@ export default {
   height: 100%;
 }
 
-.el-header {
-  background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
-}
+
 
 .el-aside {
   color: #333;
