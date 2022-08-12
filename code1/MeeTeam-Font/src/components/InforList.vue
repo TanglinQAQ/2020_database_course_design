@@ -56,8 +56,7 @@
       <el-container>
         <el-header style="text-align: right; font-size: 15px; top:50%;">
           <el-button type="primary" plain @click="additem">添加项目</el-button>
-          <el-button type="warning" plain @click="deleteitem">我的项目</el-button>
-          <el-button @click="goto_logout()">注销</el-button>
+          <el-button type="warning" plain @click="myitem">我的项目</el-button>
           <el-dropdown>
             <i class="el-icon-setting" style="margin: 30px"></i>
             <el-dropdown-menu slot="dropdown">
@@ -77,9 +76,14 @@
             </el-table-column>
             <el-table-column prop="region" label="所在校区" width="200">
             </el-table-column>
-            <el-table-column prop="details" label="项目简介" width="400">
+            <el-table-column prop="details" label="项目简介" width="200">
             </el-table-column>
             <el-table-column prop="date" label="发布时间" sortable>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleLook(scope.$index, scope.row)">查看详情</el-button>
+              </template>
             </el-table-column>
           </el-table>
         </el-main>
@@ -104,10 +108,10 @@ export default {
   },
   methods: {
     additem: function () {
-      this.$router.push({ path: "/users/CreatList" }); //接下来进入到哪个路由
+      this.$router.push({ path: "/users/CreatList" }); //接下来进入到CreatList
     },
-    goto_logout: function () {
-      this.$router.push({ path: "/users/LogOut" }); //接下来进入到哪个路由
+    myitem: function () {
+      this.$router.push({ path: "/users/MyProject" }); //接下来进入到MyProject
     },
     getlist() {
       var vm = this;//全局变量
@@ -126,6 +130,13 @@ export default {
             details: '',
             date: '',
           }
+          // let params = {
+          //   user_id: item.originator_id
+          // }
+          // alert(params.user_id);
+          // vm.getusername(params).then(function (res) {
+          //   form.originator_id = res.data;
+          // })
           // console.log(item);
           form.projectname = item.requirement_name;
           form.originator_id = item.originator_id;
