@@ -22,7 +22,6 @@ namespace Meeteam_Backend
         public string create_time { get; set; }
         public string due { get; set; }
         public string project_progress { get; set; }
-        public string organizer_id { get; set; }
         public string admin_id { get; set; }
         public string audit_result { get; set; }
         public string audit_time { get; set; }
