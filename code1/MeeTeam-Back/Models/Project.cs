@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data; //to user the plug to introduce the 'using'
+using Oracle.ManagedDataAccess.Client;
+using System.Data.SqlClient;
 using SqlSugar;
+
 
 namespace Meeteam_Backend
 {
@@ -15,15 +16,15 @@ namespace Meeteam_Backend
         [SugarColumn(IsJson = true)]
         public string project_name { get; set; }
         public string project_background { get; set; }
-        public string project_info { get; set; }
+        public string project_introduction { get; set; }
         public string project_content { get; set; }
         public string project_status { get; set; }
-        public string project_stime { get; set; }
-        public string project_etime { get; set; }
+        public string create_time { get; set; }
+        public string due { get; set; }
         public string project_progress { get; set; }
+        public string organizer_id { get; set; }
         public string admin_id { get; set; }
-        public char audit_result { get; set; }
+        public string audit_result { get; set; }
         public string audit_time { get; set; }
-
     }
 }
