@@ -20,7 +20,7 @@ namespace Meeteam_Backend.Controllers
     {
         //上传项目
         [HttpPost]
-        public bool AddProject(string project_id, string project_name, string project_background, string project_introduction, string project_content, string project_status, string due, string project_progress, string organizer_id)
+        public bool AddProject(string project_id, string project_name, string project_background, string project_introduction, string project_content, string project_status, string due, string project_progress)
         {
             //获取数据库连接
             dbORM dborm = new dbORM();
@@ -36,7 +36,6 @@ namespace Meeteam_Backend.Controllers
             pos.create_time = DateTime.Now.ToString("g"); //2009/10/30 20:40;
             pos.due = due;
             pos.project_progress = project_progress;
-            pos.organizer_id = organizer_id;
 
             int count = db.Insertable(pos).ExecuteCommand();
             if (count == 1)
