@@ -1,49 +1,12 @@
 <template>
   <div id="home">
     <!--页头-->
-    <el-header>发布项目</el-header>
+    <el-header>发布组队需求</el-header>
     <el-main>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px" class="demo-ruleForm">
-      <el-form-item label="项目名称" prop="project_name">
-          <el-input v-model="ruleForm.project_name"></el-input>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="需求名称" prop="requirement_name">
+          <el-input v-model="ruleForm.requirement_name"></el-input>
         </el-form-item>
-        <el-form-item label="项目背景" prop="project_background">
-          <el-input v-model="ruleForm.project_background"></el-input>
-        </el-form-item>
-        <el-form-item label="项目简介" prop="project_introduction">
-          <el-input v-model="ruleForm.project_introduction"></el-input>
-        </el-form-item>
-        <el-form-item label="项目内容" prop="project_content">
-          <el-input v-model="ruleForm.project_content"></el-input>
-        </el-form-item>
-        <el-form-item label="起止时间" prop="due">
-          <el-date-picker
-            v-model="ruleForm.due" 
-            type="datetimerange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            style="float: left"
-            format="yyyy-MM-dd HH:mm:ss"
-            value-format="yyyy-MM-dd HH:mm:ss">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="项目当前进度" prop="project_progress">
-          <el-select v-model="ruleForm.project_progress" placeholder="请选择项目当前进度">
-            <el-option label="准备阶段" value="1"></el-option>
-            <el-option label="规划阶段" value="2"></el-option>
-            <el-option label="起步阶段" value="3"></el-option>
-            <el-option label="中期阶段" value="4"></el-option>
-            <el-option label="收尾阶段" value="5"></el-option>
-          </el-select>
-        </el-form-item>
-         <el-form-item label="是否有组队需求" prop="project_status">
-          <el-select v-model="ruleForm.project_status" placeholder="请选择是否有组队需求">
-            <el-option label="是" value="1"></el-option>
-            <el-option label="否" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <div v-if="ruleForm.project_status === '1'">
         <el-form-item label="组队目的" prop="purpose">
           <el-input v-model="ruleForm.purpose"></el-input>
         </el-form-item>
@@ -73,7 +36,6 @@
         <el-form-item label="需求细则" prop="details">
           <el-input type="textarea" v-model="ruleForm.details"></el-input>
         </el-form-item>
-        </div>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -83,58 +45,89 @@
   </div>
 </template>
 
-
-
 <script>
 import global_msg from '../utils/global.js'
-import { createprojectlist } from '@/api/createprojectlist.js'
+import { creatlist } from '@/api/creatlist.js'
 export default {
-  name: 'CreatprojectList',
+  name: 'CreatList',
   data() {
     return {
       detailshow: false,
       props: { multiple: true },//级联选择器确定选项选不选择
+      options: [
+        {
+          disabled: false,
+          value: 1,
+          label: '竞赛组队',
+          children: [
+            { value: 2, label: '创新创业' },
+            { value: 3, label: '数学建模' },
+            { value: 4, label: '学科竞赛' },
+            { value: 5, label: '其他竞赛' },
+          ]
+        },
+        {
+          disabled: false,
+          value: 6,
+          label: '项目课程组队',
+          children: [
+            { value: 7, label: '新生院' },
+            { value: 8, label: '建筑与城市规划学院' },
+            { value: 9, label: '土木工程学院' },
+            { value: 10, label: '机械与能源工程学院' },
+            { value: 11, label: '经济与管理学院' },
+            { value: 12, label: '环境科学与工程学院' },
+            { value: 13, label: '材料科学与工程学院' },
+            { value: 14, label: '电子与信息工程学院' },
+            { value: 15, label: '人文学院' },
+            { value: 16, label: '汽车学院' },
+            { value: 17, label: '软件学院' },
+            { value: 18, label: '其他学院' },
+          ]
+        },
+      ],
       checkList: [],
       ruleForm: {
+        require_id: '',
+        purpose: '',
+        team_type: '',
+        team_limit: '',
+        details: '',
+        require_status: '',
+        originator_id: '',
         project_id: '',
-        project_name: '',
-        project_background: '',
-        project_introduction: '',
-        project_content: '',
-        due:'',
-        project_progress: '',
+        region: [], //地区得到的是一个数组
+        team_type_detail: [],//具体的类型得到的也是一个数组
+        requirement_name:''
       },
       rules: {
-         project_name: [
-          { required: true, message: '请输入项目名称', trigger: 'blur' },
+        purpose: [
+          { required: true, message: '请输入组队目的', trigger: 'blur' },
           { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
         ],
-        project_background: [
-          { required: true, message: '请输入项目背景', trigger: 'blur' },
+        team_type: [
+          { required: true, message: '请选择组队类型', trigger: 'change' }
+        ],
+        details: [
+          { required: true, message: '请填写需求细则', trigger: 'blur' },
+          { min: 3, max: 100, message: '长度在 3-100 个字符以内', trigger: 'blur' }
+        ],
+        team_limit: [
+          { required: true, message: '请选择组队人数', trigger: 'change' }
+        ],
+        region: [
+          { type: 'array', required: true, message: '请至少选择一个校区', trigger: 'change' }
+        ],
+        requirement_name:[
+           { required: true, message: '请输入需求名称', trigger: 'blur' },
           { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
-        ],
-        project_introduction: [
-          { required: true, message: '请输入项目简介', trigger: 'blur' },
-          { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
-        ],
-        project_content: [
-          { required: true, message: '请输入项目内容', trigger: 'blur' },
-          { min: 3, max: 80, message: '长度在 3-80 个字符以内', trigger: 'blur' }
-        ],
-        due: [
-          { required: true, message: '请选择时间', trigger: 'blur' },
-        ],
-        project_progress: [
-          { required: true, message: '请选择项目当前进度', trigger: 'blur' },
-        ],
-        project_status: [
-          { required: true, message: '请选择是否有组队需求', trigger: 'blur' },
         ]
       }
     };
   },
   methods: {
     submitForm(formName) {
+      // console.log(this.ruleForm.team_type_detail);
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit!');
@@ -143,17 +136,46 @@ export default {
           return false;
         }
       });
+      global_msg.requirenum += 1;//全局需求个数+1
+      global_msg.projectnum += 1;//全局项目个数+1
+      this.ruleForm.project_id = global_msg.projectnum;//得到全局项目个数
+      this.ruleForm.require_id = global_msg.requirenum;//得到全局需求个数
+      this.ruleForm.originator_id = global_msg.nowuserid;//得到全局userid
+      this.ruleForm.require_status = '0/' + this.ruleForm.team_limit;//改成了0/人数
+      var RegionLast = this.ruleForm.region.join(','); // 把数组项拼接成字符串，以逗号,分隔;转换后的地区，需要转成字符串
+      var TeamDetailLast = this.ruleForm.team_type_detail.join('-');
+      var reg = new RegExp("1,", "g");
+      TeamDetailLast = TeamDetailLast.replace(reg, "");//把父结点的值去掉
+      reg = new RegExp("6,", "g");
+      TeamDetailLast = TeamDetailLast.replace(reg, "");//把父结点的值去掉
+      // alert(this.ruleForm.require_id)
+      //  alert(this.ruleForm.purpose)
+      //  alert(this.ruleForm.team_type)
+      //  alert(this.ruleForm.team_limit)
+      //  alert(this.ruleForm.details)
+      // alert(this.ruleForm.require_status)
+      // alert(this.ruleForm.originator_id)
+      // alert(this.ruleForm.project_id)
+      // alert(this.ruleForm.project_id)
+      // alert(RegionLast)
+      // alert(this.ruleForm.project_id)
+      // alert(TeamDetailLast);
       let vm = this;
       //请求地址,this和vm指的是全局
       let param = {
+        require_id: this.ruleForm.require_id,
+        purpose: this.ruleForm.purpose,
+        team_type: this.ruleForm.team_type,
+        team_limit: this.ruleForm.team_limit,
+        details: this.ruleForm.details,
+        require_status: this.ruleForm.require_status,
+        originator_id: this.ruleForm.originator_id,
         project_id: this.ruleForm.project_id,
-        project_name: this.ruleForm.project_name,
-        project_background: this.ruleForm.project_background,
-        project_introduction: this.ruleForm.project_introduction,
-        project_content: this.ruleForm.project_content,
-        project_progress: this.ruleForm.project_progress,
+        region: RegionLast,
+        team_type_detail: TeamDetailLast,
+        requirement_name: this.ruleForm.requirement_name
       }
-      createprojectlist(param).then(function (res) {
+      creatlist(param).then(function (res) {
         if (res.data === false) {
           vm.$message.error("提交失败");
           vm.resetForm(formName);
@@ -163,6 +185,20 @@ export default {
         }
       })
     },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+      this.ruleForm.team_type_detail="";
+      this.detailshow = false;
+    },
+    teamtypecheck() {
+      this.options[0].disabled = false;
+      this.options[1].disabled = false;
+      this.detailshow = true;
+      if (this.ruleForm.team_type === "竞赛")
+        this.options[1].disabled = true;
+      else if (this.ruleForm.team_type === "课程项目")
+        this.options[0].disabled = true;
+    }
   }
 }
 </script>

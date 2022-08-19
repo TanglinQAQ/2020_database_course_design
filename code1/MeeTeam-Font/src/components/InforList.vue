@@ -8,7 +8,7 @@
       </el-aside> -->
       <el-container>
         <!-- <el-header style="text-align: right; font-size: 15px; top:50%;">
-          <el-button type="primary" plain @click="additem">添加项目</el-button>
+          <el-button type="primary" plain @click="additem">发布项目</el-button>
           <el-button type="warning" plain @click="myitem">我的项目</el-button>
           <el-dropdown>
             <i class="el-icon-setting" style="margin: 30px"></i>
@@ -25,6 +25,10 @@
               @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
             <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="项目发布人"
               @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
+           <el-select v-model="value2" multiple placeholder="项目当前进度" style="float:left;margin-right:30px;width:150px;">
+              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
             <el-select v-model="value2" multiple placeholder="是否有组队需求" style="float:left;margin-right:30px;width:150px;">
               <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -35,16 +39,16 @@
           </div>
           <br><br>
               <div>
-                <el-table :data="tableData" :header-cell-style="{textAlign:'center'}" default-sort="{ prop: 'create_time', order: 'descending' }">
+                <el-table :data="tableData" :header-cell-style="{textAlign:'center'}" :cell-style="{'text-align':'center'}" default-sort="{ prop: 'create_time', order: 'descending' }">
                   <el-table-column prop="project_name" label="项目名称" width="200">
-                  </el-table-column>
-                  <el-table-column prop="admin_id" label="项目发布人" width="200">
                   </el-table-column>
                   <el-table-column prop="project_introduction" label="项目简介" width="400">
                   </el-table-column>
+                  <el-table-column prop="project_progress" label="项目当前进度" width="200">
+                  </el-table-column>
                   <el-table-column prop="create_time" label="发布时间" sortable width="200">
                   </el-table-column>
-                   <el-table-column prop="need" label="是否有组队需求" width="200">
+                   <el-table-column prop="project_status" label="是否有组队需求" width="200">
                   </el-table-column>
                   <el-table-column label="操作">
                     <template slot-scope="scope">
@@ -62,6 +66,7 @@
 <script>
 import global_msg from '../utils/global.js'
 import { getlistInfor } from '@/api/Inforlist.js'
+import { getrequireInfor } from '@/api/Inforlist.js'
 export default {
   name: 'InforList',
   data() {
@@ -78,7 +83,7 @@ export default {
     handleLook(index, row) {//进入项目详情页面
       var project_id = this.tableData[index].project_id;
       console.log(index, row);
-      this.$router.push({ name: 'ProjectDetail', params: { pro_id: project_id } });
+      this.$router.push({ name: 'ProjectDetail', params: { p_id: project_id } });
     },
     handleClick(tab, event) {
       console.log(tab, event);
@@ -91,8 +96,11 @@ export default {
     },
     getlist() {
       var vm = this;//全局变量
+      getrequireInfor().then(function (res1) {
+        global_msg.requirenum = res1.data.length;//改变全局projectnum
+        })
       getlistInfor().then(function (res) {
-        global_msg.requirenum = res.data.length;//改变全局requirenum
+        global_msg.projectnum = res.data.length;//改变全局requirenum
         // console.log(res);
         // console.log(res.data.length);
         // console.log(res.data[0]);
@@ -100,16 +108,16 @@ export default {
         for (let item of res.data) {
           let form = {//设置添加数据的格式
             project_name: '',
-            user_name: '',
             project_introduction: '',
+            project_progress: '',
             create_time: '',
-            project_status:'',
+            project_status: '',
             project_id: '',
           }
           
           form.project_name = item.project_name;
-          form.user_name = item.user_name;
           form.project_introduction = item.project_introduction;
+          form.project_progress = item.project_progress;
           form.create_time = item.create_time;
           form.create_time = form.create_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
           form.project_status = item.project_status;
