@@ -18,28 +18,22 @@ namespace Meeteam_Backend.Controllers
     [Route("/[Controller]/[action]")]
     [ApiController]
     [EnableCors("any")]
-    public class ProjectController : ControllerBase
+    public class Project_EvaluationController : ControllerBase
     {
         //上传项目
         [HttpPost]
-        public bool AddProject(string project_id, string project_name, string project_background, string project_introduction, string project_content, string project_status, string due, string project_progress)
+        public bool AddProject_Evaluation(string project_eva_id, string project_id, string evaluator_id, string eva_content)
         {
             //获取数据库连接
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();
 
-            Project pos = new Project();
+            Project_Evaluation pos = new Project_Evaluation();
+            pos.project_eva_id = project_eva_id;
             pos.project_id = project_id;
-            pos.project_name = project_name;
-            pos.project_background = project_background;
-            pos.project_introduction = project_introduction;
-            pos.project_content = project_content;
-            pos.project_status = project_status;
-            pos.create_time = DateTime.Now.ToString("g"); //2009/10/30 20:40;
-            pos.admin_id = "system";
-            pos.audit_result = "0";
-            pos.due = due;
-            pos.project_progress = project_progress;
+            pos.evaluator_id = evaluator_id;
+            pos.eva_time = DateTime.Now.ToString("g"); //2009/10/30 20:40;
+            pos.eva_content = eva_content;
 
             int count = db.Insertable(pos).ExecuteCommand();
             if (count == 1)
@@ -47,15 +41,15 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
-        //查询全部组队需求，返回一个对象
+        //查询全部评论，返回一个对象
         [HttpGet]
-        public List<Project> SelectAllProject()
+        public List<Project_Evaluation> SelectAllProject_Evaluation()
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
             try
             {
-                List<Project> agrlist = db.Queryable<Project>().ToList();
+                List<Project_Evaluation> agrlist = db.Queryable<Project_Evaluation>().ToList();
                 return agrlist;
             }
             catch (Exception ex)
@@ -63,20 +57,20 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
-        //查询id的项目
+        //查询id的项目评论
         [HttpGet]
         public string get_by_id(string id)
         {
-            Project project = new Project();
+            Project_Evaluation project_eva = new Project_Evaluation();
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
             //搜索条件，感觉可以改成检索的方式
-            project = db.Queryable<Project>().Where(it => it.project_id == id).First();
-            return JsonSerializer.Serialize(project);
+            project_eva = db.Queryable<Project_Evaluation>().Where(it => it.project_id == id).First();
+            return JsonSerializer.Serialize(project_eva);
         }
-        //删除项目
+        //删除评论
         [HttpDelete]
-        public bool deleteProject(string project_id)
+        public bool deleteProject(string id)
         {
             //获取数据库连接
             dbORM dborm = new dbORM();
@@ -84,7 +78,7 @@ namespace Meeteam_Backend.Controllers
             //删除
             try
             {
-                int count = db.Deleteable<Project>().In(project_id).ExecuteCommand();
+                int count = db.Deleteable<Project_Evaluation>().In(id).ExecuteCommand();
                 if (count == 1)
                     return true;
                 else
