@@ -20,10 +20,9 @@ namespace Meeteam_Backend
         public string team_limit { get; set; }
         public string details { get; set; }
         public string require_status { get; set; }
-        public string originator_id { get; set; }
         public string project_id { get; set; }
         public string region { get; set; }
         public string team_type_details { get; set; }
-        public string requirement_name { get; set; }
     }
 }
+

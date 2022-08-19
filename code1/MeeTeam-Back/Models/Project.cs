@@ -12,8 +12,6 @@ namespace Meeteam_Backend
     {
         [SugarColumn(IsPrimaryKey = true)]
         public string project_id { get; set; }
-
-        [SugarColumn(IsJson = true)]
         public string project_name { get; set; }
         public string project_background { get; set; }
         public string project_introduction { get; set; }
