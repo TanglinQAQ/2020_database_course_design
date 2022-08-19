@@ -3,7 +3,7 @@
 export default{
     projectnum:0,//项目个数，对应ID
     requirenum:0,//项目需求个数
-    usernum:0,//用户个数
-    nowuserid:'123',//现在的userid，为了免得是空值
-     ID:"admin"//每次打开个人信息界面时修改ID
+    evaluationnum:0,//评论个数
+    nowadminid:"system",//现在的管理员
+    nowuserid:"normal",//现在的userid，也就是用户的名称，设为normal后面好调试
 }
