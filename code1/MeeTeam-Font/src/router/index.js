@@ -16,6 +16,8 @@ import ProjectDetail from '@/view/ProjectDetail.vue'
 import ChangeList from '@/view/ChangeList.vue'
 import ShowNotice from '@/view/ShowNotice.vue'
 import CreateNotice from '@/view/CreateNotice.vue'
+import DisplayPage from '@/components/DisplayPage.vue'
+
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -43,6 +45,7 @@ export default new Router({
         { path: '/Admin/NoticeList', component: NoticeList, props: true },
         { path: '/Admin/ShowNotice', component: ShowNotice, props: true },
         { path: '/Admin/CreateNotice', component: CreateNotice, props: true }
+         {path: '/users/DisplayPage',component: DisplayPage}
     ]
 }
 )
