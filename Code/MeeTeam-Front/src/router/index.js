@@ -7,7 +7,6 @@ Vue.use(Router)
 //导入需要的组件
 //账号操作相关
 
-import CreatList from '@/view/CreatList.vue'
 import AddUser from '@/view/AddUser.vue'
 import ChangeList from '@/view/ChangeList.vue'
 import UserInformation from '@/view/UserInformation.vue'
@@ -25,6 +24,7 @@ import CreateNotice from '@/view/Notice/CreateNotice.vue'
 import User_NoticeList from '@/view/Notice/User_NoticeList.vue'
 import User_ShowNotice from '@/view/Notice/User_ShowNotice.vue'
 //项目需求相关
+import CreatList from '@/view/Project_and_Require//CreatList.vue'
 import MyProject from '@/view/Project_and_Require/MyProject.vue'
 import ProjectDetail from '@/view/Project_and_Require/ProjectDetail.vue'
 import InforList from '@/view/Project_and_Require/InforList.vue'
@@ -36,7 +36,6 @@ export default new Router({
         { path: '/users/LogOut', component: LogOut },
         { path: '/users/PostInfor', component: PostInfor },
         { path: '/users/PersonInfo', component: PersonInfo },
-        { path: '/users/CreatList', component: CreatList },
         { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
         {
@@ -58,6 +57,7 @@ export default new Router({
             path: '/users/UserPage', component: UserPage,
             children: [
                 { path: '/users/NoticeList', component: User_NoticeList },
+                { path: '/users/CreatList', component: CreatList },
                 { path: '/users/User_ShowNotice', component: User_ShowNotice },
                 { path: '/users/InforList', component: InforList },
                 { path: '/users/MyProject', component: MyProject },

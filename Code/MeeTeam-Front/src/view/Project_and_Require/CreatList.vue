@@ -1,9 +1,16 @@
 <template>
   <div id="home">
     <!--页头-->
-    <el-header>发布项目</el-header>
     <el-main>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px" class="demo-ruleForm">
+      <div id="breadcrumb">
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>项目管理</el-breadcrumb-item>
+        <el-breadcrumb-item>新建项目</el-breadcrumb-item>
+      </el-breadcrumb>
+      </div>
+      <el-header>新建项目</el-header>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px" label-position="left" class="demo-ruleForm">
       <el-form-item label="项目名称" prop="project_name">
           <el-input v-model="ruleForm.project_name"></el-input>
         </el-form-item>
@@ -86,7 +93,7 @@
 
 
 <script>
-import global_msg from '../utils/global.js'
+import global_msg from '../../utils/global.js'
 import { createprojectlist } from '@/api/CreateList.js'
 import { createrequirelist } from '@/api/CreateList.js'
 import { createuser_project } from '@/api/CreateList.js'
@@ -295,17 +302,20 @@ export default {
 </script>
 
 <style scoped>
+#breadcrumb {
+  margin-bottom: 10px;
+}
 .el-header,
 .el-footer {
-  font-weight:900;
+  font-weight:800;
   font-size:24px;
-  background-color: #B3C0D1;
+  background-color: #FFFFFF;
   color: #333;
   text-align: center;
-  line-height: 60px;
+  line-height: 10px;
 }
 .el-main {
-  background-color: #ecf0f5;
+  background-color: #FFFFFF;
   color: #333;
   text-align: left;
   line-height: 220px;
@@ -314,7 +324,7 @@ export default {
 #home {
   width: 100%;
   min-height: 100vh;
-  background-color: #ecf0f5;
+  background-color: #FFFFFF;
   background-size: 100% 100%;
 }
 .demo-ruleForm >>> .el-form-item__label /*标题的字体大小 */
