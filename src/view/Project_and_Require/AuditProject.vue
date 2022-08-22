@@ -24,6 +24,9 @@
                         </el-col>
                     </el-row>
                 </el-card>
+                <el-dialog :title="title" :visible.sync="visible" :before-close="handleClose" width="70%">
+
+                 </el-dialog> 
             </el-main>
         </div>
 </div>
