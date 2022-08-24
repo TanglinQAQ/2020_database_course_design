@@ -35,7 +35,7 @@
         <i class="el-icon-mobile-phone"></i>
         联系方式
       </template>
-      18100000000@
+      {{this.contact_info}}
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
@@ -88,6 +88,7 @@
 
 <script>
 import global_msg from '../../utils/global.js'
+import { GetUserInfor } from '@/api/MyInfor.js'
 export default {
   name: 'UserInformation',
   data() {
@@ -101,7 +102,14 @@ export default {
   },
   methods: {
     getlist() {
-      var vm = this;//全局变量
+     let param = {
+         user_id: this.username,
+         
+        }
+      GetUserInfor(param).then(function (res) {
+          let item = res.data;
+          this.region.contact_info = item.contact_info;
+      })
      
     }
   }
