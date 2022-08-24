@@ -12,6 +12,7 @@ import LogIn from '@/view/LogManager/Login.vue'
 //主页
 import AdminPage from '@/view/MainPage/AdminPage.vue'
 import UserPage from '@/view/MainPage/UserPage.vue'
+import MyPage from '@/view/MainPage/MyPage.vue'
 //通知相关
 import NoticeList from '@/view/Notice/NoticeList.vue'
 import ShowNotice from '@/view/Notice/ShowNotice.vue'
@@ -39,11 +40,6 @@ export default new Router({
         { path: '/users/PersonInfo', component: PersonInfo },
         { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
-        {
-            path: '/users/UserInformation', name: 'UserInformation', component: UserInformation, props: true, meta: {
-                keepAlive: true
-            }
-        },
         //管理员主页及其子页面
         {
             path: '/Admin/AdminPage', component: AdminPage,
@@ -67,7 +63,14 @@ export default new Router({
                 { path: '/users/ProjectDetail', component: ProjectDetail }
             ], props: true
         },
-        {path: '/users/DisplayPage',component: DisplayPage}
+        {path: '/users/DisplayPage',component: DisplayPage},
+        //个人信息主页及其子页面
+        {
+            path:'/users/MyPage', component:MyPage,
+            children:[
+                { path: '/users/UserInformation', name: 'UserInformation', component: UserInformation},
+            ]
+        }
     ]
 }
 )

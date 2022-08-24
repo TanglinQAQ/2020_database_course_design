@@ -62,7 +62,7 @@ export default {
             this.user_id = global_msg.nowuserid;
         },
         goto_userInfo() {
-            this.$router.push({ path: "/users/UserInformation" });
+            this.$router.push({ path: "/users/MyPage" });
         }
     }
 }

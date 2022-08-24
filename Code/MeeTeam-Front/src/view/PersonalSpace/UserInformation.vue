@@ -1,25 +1,12 @@
 <template>
   <div id="creatteam-container">
-    <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-user"></i>个人信息</template>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-star-off"></i>我的收藏</template>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-time"></i>历史记录</template>
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title"><i class="el-icon-bell"></i>消息通知</template>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
       <el-container>
         <el-main>          
-        <el-descriptions class="margin-top" title="个人信息" :column="3" :size="size" border>
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>个人信息</el-breadcrumb-item>
+          </el-breadcrumb>
+        <el-descriptions class="margin-top" title=" " :column="3" :size="size" border>
     <template slot="extra">
     </template>
     <el-descriptions-item>
@@ -46,9 +33,9 @@
     <el-descriptions-item>
       <template slot="label">
         <i class="el-icon-mobile-phone"></i>
-        手机号
+        联系方式
       </template>
-      18100000000
+      18100000000@
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">
@@ -94,7 +81,7 @@
     </el-descriptions-item> 
   </el-descriptions>
        </el-main>
-      </el-container>
+
     </el-container>
   </div>
 </template>
