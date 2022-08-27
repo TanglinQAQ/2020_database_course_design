@@ -61,7 +61,6 @@
               <el-table-column prop="eva_time" label="评论时间" sortable width="150">
               </el-table-column>
             </el-table>
-
           </div>
         </el-tab-pane>
         <el-tab-pane label="收起评论列表" name="收起评论列表">
@@ -71,7 +70,6 @@
       </el-tabs>
     </el-main>
   </div>
-
 </template>
 
 
@@ -216,7 +214,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .detaildiv {
   /* position: absolute; */
   height: 100%;
