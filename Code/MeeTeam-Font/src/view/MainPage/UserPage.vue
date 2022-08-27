@@ -33,6 +33,17 @@
                             <el-menu-item index="/users/NoticeList">
                                 <i class="el-icon-s-home"></i>平台通知
                             </el-menu-item>
+                            <el-submenu index="2">
+                                <template slot="title">
+                                    <i class="el-icon-s-custom"></i>
+                                    <span>个人信息</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="/users/MyPage">我的信息</el-menu-item>
+                                    <el-menu-item index="/users/MyPage">我的收藏</el-menu-item>
+                                    <el-menu-item index="/users/MyPage">我的记录</el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
                         </el-menu>
                     </el-col>
                 </el-row>

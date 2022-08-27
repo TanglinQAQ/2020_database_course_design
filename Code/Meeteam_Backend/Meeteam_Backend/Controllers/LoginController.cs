@@ -10,6 +10,8 @@ using System.Data;
 using System.Collections;
 using SqlSugar;
 using MeeTeam_Backend;
+using System.Security;
+using System.Security.Cryptography;
 
 namespace Meeteam_Backend.Controllers
 {
@@ -21,6 +23,15 @@ namespace Meeteam_Backend.Controllers
     public class LoginController : ControllerBase
 
     {
+        //16位的MD5加密
+        public static string MD5Encrypt16(string password)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(System.Text.Encoding.Default.GetBytes(password)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
+        }
+
         //查询全部用户，返回一个对象
         [HttpGet]
         public List<User_Info> SelectAlluser()
@@ -96,7 +107,7 @@ namespace Meeteam_Backend.Controllers
                .Select(it => it.password)
                .Where("user_id=@id", new { id = user_id })
                .ToList();
-                if (password == list[0].ToString())
+                if (MD5Encrypt16(password) == list[0].ToString())//将新的密码加密比对
                     return true;
                 else
                     return false;
@@ -118,7 +129,7 @@ namespace Meeteam_Backend.Controllers
                 .Select(it => it.password)
                 .Where("admin_id=@id", new { id = admin_id })
                 .ToList();
-                if (password == list[0])
+                if (MD5Encrypt16(password) == list[0])
                     return true;
                 else
                     return false;
@@ -139,7 +150,7 @@ namespace Meeteam_Backend.Controllers
             {
                 User_Info pos = new User_Info();
                 pos.user_id = user_id;
-                pos.password = password;
+                pos.password = MD5Encrypt16(password);
                 pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
                 pos.user_name = user_name;
                 pos.account_status = '1';
@@ -171,7 +182,7 @@ namespace Meeteam_Backend.Controllers
             {
                 Administrator pos = new Administrator();
                 pos.admin_id = admin_id;
-                pos.password = password;
+                pos.password = MD5Encrypt16(password);
                 pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
                 pos.user_name = user_name;
                 pos.account_status = '1';
@@ -207,7 +218,7 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        //删除用户
+        //删除管理员
         [HttpDelete]
         public bool deleteAdmin(string admin_id)
         {
