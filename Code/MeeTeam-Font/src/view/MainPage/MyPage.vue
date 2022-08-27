@@ -5,9 +5,15 @@
             <span id="title">|</span>
             <span id="title"> 个人信息 </span>
             <div id="user_id">
-                <el-link type="info" @click="goto_userInfo()" style="color:white;font-size: 20px;">
-                    <span v-text="user_id"></span>
-                </el-link>
+                 <el-dropdown @command="handleCommand">
+                <span class="el-dropdown-link" >
+                 {{user_id}}
+                    </span>
+                 <el-dropdown-menu slot="dropdown" >
+                 <el-dropdown-item icon="el-icon-user" command="a"> 个人中心 </el-dropdown-item>
+                 <el-dropdown-item icon="el-icon-switch-button" command="b" >退出登陆</el-dropdown-item>
+                 </el-dropdown-menu>        
+               </el-dropdown>
             </div>
         </div>
         <div id="body">
@@ -32,11 +38,6 @@
                     </el-col>
                 </el-row>
             </div>
-            <div id="main">
-                <el-main>
-                    <router-view></router-view>
-                </el-main>
-            </div>
         </div>
     </div>
 </template>
@@ -56,9 +57,15 @@ export default {
         get_user() {
             this.user_id = global_msg.nowuserid;
         },
-        goto_userInfo() {
+         handleCommand(command) {
+        if(command=='a'){
             this.$router.push({ path: "/users/MyPage" });
         }
+        if(command=='b')
+        {
+             this.$router.push({ path: "/users/Logout" });
+        }
+      }
     }
 }
 </script>
@@ -84,12 +91,11 @@ export default {
 #user_id {
     margin-left: 70%;
 }
-
-
-.el-link {
+.el-dropdown-link {
+    cursor: pointer;
+    color: white;
     font-size: 20px;
-}
-
+  }
 #user_page {
     background-color: white;
     background-size: 100% 100%;

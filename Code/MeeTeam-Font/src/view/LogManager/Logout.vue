@@ -37,7 +37,7 @@ export default
     {
         global_msg.nowuserid='';
         this.$message.success("注销成功");
-        this.$router.push({path: "/users"}); //接下来进入到哪个路由
+        this.$router.push({path: "/login"}); //接下来进入到哪个路由
     }
    }
 
