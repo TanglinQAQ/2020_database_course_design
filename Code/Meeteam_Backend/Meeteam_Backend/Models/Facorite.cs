@@ -13,10 +13,9 @@ namespace Meeteam_Backend
         [SugarColumn(IsPrimaryKey = true)]
         public string facorite_id { get; set; }
         public string owner_id { get; set; }
-        public string facorite_name { get; set; }
+        public string project_id { get; set; }
         public string facorite_time { get; set; }
         public string facorite_state { get; set; }
-        
     }
 }
 
