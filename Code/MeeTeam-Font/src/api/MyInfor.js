@@ -10,3 +10,32 @@ export function GetUserInfor(params) {
       }
     })
   }
+  export function GetMyCollection(params) {
+    /*得到我的收藏 */
+    return request({
+      url: '/Facorite/GetFacorite',
+      method: 'get',
+      params:{
+        user_id:params.user_id
+      }
+    })
+  }
+  export function AddMyCollection(params) {
+    /*添加收藏 */
+    return request({
+      url: '/Facorite/AddFacorite',
+      method: 'post',
+      params:{
+        facorite_id:params.facorite_id,
+        owner_id:params.owner_id,
+        project_id:params.project_id,
+      }
+    })
+  }
+  export function SelectAllCollection() {
+    /*查询所有收藏*/
+    return request({
+      url: '/Facorite/SelectAllFacorite',
+      method: 'get',
+    })
+  }

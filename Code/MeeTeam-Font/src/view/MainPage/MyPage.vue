@@ -75,7 +75,6 @@ export default {
     caret-color: transparent;
 }
 
-
 #nav {
     background-color: black;
     height: 60px;

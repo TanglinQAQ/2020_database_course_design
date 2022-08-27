@@ -12,7 +12,7 @@
                 </div>
             </span>用户注册
         </el-header>
-        <el-main>
+        <el-main id="con">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="名称" prop="user_name">
                     <el-input v-model="ruleForm.user_name"></el-input>
@@ -50,7 +50,6 @@
                 </el-form-item>
             </el-form>
         </el-main>
-
     </div>
 </template>
 
@@ -189,12 +188,15 @@ export default {
     line-height: 60px;
 }
 
-.el-main {
+#con {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    margin-left: 0%;
     background-color: #ecf0f5;
     color: #333;
     text-align: left;
     line-height: 220px;
-    height: 100%;
 }
 
 #home {
