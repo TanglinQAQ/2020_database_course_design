@@ -31,6 +31,9 @@ import InforList from '@/view/Project_and_Require/InforList.vue'
 import DisplayPage from '@/view/PersonalSpace/DisplayPage.vue'
 import UserInformation from '@/view/PersonalSpace/UserInformation.vue'
 import PersonInfo from '@/view/PersonalSpace/PersonInfo.vue'
+import UserHistory from '@/view/PersonalSpace/HisTory.vue'
+import UserCollection from '@/view/PersonalSpace/CollecTion.vue'
+
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -69,6 +72,8 @@ export default new Router({
             path:'/users/MyPage', component:MyPage,
             children:[
                 { path: '/users/UserInformation', name: 'UserInformation', component: UserInformation},
+                { path: '/users/UserHistory', name: 'UserHistory', component: UserHistory},
+                { path: '/users/UserCollection', name: 'UserCollection', component: UserCollection},
             ]
         }
     ]
