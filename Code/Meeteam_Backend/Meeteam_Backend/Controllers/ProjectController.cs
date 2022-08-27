@@ -95,5 +95,64 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+        //查询项目
+        [HttpGet]
+
+        /*测试用例
+{
+  "project_id": "",
+  "project_name": "",
+  "publisher": "",
+  "project_progess": "规划阶段",
+  "hav_require": "",
+  "require_id": "",
+  "require_status": "",
+  "team_type": "课程项目"
+}
+         */
+        public string project_query(string s)
+        {
+            Project_Query q = JsonSerializer.Deserialize<Project_Query>(s);
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();
+            List<Project> res = new List<Project>();
+            //三表联查
+            var query = db.Queryable<Project, User_Project, Grouping_Requirement>(
+                (p, up, gr) => new JoinQueryInfos(
+                    JoinType.Left, p.project_id == up.project_id,
+                    JoinType.Full, p.project_id == gr.project_id));
+            if (q.project_id != null && q.project_id != "")
+                query.Where((p, up, gr) => p.project_id == q.project_id);
+            if (q.project_name != null && q.project_name != "")
+                query.Where((p, up, gr) => p.project_name == q.project_name);
+            if (q.publisher != null && q.publisher != "")
+                query.Where((p, up, gr) => up.user_id == q.publisher && up.duty == "发布者");
+            if (q.project_progress != null && q.project_progress != "")
+                query.Where((p, up, gr) => p.project_progress == q.project_progress);
+            if (q.hav_require == "1")
+                query.Where((p, up, gr) => SqlFunc.HasValue(gr.project_id));
+            else if (q.hav_require == "0")
+                query.Where((p, up, gr) => SqlFunc.IsNullOrEmpty(gr.project_id));
+            if (q.require_id != null && q.require_id != "")
+                query.Where((p, up, gr) => gr.require_id == q.require_id);
+            if (q.require_status != null && q.require_status != "")
+                query.Where((p, up, gr) => gr.require_status == q.require_status);
+            if (q.team_type != null && q.team_type != "")
+                query.Where((p, up, gr) => gr.team_type == q.team_type);
+            var json = query.Clone().Select<ViewMode>().Distinct().ToJson();
+            return json;
+        }
+    }
+
+    public class ViewMode
+    {
+        public string Projectproject_id { get; set; }//按项目id查询（唯一）
+        public string Projectproject_name { get; set; }//按项目名查询（字符串子串）
+        public string User_Projectuser_id { get; set; }//按发布者查询
+        public string Projectproject_progress { get; set; }//按项目进展查询
+        public string Grouping_Requirementrequire_id { get; set; }//按需求id查询（唯一）
+        public string Grouping_Requirementrequire_status { get; set; }//按需求状态查询
+        public string Grouping_Requirementteam_type { get; set; }//按组队类型查询
     }
 }
