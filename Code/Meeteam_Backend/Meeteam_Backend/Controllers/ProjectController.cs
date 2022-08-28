@@ -123,11 +123,11 @@ namespace Meeteam_Backend.Controllers
                     JoinType.Left, p.project_id == up.project_id,
                     JoinType.Full, p.project_id == gr.project_id));
             if (q.project_id != null && q.project_id != "")
-                query.Where((p, up, gr) => p.project_id == q.project_id);
+                query.Where((p, up, gr) => p.project_id==q.project_id);
             if (q.project_name != null && q.project_name != "")
-                query.Where((p, up, gr) => p.project_name == q.project_name);
+                query.Where((p, up, gr) => p.project_name.Contains(q.project_name));
             if (q.publisher != null && q.publisher != "")
-                query.Where((p, up, gr) => up.user_id == q.publisher && up.duty == "发布者");
+                query.Where((p, up, gr) => up.user_id.Contains(q.publisher) && up.duty == "发布者");
             if (q.project_progress != null && q.project_progress != "")
                 query.Where((p, up, gr) => p.project_progress == q.project_progress);
             if (q.hav_require == "1")
@@ -145,12 +145,9 @@ namespace Meeteam_Backend.Controllers
         }
     }
 
-    public class ViewMode
+    public class ViewMode:Project
     {
-        public string Projectproject_id { get; set; }//按项目id查询（唯一）
-        public string Projectproject_name { get; set; }//按项目名查询（字符串子串）
         public string User_Projectuser_id { get; set; }//按发布者查询
-        public string Projectproject_progress { get; set; }//按项目进展查询
         public string Grouping_Requirementrequire_id { get; set; }//按需求id查询（唯一）
         public string Grouping_Requirementrequire_status { get; set; }//按需求状态查询
         public string Grouping_Requirementteam_type { get; set; }//按组队类型查询
