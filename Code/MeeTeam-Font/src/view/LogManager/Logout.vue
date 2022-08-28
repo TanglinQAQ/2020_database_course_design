@@ -1,7 +1,7 @@
 <template>
    <div id="logout-container">
     <div style="text-align: center;height: 50px">
-      是否注销？
+      是否退出登录？
     </div>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item>
@@ -30,13 +30,13 @@ export default
   {
     giveup()
     {
-        this.$message.success("注销取消");
+        this.$message.success("退出取消");
         this.$router.push({path: "/users/InforList"}); //接下来进入到哪个路由
     },
     logout()
     {
         global_msg.nowuserid='';
-        this.$message.success("注销成功");
+        this.$message.success("退出成功");
         this.$router.push({path: "/login"}); //接下来进入到哪个路由
     }
    }

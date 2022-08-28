@@ -42,8 +42,8 @@
       </el-steps>
       <el-button type="success" plain style="float: right;margin-right: 80px">申请加入</el-button>
       <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
-      <el-button type="submit" plain style="float: left;margin-left: 20px"
-        @click="handlefavorite(scope.$index, scope.row)">收藏{{ favorite_num }}</el-button>
+      <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{ favorite_num
+      }}</el-button>
       <el-button type="success" plain style="float: left;margin-left: 20px" @click="handleevaluation()">评论{{
           evaluation_num
       }}</el-button>
@@ -82,6 +82,9 @@ import { get_eva } from '@/api/ProjectDetail.js'
 import { get_username } from '@/api/ProjectDetail.js'
 import { detailnum } from '@/api/ProjectDetail.js'
 import { createevalist } from '@/api/CreateList.js'
+import { AddMyCollection } from '@/api/MyInfor.js'
+import { SelectAllCollection } from '@/api/MyInfor.js'
+import { Ifcollect } from '@/api/MyInfor.js'
 export default {
   data() {
     return {
@@ -117,6 +120,9 @@ export default {
       this.$router.push({ path: "/users/InforList" });
     },
     get_Info() {
+      SelectAllCollection().then(function (res1) {
+        global_msg.facoritenum = res1.data.length + 1;//改变全局facoritenum
+      })
       get_eva().then(function (res0) {
         global_msg.evaluationnum = res0.data.length;//改变全局projectnum
       })
@@ -187,7 +193,33 @@ export default {
       })
     },
     handlefavorite(index, row) { //收藏操作
-
+      var vm = this;
+      var aa;
+      let pp = {
+        owner_id: global_msg.nowuserid,
+        project_id: vm.$route.query.p_id
+      }
+      Ifcollect(pp).then(function (res) {
+        aa = res.data;
+        if (aa === false) {//被收藏过
+          vm.$message.error("已经被收藏过");
+        }else{
+        let pa = {
+          facorite_id: Number(global_msg.facoritenum)+1,
+          owner_id: global_msg.nowuserid,
+          project_id: vm.$route.query.p_id
+        }
+        AddMyCollection(pa).then(function (res) {
+          global_msg.facoritenum = global_msg.facoritenum + 1;
+          if (res.data === false) {
+            vm.$message.error("收藏失败");
+          }
+          else {
+            alert("收藏成功！");
+          }
+        })
+        }
+      })
     },
     handleevaluation() { //评论操作
       var vm = this;

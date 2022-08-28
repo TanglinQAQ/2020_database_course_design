@@ -28,12 +28,12 @@
                             <el-menu-item index="/users/UserInformation">
                                 <i class="el-icon-user"></i>个人信息
                             </el-menu-item>
-                            <el-menu-item index="/users/UserCollection">
+                            <!-- <el-menu-item @click="goAnchor('#anchor1')">
                                 <i class="el-icon-star-off"></i>我的收藏
                             </el-menu-item>
                             <el-menu-item index="/users/UserHistory">
                                 <i class="el-icon-time"></i>历史记录
-                            </el-menu-item>
+                            </el-menu-item> -->
                         </el-menu>
                     </el-col>
                 </el-row>
@@ -64,12 +64,28 @@ export default {
         },
         handleCommand(command) {
             if (command == 'a') {
-                this.$router.push({ path: "/users/MyPage" });
+                this.$router.push({ path: "/users/UserInformation" });
             }
             if (command == 'b') {
-                this.$router.push({ path: "/users/Logout" });
+                // this.$router.push({ path: "/users/Logout" });
+                this.$confirm('确定退出登陆吗', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '退出成功'
+                    });
+                    this.$router.push({ path: "/login" }); //接下来进入到哪个路由
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '退出取消'
+                    });
+                });
             }
-        }
+        },
     }
 }
 </script>
