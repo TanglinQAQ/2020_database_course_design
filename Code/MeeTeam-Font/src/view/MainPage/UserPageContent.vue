@@ -32,16 +32,24 @@
         </div>
 
         <br>
-        <el-carousel indicator-position="outside">
-            <el-carousel-item v-for="item in 4" :key="item">
-                <h3 text="2xl" justify="center">{{ item }}</h3>
-            </el-carousel-item>
-        </el-carousel>
+        <h3 style="text-align:left">近期热点项目</h3>
+
+        <template>
+            <div class="light_index">
+                <!--跑马灯-->
+                <div>
+                    <el-carousel :interval="4000" type="card" height="200px">
+                        <el-carousel-item v-for="item in imageList" :key="item.id">
+                            <img :src="item.idView" class="image">
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
+            </div>
+        </template>
 
     </div>
 
 </template>
-
 
 
 <script>
@@ -51,10 +59,19 @@ import { ref } from 'vue'
 const value = ref(new Date())
 
 export default {
+    name: '_index',
     data() {
         return {
             user_name: '',
-            user_id: ''
+            user_id: '',
+            imageList: [
+                { id: 0, idView: require("@/assets/l1.jpg") },
+                { id: 1, idView: require("@/assets/l2.jpg") },
+                { id: 2, idView: require("@/assets/l3.jpg") },
+                { id: 3, idView: require("@/assets/l4.jpg") },
+                { id: 4, idView: require("@/assets/l5.jpg") },
+                { id: 5, idView: require("@/assets/l6.jpg") },
+            ]
         };
     },
 
@@ -116,14 +133,32 @@ export default {
 
 .box-card {
     width: 430px;
-    height:400px;
+    height: 400px;
+}
+</style>
+
+
+<style>
+.el-calendar-table .el-calendar-day {
+    height: 30px;
+}
+</style>
+
+<style>
+._index {
+    background: #c8cfd8;
+    width: 80%;
+    text-align: center;
+    margin-left: 142px;
+    width: 80.6%;
+
 }
 
 .el-carousel__item h3 {
-    display: flex;
     color: #475669;
+    font-size: 14px;
     opacity: 0.75;
-    line-height: 300px;
+    line-height: 200px;
     margin: 0;
 }
 
@@ -131,13 +166,8 @@ export default {
     background-color: #99a9bf;
 }
 
-.el-carousel__item:nth-child(2n + 1) {
+.el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
 }
 </style>
 
-<style>
-    .el-calendar-table .el-calendar-day{
-        height: 35px;
-    }
-</style>
