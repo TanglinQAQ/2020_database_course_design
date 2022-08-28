@@ -69,12 +69,28 @@ export default {
         },
         handleCommand(command) {
             if (command == 'a') {
-                this.$router.push({ path: "/users/MyPage" });
+                this.$router.push({ path: "/users/UserInformation" });
             }
             if (command == 'b') {
-                this.$router.push({ path: "/users/Logout" });
+                // this.$router.push({ path: "/users/Logout" });
+                this.$confirm('确定退出登陆吗', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '退出成功'
+                    });
+                    this.$router.push({ path: "/login" }); //接下来进入到哪个路由
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '退出取消'
+                    });
+                });
             }
-        }
+        },
     }
 }
 </script>

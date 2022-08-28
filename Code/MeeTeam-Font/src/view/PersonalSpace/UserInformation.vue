@@ -73,7 +73,7 @@
             {{introduction}}
           </el-descriptions-item>
         </el-descriptions>
-        <el-divider></el-divider>
+        <el-divider href="#anchor1"></el-divider>
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
@@ -195,6 +195,11 @@ export default {
         deletecollect(param);
         console.log(index, row);
     },
+    handleDetail(index, row){
+      var project_id = this.tableData1[index].project_id;
+      console.log(index, row);
+      this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
+    }
   }
 }
 </script>
