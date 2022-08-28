@@ -39,3 +39,34 @@ export function GetUserInfor(params) {
       method: 'get',
     })
   }
+  export function getproject(params) {
+    /*查询收藏对应的项目*/
+    return request({
+      url: '/Facorite/GetPorject',
+      method: 'get',
+      params:{
+        project_id:params.project_id
+      }
+    })
+  }
+  export function Ifcollect(params) {
+    /*判断改用户对应项目是否收藏过*/
+    return request({
+      url: '/Facorite/IfCollect',
+      method: 'get',
+      params:{
+        project_id:params.project_id,
+        owner_id:params.owner_id
+      }
+    })
+  }
+  export function deletecollect(params) {
+    /*删除收藏*/
+    return request({
+      url: '/Facorite/deletecollect',
+      method: 'delete',
+      params:{
+        facorite_id:params.facorite_id,
+      }
+    })
+  }
