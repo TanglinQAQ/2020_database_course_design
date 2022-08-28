@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
 Vue.use(Router)
 
 //导入需要的组件
@@ -13,6 +12,7 @@ import LogIn from '@/view/LogManager/Login.vue'
 import AdminPage from '@/view/MainPage/AdminPage.vue'
 import UserPage from '@/view/MainPage/UserPage.vue'
 import MyPage from '@/view/MainPage/MyPage.vue'
+import UserPageContent from'@/view/MainPage/UserPageContent.vue'
 //通知相关
 import NoticeList from '@/view/Notice/NoticeList.vue'
 import ShowNotice from '@/view/Notice/ShowNotice.vue'
@@ -63,7 +63,8 @@ export default new Router({
                 { path: '/users/User_ShowNotice', component: User_ShowNotice },
                 { path: '/users/InforList', component: InforList },
                 { path: '/users/MyProject', component: MyProject },
-                { path: '/users/ProjectDetail', component: ProjectDetail }
+                { path: '/users/ProjectDetail', component: ProjectDetail },
+                { path:'/users/UserPageContent',component:UserPageContent}
             ], props: true
         },
         {path: '/users/DisplayPage',component: DisplayPage},

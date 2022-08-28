@@ -38,6 +38,11 @@
                     </el-col>
                 </el-row>
             </div>
+            <div id="main">
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
+            </div>
         </div>
     </div>
 </template>

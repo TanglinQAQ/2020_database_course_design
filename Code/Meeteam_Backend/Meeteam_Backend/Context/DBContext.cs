@@ -8,7 +8,6 @@ namespace MeeTeam_Backend
 {
     public class dbORM
     {
-
         public SqlSugarClient getInstance()
         {
             SqlSugarClient db = new SqlSugarClient(connect_info);

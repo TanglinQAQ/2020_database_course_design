@@ -122,4 +122,5 @@ export default {
 #breadcrumb {
   margin-bottom: 10px;
 }
+
 </style>

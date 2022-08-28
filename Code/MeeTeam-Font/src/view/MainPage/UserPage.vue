@@ -5,15 +5,15 @@
             <span id="title">|</span>
             <span id="title">大学生组队信息平台</span>
             <div id="user_id">
-                  <el-dropdown @command="handleCommand">
-                <span class="el-dropdown-link" >
-                 {{user_id}}
+                <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link">
+                        {{ user_id }}
                     </span>
-                 <el-dropdown-menu slot="dropdown" >
-                 <el-dropdown-item icon="el-icon-user" command="a"> 个人中心 </el-dropdown-item>
-                 <el-dropdown-item icon="el-icon-switch-button" command="b" >退出登陆</el-dropdown-item>
-                 </el-dropdown-menu>        
-               </el-dropdown>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item icon="el-icon-user" command="a"> 个人中心 </el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-switch-button" command="b">退出登陆</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
             </div>
         </div>
         <div id="body">
@@ -22,7 +22,7 @@
                     <el-col>
                         <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64"
                             text-color="#fff" active-text-color="#ffd04b" :router="true">
-                            <el-menu-item index="/users/UserPage">
+                            <el-menu-item index="/users/UserPageContent">
                                 <i class="el-icon-s-home"></i>首页
                             </el-menu-item>
                             <el-submenu index="1">
@@ -42,6 +42,11 @@
                         </el-menu>
                     </el-col>
                 </el-row>
+            </div>
+            <div id="main">
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
             </div>
         </div>
     </div>
@@ -63,14 +68,13 @@ export default {
             this.user_id = global_msg.nowuserid;
         },
         handleCommand(command) {
-        if(command=='a'){
-            this.$router.push({ path: "/users/MyPage" });
+            if (command == 'a') {
+                this.$router.push({ path: "/users/MyPage" });
+            }
+            if (command == 'b') {
+                this.$router.push({ path: "/users/Logout" });
+            }
         }
-        if(command=='b')
-        {
-             this.$router.push({ path: "/users/Logout" });
-        }
-      }
     }
 }
 </script>
@@ -80,7 +84,6 @@ export default {
     caret-color: transparent;
 }
 
-
 #nav {
     background-color: black;
     height: 60px;
@@ -89,19 +92,19 @@ export default {
     padding-left: 0;
     align-items: center;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
 
 }
+
 .el-dropdown-link {
     cursor: pointer;
     color: white;
     font-size: 20px;
-  }
-#user_id {
-   margin-left: 65%;
 }
 
-
+#user_id {
+    margin-left: 65%;
+}
 
 #user_page {
     background-color: white;
@@ -123,5 +126,6 @@ export default {
     height: 100%;
     background-color: #545c64;
 }
+
 </style>
 
