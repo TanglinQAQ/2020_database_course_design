@@ -215,7 +215,7 @@ export default {
             vm.$message.error("收藏失败");
           }
           else {
-            alert("收藏成功！");
+            vm.$message.success("收藏成功");
           }
         })
         }
