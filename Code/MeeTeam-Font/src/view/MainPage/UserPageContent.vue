@@ -6,11 +6,11 @@
                     <el-card class="box-card">
                         <template #header>
                             <div class="card-header">
-                                <span>hi, {{ user_name }} !</span>
+                                <span>hi, {{  user_name  }} !</span>
                                 <!--span标签用于组合行内的元素-->
                             </div>
                         </template>
-                        <template>
+                        <template class="test">
                             <el-calendar v-model="value" />
                         </template>
                     </el-card>
@@ -22,10 +22,18 @@
                             <div class="card-header">
                                 <span>近期公告速览</span>
                                 <!--span标签用于组合行内的元素-->
-                                <el-button type=primary class="button" text>For More</el-button>
+                                <el-button type=primary class="button" text @click="Newroutes">For More</el-button>
                             </div>
                         </template>
-                        <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div>
+                        <template>
+                            <el-table :data="tableData" style="width: 100%">
+                                <el-table-column prop="title" label="公告标题">
+                                </el-table-column>
+                                <el-table-column prop="operate_time" label="发布时间" align="right">
+                                </el-table-column>
+                            </el-table>
+                        </template>
+
                     </el-card>
                 </el-col>
             </el-row>
@@ -34,12 +42,11 @@
         <br>
         <h3 style="text-align:left">近期热点项目</h3>
 
-
         <div class="light_index">
             <!--{{ bannerheight }} 用于测试高度-->
             <!--跑马灯-->
             <template>
-                <el-carousel :interval="4000" type="card" :height="bannerheight+'px'">
+                <el-carousel :interval="4000" type="card" :height="bannerheight + 'px'">
                     <el-carousel-item v-for="item in imageList" :key="item.id">
                         <img ref="bannerheight" :src="item.idView" class="image" @load="imgLoad" style="width:100%">
                     </el-carousel-item>
@@ -57,11 +64,28 @@
 import global_msg from '../../utils/global.js'
 import { getInfo } from '@/api/getinfo';
 import { ref } from 'vue'
-const value = ref(new Date())
+import { get_all } from '@/api/notice.js'
+
 
 export default {
     name: '_index',
     data() {
+        this.tableData = [];
+        get_all().then(res => {
+            Object.keys(res.data).forEach(v => {
+                let o = {};
+                if (v < 6) {
+                    o.notice_id = res.data[v].notice_id;
+                    o.title = res.data[v].notice_title;
+                    o.admin_id = res.data[v].admin_id;
+                    o.operate_time = res.data[v].operate_time;
+                    if (res.data[v].operate_type) {
+                        this.tableData.push(o);
+                    }
+                }
+            });
+        });
+
         return {
             user_name: '',
             user_id: '',
@@ -73,7 +97,8 @@ export default {
                 { id: 3, idView: require("@/assets/l1.jpg") },
                 { id: 4, idView: require("@/assets/l2.jpg") },
                 { id: 5, idView: require("@/assets/l4.jpg") },
-            ]
+            ],
+            value: new Date()
         };
     },
 
@@ -117,6 +142,7 @@ export default {
 
         Newroutes() {
             this.$router.push("/users/NoticeList"); //这里左侧的颜色显示有点问题，看看之后解决一下
+
         },
 
         imgLoad() {
@@ -128,6 +154,7 @@ export default {
     }
 }
 </script>
+
 
 <style>
 #bigbox {
@@ -145,20 +172,20 @@ export default {
 }
 
 .item {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .box-card {
-    width: 430px;
-    height: 400px;
+    width: 450px;
+    height: 500px;
 }
 </style>
 
-
 <style>
-.el-calendar-table .el-calendar-day {
-    height: 32px;
-}
+ .test /deep/  .el-calendar-table .el-calendar-day{
+    height: 50%;
+    width: 100%;
+  }
 </style>
 
 <style>
