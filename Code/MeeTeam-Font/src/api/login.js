@@ -77,4 +77,28 @@ export function isUseruni(params) {
   })
 }
 
+export function SendMail(params) {
+  /*需要发送验证码*/
+  return request({
+    url: '/Login/SendMailUseZj',
+    method: 'get',
+    params: {
+      aa: params.mail_id,
+    }
+  })
+}
+
+export function ChangePass(params) {
+  /*修改密码*/
+  return request({
+    url: '/Login/UpdateUser',
+    method: 'get',
+    params: {
+      user_id: params.user_id,
+      password: params.password,
+    }
+  })
+}
+
+
 

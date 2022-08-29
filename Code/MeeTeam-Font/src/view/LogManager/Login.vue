@@ -111,7 +111,7 @@ body {
 }
 
 #bg {
-  background-image: url("@/assets/bg.jpg");
+  background-image: url("@/assets/bg2.png");
   margin: 0;
   padding: 0;
   width: 100%;
@@ -123,7 +123,7 @@ body {
 #login-container {
   width: 400px;
   height: 290px;
-  background: rgba(249, 164, 164, 0.5);
+  background: rgba(104, 96, 96, 0.5);
   /*背景颜色为黑色，透明度为0.8*/
   position: absolute;
   /*绝对定位 */
