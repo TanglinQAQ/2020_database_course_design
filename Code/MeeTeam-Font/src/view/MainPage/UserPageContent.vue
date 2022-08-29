@@ -34,18 +34,19 @@
         <br>
         <h3 style="text-align:left">近期热点项目</h3>
 
-        <template>
-            <div class="light_index">
-                <!--跑马灯-->
-                <div>
-                    <el-carousel :interval="4000" type="card" height="200px">
-                        <el-carousel-item v-for="item in imageList" :key="item.id">
-                            <img :src="item.idView" class="image">
-                        </el-carousel-item>
-                    </el-carousel>
-                </div>
-            </div>
-        </template>
+
+        <div class="light_index">
+            <!--{{ bannerheight }} 用于测试高度-->
+            <!--跑马灯-->
+            <template>
+                <el-carousel :interval="4000" type="card" :height="bannerheight+'px'">
+                    <el-carousel-item v-for="item in imageList" :key="item.id">
+                        <img ref="bannerheight" :src="item.idView" class="image" @load="imgLoad" style="width:100%">
+                    </el-carousel-item>
+                </el-carousel>
+            </template>
+        </div>
+
 
     </div>
 
@@ -64,13 +65,14 @@ export default {
         return {
             user_name: '',
             user_id: '',
+            bannerheight: '',
             imageList: [
                 { id: 0, idView: require("@/assets/l1.jpg") },
                 { id: 1, idView: require("@/assets/l2.jpg") },
-                { id: 2, idView: require("@/assets/l3.jpg") },
-                { id: 3, idView: require("@/assets/l4.jpg") },
-                { id: 4, idView: require("@/assets/l5.jpg") },
-                { id: 5, idView: require("@/assets/l6.jpg") },
+                { id: 2, idView: require("@/assets/l4.jpg") },
+                { id: 3, idView: require("@/assets/l1.jpg") },
+                { id: 4, idView: require("@/assets/l2.jpg") },
+                { id: 5, idView: require("@/assets/l4.jpg") },
             ]
         };
     },
@@ -78,6 +80,14 @@ export default {
     created() {
         this.getid();
         this.getname();
+    },
+
+    mounted() {
+        this.imgLoad();
+        window.addEventListener('resize', () => {
+            this.bannerheight = this.$refs.bannerheight[0].height
+            this.imgLoad();
+        }, false)
     },
 
     methods: {
@@ -107,6 +117,13 @@ export default {
 
         Newroutes() {
             this.$router.push("/users/NoticeList"); //这里左侧的颜色显示有点问题，看看之后解决一下
+        },
+
+        imgLoad() {
+            this.$nextTick(() => {
+                this.bannerheight = this.$refs.bannerheight[0].height
+                console.log(this.$refs.bannerheight[0].height);
+            })
         }
     }
 }
@@ -140,7 +157,7 @@ export default {
 
 <style>
 .el-calendar-table .el-calendar-day {
-    height: 30px;
+    height: 32px;
 }
 </style>
 
