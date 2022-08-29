@@ -22,7 +22,7 @@ namespace Meeteam_Backend.Controllers
     {
         [HttpPost]
         //修改项目的审核状态
-        public int Project_Audit(string project_id, string admin_id, string result)
+        public int Project_Audit(string project_id, string admin_id, string result, string reason)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -36,7 +36,9 @@ namespace Meeteam_Backend.Controllers
                 {
                     audit_result = result,
                     audit_time = time,
-                    admin_id = admin_id
+                    admin_id = admin_id,
+                    audit_reason = reason,
+                    audit_status = "1"
                 })
                 .Where(it => it.project_id == project_id)
                 .ExecuteCommand();
