@@ -80,7 +80,7 @@ export default {
         },
         handleCommand(command) {
             if (command == 'a') {
-                //   this.$router.push({ path: "/users/AdminInformation" }); 
+             this.$router.push({ path: "/Admin/AdminInformation" }); 
             }
             if (command == 'b') {
                 this.$confirm('确定退出登陆吗', '提示', {

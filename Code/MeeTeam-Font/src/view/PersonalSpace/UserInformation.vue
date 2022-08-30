@@ -176,8 +176,6 @@ export default {
           })
           console.log(form)
           vm.tableData1.push(form);
-          // console.log(form);
-          // console.log(vm.tableData);
         }
       })
     },
