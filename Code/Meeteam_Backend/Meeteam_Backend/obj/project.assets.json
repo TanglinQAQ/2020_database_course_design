@@ -7752,34 +7752,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\xltx-\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\中野\\.nuget\\packages\\": {}
->>>>>>> 26d3a9419071a15126022d4c59b91c9556ac743c
+    "C:\\Users\\ZZL\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "projectUniqueName": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
       "projectName": "Meeteam_Backend",
-      "projectPath": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-      "packagesPath": "C:\\Users\\xltx-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
+      "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\xltx-\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-      "projectUniqueName": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-      "projectName": "Meeteam_Backend",
-      "projectPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-      "packagesPath": "C:\\Users\\中野\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\中野\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 26d3a9419071a15126022d4c59b91c9556ac743c
+        "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7840,15 +7825,17 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
->>>>>>> 26d3a9419071a15126022d4c59b91c9556ac743c
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "读取缓存文件 D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\project.nuget.cache 时遇到问题: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1701",
       "level": "Warning",
