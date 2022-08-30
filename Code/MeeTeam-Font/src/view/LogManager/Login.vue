@@ -16,12 +16,12 @@
           <el-input type="password" v-model="pass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')" style="float:left">提交</el-button>
-          <el-button @click="resetForm('ruleForm')"  style="float:right">重置</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" style="float:right">提交</el-button>
+          <el-button @click="resetForm('ruleForm')"  style="float:right;margin-right:10px;">重置</el-button>
         </el-form-item>
-        <el-button type="text" class="testleft" @click="adminlo">{{ globaltest }}</el-button>
-        <el-button type="text" class="testright" @click="adduser">注册</el-button>
-        <el-button type="text" class="testright">忘记密码？</el-button>
+        <el-button type="text" class="testleft" @click="adminlo" style="color:black">{{ globaltest }}</el-button>
+        <el-button type="text" class="testright" @click="adduser" style="color:black">注册</el-button>
+        <el-button type="text" class="testright " @click="forgetkey" style="color:black">忘记密码？</el-button>
       </el-form>
     </div>
   </div>
@@ -31,6 +31,7 @@
 import global_msg from '../../utils/global.js'
 import { login } from '@/api/login.js'
 import { adminlogin } from '@/api/login.js'
+
 export default {
   name: 'LogIn',
   data() {
@@ -100,6 +101,9 @@ export default {
     },
     adduser() { //进入注册的界面
       this.$router.push({ path: "/users/AddUser" }); //接下来进入到哪个路由
+    },
+    forgetkey(){
+      this.$router.push({ path: "/users/ForgetPass" }); //接下来进入忘记密码
     }
   }
 }

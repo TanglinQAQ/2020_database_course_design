@@ -109,17 +109,18 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.tableData.splice(index, 1) //删除下标为index的内容
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
+        //有个bug
         var id = this.tableData[index].project_id;
         //再在数据库中删除
         let param = {
           project_id: id,
         }
         deleteproject(param);
+        this.tableData.splice(index, 1) //删除下标为index的内容
+        this.$message({
+          type: 'success',
+          message: '删除成功!',
+        })
         console.log(index, row);
       }).catch((err) => {
         this.$message({

@@ -1,5 +1,5 @@
 <template>
-<el-main>
+    <el-main>
         <div id="breadcrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
@@ -7,64 +7,129 @@
                 <el-breadcrumb-item>平台项目列表</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div style="height: 50px;">
-            <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="项目名称"
-                @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-            <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="项目发布人"
-                @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-            <el-select v-model="value2" multiple placeholder="项目当前进度" style="float:left;margin-right:30px;width:150px;">
-                <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-            </el-select>
-            <el-select v-model="value2" multiple placeholder="是否有组队需求"
-                style="float:left;margin-right:30px;width:150px;">
-                <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-            </el-select>
-            <el-button class="filter-item" type="primary" icon="el-icon-search" @click="searchContList"
-                style="float:left">
-                搜索
-            </el-button>
-        </div>
-        <br>
+
         <template>
-            <el-row>
-                <el-col v-for="(o, index) in 2" :key="o" :span="8" :offset="index > 0 ? 2 : 0">
-                    <el-card :body-style="{ padding: '0px' }">
-                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                            class="image" />
-                        <div style="padding: 14px">
-                            <span>Yummy hamburger</span>
-                            <div class="bottom">
-                                <time class="time">{{  currentDate  }}</time>
-                                <el-button text class="button">Operating</el-button>
-                            </div>
+            <div v-if="reset">
+                <el-row :glutter="10" class="elrow">
+                    <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
+                        <div style="margin-top:15px">
+                            <!--这一层div的作用是什么-->
+                            <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                    class="image" />
+                                <div class="text">
+                                    {{  o.project_name  }}<br />
+                                    发起时间：{{  o.create_time  }}<br />
+                                    项目进度：{{  o.project_progress  }}<br /><br>
+                                    <template slot-scope="scope">
+                                        <el-button type="success" plain size="mini" style="float:right"
+                                        @click="handleLook(scope.$index, scope.row)">了解更多</el-button>
+                                    </template>
+                                    <br>
+                                </div>
+                            </el-card>
                         </div>
-                    </el-card>
-                </el-col>
-            </el-row>
+                        <br><br>
+                    </el-col>
+                </el-row>
+            </div>
         </template>
     </el-main>
 </template>
 
-<script lang="ts" setup>
+<script>
 import { ref } from 'vue'
+import global_msg from '../../utils/global.js'
+import { getlistInfor } from '@/api/Inforlist.js'
 
-const currentDate = ref(new Date())
+export default {
+    name: 'InforList',
+    data() {
+        return {
+            tabledata: [],
+            current_page: 1,
+            total: null,
+            pagesize: 8,
+            listdata: {
+                admin_id: "system",
+                audit_reason: null,
+                audit_result: "1",
+                audit_status: "1",
+                audit_time: "2022/8/28 21:29:24",
+                create_time: "2022/8/19 20:26",
+                due: "\"2022-08-09 00:00:00,2022-09-08 00:00:00\"",
+                project_background: "测试项目背景7",
+                project_content: "测试项目内容7",
+                project_id: "5",
+                project_introduction: "测试项目简介7",
+                project_name: "测试项目7",
+                project_progress: "规划阶段",
+                project_status: "是",
+            },
+            reset: true
+        }
+    },
+    methods: {
+        refresh() {
+            location.reload();
+        },
+
+        gettable() {
+            getlistInfor().then(res => {
+                let vm = this;
+                global_msg.projectnum = res.data.length;//改变全局requirenum
+                // console.log(res);
+                // console.log(res.data.length);
+                // console.log(res.data[0]);
+                // console.log(res.data[0].details);
+                for (let item of res.data) {
+                    let form = {//设置添加数据的格式
+                        project_name: '',
+                        project_introduction: '',
+                        project_progress: '',
+                        create_time: '',
+                        project_status: '',
+                        project_id: '',
+                    }
+
+                    form.project_name = item.project_name;
+                    form.project_introduction = item.project_introduction;
+                    form.project_progress = item.project_progress;
+                    form.create_time = item.create_time;
+                    form.create_time = form.create_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
+                    form.project_status = item.project_status;
+                    form.project_id = item.project_id;
+
+                    vm.tabledata.push(form);
+                    // console.log(form);
+                    // console.log(vm.tableData);
+                }
+            }).catch((res) => {
+                console.log(res);
+            })
+        },
+
+        handleLook(index, row) {//进入项目详情页面
+            var project_id = this.tabledata[index].project_id;
+            console.log(index, row);
+            this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
+        },
+
+    },
+
+    mounted() {
+        this.gettable();
+    },
+
+
+}
 </script>
+
     
 <style>
 .time {
     font-size: 12px;
     color: #999;
-}
-
-.bottom {
-    margin-top: 13px;
-    line-height: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .button {
@@ -76,5 +141,41 @@ const currentDate = ref(new Date())
     width: 100%;
     display: block;
 }
+
+.text {
+    padding: 16px;
+    line-height: 30px;
+}
 </style>
 
+<style scoped>
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+</style>
