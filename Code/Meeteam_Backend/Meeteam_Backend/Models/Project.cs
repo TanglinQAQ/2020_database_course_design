@@ -25,6 +25,8 @@ namespace Meeteam_Backend
         public string audit_result { get; set; }
         public string audit_time { get; set; }
         public string audit_status { get; set; }
+        public string recommend { get; set; }
+        public string recommend_time { get; set; }
     }
 
     public class Project_Query
