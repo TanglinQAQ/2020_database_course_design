@@ -64,7 +64,7 @@ namespace Meeteam_Backend.Controllers
                 List<Grouping_Requirement> agrlist = db.Queryable<Grouping_Requirement>().ToList();
                 return agrlist;
             }
-            catch (Exception ex)
+            catch (Exception ex)  
             {
                 return null;
             }

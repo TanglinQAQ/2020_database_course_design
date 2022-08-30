@@ -28,6 +28,7 @@ import MyProject from '@/view/Project_and_Require/MyProject.vue'
 import ProjectDetail from '@/view/Project_and_Require/ProjectDetail.vue'
 import InforList from '@/view/Project_and_Require/InforList.vue'
 import ProjList from '@/view/Project_and_Require/ProjList.vue'
+import Test from '@/view/Project_and_Require/Test.vue'
 //用户信息
 import DisplayPage from '@/view/PersonalSpace/DisplayPage.vue'
 import UserInformation from '@/view/PersonalSpace/UserInformation.vue'
@@ -66,7 +67,8 @@ export default new Router({
                 { path: '/users/MyProject', component: MyProject },
                 { path: '/users/ProjectDetail', component: ProjectDetail },
                 { path: '/users/UserPageContent', component: UserPageContent },
-                { path: '/users/ProjList', component: ProjList }
+                { path: '/users/ProjList', component: ProjList },
+                {path:'/users/Test',component:Test}
             ], props: true
         },
         { path: '/users/DisplayPage', component: DisplayPage },
