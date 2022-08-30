@@ -92,10 +92,22 @@ export function ChangePass(params) {
   /*修改密码*/
   return request({
     url: '/Login/UpdateUser',
-    method: 'get',
+    method: 'post',
     params: {
       user_id: params.user_id,
       password: params.password,
+    }
+  })
+}
+
+export function IftrueMail(params) {
+  /*验证邮箱用户是否正确*/
+  return request({
+    url: '/Login/Iftruemail',
+    method: 'get',
+    params: {
+      user_id: params.user_id,
+      contact_info: params.contact_info,
     }
   })
 }
