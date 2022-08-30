@@ -38,6 +38,8 @@ namespace Meeteam_Backend.Controllers
             pos.create_time = DateTime.Now.ToString("g"); //2009/10/30 20:40;
             pos.admin_id = "system";
             pos.audit_result = "0";
+            pos.audit_status = "0";
+            pos.audit_reason = null;
             pos.due = due;
             pos.project_progress = project_progress;
 
@@ -105,10 +107,11 @@ namespace Meeteam_Backend.Controllers
   "project_name": "",
   "publisher": "",
   "project_progess": "规划阶段",
+  "audit_status": "1",
   "hav_require": "",
   "require_id": "",
   "require_status": "",
-  "team_type": "课程项目"
+  "team_type": ""
 }
          */
         public string project_query(string s)
@@ -123,7 +126,7 @@ namespace Meeteam_Backend.Controllers
                     JoinType.Left, p.project_id == up.project_id,
                     JoinType.Full, p.project_id == gr.project_id));
             if (q.project_id != null && q.project_id != "")
-                query.Where((p, up, gr) => p.project_id==q.project_id);
+                query.Where((p, up, gr) => p.project_id == q.project_id);
             if (q.project_name != null && q.project_name != "")
                 query.Where((p, up, gr) => p.project_name.Contains(q.project_name));
             if (q.publisher != null && q.publisher != "")
@@ -140,6 +143,8 @@ namespace Meeteam_Backend.Controllers
                 query.Where((p, up, gr) => gr.require_status == q.require_status);
             if (q.team_type != null && q.team_type != "")
                 query.Where((p, up, gr) => gr.team_type == q.team_type);
+            if (q.audit_status != null && q.audit_status != "")
+                query.Where((p, up, gr) => p.audit_status == q.audit_status);
             var json = query.Clone().Select<ViewMode>().Distinct().ToJson();
             return json;
         }

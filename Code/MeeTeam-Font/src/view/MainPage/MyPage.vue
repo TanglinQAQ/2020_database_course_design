@@ -67,7 +67,6 @@ export default {
                 this.$router.push({ path: "/users/UserInformation" });
             }
             if (command == 'b') {
-                // this.$router.push({ path: "/users/Logout" });
                 this.$confirm('确定退出登陆吗', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -93,6 +92,7 @@ export default {
 <style scoped>
 #user_page {
     caret-color: transparent;
+    background-image: url("@/assets/bg3.jpg");
 }
 
 #nav {

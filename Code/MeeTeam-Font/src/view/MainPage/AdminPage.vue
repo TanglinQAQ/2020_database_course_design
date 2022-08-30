@@ -5,9 +5,15 @@
             <span id="title">|</span>
             <span id="title">平台管理</span>
             <div id="admin_id">
-                <el-link type="info" style="color:white;font-size: 20px;">
-                    <span v-text="admin_id"></span>
-                </el-link>
+                <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link">
+                        {{ admin_id }}
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item icon="el-icon-user" command="a"> 个人中心 </el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-switch-button" command="b">退出登陆</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
             </div>
         </div>
         <div id="body">
@@ -71,7 +77,31 @@ export default {
     methods: {
         get_admin() {
             this.admin_id = global_msg.nowadminid;
-        }
+        },
+        handleCommand(command) {
+            if (command == 'a') {
+             this.$router.push({ path: "/Admin/AdminInformation" }); 
+            }
+            if (command == 'b') {
+                this.$confirm('确定退出登陆吗', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '退出成功'
+                    });
+                    this.$router.push({ path: "/login" }); //接下来进入到哪个路由
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '退出取消'
+                    });
+                });
+            }
+        },
+
     }
 }
 </script>
@@ -99,9 +129,10 @@ export default {
 }
 
 
-.el-link {
-    font-size: 20px;
+.el-dropdown-link {
+    cursor: pointer;
     color: white;
+    font-size: 20px;
 }
 
 #admin_page {

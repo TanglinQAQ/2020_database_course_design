@@ -40,7 +40,7 @@ namespace Meeteam_Backend.Controllers
         }
 
         [HttpGet]
-        public bool PullInfo(string ID, char gender, string phone_number,
+        public bool PullInfo(string ID, string gender, string phone_number,
                                 string institution, string major, string introduction)
         {
             User_Info info = new User_Info();

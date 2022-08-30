@@ -98,6 +98,7 @@ export default {
 <style scoped>
 #user_page {
     caret-color: transparent;
+    background-image: url("@/assets/bg3.jpg");
 }
 
 #nav {

@@ -36,10 +36,7 @@ namespace Meeteam_Backend.Controllers
             try
             {
                 int count = db.Insertable(pos).ExecuteCommand();
-                if (count == 1)
-                    return true;
-                else
-                    return false;
+                return true;
             }
             catch (Exception ex)
             {
@@ -125,10 +122,7 @@ namespace Meeteam_Backend.Controllers
             try
             {
                 int count = db.Deleteable<Facorite>().In(facorite_id).ExecuteCommand();
-                if (count == 1)
-                    return true;
-                else
-                    return false;
+                return true;
             }
             catch (Exception)
             {
