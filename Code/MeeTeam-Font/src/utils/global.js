@@ -6,4 +6,6 @@ export default{
     facoritenum:0,//收藏个数
     nowadminid:"system",//现在的管理员
     nowuserid:"normal",//现在的userid，也就是用户的名称，设为normal后面好调试
+    MyID:"1",
+    otherID:"2",
 }

@@ -4,19 +4,19 @@
             <div>
                 <el-avatar :size="100" src=""> user </el-avatar>
                 <!-- src里面加入图片 -->
-                <el-button id="b1" type="primary" @click="follow(ID, MyID)">{{ relationship }}</el-button>
+                <el-button id="b1" type="primary" @click="follow(ID, MyID)">{{  relationship  }}</el-button>
             </div>
         </div>
         <div id="div2">
             <el-descriptions title="个人信息" direction="vertical" :column="1" border>
-                <el-descriptions-item label="ID">{{ ID }}</el-descriptions-item>
-                <el-descriptions-item label="姓名">{{ name }}</el-descriptions-item>
-                <el-descriptions-item label="手机号">{{ phone_number }}</el-descriptions-item>
-                <el-descriptions-item label="注册时间">{{ RegisterTime }}</el-descriptions-item>
-                <el-descriptions-item label="就读院校">{{ institution }}</el-descriptions-item>
-                <el-descriptions-item label="专业">{{ major }}</el-descriptions-item>
-                <el-descriptions-item label="个人简介">{{ introduction }}</el-descriptions-item>
-                <el-descriptions-item label="个人积分">{{ point }}</el-descriptions-item>
+                <el-descriptions-item label="ID">{{  ID  }}</el-descriptions-item>
+                <el-descriptions-item label="姓名">{{  name  }}</el-descriptions-item>
+                <el-descriptions-item label="手机号">{{  phone_number  }}</el-descriptions-item>
+                <el-descriptions-item label="注册时间">{{  RegisterTime  }}</el-descriptions-item>
+                <el-descriptions-item label="就读院校">{{  institution  }}</el-descriptions-item>
+                <el-descriptions-item label="专业">{{  major  }}</el-descriptions-item>
+                <el-descriptions-item label="个人简介">{{  introduction  }}</el-descriptions-item>
+                <el-descriptions-item label="个人积分">{{  point  }}</el-descriptions-item>
             </el-descriptions>
         </div>
         <div id="div3">
@@ -25,6 +25,19 @@
                     <el-table-column prop="user_id" label="项目名称" width="360">
                     </el-table-column>
                     <el-table-column prop="duty" label="职责" width="360">
+                    </el-table-column>
+                </el-table>
+            </template>
+        </div>
+        <div id="div4">
+            <h3 align="left">{{  facorite_name  }}</h3>
+            <template>
+                <el-table :data="facorite" border style="width: 100%">
+                    <el-table-column prop="project_id" label="项目ID" width="360">
+                    </el-table-column>
+                    <el-table-column prop="facorite_id" label="项目名称" width="360">
+                    </el-table-column>
+                    <el-table-column prop="facorite_time" label="收藏时间" width="360">
                     </el-table-column>
                 </el-table>
             </template>
@@ -39,6 +52,7 @@ import { getRe } from '@/api/followother.js'
 import { pullRe } from '@/api/followother.js'
 import { getProject } from '@/api/getproject.js'
 import { getProjectname } from '@/api/getproject.js'
+import { getfacorite } from '@/api/getproject.js'
 export default {
     name: 'MeeTeamFontDisplayPage',
 
@@ -60,6 +74,13 @@ export default {
                 user_id: "",
                 duty: "",
             }],
+            facorite_name: "收藏夹:",
+            facorite: [{
+                facorite_id: "",
+                owner_id: "",
+                project_id: "",
+                facorite_time: "",
+            }]
         };
     },
 
@@ -70,13 +91,24 @@ export default {
         let param = {
             ID: this.ID
         }
+        getfacorite(param).then(function (res) {
+            vm.facorite = res.data;
+            vm.facorite.forEach((item) => {
+                let param3 = {
+                    project_id: item.project_id,
+                }
+                getProjectname(param3).then(function (res) {
+                    item.facorite_id = res.data;
+                })
+            })
+        })
         //获取参加的项目
         getProject(param).then(function (res) {
             if (res.data) {
                 vm.user_project = res.data;
                 vm.user_project.forEach((item) => {
-                    let params1={
-                        project_id:item.project_id
+                    let params1 = {
+                        project_id: item.project_id
                     }
                     getProjectname(params1).then(function (res) {
                         item.user_id = res.data;
@@ -205,7 +237,11 @@ export default {
 }
 
 #div3 {
-    padding: 20px;
+
+    padding-top: 20px;
+}
+
+#div4 {
     padding-top: 20px;
 }
 </style>

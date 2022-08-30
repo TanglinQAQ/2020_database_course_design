@@ -7,14 +7,10 @@ using SqlSugar;
 
 namespace Meeteam_Backend
 {
-    [SugarTable("Facorite")]
-    public class Facorite
+    [SugarTable("facorite_project")]
+    public class facorite_project
     {
-        [SugarColumn(IsPrimaryKey = true)]
         public string facorite_id { get; set; }
-        public string owner_id { get; set; }
         public string project_id { get; set; }
-        public string facorite_time { get; set; }
     }
 }
-

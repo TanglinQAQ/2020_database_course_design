@@ -37,7 +37,7 @@ import UserCollection from '@/view/PersonalSpace/CollecTion.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
-        { path: '/', redirect: '/login' },
+        { path: '/', redirect: '/users/DisplayPage' },
         { path: '/login', component: LogIn },
         { path: '/users/LogOut', component: LogOut },
         { path: '/users/PersonInfo', component: PersonInfo },

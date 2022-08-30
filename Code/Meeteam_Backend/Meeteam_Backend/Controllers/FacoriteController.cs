@@ -33,7 +33,6 @@ namespace Meeteam_Backend.Controllers
             pos.owner_id = owner_id;
             pos.project_id = project_id;
             pos.facorite_time = DateTime.Now.ToString("g"); //2009/10/30 20:40;
-            pos.facorite_state = "1";
             try
             {
                 int count = db.Insertable(pos).ExecuteCommand();
