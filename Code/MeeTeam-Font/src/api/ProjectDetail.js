@@ -12,12 +12,25 @@ export function get_project(params) {
 }
 
 export function get_username(params) {
-    /*根据id获取单条公告内容*/
+    /*根据id获取项目相关的id和duty*/
     return request({
         url: '/User_Project/get_by_id',
         method: 'get',
         params: {
-            id: params.id
+            pid: params.pid,
+            uid: params.uid
+        }
+    })
+}
+
+export function get_apply(params) {
+    /*根据id获取项目相关的id和duty*/
+    return request({
+        url: '/User_Project/get_apply',
+        method: 'get',
+        params: {
+            pid: params.pid,
+            duty: params.duty
         }
     })
 }
