@@ -35,7 +35,7 @@ import UserInformation from '@/view/PersonalSpace/UserInformation.vue'
 import PersonInfo from '@/view/PersonalSpace/PersonInfo.vue'
 import UserHistory from '@/view/PersonalSpace/HisTory.vue'
 import UserCollection from '@/view/PersonalSpace/CollecTion.vue'
-
+import AdminInformation from '@/view/PersonalSpace/AdminInformation'
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -54,7 +54,8 @@ export default new Router({
                 { path: '/Admin/AuditRequire', component: AuditRequire },
                 { path: '/Admin/NoticeList', component: NoticeList },
                 { path: '/Admin/CreateNotice', component: CreateNotice },
-                { path: '/Admin/ShowNotice', component: ShowNotice }
+                { path: '/Admin/ShowNotice', component: ShowNotice },
+                { path: '/Admin/AdminInformation',component: AdminInformation}
             ], props: true
         },
         //用户主页及其子页面
