@@ -54,18 +54,16 @@
             </template>
         </div>
 
-
     </div>
-
 </template>
 
 
 <script>
 import global_msg from '../../utils/global.js'
-import { getInfo } from '@/api/getinfo';
+import { getInfo } from '@/api/getinfo'
 import { ref } from 'vue'
 import { get_all } from '@/api/notice.js'
-
+import { openfile } from "@/api/file_load.js"
 
 export default {
     name: '_index',
@@ -90,14 +88,15 @@ export default {
             user_name: '',
             user_id: '',
             bannerheight: '',
-            imageList: [
+            imageList: [],
+                            /*
                 { id: 0, idView: require("@/assets/l1.jpg") },
                 { id: 1, idView: require("@/assets/l2.jpg") },
                 { id: 2, idView: require("@/assets/l4.jpg") },
                 { id: 3, idView: require("@/assets/l1.jpg") },
                 { id: 4, idView: require("@/assets/l2.jpg") },
                 { id: 5, idView: require("@/assets/l4.jpg") },
-            ],
+                */
             value: new Date()
         };
     },
@@ -105,6 +104,7 @@ export default {
     created() {
         this.getid();
         this.getname();
+        this.getimg();
     },
 
     mounted() {
@@ -116,6 +116,22 @@ export default {
     },
 
     methods: {
+        getimg() {
+            for (let i = 0; i < 6; i++) {
+                let param = {
+                    target: "project",
+                    id: i
+                }
+                openfile(param).then((res) => {
+                    if (res.data) {
+                        this.imageList.push({ id: param.id, idView: 'data:;base64,' + res.data});
+                    }
+                })
+            }
+
+            console.log(this.imageList);
+        },
+
         getid() {
             this.user_id = global_msg.nowuserid; //这里用全局默认id值，后续可能需要更改？
             console.log(this.user_id);
@@ -142,7 +158,6 @@ export default {
 
         Newroutes() {
             this.$router.push("/users/NoticeList"); //这里左侧的颜色显示有点问题，看看之后解决一下
-
         },
 
         imgLoad() {
@@ -182,10 +197,10 @@ export default {
 </style>
 
 <style>
- .test /deep/  .el-calendar-table .el-calendar-day{
+.test /deep/ .el-calendar-table .el-calendar-day {
     height: 50%;
     width: 100%;
-  }
+}
 </style>
 
 <style>

@@ -30,8 +30,8 @@ export default {
     return {
       upload_data: {
         path: "head_img",
-        id: "normal",
-        target:'user'
+        id: "1",
+        target:'project'
       },
       fileList: [],
       base64:''
