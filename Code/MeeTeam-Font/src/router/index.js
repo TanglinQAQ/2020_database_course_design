@@ -42,7 +42,7 @@ import ChangeUserInfo from '@/view/PersonalSpace/ChangeUserInfo.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
-        { path: '/', redirect: '/users/DisplayPage' },
+        { path: '/', redirect: '/login' },
         { path: '/login', component: LogIn },
         { path: '/users/LogOut', component: LogOut },
         { path: '/users/PersonInfo', component: PersonInfo },
