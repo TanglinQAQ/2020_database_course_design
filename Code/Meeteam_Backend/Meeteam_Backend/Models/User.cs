@@ -25,6 +25,7 @@ namespace MeeTeam_Backend
         public string grade { get; set; }
         public string instruction { get; set; }
         public int point { get; set; }
+        public string head_img { get; set; }
     }
 
     public class UserInfo

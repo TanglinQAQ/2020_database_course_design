@@ -36,6 +36,7 @@ import PersonInfo from '@/view/PersonalSpace/PersonInfo.vue'
 import UserHistory from '@/view/PersonalSpace/HisTory.vue'
 import UserCollection from '@/view/PersonalSpace/CollecTion.vue'
 import AdminInformation from '@/view/PersonalSpace/AdminInformation'
+import ChangeUserInfo from '@/view/PersonalSpace/ChangeUserInfo.vue'
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -80,6 +81,7 @@ export default new Router({
                 { path: '/users/UserInformation', name: 'UserInformation', component: UserInformation },
                 { path: '/users/UserHistory', name: 'UserHistory', component: UserHistory },
                 { path: '/users/UserCollection', name: 'UserCollection', component: UserCollection },
+                { path: '/users/ChangeUserInfo', component: ChangeUserInfo }
             ]
         }
     ]
