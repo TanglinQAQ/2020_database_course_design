@@ -293,5 +293,27 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+        //验证用户名和邮箱是否正确
+        [HttpGet]
+        public bool Iftruemail(string user_id, string contact_info)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                var list = db.Queryable<User_Info>()
+               .Select(it => it.contact_info)
+               .Where("user_id=@id", new { id = user_id })
+               .ToList();
+                if (contact_info == list[0].ToString())//将新的密码加密比对
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -8,31 +8,31 @@
           <el-breadcrumb-item>项目详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <p class="title" align="center" label="项目名称">{{ project_name }}</p>
+      <p class="title" align="center" label="项目名称">{{  project_name  }}</p>
       <el-descriptions title="项目详情" :column="2" border style="margin-top: 20px;">
-        <el-descriptions-item label="项目发布者">{{ user_id }}</el-descriptions-item>
-        <el-descriptions-item label="创建时间">{{ create_time }}</el-descriptions-item>
-        <el-descriptions-item label="开始时间">{{ start_time }}</el-descriptions-item>
-        <el-descriptions-item label="结束时间">{{ end_time }}</el-descriptions-item>
-        <el-descriptions-item label="项目当前进展">{{ project_progress }}</el-descriptions-item>
-        <el-descriptions-item label="是否有组队需求">{{ project_status }}</el-descriptions-item>
+        <el-descriptions-item label="项目发布者">{{  user_id  }}</el-descriptions-item>
+        <el-descriptions-item label="创建时间">{{  create_time  }}</el-descriptions-item>
+        <el-descriptions-item label="开始时间">{{  start_time  }}</el-descriptions-item>
+        <el-descriptions-item label="结束时间">{{  end_time  }}</el-descriptions-item>
+        <el-descriptions-item label="项目当前进展">{{  project_progress  }}</el-descriptions-item>
+        <el-descriptions-item label="是否有组队需求">{{  project_status  }}</el-descriptions-item>
       </el-descriptions>
       <el-descriptions title="" :column="1" border>
-        <el-descriptions-item label="项目背景">{{ project_background }}</el-descriptions-item>
-        <el-descriptions-item label="项目简介">{{ project_introduction }}</el-descriptions-item>
-        <el-descriptions-item label="项目内容">{{ project_content }}</el-descriptions-item>
+        <el-descriptions-item label="项目背景">{{  project_background  }}</el-descriptions-item>
+        <el-descriptions-item label="项目简介">{{  project_introduction  }}</el-descriptions-item>
+        <el-descriptions-item label="项目内容">{{  project_content  }}</el-descriptions-item>
       </el-descriptions>
       <br>
       <el-descriptions title="需求详情" :column="2" border>
-        <el-descriptions-item label="组队类型">{{ team_type }}</el-descriptions-item>
-        <el-descriptions-item label="类型细则">{{ team_type_details }}</el-descriptions-item>
-        <el-descriptions-item label="组队人数">{{ team_limit }}</el-descriptions-item>
-        <el-descriptions-item label="当前状态">{{ require_status }}</el-descriptions-item>
+        <el-descriptions-item label="组队类型">{{  team_type  }}</el-descriptions-item>
+        <el-descriptions-item label="类型细则">{{  team_type_details  }}</el-descriptions-item>
+        <el-descriptions-item label="组队人数">{{  team_limit  }}</el-descriptions-item>
+        <el-descriptions-item label="当前状态">{{  require_status  }}</el-descriptions-item>
       </el-descriptions>
       <el-descriptions title="" :column="1" border>
-        <el-descriptions-item label="所在校区">{{ region }}</el-descriptions-item>
-        <el-descriptions-item label="需求目的">{{ purpose }}</el-descriptions-item>
-        <el-descriptions-item label="组队细则">{{ details }}</el-descriptions-item>
+        <el-descriptions-item label="所在校区">{{  region  }}</el-descriptions-item>
+        <el-descriptions-item label="需求目的">{{  purpose  }}</el-descriptions-item>
+        <el-descriptions-item label="组队细则">{{  details  }}</el-descriptions-item>
       </el-descriptions>
       <el-steps :space="500" :active="1" finish-status="success" align-center
         style="margin-top: 100px;margin-bottom: 100px">
@@ -42,11 +42,11 @@
       </el-steps>
       <el-button type="success" plain style="float: right;margin-right: 80px">申请加入</el-button>
       <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
-      <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{ favorite_num
-      }}</el-button>
+      <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{  favorite_num 
+        }}</el-button>
       <el-button type="success" plain style="float: left;margin-left: 20px" @click="handleevaluation()">评论{{
-          evaluation_num
-      }}</el-button>
+         evaluation_num 
+        }}</el-button>
       <br><br><br>
       <el-tabs v-model="activeName">
         <el-tab-pane label="展开评论列表" name="展开评论列表" @tab-click="handleClick">
@@ -120,9 +120,6 @@ export default {
       this.$router.push({ path: "/users/InforList" });
     },
     get_Info() {
-      SelectAllCollection().then(function (res1) {
-        global_msg.facoritenum = res1.data.length + 1;//改变全局facoritenum
-      })
       get_eva().then(function (res0) {
         global_msg.evaluationnum = res0.data.length;//改变全局projectnum
       })
@@ -192,7 +189,10 @@ export default {
         }
       })
     },
-    handlefavorite(index, row) { //收藏操作
+    handlefavorite(index, row) { //收藏操作,需要间隔时间长一点，否则会收藏失败
+      SelectAllCollection().then(function (res1) {
+        global_msg.facoritenum = res1.data.length + 1;//改变全局facoritenum
+      })
       var vm = this;
       var aa;
       let pp = {
@@ -203,21 +203,21 @@ export default {
         aa = res.data;
         if (aa === false) {//被收藏过
           vm.$message.error("已经被收藏过");
-        }else{
-        let pa = {
-          facorite_id: Number(global_msg.facoritenum)+1,
-          owner_id: global_msg.nowuserid,
-          project_id: vm.$route.query.p_id
-        }
-        AddMyCollection(pa).then(function (res) {
-          global_msg.facoritenum = global_msg.facoritenum + 1;
-          if (res.data === false) {
-            vm.$message.error("收藏失败");
+        } else {
+          global_msg.facoritenum = Number(global_msg.facoritenum) + 1
+          let pa = {
+            facorite_id: Number(global_msg.facoritenum),
+            owner_id: global_msg.nowuserid,
+            project_id: vm.$route.query.p_id
           }
-          else {
-            vm.$message.success("收藏成功");
-          }
-        })
+          AddMyCollection(pa).then(function (res) {
+            if (res.data === false) {
+              vm.$message.error("收藏失败");
+            }
+            else {
+              vm.$message.success("收藏成功");
+            }
+          })
         }
       })
     },

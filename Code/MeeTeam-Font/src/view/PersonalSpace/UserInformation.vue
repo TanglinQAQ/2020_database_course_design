@@ -14,63 +14,63 @@
               <i class="el-icon-user"></i>
               用户名
             </template>
-            {{ username }}
+            {{  username  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-s-custom"></i>
               性别
             </template>
-            {{gender}}
+            {{  gender  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-mobile-phone"></i>
               联系方式
             </template>
-            {{ contact_info }}
+            {{  contact_info  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-location-outline"></i>
               就读院校
             </template>
-            {{institution}}
+            {{  institution  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-office-building"></i>
               专业
             </template>
-            {{major}}
+            {{  major  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-reading"></i>
               年级
             </template>
-            {{grade}}
+            {{  grade  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-coin"></i>
               积分
             </template>
-            {{point}}
+            {{  point  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-date"></i>
               注册时间
             </template>
-            {{register_time}}
+            {{  register_time  }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-tickets"></i>
               个人简介
             </template>
-            {{introduction}}
+            {{  introduction  }}
           </el-descriptions-item>
         </el-descriptions>
         <el-divider href="#anchor1"></el-divider>
@@ -79,24 +79,24 @@
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
         <div>
-      <el-table :data="tableData1" :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }"
-        default-sort="{ prop: 'create_time', order: 'descending' }">
-        <el-table-column prop="project_name" label="项目名称" width="150">
-        </el-table-column>
-        <el-table-column prop="project_introduction" label="项目简介" width="350">
-        </el-table-column>
-        <el-table-column prop="facorite_time" label="收藏时间" sortable width="150">
-        </el-table-column>
-        <el-table-column prop="project_status" label="是否有组队需求" width="150">
-        </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-              <el-button size="mini" @click="handleDetail(scope.$index, scope.row)">查看详情</el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-            </template>
-        </el-table-column>
-      </el-table>
-    </div>
+          <el-table :data="tableData1" :header-cell-style="{ textAlign: 'center' }"
+            :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'create_time', order: 'descending' }">
+            <el-table-column prop="project_name" label="项目名称" width="150">
+            </el-table-column>
+            <el-table-column prop="project_introduction" label="项目简介" width="350">
+            </el-table-column>
+            <el-table-column prop="facorite_time" label="收藏时间" sortable width="150">
+            </el-table-column>
+            <el-table-column prop="project_status" label="是否有组队需求" width="150">
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleDetail(scope.$index, scope.row)">查看详情</el-button>
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </el-main>
     </el-container>
   </div>
@@ -113,14 +113,14 @@ export default {
   data() {
     return {
       username: global_msg.nowuserid,
-      gender:'',
-      contact_info:'',
-      institution:'',
-      major:'',
-      grade:'',
-      point:'',
-      register_time:'',
-      introduction:'',
+      gender: '',
+      contact_info: '',
+      institution: '',
+      major: '',
+      grade: '',
+      point: '',
+      register_time: '',
+      introduction: '',
       tableData1: [],
     };
   },
@@ -130,28 +130,28 @@ export default {
   },
   methods: {
     getlist() {
-      let vm=this;
+      let vm = this;
       let params = {
         user_id: this.username,
       };
-      GetUserInfor(params).then(res=> {
+      GetUserInfor(params).then(res => {
         let item = res.data[0];
-        vm.gender=item.gender;
-        vm.contact_info=item.contact_info;
-        vm.institution=item.institution;
-        vm.major=item.major;
-        vm.grade=item.grade;
-        vm.point=item.point;
-        vm.register_time=item.register_time.replace("\"", "").replace("\"", "");
-        vm.introduction=item.introduction;
+        vm.gender = item.gender;
+        vm.contact_info = item.contact_info;
+        vm.institution = item.institution;
+        vm.major = item.major;
+        vm.grade = item.grade;
+        vm.point = item.point;
+        vm.register_time = item.register_time.replace("\"", "").replace("\"", "");
+        vm.introduction = item.introduction;
       })
     },
-    getcollect(){
-      let vm=this;
-      let pa1={
-        user_id:vm.username
+    getcollect() {
+      let vm = this;
+      let pa1 = {
+        user_id: vm.username
       }
-      GetMyCollection(pa1).then(res=> {
+      GetMyCollection(pa1).then(res => {
         console.log(res)
         for (let item of res.data) {
           let form = {//设置添加数据的格式
@@ -159,20 +159,21 @@ export default {
             project_introduction: '',
             project_status: '',
             project_id: '',
-            facorite_id:'',
-            facorite_time:'',
+            facorite_id: '',
+            facorite_time: '',
           }
-          let pa2={
-            project_id:item.project_id
+          let pa2 = {
+            project_id: item.project_id
           }
-          getproject(pa2).then(res1=>{
-            let dataa=res1.data[0];
-            form.project_name=dataa.project_name;
-            form.project_introduction=dataa.project_introduction;
-            form.project_status=dataa.project_status;
-            form.project_id=dataa.project_id;
-            form.facorite_id=item.facorite_id;
-            form.facorite_time=item.facorite_time;
+          getproject(pa2).then(res1 => {
+            let dataa = res1.data[0];
+            form.project_name = dataa.project_name;
+            form.project_introduction = dataa.project_introduction;
+            form.project_status = dataa.project_status;
+            form.project_id = dataa.project_id;
+            form.facorite_id = item.facorite_id;
+            form.facorite_time = item.facorite_time;
+            // alert(form.project_id)
           })
           console.log(form)
           vm.tableData1.push(form);
@@ -182,20 +183,22 @@ export default {
       })
     },
     handleDelete(index, row) {//删除操作
-        this.tableData1.splice(index, 1) //删除下标为index的内容
-        this.$message({
-          type: 'success',
-          message: '删除成功!',
-        })
-        var id = this.tableData1[index].facorite_id;
-        //再在数据库中删除
-        let param = {
-          facorite_id:id,
-        }
-        deletecollect(param);
-        console.log(index, row);
+      var id = this.tableData1[index].facorite_id;
+      //有个bug，要先在数据库删除，再在列表中删除，否则不能删掉最后一个
+      //在数据库中删除
+      let param = {
+        facorite_id: id,
+      }
+      deletecollect(param);
+      //列表中删除
+      this.tableData1.splice(index, 1) //删除下标为index的内容
+      this.$message({
+        type: 'success',
+        message: '删除成功!',
+      })
+      console.log(index, row);
     },
-    handleDetail(index, row){
+    handleDetail(index, row) {
       var project_id = this.tableData1[index].project_id;
       console.log(index, row);
       this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });

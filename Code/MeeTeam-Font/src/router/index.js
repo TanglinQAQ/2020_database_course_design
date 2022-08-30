@@ -8,6 +8,7 @@ Vue.use(Router)
 import AddUser from '@/view/LogManager/AddUser.vue'
 import LogOut from '@/view/LogManager/Logout.vue'
 import LogIn from '@/view/LogManager/Login.vue'
+import ForgetPass from '@/view/LogManager/ForgetPass.vue'
 //主页
 import AdminPage from '@/view/MainPage/AdminPage.vue'
 import UserPage from '@/view/MainPage/UserPage.vue'
@@ -44,6 +45,7 @@ export default new Router({
         { path: '/users/PersonInfo', component: PersonInfo },
         { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
+        { path: '/users/ForgetPass', component: ForgetPass },
         //管理员主页及其子页面
         {
             path: '/Admin/AdminPage', component: AdminPage,
