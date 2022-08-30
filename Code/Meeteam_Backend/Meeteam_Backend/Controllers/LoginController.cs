@@ -144,7 +144,7 @@ namespace Meeteam_Backend.Controllers
         }
         //添加普通用户
         [HttpPost]
-        public bool addnormal(string user_id, string password, string user_name, char gender, string contact_info, string institution, string major, string introduction)
+        public bool addnormal(string user_id, string password, string user_name, string gender, string contact_info, string institution, string major, string introduction)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -155,7 +155,7 @@ namespace Meeteam_Backend.Controllers
                 pos.password = MD5Encrypt16(password);
                 pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
                 pos.user_name = user_name;
-                pos.account_status = '1';
+                pos.account_status ="1";
                 pos.gender = gender;
                 pos.contact_info = contact_info;
                 pos.institution = institution;
@@ -176,7 +176,7 @@ namespace Meeteam_Backend.Controllers
         }
         //添加管理员
         [HttpPost]
-        public bool addadmin(string admin_id, string password, string user_name, char gender, string contact_info)
+        public bool addadmin(string admin_id, string password, string user_name, string gender, string contact_info)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -187,7 +187,7 @@ namespace Meeteam_Backend.Controllers
                 pos.password = MD5Encrypt16(password);
                 pos.register_time = DateTime.Now.ToString("g"); //2009/10/30 20:40
                 pos.user_name = user_name;
-                pos.account_status = '1';
+                pos.account_status = "1";
                 pos.gender = gender;
                 pos.contact_info = contact_info;
                 int count = db.Insertable(pos).ExecuteCommand();

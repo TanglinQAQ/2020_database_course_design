@@ -14,9 +14,9 @@ namespace Meeteam_Backend
         public string admin_id { get; set; }
         public string password { get; set; }
         public string register_time { get; set; }
-        public char account_status { get; set; }
+        public string account_status { get; set; }
         public string user_name { get; set; }
-        public char gender { get; set; }
+        public string gender { get; set; }
         public string contact_info { get; set; }
     }
 }

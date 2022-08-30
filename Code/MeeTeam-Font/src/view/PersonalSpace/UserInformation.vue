@@ -136,7 +136,11 @@ export default {
       };
       GetUserInfor(params).then(res => {
         let item = res.data[0];
-        vm.gender = item.gender;
+        if(item.gender==="0")
+        vm.gender="女"
+        else
+        vm.gender="男"
+        // vm.gender = item.gender;
         vm.contact_info = item.contact_info;
         vm.institution = item.institution;
         vm.major = item.major;

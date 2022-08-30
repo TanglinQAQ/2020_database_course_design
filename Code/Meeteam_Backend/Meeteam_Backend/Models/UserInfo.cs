@@ -14,9 +14,9 @@ namespace Meeteam_Backend
         public string user_id { get; set; }
         public string password { get; set; }
         public string register_time { get; set; }
-        public char account_status { get; set; }
+        public string account_status { get; set; }
         public string user_name { get; set; }
-        public char gender { get; set; }
+        public string gender { get; set; }//oracle的char对应的是string
         public string contact_info { get; set; }
         public string institution { get; set; }
         public string major { get; set; }
