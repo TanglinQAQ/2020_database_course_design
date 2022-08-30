@@ -37,6 +37,21 @@
               class="filter-item"
             >
               <el-option
+                v-for="item in havreqOptions"
+                :key="item.key"
+                :label="item.display_name"
+                :value="item.key"
+              />
+            </el-select>
+            &nbsp;
+            <el-select
+              v-model="listQuery.audit_status"
+              placeholder="审核状态"
+              clearable
+              style="width: 180px"
+              class="filter-item"
+            >
+              <el-option
                 v-for="item in statusOptions"
                 :key="item.key"
                 :label="item.display_name"
@@ -63,13 +78,19 @@
           >
             <el-table-column prop="project_name" label="项目名称" width="160">
             </el-table-column>
-            <el-table-column prop="project_introduction" label="项目简介" width="240">
+            <el-table-column prop="project_introduction" label="项目简介" width="200">
             </el-table-column>
-            <el-table-column prop="User_Projectuser_id" label="发布者" width="180">
+            <el-table-column prop="User_Projectuser_id" label="发布者" width="150">
             </el-table-column>
-            <el-table-column prop="create_time" label="发布时间" sortable width="180">
+            <el-table-column prop="create_time" label="发布时间" sortable width="160">
             </el-table-column>
             <el-table-column prop="project_status" label="是否有组队需求" width="160">
+            </el-table-column>
+            <el-table-column prop="audit_status" label="审核状态" width="160">
+              <template slot-scope="scope">
+                <span v-if="scope.row.audit_status == 0">未审核</span>
+                <span v-else>已审核</span>
+              </template>
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
@@ -93,9 +114,20 @@ import { getrequireInfor } from "@/api/Inforlist.js";
 import { get_username } from "@/api/ProjectDetail.js";
 import { fetchList } from "@/api/Querylist.js";
 
-const statusOptions = [
+const havreqOptions = [
   { key: "1", display_name: "是" },
   { key: "0", display_name: "否" },
+];
+
+// arr to obj
+const havreqKeyValue = havreqOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name;
+  return acc;
+}, {});
+
+const statusOptions = [
+  { key: "1", display_name: "已审核" },
+  { key: "0", display_name: "未审核" },
 ];
 
 // arr to obj
@@ -108,6 +140,9 @@ export default {
   name: "AuditProject",
   //components: { Pagination },
   filters: {
+    havreqFilter(havreq) {
+      return havreqKeyValue[havreq];
+    },
     statusFilter(status) {
       return statusKeyValue[status];
     },
@@ -124,10 +159,9 @@ export default {
         project_name: "",
         publisher: "",
         hav_require: "",
-        require_id: "",
-        require_status: "",
-        team_type: "",
+        audit_status: "",
       },
+      havreqOptions,
       statusOptions,
     };
   },
