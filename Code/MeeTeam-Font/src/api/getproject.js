@@ -21,3 +21,13 @@ export function getProjectname(params) {
         }
     })
 }
+
+export function getfacorite(params){
+    return request({
+        url: '/UserProject/GetFacorite',
+        method: 'get',
+        params: {
+            ID: params.ID,
+        }
+    })
+}

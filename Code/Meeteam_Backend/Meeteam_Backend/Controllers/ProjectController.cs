@@ -98,6 +98,35 @@ namespace Meeteam_Backend.Controllers
             }
         }
 
+        [HttpPost]
+        //修改推荐状态
+        public int Recommend_Project(string project_id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            bool have_p = db.Queryable<Project>().Any(it => it.project_id == project_id);
+            if (!have_p)
+                return 0;
+            string time = DateTime.Now.ToString();
+            return db.Updateable<Project>()
+                .SetColumns(it => new Project
+                {
+                    recommend_time = time,
+                    recommend = "1"
+                })
+                .Where(it => it.project_id == project_id)
+                .ExecuteCommand();
+        }
+
+        [HttpGet]
+        public List<Project> SelectAllRecommend()
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            var rec = db.Queryable<Project>().Where(it => it.recommend == "1").ToList();
+            return rec;
+        }
+
         //查询项目
         [HttpGet]
 
