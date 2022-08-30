@@ -16,12 +16,12 @@
           <el-input type="password" v-model="pass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" style="float:left">提交</el-button>
+          <el-button @click="resetForm('ruleForm')"  style="float:right">重置</el-button>
         </el-form-item>
         <el-button type="text" class="testleft" @click="adminlo">{{ globaltest }}</el-button>
         <el-button type="text" class="testright" @click="adduser">注册</el-button>
-        <el-button type="text" class="testright">找回密码</el-button>
+        <el-button type="text" class="testright">忘记密码？</el-button>
       </el-form>
     </div>
   </div>

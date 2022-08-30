@@ -28,7 +28,7 @@
     <div>
       <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }"
         default-sort="{ prop: 'create_time', order: 'descending' }">
-        <el-table-column prop="project_name" label="项目名称" width="150">
+        <el-table-column prop="project_name" label="项目名称" width="100">
         </el-table-column>
         <el-table-column prop="project_introduction" label="项目简介" width="350">
         </el-table-column>

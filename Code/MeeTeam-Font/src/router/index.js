@@ -12,7 +12,7 @@ import LogIn from '@/view/LogManager/Login.vue'
 import AdminPage from '@/view/MainPage/AdminPage.vue'
 import UserPage from '@/view/MainPage/UserPage.vue'
 import MyPage from '@/view/MainPage/MyPage.vue'
-import UserPageContent from'@/view/MainPage/UserPageContent.vue'
+import UserPageContent from '@/view/MainPage/UserPageContent.vue'
 //通知相关
 import NoticeList from '@/view/Notice/NoticeList.vue'
 import ShowNotice from '@/view/Notice/ShowNotice.vue'
@@ -27,6 +27,7 @@ import CreatList from '@/view/Project_and_Require//CreatList.vue'
 import MyProject from '@/view/Project_and_Require/MyProject.vue'
 import ProjectDetail from '@/view/Project_and_Require/ProjectDetail.vue'
 import InforList from '@/view/Project_and_Require/InforList.vue'
+import ProjList from '@/view/Project_and_Require/ProjList.vue'
 //用户信息
 import DisplayPage from '@/view/PersonalSpace/DisplayPage.vue'
 import UserInformation from '@/view/PersonalSpace/UserInformation.vue'
@@ -64,17 +65,18 @@ export default new Router({
                 { path: '/users/InforList', component: InforList },
                 { path: '/users/MyProject', component: MyProject },
                 { path: '/users/ProjectDetail', component: ProjectDetail },
-                { path:'/users/UserPageContent',component:UserPageContent}
+                { path: '/users/UserPageContent', component: UserPageContent },
+                { path: '/users/ProjList', component: ProjList }
             ], props: true
         },
-        {path: '/users/DisplayPage',component: DisplayPage},
+        { path: '/users/DisplayPage', component: DisplayPage },
         //个人信息主页及其子页面
         {
-            path:'/users/MyPage', component:MyPage,
-            children:[
-                { path: '/users/UserInformation', name: 'UserInformation', component: UserInformation},
-                { path: '/users/UserHistory', name: 'UserHistory', component: UserHistory},
-                { path: '/users/UserCollection', name: 'UserCollection', component: UserCollection},
+            path: '/users/MyPage', component: MyPage,
+            children: [
+                { path: '/users/UserInformation', name: 'UserInformation', component: UserInformation },
+                { path: '/users/UserHistory', name: 'UserHistory', component: UserHistory },
+                { path: '/users/UserCollection', name: 'UserCollection', component: UserCollection },
             ]
         }
     ]
