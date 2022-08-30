@@ -28,16 +28,15 @@ namespace Meeteam_Backend.Controllers
                 string name = file.FileName;
                 path = @"D:\work_space\storage\" + path + @"\";
                 string filename = path + name;
-                if (System.IO.File.Exists(filename))
+                if (!System.IO.File.Exists(filename))
                 {
-                    System.IO.File.Delete(filename);
-                }
-                using (FileStream fs = System.IO.File.Create(filename))
-                {
-                    // 复制文件
-                    file.CopyTo(fs);
-                    // 清空缓冲区数据
-                    fs.Flush();
+                    using (FileStream fs = System.IO.File.Create(filename))
+                    {
+                        // 复制文件
+                        file.CopyTo(fs);
+                        // 清空缓冲区数据
+                        fs.Flush();
+                    }
                 }
                 //将文件路径存入数据库
                 dbORM dborm = new dbORM();
@@ -56,7 +55,10 @@ namespace Meeteam_Backend.Controllers
                 if (target == "project")
                 {
                     //修改project表，即项目宣传图
-                    //暂时没写，之后加上
+                    var entity = new Project_Img();
+                    entity.project_id = id;
+                    entity.img_path = filename;
+                    db.Storageable(entity).ExecuteCommand();
                 }
             }
         }
@@ -78,14 +80,18 @@ namespace Meeteam_Backend.Controllers
             if (target == "project")
             {
                 //修改project表，即项目宣传图
-                //暂时没写，之后加上
+                var q = db.Queryable<Project_Img>().First(it => it.project_id == id);
+                if (q == null)
+                    return null;
+                filename = q.img_path;
+                if (filename == null)
+                    return null;
             }
             FileStream fs = System.IO.File.OpenRead(filename);
             var ms = new MemoryStream();
             fs.CopyTo(ms);
             byte[] b = ms.ToArray();
             return Convert.ToBase64String(b);
-
         }
     }
     public class view_user
