@@ -148,6 +148,7 @@ import { getlistInfor } from "@/api/Inforlist.js";
 import { getrequireInfor } from "@/api/Inforlist.js";
 import { openfile } from "@/api/file_load.js";
 import { fetchList } from "@/api/Querylist.js";
+import { addviewhistory } from "@/api/Addhistory";
 
 const havreqOptions = [
   { key: "1", display_name: "是" },
