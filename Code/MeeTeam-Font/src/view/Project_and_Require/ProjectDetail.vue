@@ -1,4 +1,4 @@
-<template>
+·<template>
   <div class="detaildiv">
     <el-main>
       <div id="breadcrumb">
@@ -40,7 +40,7 @@
         <el-step title="招募队友"></el-step>
         <el-step title="项目完结"></el-step>
       </el-steps>
-      <el-button type="success" plain style="float: right;margin-right: 80px">申请加入</el-button>
+      <el-button type="success" plain style="float: right;margin-right: 80px" @click="handleApply()">申请加入</el-button>
       <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
       <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{  favorite_num 
         }}</el-button>
@@ -51,7 +51,6 @@
       <el-tabs v-model="activeName">
         <el-tab-pane label="展开评论列表" name="展开评论列表" @tab-click="handleClick">
           <div>
-
             <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }"
               :cell-style="{ 'text-align': 'center' }" :default-sort="{ prop: 'date', order: 'descending' }">
               <el-table-column prop="evaluator_id" label="用户id" width="150">
@@ -85,6 +84,7 @@ import { createevalist } from '@/api/CreateList.js'
 import { AddMyCollection } from '@/api/MyInfor.js'
 import { SelectAllCollection } from '@/api/MyInfor.js'
 import { Ifcollect } from '@/api/MyInfor.js'
+import { createuser_project } from '@/api/CreateList.js'
 export default {
   data() {
     return {
@@ -232,10 +232,26 @@ export default {
       }
       createevalist(param).then(function (res) {
         if (res.data === false) {
-          vm.$message.error("提交失败");
+          vm.$message.error("评论失败");
         }
         else {
-          alert("提交成功！");
+          vm.$message.success("评论成功");
+        }
+      })
+    },
+    handleApply() { //申请操作
+      var vm = this;
+      let param = {
+        user_id: global_msg.nowuserid,
+        project_id: vm.$route.query.p_id,
+        duty:"申请者",
+      }
+      createuser_project(param).then(function (res) {
+        if (res.data === false) {
+          vm.$message.error("申请失败");
+        } 
+        else{
+          vm.$message.success("申请成功");
         }
       })
     },

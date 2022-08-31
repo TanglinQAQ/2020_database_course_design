@@ -1,20 +1,28 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
+=======
+    "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {}
+>>>>>>> 5f9e01b4cfec19bc57f803886a05fa6cd6c93c4c
   },
   "projects": {
-    "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {
+    "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+        "projectUniqueName": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
         "projectName": "Meeteam_Backend",
-        "projectPath": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-        "packagesPath": "C:\\Users\\xltx-\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\xltx-\\Desktop\\db\\code\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
+        "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+        "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\xltx-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 5f9e01b4cfec19bc57f803886a05fa6cd6c93c4c
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +83,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+>>>>>>> 5f9e01b4cfec19bc57f803886a05fa6cd6c93c4c
         }
       }
     }

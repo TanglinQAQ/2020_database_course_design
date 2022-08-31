@@ -1,3 +1,7 @@
 is_global = true
 build_property.RootNamespace = Meeteam_Backend
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\xltx-\Desktop\db\code\2020_database_course_design\Code\Meeteam_Backend\Meeteam_Backend\
+=======
+build_property.ProjectDir = D:\Users\ZZL\Documents\GitHub\2020_database_course_design\Code\Meeteam_Backend\Meeteam_Backend\
+>>>>>>> 5f9e01b4cfec19bc57f803886a05fa6cd6c93c4c

@@ -18,10 +18,13 @@
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>项目管理</el-breadcrumb-item>
-            <el-breadcrumb-item>平台项目列表</el-breadcrumb-item>
+            <el-breadcrumb-item>我的项目</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }"
+        <el-tabs v-model="activeName">
+        <el-tab-pane label="我发布的" name="我发布的" @tab-click="handleClick">
+          <div>
+            <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }"
           :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'date', order: 'descending' }">
           <el-table-column prop="project_name" label="项目名称" width="200">
           </el-table-column>
@@ -35,10 +38,35 @@
             <template slot-scope="scope">
               <el-button size="mini" @click="handleDetail(scope.$index, scope.row)">查看详情</el-button>
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <br><br>
+              <el-button size="mini" type="success" @click="handleApply(scope.$index, scope.row)">审核申请</el-button>
               <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="我申请的" name="我申请的">
+          <div>
+          <el-table :data="tableData0" :header-cell-style="{ textAlign: 'center' }"
+          :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'date', order: 'descending' }">
+          <el-table-column prop="project0_name" label="项目名称" width="200">
+          </el-table-column>
+          <el-table-column prop="project0_progress" label="项目当前进度" width="200">
+          </el-table-column>
+          <el-table-column prop="create0_time" label="发布时间" sortable width="200">
+          </el-table-column>
+          <el-table-column prop="project0_duty" label="当前身份" width="200">
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button size="mini" @click="handleDetail0(scope.$index, scope.row)">查看详情</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
       </el-main>
     </el-container>
   </div>
@@ -54,7 +82,9 @@ export default {
   data() {
     return {
       username: global_msg.nowuserid,
+      activeName: "我发布的",
       tableData: [],
+      tableData0: [],
     };
   },
   mounted() {
@@ -69,12 +99,20 @@ export default {
       getlistInfor().then(function (res) {
         for (let item of res.data) {
           let form = {//设置添加数据的格式
+            //发布表
             project_name: '',
             project_progress: '',
             create_time: '',
             project_status: '',
             project_id: '',
+            //申请表
+            project0_name: '',
+            project0_progress: '',
+            create0_time: '',
+            project0_status: '',
+            project0_id: '',
           }
+          //发布表
           form.project_name = item.project_name;
           form.project_introduction = item.project_introduction;
           form.project_progress = item.project_progress;
@@ -82,21 +120,47 @@ export default {
           form.create_time = form.create_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
           form.project_status = item.project_status;
           form.project_id = item.project_id;
+          //申请表
+          form.project0_name = item.project_name;
+          form.project0_introduction = item.project_introduction;
+          form.project0_progress = item.project_progress;
+          form.create0_time = item.create_time;
+          form.create0_time = form.create0_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
+          form.project0_id = item.project_id;
           let para = {
-            id: form.project_id
+            pid: form.project_id,
+            uid: global_msg.nowuserid
           };
           get_username(para).then(res => {
             form.user_id = res.data.user_id;
-            if (res.data.user_id == global_msg.nowuserid)
+            if (res.data.duty == "发布者")
               vm.tableData.push(form);
+            if (res.data.duty == "申请者"){
+              vm.tableData0.push(form);
+              form.project0_duty = "申请者";
+            }
+            if (res.data.duty == "组员"){
+              vm.tableData0.push(form);
+              form.project0_duty = "组员";
+            }  
           })
         }
       })
     },
-    handleDetail(index, row) { //查看详情操作
+    handleDetail(index, row) { //查看详情操作(发布表)
       var project_id = this.tableData[index].project_id;
       console.log(index, row);
       this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
+    },
+    handleDetail0(index, row) { //查看详情操作(申请表)
+      var project_id = this.tableData0[index].project0_id;
+      console.log(index, row);
+      this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
+    },
+    handleApply(index, row) { //审核申请操作
+      var project_id = this.tableData[index].project_id;
+      console.log(index, row);
+      this.$router.push({ path: "/users/AuditApply", query: { p_id: project_id } });
     },
     handleEdit(index, row) { //编辑操作
       var project_id = this.tableData[index].project_id;
@@ -128,6 +192,9 @@ export default {
           message: err
         })
       })
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
     },
   }
 }
