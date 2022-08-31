@@ -124,7 +124,7 @@
                         plain
                         size="mini"
                         style="float: right"
-                        @click="handleLook(index, o.row)"
+                        @click="handleLook(index, o.row),addhistory(username,o.project_id)"
                       >
                         了解更多</el-button
                       >
@@ -338,8 +338,13 @@ export default {
     },
 
     /*触发添加浏览历史*/
-    addhistory(){
-      addviewhistory();
+    addhistory(user_id,proj_id){
+      let params={
+        user_id:user_id,
+        project_id:proj_id
+      };
+      console.log(params);
+      addviewhistory(params);
     }
   },
 };

@@ -5,7 +5,8 @@ export function addviewhistory(params){
         url: '/User/AddViewHistory',
         method: 'post',
         params: {
-            require_id: params.require_id
+            user_id:params.user_id,
+            project_id:params.project_id,
         }
     })
 

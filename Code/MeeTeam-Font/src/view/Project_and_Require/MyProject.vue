@@ -127,7 +127,7 @@
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
-                    @click="handleDetail0(scope.$index, scope.row)"
+                    @click="handleDetail0(scope.$index, scope.row),addhistory(username,this.tableData0[scope.$index].project0_id)"
                     >查看详情</el-button
                   >
                   <el-button
@@ -152,6 +152,9 @@ import { getlistInfor } from "@/api/Inforlist.js";
 import { deleteproject } from "@/api/Myprojectlist.js";
 import { deleteapply } from "@/api/Myprojectlist.js";
 import { get_username } from "@/api/ProjectDetail.js";
+import { addviewhistory } from "@/api/Addhistory";
+
+
 export default {
   name: "MyProject",
   data() {
@@ -320,6 +323,16 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
+
+     /*触发添加浏览历史*/
+     addhistory(user_id,proj_id){
+      let params={
+        user_id:user_id,
+        project_id:proj_id
+      };
+      console.log(params);
+      addviewhistory(params);
+    }
   },
 };
 </script>
