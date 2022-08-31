@@ -100,5 +100,31 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
+        /*
+         测试用例：
+{
+    "admin_id": "",
+    "notice_title": "",
+    "operate": ""
+}
+         */
+        [HttpGet]
+        public string notice_query(string s)
+        {
+            Notice_Query q = JsonSerializer.Deserialize<Notice_Query>(s);
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();
+            var query = db.Queryable<Notice>();
+            if (q.admin_id != null && q.admin_id != "")
+                query.Where(it => it.admin_id.Contains(q.admin_id));
+            if (q.notice_title != null && q.notice_title != "")
+                query.Where(it => it.notice_title.Contains(q.notice_title));
+            if (q.operate == "0")
+                query.Where(it => it.operate_type == OPERATE_TYPE.SAVE);
+            else if (q.operate == "1")
+                query.Where(it => it.operate_type == OPERATE_TYPE.PUBLISH);
+            var json = query.Clone().Distinct().ToJson();
+            return json;
+        }
     }
 }

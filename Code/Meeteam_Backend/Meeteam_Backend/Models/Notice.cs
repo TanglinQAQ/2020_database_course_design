@@ -40,7 +40,13 @@ namespace MeeTeam_Backend
             return id;
         }
 
+    }
 
+    public class Notice_Query
+    {
+        public string admin_id { get; set; }
+        public string notice_title { get; set; }
+        public string operate { get; set; }
     }
 }
 

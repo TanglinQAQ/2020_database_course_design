@@ -37,3 +37,13 @@ export function delete_notice(params) {
         }
     })
 }
+
+export function fetchList(query) {//获取查询列表结果
+    return request({
+        url: '/Notice/notice_query',
+        method: 'get',
+        params: {
+            s: query
+        }
+    })
+}
