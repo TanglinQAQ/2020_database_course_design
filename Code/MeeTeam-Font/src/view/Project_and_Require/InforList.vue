@@ -78,7 +78,7 @@
             <div style="margin-top:15px">
               <!--这一层div的作用是什么-->
               <el-card :body-style="{ padding: '0px' }" shadow="hover">
-                <img :src=o.project_img class="image" />
+                <img :src=o.Project_Imgimg_path class="image" />
                 <div class="text">
                   {{ o.project_name }}<br />
                   发起时间：{{ o.create_time }}<br />
@@ -150,7 +150,7 @@ export default {
       getlistInfor().then(res => {
         let vm = this;
         global_msg.projectnum = res.data.length;//改变全局requirenum
-        // console.log(res);
+        //console.log(res);
         // console.log(res.data.length);
         // console.log(res.data[0]);
         // console.log(res.data[0].details);
@@ -162,7 +162,7 @@ export default {
             create_time: '',
             project_status: '',
             project_id: '',
-            project_img: ''
+            Project_Imgimg_path: ''
           }
 
           form.project_name = item.project_name;
@@ -180,9 +180,11 @@ export default {
 
           openfile(param).then((res) => {
             if (res.data) {
-              form.project_img = 'data:;base64,' + res.data;
+              form.Project_Imgimg_path = 'data:;base64,' + res.data;
             }
           })
+
+          //console.log(form);
 
           vm.tabledata.push(form);
           // console.log(form);
@@ -195,16 +197,28 @@ export default {
 
     handleLook(index, row) {//进入项目详情页面
       var project_id = this.tabledata[index].project_id;
-      console.log(index, row);
+      //console.log(index, row);
       this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
     },
 
     getList2() {
       var query = JSON.stringify(this.listQuery);
       fetchList(query).then((response) => {
-        console.log(response);
+        //console.log(response);
         this.tabledata = response.data;
-        console.log(this.table_Data);
+        for(let item of this.tabledata){
+          let param = {
+            target: "project",
+            id: item.project_id
+          }
+
+          openfile(param).then((res) => {
+            if (res.data) {
+              item.Project_Imgimg_path = 'data:;base64,' + res.data;
+            }
+          })
+        }
+        //console.log(this.table_Data);
       });
     },
 
