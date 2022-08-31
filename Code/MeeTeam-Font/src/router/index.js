@@ -22,7 +22,8 @@ import CreateNotice from '@/view/Notice/CreateNotice.vue'
 import User_NoticeList from '@/view/Notice/User_NoticeList.vue'
 import User_ShowNotice from '@/view/Notice/User_ShowNotice.vue'
 //项目需求相关
-import ChangeList from '@/view/Project_and_Require/ChangeList.vue'
+import ChangeListwithRequire from '@/view/Project_and_Require/ChangeListwithRequire.vue'
+import ChangeListwithoutRequire from '@/view/Project_and_Require/ChangeListwithoutRequire.vue'
 import AuditProject from '@/view/Project_and_Require/AuditProject.vue'
 import AuditRequire from '@/view/Project_and_Require/AuditRequire.vue'
 import DetailAudit from '@/view/Project_and_Require/DetailAudit.vue'
@@ -47,7 +48,6 @@ export default new Router({
         { path: '/login', component: LogIn },
         { path: '/users/LogOut', component: LogOut },
         { path: '/users/PersonInfo', component: PersonInfo },
-        { path: '/users/ChangeList', name: 'ChangeList', component: ChangeList, props: true },
         { path: '/users/AddUser', component: AddUser },
         { path: '/users/ForgetPass', component: ForgetPass },
         //管理员主页及其子页面
@@ -77,6 +77,8 @@ export default new Router({
                 { path: '/users/UserPageContent', component: UserPageContent },
                 { path: '/users/ProjList', component: ProjList },
                 { path:'/users/AuditApply',component:AuditApply}
+                { path:'/users/ChangeListwithRequire',component:ChangeListwithRequire},
+                { path:'/users/ChangeListwithoutRequire',component:ChangeListwithoutRequire}
             ], props: true
         },
         { path: '/users/DisplayPage', component: DisplayPage },
