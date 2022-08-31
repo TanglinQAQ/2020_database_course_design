@@ -61,7 +61,14 @@
                   >
                   <el-button
                     size="mini"
-                    @click="handleEdit(scope.$index, scope.row)"
+                    @click="handleEditwithRequire(scope.$index, scope.row)"
+                    v-if="scope.row.project_status === '是'"
+                    >编辑</el-button
+                  >
+                  <el-button
+                    size="mini"
+                    @click="handleEditwithoutRequire(scope.$index, scope.row)"
+                    v-if="scope.row.project_status === '否'"
                     >编辑</el-button
                   >
                   <br /><br />
@@ -71,13 +78,6 @@
                     @click="handleApply(scope.$index, scope.row)"
                     v-if="scope.row.project_status === '是'"
                     >管理团队</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="primary"
-                    @click="AddGroupRequirement(scope.$index, scope.row)"
-                    v-if="scope.row.project_status === '否'"
-                    >新建需求</el-button
                   >
                   <el-button
                     size="mini"
@@ -255,11 +255,23 @@ export default {
         query: { p_id: project_id },
       });
     },
-    handleEdit(index, row) {
+    handleEditwithRequire(index, row) {
       //编辑操作
       var project_id = this.tableData[index].project_id;
-      this.$router.push({ name: "ChangeList", params: { p_id: project_id } });
       console.log(index, row);
+      this.$router.push({
+        path: "/users/ChangeListwithRequire",
+        query: { p_id: project_id },
+      });
+    },
+    handleEditwithoutRequire(index, row) {
+      //编辑操作
+      var project_id = this.tableData[index].project_id;
+      console.log(index, row);
+      this.$router.push({
+        path: "/users/ChangeListwithoutRequire",
+        query: { p_id: project_id },
+      });
     },
     handleDelete(index, row) {
       //删除操作
