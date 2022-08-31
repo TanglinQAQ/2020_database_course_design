@@ -11,6 +11,7 @@ import LogIn from '@/view/LogManager/Login.vue'
 import ForgetPass from '@/view/LogManager/ForgetPass.vue'
 //主页
 import AdminPage from '@/view/MainPage/AdminPage.vue'
+import AdminPageContent from '@/view/MainPage/AdminPageContent.vue'
 import UserPage from '@/view/MainPage/UserPage.vue'
 import MyPage from '@/view/MainPage/MyPage.vue'
 import UserPageContent from '@/view/MainPage/UserPageContent.vue'
@@ -53,6 +54,7 @@ export default new Router({
         {
             path: '/Admin/AdminPage', component: AdminPage,
             children: [
+                { path: '/Admin/AdminPageContent', component: AdminPageContent },
                 { path: '/Admin/AuditProject', component: AuditProject },
                 { path: '/Admin/DetailAudit', component: DetailAudit },
                 { path: '/Admin/AuditRequire', component: AuditRequire },

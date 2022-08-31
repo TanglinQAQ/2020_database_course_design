@@ -31,9 +31,7 @@
                             <el-menu-item index="/users/UserInformation">
                                 <i class="el-icon-user"></i>个人信息
                             </el-menu-item>
-                            <el-menu-item index="/users/UserInformation">
-                                <i class="el-icon-edit"></i>修改信息
-                            </el-menu-item>
+                          
                             <!-- <el-menu-item @click="goAnchor('#anchor1')">
                                 <i class="el-icon-star-off"></i>我的收藏
                             </el-menu-item>

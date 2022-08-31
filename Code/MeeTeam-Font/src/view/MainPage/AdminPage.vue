@@ -22,7 +22,7 @@
                     <el-col>
                         <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64"
                             text-color="#fff" active-text-color="#ffd04b" :router="true">
-                            <el-menu-item index="/Admin/AdminPage">
+                            <el-menu-item index="/Admin/AdminPage/AdminPageContent">
                                 <i class="el-icon-s-home"></i>首页
                             </el-menu-item>
                             <el-submenu index="1">
