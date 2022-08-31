@@ -9,7 +9,6 @@ import qs from 'qs';
 import { createApp } from 'vue'
 import VueParticles from 'vue-particles'  
 
-
 Vue.prototype.$qs = qs; //添加实例 property
 Vue.config.productionTip = false
 Vue.use(ElementUI)

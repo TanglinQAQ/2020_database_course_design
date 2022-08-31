@@ -9,7 +9,7 @@
         </div>
 
         <template>
-            <div v-if="reset">
+            <div>
                 <el-row :glutter="10">
                     <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
                         <div style="margin-top:15px">
@@ -19,7 +19,8 @@
                                 <div class="text">
                                     {{  o.project_name  }}<br />
                                     发起时间：{{  o.create_time  }}<br />
-                                    项目进度：{{  o.project_progress  }}<br /><br>
+                                    项目进度：{{  o.project_progress  }}<br />
+                                    当前是否有组队需求：{{o.project_status}}<br/><br/>
                                     <template>
                                         <el-button type="success" plain size="mini" style="float:right"
                                             @click="handleLook(index, o.row)">了解更多</el-button>
@@ -49,30 +50,16 @@ export default {
             tabledata: [],
             current_page: 1,
             total: null,
-            pagesize: 8,
-            listdata: {
-                admin_id: "system",
-                audit_reason: null,
-                audit_result: "1",
-                audit_status: "1",
-                audit_time: "2022/8/28 21:29:24",
-                create_time: "2022/8/19 20:26",
-                due: "\"2022-08-09 00:00:00,2022-09-08 00:00:00\"",
-                project_background: "测试项目背景7",
-                project_content: "测试项目内容7",
-                project_id: "5",
-                project_introduction: "测试项目简介7",
-                project_name: "测试项目7",
-                project_progress: "规划阶段",
-                project_status: "是",
-            },
-            reset: true
+            pagesize: 8
         }
     },
     methods: {
-        refresh() {
+        /*
+                refresh() {
             location.reload();
         },
+        */
+
 
         gettable() {
             getlistInfor().then(res => {
@@ -125,8 +112,7 @@ export default {
             var project_id = this.tabledata[index].project_id;
             console.log(index, row);
             this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
-        },
-
+        }
     },
 
     mounted() {
@@ -138,11 +124,6 @@ export default {
 
     
 <style>
-.time {
-    font-size: 12px;
-    color: #999;
-}
-
 .button {
     padding: 0;
     min-height: auto;
