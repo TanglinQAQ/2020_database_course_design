@@ -98,7 +98,7 @@ namespace Meeteam_Backend.Controllers
             pos.team_type_details = team_type_details;
             try
             {
-                int result = db.Updateable<Grouping_Requirement>(pos).Where(it => it.project_id == project_id).First().ExecuteCommand();
+                int result = db.Updateable<Grouping_Requirement>(pos).Where(it => it.project_id == project_id).ExecuteCommand();
                 if (result == 1)
                     return true;
                 else
