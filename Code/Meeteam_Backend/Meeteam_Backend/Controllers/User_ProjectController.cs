@@ -40,14 +40,29 @@ namespace Meeteam_Backend.Controllers
         }
         //查询id的项目
         [HttpGet]
-        public string get_by_id(string id)
+        public string get_by_id(string pid, string uid)
         {
             User_Project project = new User_Project();
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
                                                  
-            project = db.Queryable<User_Project>().Where(it => it.project_id == id).First();
+            project = db.Queryable<User_Project>().Where(it => it.project_id == pid && it.user_id == uid).First();
             return JsonSerializer.Serialize(project);
+        }
+        [HttpGet]
+        public List<User_Project> get_apply(string pid, string duty)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                List<User_Project> agrlist = db.Queryable<User_Project>().Where(it => it.project_id == pid && it.duty == duty).ToList();
+                return agrlist;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
