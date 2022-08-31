@@ -6,7 +6,7 @@
           <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>我的项目</el-breadcrumb-item>
-          <el-breadcrumb-item>审核申请</el-breadcrumb-item>
+          <el-breadcrumb-item>管理团队</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <p class="title" align="center" label="项目名称">{{  project_name  }}</p>
