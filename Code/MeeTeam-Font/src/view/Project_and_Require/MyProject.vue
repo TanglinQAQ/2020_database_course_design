@@ -56,7 +56,7 @@
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
-                    @click="handleDetail(scope.$index, scope.row)"
+                    @click="handleDetail(scope.$index, scope.row),addhistory(username,this.tableData0[scope.$index].project0_id)"
                     >查看详情</el-button
                   >
                   <el-button
@@ -127,7 +127,7 @@
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
-                    @click="handleDetail0(scope.$index, scope.row),addhistory(username,this.tableData0[scope.$index].project0_id)"
+                    @click="handleDetail0(scope.$index, scope.row)"
                     >查看详情</el-button
                   >
                   <el-button

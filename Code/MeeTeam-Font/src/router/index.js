@@ -76,7 +76,7 @@ export default new Router({
                 { path: '/users/ProjectDetail', component: ProjectDetail },
                 { path: '/users/UserPageContent', component: UserPageContent },
                 { path: '/users/ProjList', component: ProjList },
-                { path:'/users/AuditApply',component:AuditApply}
+                { path:'/users/AuditApply',component:AuditApply},
                 { path:'/users/ChangeListwithRequire',component:ChangeListwithRequire},
                 { path:'/users/ChangeListwithoutRequire',component:ChangeListwithoutRequire}
             ], props: true
