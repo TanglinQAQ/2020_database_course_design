@@ -76,6 +76,35 @@ namespace Meeteam_Backend.Controllers
             project = db.Queryable<Project>().Where(it => it.project_id == id).First();
             return JsonSerializer.Serialize(project);
         }
+        //编辑更新项目
+        [HttpPost]
+        public bool Changeprojectlist(string project_id, string project_name, string project_background, string project_introduction, string project_content, string due, string project_progress)
+        {
+            //获取数据库连接
+            Project project = new Project();
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            //搜索条件，感觉可以改成检索的方式
+            project = db.Queryable<Project>().Where(it => it.project_id == project_id).First();
+            project.project_name = project_name;
+            project.project_background = project_background;
+            project.project_introduction = project_introduction;
+            project.project_content = project_content;
+            project.project_progress = project_progress;
+            project.due = due;
+            try
+            {
+                int result = db.Updateable<Project>(project).Where(it => it.project_id == project_id).ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         //删除项目
         [HttpDelete]
         public bool deleteProject(string project_id)
