@@ -78,13 +78,30 @@
           >
             <el-table-column prop="project_name" label="项目名称" width="160">
             </el-table-column>
-            <el-table-column prop="project_introduction" label="项目简介" width="200">
+            <el-table-column
+              prop="project_introduction"
+              label="项目简介"
+              width="200"
+            >
             </el-table-column>
-            <el-table-column prop="User_Projectuser_id" label="发布者" width="150">
+            <el-table-column
+              prop="User_Projectuser_id"
+              label="发布者"
+              width="150"
+            >
             </el-table-column>
-            <el-table-column prop="create_time" label="发布时间" sortable width="160">
+            <el-table-column
+              prop="create_time"
+              label="发布时间"
+              sortable
+              width="160"
+            >
             </el-table-column>
-            <el-table-column prop="project_status" label="是否有组队需求" width="160">
+            <el-table-column
+              prop="project_status"
+              label="是否有组队需求"
+              width="160"
+            >
             </el-table-column>
             <el-table-column prop="audit_status" label="审核状态" width="160">
               <template slot-scope="scope">
@@ -94,7 +111,9 @@
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
-                <el-button size="mini" @click="handleCheck(scope.$index, scope.row)"
+                <el-button
+                  size="mini"
+                  @click="handleCheck(scope.$index, scope.row)"
                   >查看详情</el-button
                 >
               </template>
@@ -185,7 +204,10 @@ export default {
       //详情审核操作
       var project_id = this.tableData[index].project_id;
       console.log(index, row);
-      this.$router.push({ path: "/Admin/DetailAudit", query: { p_id: project_id } });
+      this.$router.push({
+        path: "/Admin/DetailAudit",
+        query: { p_id: project_id },
+      });
     },
   },
 };
@@ -207,15 +229,9 @@ export default {
   margin-bottom: 10px;
 }
 .el-card {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0, 15);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0, 15);
 }
 .filter-container {
   padding-bottom: 10px;
-
-  .filter-item {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 10px;
-  }
 }
 </style>

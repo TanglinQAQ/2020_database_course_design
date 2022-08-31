@@ -109,6 +109,7 @@ export default {
 <style scoped>
 #admin_page {
     caret-color: transparent;
+    background-image: url("@/assets/bg3.jpg");
 }
 
 
@@ -155,5 +156,10 @@ export default {
     margin-top: 0px;
     height: 100%;
     background-color: #545c64;
+}
+
+#main{
+
+    background-color: rgba(255, 255, 255, 0.7);
 }
 </style>

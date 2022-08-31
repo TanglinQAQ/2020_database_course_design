@@ -173,7 +173,7 @@ export default {
 
 <style>
 #bigbox {
-    margin-left: 15%;
+    margin-left: 8%;
 }
 
 .card-header {

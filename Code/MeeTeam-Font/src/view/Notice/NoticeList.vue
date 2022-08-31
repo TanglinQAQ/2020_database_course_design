@@ -113,7 +113,7 @@
   </div>
 </template>
  
-<script>
+<script scoped>
 import { get_all } from "@/api/notice.js";
 import { delete_notice } from "@/api/notice.js";
 import { fetchList } from "@/api/notice.js";
@@ -220,4 +220,5 @@ export default {
   height: 30px;
   margin-bottom: 10px;
 }
+
 </style>
