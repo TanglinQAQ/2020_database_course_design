@@ -150,10 +150,12 @@ namespace Meeteam_Backend.Controllers
             SqlSugarClient db = dborm.getInstance();
             List<Project> res = new List<Project>();
             //三表联查
-            var query = db.Queryable<Project, User_Project, Grouping_Requirement>(
-                (p, up, gr) => new JoinQueryInfos(
+            var query = db.Queryable<Project, User_Project, Grouping_Requirement,Project_Img>(
+                (p, up, gr,pi) => new JoinQueryInfos(
                     JoinType.Left, p.project_id == up.project_id,
-                    JoinType.Full, p.project_id == gr.project_id));
+                    JoinType.Full, p.project_id == gr.project_id,
+                    JoinType.Full, p.project_id == pi.project_id
+                    ));
             if (q.project_id != null && q.project_id != "")
                 query.Where((p, up, gr) => p.project_id == q.project_id);
             if (q.project_name != null && q.project_name != "")
@@ -174,7 +176,7 @@ namespace Meeteam_Backend.Controllers
                 query.Where((p, up, gr) => gr.team_type == q.team_type);
             if (q.audit_status != null && q.audit_status != "")
                 query.Where((p, up, gr) => p.audit_status == q.audit_status);
-            var json = query.Clone().Select<ViewMode>().Distinct().ToJson();
+            var json = query.Select<ViewMode>().MergeTable().PartitionBy(it=>it.project_id).ToJson();
             return json;
         }
     }
@@ -182,8 +184,10 @@ namespace Meeteam_Backend.Controllers
     public class ViewMode:Project
     {
         public string User_Projectuser_id { get; set; }//按发布者查询
+        public string User_Projectduty { get; set; }
         public string Grouping_Requirementrequire_id { get; set; }//按需求id查询（唯一）
         public string Grouping_Requirementrequire_status { get; set; }//按需求状态查询
         public string Grouping_Requirementteam_type { get; set; }//按组队类型查询
+        public  string Project_Imgimg_path { get; set; }
     }
 }
