@@ -6,6 +6,36 @@
           <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>个人信息</el-breadcrumb-item>
         </el-breadcrumb>
+        <el-button type="text" @click="dialogFormVisible=true"><i class="el-icon-edit"></i>编辑信息</el-button>
+        <el-dialog title="修改个人信息" :visible.sync="dialogFormVisible">
+  <el-form :model="form">
+    <el-form-item label="联系方式" :label-width="formLabelWidth">
+      <el-input v-model="form.contact_info" autocomplete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="性别" :label-width="formLabelWidth">
+      <el-select v-model="form.gender" placeholder="请选择性别">
+        <el-option label="男" value="1"></el-option>
+        <el-option label="女" value="0"></el-option>
+      </el-select>
+    </el-form-item>
+     <el-form-item label="就读院校" :label-width="formLabelWidth">
+      <el-input v-model="form.institution" autocomplete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="专业" :label-width="formLabelWidth">
+      <el-input v-model="form.major" autocomplete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="年级" :label-width="formLabelWidth">
+      <el-input v-model="form.grade" autocomplete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="个人简介" :label-width="formLabelWidth">
+      <el-input v-model="form.introduction" autocomplete="off"></el-input>
+     </el-form-item>
+  </el-form>
+   <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false">取 消</el-button>
+    <el-button type="primary" @click="updata()">确 定</el-button>
+  </div>
+</el-dialog>
         <el-descriptions class="margin-top" title=" " :column="3" :size="size" border>
           <template slot="extra">
           </template>
@@ -73,6 +103,7 @@
             {{  introduction  }}
           </el-descriptions-item>
         </el-descriptions>
+        
         <el-divider href="#anchor1"></el-divider>
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
@@ -122,6 +153,23 @@ export default {
       register_time: '',
       introduction: '',
       tableData1: [],
+      /*判断对话框是否打开，true为打开*/
+      dialogFormVisible: false,
+      form: {
+        contact_info: '', //联系方式
+        gender: '' ,    //性别
+        institution: '', //就读院校
+        major: '',       //专业
+        grade:'',      //年级
+        introduction: '',//个人简介
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+        },
+        formLabelWidth: '80px'
     };
   },
   mounted() {
@@ -204,7 +252,10 @@ export default {
       var project_id = this.tableData1[index].project_id;
       console.log(index, row);
       this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
-    }
+    },
+    updata(){
+    this.dialogFormVisible=false;
+    },
   }
 }
 </script>
