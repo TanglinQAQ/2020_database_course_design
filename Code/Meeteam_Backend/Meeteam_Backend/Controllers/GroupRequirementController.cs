@@ -98,6 +98,25 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+        /*//改变组队需求
+        [HttpPost]
+        public bool ChangeGroupRequirement(string require_id,string purpose,st)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                      //删除
+            try
+            {
+                int count = db.Deleteable<Grouping_Requirement>().In(require_id).ExecuteCommand();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }*/
     }
 }
 

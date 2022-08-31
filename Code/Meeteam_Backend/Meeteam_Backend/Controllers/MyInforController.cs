@@ -19,7 +19,7 @@ namespace Meeteam_Backend.Controllers
     [ApiController]
     public class MyInforController : ControllerBase
     {
-        //查询个人用户的组队需求，返回一个对象
+        //查询个人的信息
         [HttpGet]
         public List<User_Info> GetUserInfor(string user_id)
         {
