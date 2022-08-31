@@ -10,3 +10,14 @@ export function openfile(params) {
         }
     })
 }
+
+export function findimg(params){
+    return request({
+        url:'File/OpenFile',
+        method:'get',
+        params:{
+            target:"project",
+            id:params.id
+        }
+    })
+}

@@ -21,9 +21,9 @@
                                     {{  o.project_name  }}<br />
                                     发起时间：{{  o.create_time  }}<br />
                                     项目进度：{{  o.project_progress  }}<br /><br>
-                                    <template slot-scope="scope">
+                                    <template>
                                         <el-button type="success" plain size="mini" style="float:right"
-                                        @click="handleLook(scope.$index, scope.row)">了解更多</el-button>
+                                        @click="handleLook(index, o.row)">了解更多</el-button>
                                     </template>
                                     <br>
                                 </div>
@@ -41,6 +41,7 @@
 import { ref } from 'vue'
 import global_msg from '../../utils/global.js'
 import { getlistInfor } from '@/api/Inforlist.js'
+import { openfile } from "@/api/file_load.js";
 
 export default {
     name: 'InforList',
