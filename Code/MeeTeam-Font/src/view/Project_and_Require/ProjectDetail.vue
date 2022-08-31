@@ -41,7 +41,7 @@
         <el-step title="招募队友"></el-step>
         <el-step title="项目完结"></el-step>
       </el-steps>
-      <el-button type="success" plain style="float: right;margin-right: 80px" @click="handleApply()">申请加入</el-button>
+      <el-button type="success" plain style="float: right;margin-right: 80px" @click="handleApply()" v-if="this.project_status === '是'">申请加入</el-button>
       <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
       <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{  favorite_num 
         }}</el-button>

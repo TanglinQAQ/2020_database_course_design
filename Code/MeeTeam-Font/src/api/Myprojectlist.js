@@ -10,6 +10,32 @@ export function deleteproject(params) {
       }
     })
   }
+
+  export function deleteapply(params) {
+    /*删除组队需求 */
+      return request({
+        url: '/User_Project/DeleteApply',
+        method: 'delete',
+        params:{
+          pid:params.pid,
+          uid:params.uid
+        }
+      })
+    }
+  
+  export function Audit(params) {
+      /*删除组队需求 */
+        return request({
+          url: '/User_Project/Audit',
+          method: 'post',
+          params:{
+            pid:params.pid,
+            uid:params.uid,
+            dy:params.dy
+          }
+        })
+  }
+
   export function changelist(params) {
     /*创建组队需求 */
     return request({

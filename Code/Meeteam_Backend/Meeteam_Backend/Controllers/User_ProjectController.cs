@@ -49,8 +49,9 @@ namespace Meeteam_Backend.Controllers
             project = db.Queryable<User_Project>().Where(it => it.project_id == pid && it.user_id == uid).First();
             return JsonSerializer.Serialize(project);
         }
+        //查询申请者列表
         [HttpGet]
-        public List<User_Project> get_apply(string pid, string duty)
+        public List<User_Project> get_member(string pid, string duty)
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -62,6 +63,47 @@ namespace Meeteam_Backend.Controllers
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        //发布者审核
+        [HttpPost]
+        public bool Audit(string pid, string uid,string dy)
+        {
+            User_Project project = new User_Project();
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                int result = db.Updateable<User_Project>().SetColumns(it => it.duty == dy).Where(it => it.project_id == pid && it.user_id == uid).ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        //删除申请
+        [HttpDelete]
+        public bool DeleteApply(string pid,string uid)
+        {
+            //获取数据库连接
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();
+            //删除
+            try
+            {
+                int count = db.Deleteable<User_Project>().Where(it => it.project_id == pid && it.user_id == uid).ExecuteCommand();
+                if (count == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

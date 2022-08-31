@@ -39,7 +39,8 @@
               <el-button size="mini" @click="handleDetail(scope.$index, scope.row)">查看详情</el-button>
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <br><br>
-              <el-button size="mini" type="success" @click="handleApply(scope.$index, scope.row)">审核申请</el-button>
+              <el-button size="mini" type="success" @click="handleApply(scope.$index, scope.row)" v-if="scope.row.project_status === '是'">管理团队</el-button>
+              <el-button size="mini" type="primary" @click="AddGroupRequirement(scope.$index, scope.row)" v-if="scope.row.project_status === '否'">新建需求</el-button>
               <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -61,6 +62,7 @@
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button size="mini" @click="handleDetail0(scope.$index, scope.row)">查看详情</el-button>
+              <el-button size="mini" type="danger" @click="handleDeleteApply(scope.$index, scope.row)">取消申请</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -76,6 +78,7 @@
 import global_msg from '../../utils/global.js'
 import { getlistInfor } from '@/api/Inforlist.js'
 import { deleteproject } from '@/api/Myprojectlist.js'
+import { deleteapply } from '@/api/Myprojectlist.js'
 import { get_username } from '@/api/ProjectDetail.js'
 export default {
   name: 'MyProject',
@@ -111,6 +114,7 @@ export default {
             create0_time: '',
             project0_status: '',
             project0_id: '',
+            operation:'',
           }
           //发布表
           form.project_name = item.project_name;
@@ -192,6 +196,33 @@ export default {
           message: err
         })
       })
+    },
+    handleDeleteApply(index, row) {//删除操作
+      this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var id = this.tableData0[index].project0_id;
+        //再在数据库中删除
+        let param = {
+          pid: id,
+          uid: global_msg.nowuserid,
+        }
+        deleteapply(param);
+        this.tableData.splice(index, 1) //删除下标为index的内容
+        this.$message({
+          type: 'success',
+          message: '删除成功!',
+        })
+        console.log(index, row);
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err
+        })
+      })
+      console.log(index, row);
     },
     handleClick(tab, event) {
       console.log(tab, event);
