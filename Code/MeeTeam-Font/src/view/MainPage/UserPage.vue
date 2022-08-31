@@ -6,7 +6,6 @@
             <span id="title">大学生组队信息平台</span>
             <div id="user_id">
                 <el-dropdown @command="handleCommand">
-                    <el-icon><User /></el-icon>
                     <span class="el-dropdown-link">
                         {{  user_id  }}
                     </span>

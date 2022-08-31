@@ -2,7 +2,7 @@
     <el-main>
         <div id="breadcrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
-                <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/users/UserPageContent' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item>项目管理</el-breadcrumb-item>
                 <el-breadcrumb-item>平台项目列表</el-breadcrumb-item>
             </el-breadcrumb>
