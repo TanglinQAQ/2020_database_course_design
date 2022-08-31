@@ -36,23 +36,37 @@ export function deleteproject(params) {
         })
   }
 
-  export function changelist(params) {
+  export function Changeprojectlist(params) {
     /*创建组队需求 */
     return request({
-      url: '/GroupRequirement/ChangeGroupRequirement',
+      url: '/Project/Changeprojectlist',
       method: 'post',
       params:{
-        require_id:params.require_id,
+        project_id:params.project_id,
+        project_name:params.project_name,
+        project_background:params.project_background,
+        project_introduction:params.project_introduction,
+        project_content:params.project_content,
+        due:params.due,
+        project_progress:params.project_progress,
+      }
+    })
+  }
+
+  export function Changerequirelist(params) {
+    /*创建组队需求 */
+    return request({
+      url: '/GroupRequirement/Changerequirelist',
+      method: 'post',
+      params:{
         purpose:params.purpose,
         team_type:params.team_type,
         team_limit:params.team_limit,
         details:params.details,       
         require_status:params.require_status,
-        originator_id:params.originator_id,
         project_id:params.project_id,
         region:params.region,
         team_type_details:params.team_type_detail,
-        requirement_name:params.requirement_name,
       }
     })
   }
