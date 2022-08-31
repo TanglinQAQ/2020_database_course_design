@@ -335,6 +335,11 @@ export default {
         }
       });
     },
+
+    /*触发添加浏览历史*/
+    addhistory(){
+      addviewhistory();
+    }
   },
 };
 </script>
