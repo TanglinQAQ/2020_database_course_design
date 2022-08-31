@@ -79,6 +79,36 @@ namespace Meeteam_Backend.Controllers
             re = db.Queryable<Grouping_Requirement>().Where(it => it.project_id == id).First();
             return JsonSerializer.Serialize(re);
         }
+        //编辑更新需求
+        [HttpPost]
+        public bool Changerequirelist(string purpose, string team_type, string team_limit, string details, string require_status, string project_id, string region, string team_type_details)
+        {
+            //获取数据库连接
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();
+
+            Grouping_Requirement pos = new Grouping_Requirement();
+            pos.purpose = purpose;
+            pos.team_type = team_type;
+            pos.team_limit = team_limit;
+            pos.details = details;
+            pos.require_status = require_status;
+            pos.project_id = project_id;
+            pos.region = region;
+            pos.team_type_details = team_type_details;
+            try
+            {
+                int result = db.Updateable<Grouping_Requirement>(pos).Where(it => it.project_id == project_id).First().ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         //删除组队需求
         [HttpDelete]
         public bool deleteGroupRequirement(string require_id)
@@ -98,25 +128,7 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        /*//改变组队需求
-        [HttpPost]
-        public bool ChangeGroupRequirement(string require_id,string purpose,st)
-        {
-            dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                      //删除
-            try
-            {
-                int count = db.Deleteable<Grouping_Requirement>().In(require_id).ExecuteCommand();
-                if (count == 1)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }*/
+
     }
 }
 
