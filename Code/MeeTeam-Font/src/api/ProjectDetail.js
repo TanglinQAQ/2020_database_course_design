@@ -23,10 +23,10 @@ export function get_username(params) {
     })
 }
 
-export function get_apply(params) {
+export function get_member(params) {
     /*根据id获取项目相关的id和duty*/
     return request({
-        url: '/User_Project/get_apply',
+        url: '/User_Project/get_member',
         method: 'get',
         params: {
             pid: params.pid,
