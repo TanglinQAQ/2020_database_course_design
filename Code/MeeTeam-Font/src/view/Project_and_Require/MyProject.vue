@@ -134,6 +134,7 @@
                     size="mini"
                     type="danger"
                     @click="handleDeleteApply(scope.$index, scope.row)"
+                    v-if="scope.row.project0_duty === '申请者'"
                     >取消申请</el-button
                   >
                 </template>
