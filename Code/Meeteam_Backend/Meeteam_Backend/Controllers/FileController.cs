@@ -38,6 +38,8 @@ namespace Meeteam_Backend.Controllers
                         fs.Flush();
                     }
                 }
+                if (target == "temporary")
+                    return;
                 //将文件路径存入数据库
                 dbORM dborm = new dbORM();
                 SqlSugarClient db = dborm.getInstance();//获取数据库连接
@@ -87,11 +89,37 @@ namespace Meeteam_Backend.Controllers
                 if (filename == null)
                     return null;
             }
+            if (target == "temporary")
+            {
+                filename = @"D:\work_space\storage\temporary\" + id;
+            }
             FileStream fs = System.IO.File.OpenRead(filename);
             var ms = new MemoryStream();
             fs.CopyTo(ms);
             byte[] b = ms.ToArray();
             return Convert.ToBase64String(b);
+        }
+        [HttpPost]
+        public int CopyFile(string project_id,string filename)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            var entity = new Project_Img();
+            entity.project_id = project_id;
+            entity.img_path = @"D:\work_space\storage\project_img\"+filename;
+            if (!System.IO.File.Exists(entity.img_path))
+            {
+                using (FileStream fs = System.IO.File.Create(entity.img_path))
+                {
+                    string src = @"D:\work_space\storage\temporary\" + filename;
+                    FileStream file = System.IO.File.OpenRead(src);
+                    // 复制文件
+                    file.CopyTo(fs);
+                    // 清空缓冲区数据
+                    fs.Flush();
+                }
+            }
+            return db.Storageable(entity).ExecuteCommand();
         }
     }
     public class view_user

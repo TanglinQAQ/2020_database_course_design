@@ -338,8 +338,7 @@ export default {
 <style>
 #creatteam-container {
   position: relative;
-  margin: 10px 0;
-  margin-left: 0px;
+  min-height: 100vh;
   height: 100%;
 }
 

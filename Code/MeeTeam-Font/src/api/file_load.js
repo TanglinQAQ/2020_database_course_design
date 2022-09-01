@@ -11,13 +11,24 @@ export function openfile(params) {
     })
 }
 
-export function findimg(params){
+export function findimg(params) {
     return request({
-        url:'File/OpenFile',
-        method:'get',
-        params:{
-            target:"project",
-            id:params.id
+        url: 'File/OpenFile',
+        method: 'get',
+        params: {
+            target: "project",
+            id: params.id
+        }
+    })
+}
+
+export function copyimg(params) {
+    return request({
+        url: 'File/CopyFile',
+        method: 'POST',
+        params: {
+            project_id: params.project_id,
+            filename: params.filename
         }
     })
 }

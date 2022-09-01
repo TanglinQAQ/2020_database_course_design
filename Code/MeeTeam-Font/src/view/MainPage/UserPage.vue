@@ -79,8 +79,7 @@ export default {
     };
   },
   created() {
-      this.get_user(),
-      this.goto_content()
+      this.get_user()
   },
   methods: {
     get_user() {
@@ -119,6 +118,9 @@ export default {
           });
       }
     },
+    goto_content() {
+        this.$router.push({ path: "/users/UserPageContent" });
+    }
   },
 };
 </script>

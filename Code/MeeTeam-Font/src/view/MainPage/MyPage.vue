@@ -25,7 +25,7 @@
                     <el-col>
                         <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64"
                             text-color="#fff" active-text-color="#ffd04b" :router="true">
-                            <el-menu-item index="/users/UserPage">
+                            <el-menu-item index="/users/UserPageContent">
                                 <i class="el-icon-s-home"></i>首页
                             </el-menu-item>
                             <el-menu-item index="/users/UserInformation">
@@ -150,6 +150,10 @@ export default {
     margin-top: 0px;
     height: 100%;
     background-color: #545c64;
+}
+
+#main {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 </style>
 

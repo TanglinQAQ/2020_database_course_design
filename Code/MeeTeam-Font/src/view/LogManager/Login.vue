@@ -82,7 +82,7 @@ export default {
           } else {
             global_msg.nowuserid = vm.user;//改变全局nowusername
             vm.$message.success("登录成功");
-            vm.$router.push({ path: "/users/UserPage" }); //接下来进入到哪个路由
+            vm.$router.push({ path: "/users/UserPageContent" }); //接下来进入到哪个路由
           }
         })
       } else {
