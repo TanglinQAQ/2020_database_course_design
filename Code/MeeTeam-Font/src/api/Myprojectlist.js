@@ -36,6 +36,18 @@ export function deleteproject(params) {
         })
   }
 
+  export function UpdateProgress(params) {
+    /*创建组队需求 */
+    return request({
+      url: '/Project/UpdateProgress',
+      method: 'post',
+      params:{
+        project_id:params.project_id,
+        project_progress:params.project_progress,
+      }
+    })
+  }
+
   export function Changeprojectlist(params) {
     /*创建组队需求 */
     return request({
@@ -48,7 +60,6 @@ export function deleteproject(params) {
         project_introduction:params.project_introduction,
         project_content:params.project_content,
         due:params.due,
-        project_progress:params.project_progress,
       }
     })
   }
