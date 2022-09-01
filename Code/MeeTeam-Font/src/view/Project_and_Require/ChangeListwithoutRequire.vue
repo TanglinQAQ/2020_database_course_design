@@ -47,19 +47,6 @@
               >
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="项目当前进度" prop="project_progress">
-              <el-select
-                v-model="ruleForm.project_progress"
-                placeholder="请选择项目当前进度"
-              >
-                <el-option label="准备阶段" value="准备阶段"></el-option>
-                <el-option label="规划阶段" value="规划阶段"></el-option>
-                <el-option label="起步阶段" value="起步阶段"></el-option>
-                <el-option label="中期阶段" value="中期阶段"></el-option>
-                <el-option label="收尾阶段" value="收尾阶段"></el-option>
-              </el-select>
-            </el-form-item>
-
             <el-form-item>
               <el-button type="primary" @click="submitForm('ruleForm')"
                 >立即创建</el-button
@@ -92,7 +79,6 @@ export default {
         project_introduction: "",
         project_content: "",
         due: "",
-        project_progress: "",
       },
       rules: {
         project_name: [
@@ -132,9 +118,6 @@ export default {
           },
         ],
         due: [{ required: true, message: "请选择时间", trigger: "blur" }],
-        project_progress: [
-          { required: true, message: "请选择项目当前进度", trigger: "blur" },
-        ],
       },
     };
   },
@@ -151,7 +134,6 @@ export default {
         this.$set(this.ruleForm,'project_background',res.data.project_background);
         this.$set(this.ruleForm,'project_introduction',res.data.project_introduction);
         this.$set(this.ruleForm,'project_content',res.data.project_content);
-        this.$set(this.ruleForm,'project_progress',res.data.project_progress);
       })
     },
     submitForm(formName) {
@@ -174,7 +156,6 @@ export default {
         project_introduction: this.ruleForm.project_introduction,
         project_content: this.ruleForm.project_content,
         due: Due,
-        project_progress: this.ruleForm.project_progress,
       }
       Changeprojectlist(param1).then(function (res) {
         if (res.data === false) {

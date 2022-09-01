@@ -4,7 +4,9 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
+            >首页</el-breadcrumb-item
+          >
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>新建项目</el-breadcrumb-item>
         </el-breadcrumb>
@@ -42,19 +44,14 @@
                 style="float: left"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
-              ></el-date-picker>
-            </el-form-item>
-            <el-form-item label="项目当前进度" prop="project_progress">
-              <el-select v-model="ruleForm.project_progress" placeholder="请选择项目当前进度">
-                <el-option label="准备阶段" value="准备阶段"></el-option>
-                <el-option label="规划阶段" value="规划阶段"></el-option>
-                <el-option label="起步阶段" value="起步阶段"></el-option>
-                <el-option label="中期阶段" value="中期阶段"></el-option>
-                <el-option label="收尾阶段" value="收尾阶段"></el-option>
-              </el-select>
+              >
+              </el-date-picker>
             </el-form-item>
             <el-form-item label="是否有组队需求" prop="project_status">
-              <el-select v-model="ruleForm.project_status" placeholder="请选择是否有组队需求">
+              <el-select
+                v-model="ruleForm.project_status"
+                placeholder="请选择是否有组队需求"
+              >
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>
               </el-select>
@@ -83,7 +80,10 @@
                 ></el-cascader>
               </el-form-item>
               <el-form-item label="组队人数" prop="team_limit">
-                <el-select v-model="ruleForm.team_limit" placeholder="请选择组队人数">
+                <el-select
+                  v-model="ruleForm.team_limit"
+                  placeholder="请选择组队人数"
+                >
                   <el-option label="3" value="3"></el-option>
                   <el-option label="4" value="4"></el-option>
                   <el-option label="5" value="5"></el-option>
@@ -102,7 +102,10 @@
               </el-form-item>
             </div>
             <el-form-item label="是否上传项目宣传图" prop="project_img">
-              <el-select v-model="ruleForm.project_img" placeholder="请选择是否上传项目宣传图">
+              <el-select
+                v-model="ruleForm.project_img"
+                placeholder="请选择是否上传项目宣传图"
+              >
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>
               </el-select>
@@ -131,7 +134,9 @@
               </el-form-item>
             </div>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+              <el-button type="primary" @click="submitForm('ruleForm')"
+                >立即创建</el-button
+              >
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
@@ -206,9 +211,8 @@ export default {
         project_content: "",
         due: "",
         project_status: "",
-        project_progress: "",
-        project_img: "",
-        img: "",
+        project_img:"",
+        img:"",
 
         require_id: "",
         purpose: "",
@@ -257,9 +261,6 @@ export default {
           },
         ],
         due: [{ required: true, message: "请选择时间", trigger: "blur" }],
-        project_progress: [
-          { required: true, message: "请选择项目当前进度", trigger: "blur" },
-        ],
         project_status: [
           { required: true, message: "请选择是否有组队需求", trigger: "blur" },
         ],
@@ -305,6 +306,9 @@ export default {
       },
     };
   },
+  created() {
+    this.getimg();
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -326,17 +330,6 @@ export default {
         project_id: this.ruleForm.project_id,
         duty: "发布者",
       };
-      let param1 = {
-        project_id: this.ruleForm.project_id,
-        project_name: this.ruleForm.project_name,
-        project_background: this.ruleForm.project_background,
-        project_introduction: this.ruleForm.project_introduction,
-        project_content: this.ruleForm.project_content,
-        due: Due,
-        project_progress: this.ruleForm.project_progress,
-        project_status: this.ruleForm.project_status,
-      };
-      //需求
       var judge = new String(this.ruleForm.project_status);
       if (judge == "是") {
         global_msg.requirenum += 1; //全局需求个数+1
@@ -358,13 +351,47 @@ export default {
           project_id: this.ruleForm.project_id,
           region: RegionLast,
           team_type_detail: TeamDetailLast,
-        };
+        }
         //添加数据进GroupRequirement表
         createrequirelist(param2).then(function (res) {
           if (res.data === false) {
-            vm.$message.error("提交失败");
+            vm.$message.error("提交需求失败");
             vm.resetForm(formName);
           }
+        });
+        let param1 = {
+        project_id: this.ruleForm.project_id,
+        project_name: this.ruleForm.project_name,
+        project_background: this.ruleForm.project_background,
+        project_introduction: this.ruleForm.project_introduction,
+        project_content: this.ruleForm.project_content,
+        due: Due,
+        project_progress: "招募中",
+        project_status: this.ruleForm.project_status,
+        }
+        createprojectlist(param1).then(function (res) {
+        if (res.data === false) {
+          vm.$message.error("提交项目失败");
+          vm.resetForm(formName);
+        } 
+        });
+      }
+      else{
+        let param1 = {
+        project_id: this.ruleForm.project_id,
+        project_name: this.ruleForm.project_name,
+        project_background: this.ruleForm.project_background,
+        project_introduction: this.ruleForm.project_introduction,
+        project_content: this.ruleForm.project_content,
+        due: Due,
+        project_progress: "已发布",
+        project_status: this.ruleForm.project_status,
+        }
+        createprojectlist(param1).then(function (res) {
+        if (res.data === false) {
+          vm.$message.error("提交项目失败");
+          vm.resetForm(formName);
+        } 
         });
       }
       //添加数据进Project_User表
@@ -373,31 +400,12 @@ export default {
           vm.$message.error("提交失败");
           vm.resetForm(formName);
         }
-      });
-      //添加数据进Project表
-      createprojectlist(param1).then((res) => {
-        if (res.data === false) {
-          vm.$message.error("提交失败");
-          vm.resetForm(formName);
-        } else {
-          if (this.img_name != '') {
-            let para = {
-              project_id: this.ruleForm.project_id,
-              filename: this.img_name
-            }
-            copyimg(para).then(function (res) {
-              if (res.data === false) {
-                vm.$message.error("提交失败");
-                vm.resetForm(formName);
-              } else {
-                vm.$message.success("提交成功");
-              }
-            });
-          }
-          vm.$message.success("提交成功");
+        else{
+           vm.$message.success("提交成功");
           vm.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
         }
       });
+      //添加数据进Project表
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

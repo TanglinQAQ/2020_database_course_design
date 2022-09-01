@@ -47,18 +47,6 @@
               >
               </el-date-picker>
             </el-form-item>
-            <el-form-item label="项目当前进度" prop="project_progress">
-              <el-select
-                v-model="ruleForm.project_progress"
-                placeholder="请选择项目当前进度"
-              >
-                <el-option label="准备阶段" value="准备阶段"></el-option>
-                <el-option label="规划阶段" value="规划阶段"></el-option>
-                <el-option label="起步阶段" value="起步阶段"></el-option>
-                <el-option label="中期阶段" value="中期阶段"></el-option>
-                <el-option label="收尾阶段" value="收尾阶段"></el-option>
-              </el-select>
-            </el-form-item>
               <el-form-item label="组队目的" prop="purpose">
                 <el-input v-model="ruleForm.purpose"></el-input>
               </el-form-item>
@@ -170,7 +158,6 @@ export default {
         project_introduction: "",
         project_content: "",
         due: "",
-        project_progress: "",
 
         purpose: "",
         team_type: "",
@@ -218,9 +205,6 @@ export default {
           },
         ],
         due: [{ required: true, message: "请选择时间", trigger: "blur" }],
-        project_progress: [
-          { required: true, message: "请选择项目当前进度", trigger: "blur" },
-        ],
         project_status: [
           { required: true, message: "请选择是否有组队需求", trigger: "blur" },
         ],
@@ -303,7 +287,6 @@ export default {
         project_introduction: this.ruleForm.project_introduction,
         project_content: this.ruleForm.project_content,
         due: Due,
-        project_progress: this.ruleForm.project_progress,
       }
       Changeprojectlist(param1).then(function (res) {
         if (res.data === false) {

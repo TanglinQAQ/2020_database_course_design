@@ -27,8 +27,8 @@
           <div>
             <el-table
               :data="tableData"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
+              :header-cell-style="{ textAlign: 'left' }"
+              :cell-style="{ 'text-align': 'left' }"
               default-sort="{ prop: 'date', order: 'descending' }"
             >
               <el-table-column prop="project_name" label="项目名称" width="200">
@@ -52,7 +52,7 @@
                 width="200"
               >
               </el-table-column>
-              <el-table-column label="操作">
+              <el-table-column label="操作" >
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
@@ -61,12 +61,14 @@
                   >
                   <el-button
                     size="mini"
+                    type="primary"
                     @click="handleEditwithRequire(scope.$index, scope.row)"
                     v-if="scope.row.project_status === '是'"
                     >编辑</el-button
                   >
                   <el-button
                     size="mini"
+                    type="primary"
                     @click="handleEditwithoutRequire(scope.$index, scope.row)"
                     v-if="scope.row.project_status === '否'"
                     >编辑</el-button
@@ -74,16 +76,23 @@
                   <br /><br />
                   <el-button
                     size="mini"
-                    type="success"
-                    @click="handleApply(scope.$index, scope.row)"
-                    v-if="scope.row.project_status === '是'"
-                    >管理团队</el-button
-                  >
-                  <el-button
-                    size="mini"
                     type="danger"
                     @click="handleDelete(scope.$index, scope.row)"
                     >删除</el-button
+                  >
+                  <el-button
+                    size="mini"
+                    type="warning"
+                    @click="handleEndProgress(scope.$index, scope.row)"
+                    v-if="scope.row.project_progress != '已完结'"
+                    >完结项目</el-button
+                  >
+                  <el-button
+                    size="mini"
+                    type="success"
+                    @click="handleApply(scope.$index, scope.row)"
+                    v-if="scope.row.project_progress === '招募中'"
+                    >管理团队</el-button
                   >
                 </template>
               </el-table-column>
@@ -152,6 +161,7 @@ import global_msg from "../../utils/global.js";
 import { getlistInfor } from "@/api/Inforlist.js";
 import { deleteproject } from "@/api/Myprojectlist.js";
 import { deleteapply } from "@/api/Myprojectlist.js";
+import { UpdateProgress } from "@/api/Myprojectlist.js";
 import { get_username } from "@/api/ProjectDetail.js";
 import { addviewhistory } from "@/api/Addhistory";
 
@@ -282,6 +292,17 @@ export default {
         query: { p_id: project_id },
       });
     },
+    handleEndProgress(index, row){
+      //完结项目操作
+      var project_id = this.tableData[index].project_id;
+      let para={
+        project_id:this.tableData[index].project_id,
+        project_progress:"已完结"
+      }
+      UpdateProgress(para);
+      console.log(index, row);
+      location.reload();
+    },
     handleDelete(index, row) {
       //删除操作
       this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
@@ -340,7 +361,6 @@ export default {
           });
         });
       console.log(index, row);
-      location. reload();
     },
     handleClick(tab, event) {
       console.log(tab, event);

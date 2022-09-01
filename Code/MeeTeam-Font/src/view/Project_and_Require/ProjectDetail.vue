@@ -37,7 +37,7 @@
       </el-descriptions>
       <el-steps
         :space="500"
-        :active="1"
+        :active="active"
         finish-status="success"
         align-center
         style="margin-top: 100px;margin-bottom: 100px"
@@ -51,9 +51,8 @@
         plain
         style="float: right;margin-right: 80px"
         @click="handleApply()"
-        v-if="this.project_status === '是'"
+        v-if="this.project_progress === '招募中'"
       >申请加入</el-button>
-      <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
       <el-button
         type="submit"
         plain
@@ -229,6 +228,7 @@ export default {
       project_introduction: '',
       project_content: '',
       project_progress: '',
+      active:0,
       project_status: '',
       start_time: '',
       end_time: '',
@@ -386,6 +386,12 @@ export default {
         this.project_introduction = res.data.project_introduction;
         this.project_content = res.data.project_content;
         this.project_progress = res.data.project_progress;
+        if(this.project_progress=="已发布")
+          this.active=1;
+        else if(this.project_progress=='招募中')
+          this.active="2";
+        else if(this.project_progress=='已完结')
+          this.active="3";
         this.project_status = res.data.project_status;
         this.start_time = res.data.due;
         this.start_time = this.start_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
