@@ -45,7 +45,7 @@
                                     <el-menu-item index="/Admin/CreateNotice">新建通知</el-menu-item>
                                 </el-menu-item-group>
                             </el-submenu>
-                            <el-menu-item index="null">
+                            <el-menu-item index="/Admin/ManageUser">
                                 <i class="el-icon-user-solid"></i>用户管理
                             </el-menu-item>
                         </el-menu>

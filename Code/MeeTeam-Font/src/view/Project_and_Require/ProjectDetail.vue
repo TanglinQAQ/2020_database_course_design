@@ -1,4 +1,4 @@
-·<template>
+<template>
   <div class="detaildiv">
     <el-main>
       <div id="breadcrumb">
