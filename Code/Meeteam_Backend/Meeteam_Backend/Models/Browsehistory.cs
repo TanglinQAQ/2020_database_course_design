@@ -12,11 +12,12 @@ namespace MeeTeam_Backend
     {
         /*
         //主码需要特殊说明
-        [SugarColumn(IsPrimaryKey = true)]
         */
 
+        [SugarColumn(IsPrimaryKey = true)]
         public string user_id { get; set; }
 
+        [SugarColumn(IsPrimaryKey = true)]
         public string project_id { get; set; }
 
         public string browse_time { get; set; }

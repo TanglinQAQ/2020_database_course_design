@@ -109,6 +109,7 @@
           <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
+        <br/>
         <div>
           <el-table :data="tableData1" :header-cell-style="{ textAlign: 'center' }"
             :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'create_time', order: 'descending' }">

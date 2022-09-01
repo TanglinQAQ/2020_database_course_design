@@ -32,11 +32,45 @@ namespace Meeteam_Backend.Controllers
                 bh.user_id = user_id;
                 bh.project_id = project_id;
                 bh.browse_time = DateTime.Now.ToString();
+
+                int count = db.Storageable(bh).ExecuteCommand(); //自动判断是insert还是update
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                /*
                 int count = db.Insertable(bh).ExecuteCommand();
                 if (count == 1)
                     return true;
                 else
-                    return false;
+                {
+                    
+                     * int count2 = db.Updateable<Browsehistory>()
+                        .SetColumns(p=>new Browsehistory() { browse_time = bh.browse_time })
+                        .Where(it => it.user_id == user_id && it.project_id == project_id)
+                        .ExecuteCommand();
+                     
+                    int count2 = db.Updateable<Browsehistory>()
+                        .SetColumns(it => new Browsehistory { browse_time = bh.browse_time })
+                        .Where(it => it.project_id == project_id&&it.user_id==user_id)
+                        .ExecuteCommand();
+
+                    //int count2 = db.Updateable(bh).ExecuteCommand();
+                    if (count2 == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                
+                }
+                    */
             }
             catch (Exception ex)
             {
