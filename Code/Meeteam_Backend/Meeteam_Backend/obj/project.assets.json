@@ -7752,19 +7752,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ZZL\\.nuget\\packages\\": {}
+    "C:\\Users\\中野\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "projectUniqueName": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
       "projectName": "Meeteam_Backend",
-      "projectPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
-      "packagesPath": "C:\\Users\\ZZL\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\ZZL\\Documents\\GitHub\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
+      "projectPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\Meeteam_Backend.csproj",
+      "packagesPath": "C:\\Users\\中野\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\中野\\Desktop\\2020_database_course_design\\Code\\Meeteam_Backend\\Meeteam_Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ZZL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\中野\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7825,7 +7825,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
       }
     }
   },

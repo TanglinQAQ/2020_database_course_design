@@ -9,6 +9,20 @@
         <el-button type="text" @click="dialogFormVisible=true"><i class="el-icon-edit"></i>编辑信息</el-button>
         <el-dialog title="修改个人信息" :visible.sync="dialogFormVisible">
   <el-form :model="form">
+    <el-form-item label="头像">
+                    <div slot="tip" class="el-upload__tip">
+                        只能上传jpg/png文件，且不超过500kb
+                    </div>
+                    <el-upload class="upload-demo" action="https://localhost:5001/File/PostFile/" :data="upload_data"
+                        :on-preview="handlePreview" :on-remove="handleRemove" :on-success="handleSuccess"
+                        :before-remove="beforeRemove" multiple :limit="1" :on-exceed="handleExceed"
+                        :file-list="fileList">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+                    <div>
+                        <el-avatar shape="square" :size="100" :fit="fit" :src="base64"></el-avatar>
+                    </div>
+                </el-form-item>
     <el-form-item label="联系方式" :label-width="formLabelWidth">
       <el-input v-model="form.contact_info" autocomplete="off"></el-input>
      </el-form-item>
@@ -135,6 +149,7 @@
 </template>
 
 <script>
+import { openfile } from "@/api/file_load.js";
 import global_msg from '../../utils/global.js'
 import { GetUserInfor } from '@/api/MyInfor.js'
 import { GetMyCollection } from '@/api/MyInfor.js'
@@ -171,7 +186,14 @@ export default {
         resource: '',
         desc: ''
         },
-        formLabelWidth: '80px'
+        formLabelWidth: '80px',
+        upload_data: {
+        path: "head_img",
+        id: "normal",
+        target:'user',
+      },
+      fileList: [],
+      base64:''
     };
   },
   mounted() {
@@ -267,20 +289,48 @@ export default {
         grade:this.form.grade,
       }
       console.log(params)
-      PullInfo(params).then(function(res){
-                console.log(res)
-                console.log(res.isexist)
-                if(res.data)
-                {
+      PullInfo(params).then((res) =>{
+        console.log(res)
+                if(res.data === true){
                   this.dialogFormVisible=false;
-                    vm.$router.push({path: "/users/UserInformation"}); //回到个人详细页面
+                  location. reload(); //回到个人详细页面
+                  
                 }
                 else{
+                  vm.$message.error("编辑失败");
                   this.dialogFormVisible=false;
-                    vm.resetForm()
                 }
              })
+            
     },
+    handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
+        handleSuccess() {
+            location.reload();
+        },
+        handleExceed(files, fileList) {
+            this.$message.warning(
+                `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length
+                } 个文件`
+            );
+        },
+        beforeRemove(file, fileList) {
+            return this.$confirm(`确定移除 ${file.name}？`);
+        },
+        getimg() {
+            let params = {
+                target: 'user',
+                id: 'normal'
+            }
+            openfile(params).then((res) => {
+                this.base64 = 'data:;base64,' + res.data;
+            });
+        },
+
   }
 }
 </script>
