@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\work_space\数据库\Meeteam_Backend\Meeteam_Backend\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-09-01T20:12:41.1598109Z;True|2022-09-02T04:02:23.2115875+08:00;True|2022-09-02T03:56:39.7624716+08:00;</History>
+  </PropertyGroup>
+</Project>
