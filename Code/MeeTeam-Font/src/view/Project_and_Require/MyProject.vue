@@ -164,7 +164,8 @@ import { deleteapply } from "@/api/Myprojectlist.js";
 import { UpdateProgress } from "@/api/Myprojectlist.js";
 import { get_username } from "@/api/ProjectDetail.js";
 import { addviewhistory } from "@/api/Addhistory";
-
+import { get_member } from '@/api/ProjectDetail.js'
+import { UpdatePoint } from '@/api/getinfo.js'
 
 export default {
   name: "MyProject",
@@ -302,6 +303,22 @@ export default {
       UpdateProgress(para);
       console.log(index, row);
       location.reload();
+      let para0 = {
+        pid: this.tableData[index].project_id,
+        duty: "组员"
+      };
+      get_member(para0).then(function (res) {
+        for (let item of res.data) {
+          let pa={
+            user_id:item.user_id
+          }
+          UpdatePoint(pa);
+        }
+      })
+      this.$message({
+            type: "success",
+            message: "项目已完结!",
+          });
     },
     handleDelete(index, row) {
       //删除操作
