@@ -16,7 +16,7 @@ export function recommend(param) {
     return request({
         url: 'Project/Recommend_Project',
         method: 'post',
-        param: {
+        params: {
             project_id: param.project_id,
         }
     })

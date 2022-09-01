@@ -229,6 +229,10 @@ namespace Meeteam_Backend.Controllers
                 query.Where((p, up, gr) => gr.team_type == q.team_type);
             if (q.audit_status != null && q.audit_status != "")
                 query.Where((p, up, gr) => p.audit_status == q.audit_status);
+            if (q.audit_result != null && q.audit_result != "")
+                query.Where((p, up, gr) => p.audit_result == q.audit_result);
+            if(q.recommend != null && q.recommend != "")
+                query.Where((p, up, gr) => p.recommend == q.recommend);
             var json = query.Select<ViewMode>().MergeTable().PartitionBy(it=>it.project_id).ToJson();
             return json;
         }

@@ -8,16 +8,13 @@
               <div class="card-header">
                 <span>近期尚未审核项目速览</span>
                 <!--span标签用于组合行内的元素-->
-                <el-button type="primary" class="button" text @click="forAuditDetail"
-                  >For More</el-button
-                >
+                <el-button type="primary" class="button" text @click="forAuditDetail">For More</el-button>
               </div>
             </template>
             <template>
               <el-table :data="tbAudit" style="width: 100%">
-                <el-table-column prop="project_name" label="项目名称"> </el-table-column>
-                <el-table-column prop="create_time" label="发布时间" align="right">
-                </el-table-column>
+                <el-table-column prop="project_name" label="项目名称"></el-table-column>
+                <el-table-column prop="create_time" label="发布时间" align="right"></el-table-column>
               </el-table>
             </template>
           </el-card>
@@ -29,16 +26,13 @@
               <div class="card-header">
                 <span>近期公告速览</span>
                 <!--span标签用于组合行内的元素-->
-                <el-button type="primary" class="button" text @click="forNotice"
-                  >For More</el-button
-                >
+                <el-button type="primary" class="button" text @click="forNotice">For More</el-button>
               </div>
             </template>
             <template>
               <el-table :data="tbNotice" style="width: 100%">
-                <el-table-column prop="title" label="公告标题"> </el-table-column>
-                <el-table-column prop="operate_time" label="发布时间" align="right">
-                </el-table-column>
+                <el-table-column prop="title" label="公告标题"></el-table-column>
+                <el-table-column prop="operate_time" label="发布时间" align="right"></el-table-column>
               </el-table>
             </template>
           </el-card>
@@ -115,6 +109,7 @@ export default {
 
   created() {
     this.getproj();
+    this.getimg();
   },
 
   mounted() {
@@ -131,18 +126,32 @@ export default {
 
   methods: {
     getimg() {
-      for (let i = 0; i < 6; i++) {
-        let param = {
-          target: "project",
-          id: i,
-        };
-        openfile(param).then((res) => {
-          if (res.data) {
-            this.imageList.push({ id: param.id, idView: "data:;base64," + res.data });
-          }
+      let listQuery = {
+        project_name: "",
+        publisher: "",
+        hav_require: "",
+        audit_status: "1",
+        audit_result: "1",
+        recommend: "1"
+      };
+      var count = 0;
+      var query = JSON.stringify(listQuery);
+      fetchList(query).then((res) => {
+        Object.keys(res.data).forEach((v) => {
+          let param = {
+            target: "project",
+            id: res.data[v].project_id
+          };
+          openfile(param).then((res) => {
+            if (res.data) {
+              this.imageList.push({ id: param.id, idView: 'data:;base64,' + res.data });
+              count++;
+              if (count == 6)
+                return;
+            }
+          })
         });
-      }
-
+      });
       console.log(this.imageList);
     },
     getproj() {
@@ -158,13 +167,12 @@ export default {
     forNotice() {
       this.$router.push("/users/NoticeList"); //这里左侧的颜色显示有点问题，看看之后解决一下
     },
-
     imgLoad() {
       this.$nextTick(() => {
-        this.bannerheight = this.$refs.bannerheight[0].height;
-        //console.log(this.$refs.bannerheight[0].height);
-      });
-    },
+        this.bannerheight = this.$refs.bannerheight[0].height
+        console.log(this.$refs.bannerheight[0].height);
+      })
+    }
   },
 };
 </script>

@@ -3,9 +3,7 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/users/UserPageContent' }"
-            >首页</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/users/UserPageContent' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>平台项目列表</el-breadcrumb-item>
         </el-breadcrumb>
@@ -19,16 +17,14 @@
             style="width: 180px"
             class="filter-item"
             @keyup.enter.native="handleFilter"
-          ></el-input>
-          &nbsp;
+          ></el-input>&nbsp;
           <el-input
             v-model="listQuery.publisher"
             placeholder="项目发布者"
             style="width: 180px"
             class="filter-item"
             @keyup.enter.native="handleFilter"
-          ></el-input>
-          &nbsp;
+          ></el-input>&nbsp;
           <el-select
             v-model="listQuery.hav_require"
             placeholder="是否有组队需求"
@@ -42,17 +38,14 @@
               :label="item.display_name"
               :value="item.key"
             />
-          </el-select>
-          &nbsp;
+          </el-select>&nbsp;
           <el-button
             class="filter-item"
             type="primary"
             icon="el-icon-search"
             @click="searchContList"
             style="float: right"
-          >
-            搜索
-          </el-button>
+          >搜索</el-button>
         </div>
       </div>
 
@@ -74,7 +67,7 @@
         搜索
       </el-button>
     </div>
-        -->
+      -->
 
       <br />
       <!--
@@ -98,26 +91,26 @@
         </el-table-column>
       </el-table>
     </div>
-    -->
+      -->
 
       <template>
         <div>
           <el-row :glutter="10">
-            <el-col
-              :span="6"
-              v-for="(o, index) in tabledata"
-              :key="index"
-              :offset="2"
-            >
+            <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
               <div style="margin-top: 15px">
                 <!--这一层div的作用是什么-->
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
                   <img :src="o.Project_Imgimg_path" class="image" />
                   <div class="text">
-                    {{ o.project_name }}<br />
-                    发起时间：{{ o.create_time }}<br />
-                    项目进度：{{ o.project_progress }}<br />
-                    当前是否有组队需求：{{ o.project_status }}<br /><br />
+                    {{ o.project_name }}
+                    <br />
+                    发起时间：{{ o.create_time }}
+                    <br />
+                    项目进度：{{ o.project_progress }}
+                    <br />
+                    当前是否有组队需求：{{ o.project_status }}
+                    <br />
+                    <br />
                     <template>
                       <el-button
                         type="success"
@@ -125,15 +118,14 @@
                         size="mini"
                         style="float: right"
                         @click="handleLook(index, o.row),addhistory(username,o.project_id)"
-                      >
-                        了解更多</el-button
-                      >
+                      >了解更多</el-button>
                     </template>
                     <br />
                   </div>
                 </el-card>
               </div>
-              <br /><br />
+              <br />
+              <br />
             </el-col>
           </el-row>
         </div>
@@ -173,7 +165,8 @@ export default {
         project_name: "",
         publisher: "",
         hav_require: "",
-        audit_status: "",
+        audit_status: "1",
+        audit_result: "1"
       },
       havreqOptions,
     };
@@ -199,6 +192,8 @@ export default {
           // console.log(res.data[0]);
           // console.log(res.data[0].details);
           for (let item of res.data) {
+            if (item.audit_result == "0")
+              continue;
             let form = {
               //设置添加数据的格式
               project_name: "",
@@ -232,7 +227,6 @@ export default {
             });
 
             //console.log(form);
-
             vm.tabledata.push(form);
             // console.log(form);
             // console.log(vm.table_Data);
@@ -338,10 +332,10 @@ export default {
     },
 
     /*触发添加浏览历史*/
-    addhistory(user_id,proj_id){
-      let params={
-        user_id:user_id,
-        project_id:proj_id
+    addhistory(user_id, proj_id) {
+      let params = {
+        user_id: user_id,
+        project_id: proj_id
       };
       console.log(params);
       addviewhistory(params);
