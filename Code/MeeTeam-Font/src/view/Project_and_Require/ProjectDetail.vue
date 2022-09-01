@@ -173,6 +173,7 @@ import { get_project } from '@/api/ProjectDetail.js'
 import { get_require } from '@/api/ProjectDetail.js'
 import { get_eva } from '@/api/ProjectDetail.js'
 import { get_username } from '@/api/ProjectDetail.js'
+import { get_leader } from '@/api/ProjectDetail.js'
 import { detailnum } from '@/api/ProjectDetail.js'
 import { createevalist } from '@/api/CreateList.js'
 import { AddMyCollection } from '@/api/MyInfor.js'
@@ -302,8 +303,8 @@ export default {
         this.end_time = this.end_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
         this.end_time = this.end_time.slice(20, 39);
         var judge = new String(this.project_status);
-        get_username(para).then(res => {
-          this.user_id = res.data.user_id;
+        get_leader(para).then(res => {
+          this.user_id = res.data;
         })
         if (judge == '是') {
           get_require(para).then(res => {
