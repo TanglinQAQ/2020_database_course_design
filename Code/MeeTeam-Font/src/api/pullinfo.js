@@ -6,13 +6,14 @@ import request from '@/utils/request'
       url: '/Info/ChangeInfo',
       method: 'get',
       params:{
-        ID:params.ID,
+        ID:params.user_id,
+        grade:params.grade,
         gender:params.gender,
-        phone_number:params.contact_info,
+        contact_info:params.contact_info,
         institution:params.institution,
         major:params.major,
         introduction:params.introduction,
-        grade:params.grade,
+        
       }
     })
   }

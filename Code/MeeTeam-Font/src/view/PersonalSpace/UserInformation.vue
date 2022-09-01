@@ -33,7 +33,7 @@
   </el-form>
    <div slot="footer" class="dialog-footer">
     <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="updata()">确 定</el-button>
+    <el-button type="primary" @click="submit()">确 定</el-button>
   </div>
 </el-dialog>
         <el-descriptions class="margin-top" title=" " :column="3" :size="size" border>
@@ -140,6 +140,7 @@ import { GetUserInfor } from '@/api/MyInfor.js'
 import { GetMyCollection } from '@/api/MyInfor.js'
 import { getproject } from '@/api/MyInfor.js'
 import { deletecollect } from '@/api/MyInfor.js'
+import { PullInfo } from '@/api/pullinfo.js'
 export default {
   name: 'UserInformation',
   data() {
@@ -254,8 +255,31 @@ export default {
       console.log(index, row);
       this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
     },
-    updata(){
-    this.dialogFormVisible=false;
+    submit(){
+      let vm=this;
+      let params = {
+        ID:vm.username,
+        gender:this.form.gender,
+        contact_info:this.form.contact_info,
+        institution:this.form.institution,
+        major:this.form.major,
+        introduction:this.form.introduction,
+        grade:this.form.grade,
+      }
+      console.log(params)
+      PullInfo(params).then(function(res){
+                console.log(res)
+                console.log(res.isexist)
+                if(res.data)
+                {
+                  this.dialogFormVisible=false;
+                    vm.$router.push({path: "/users/UserInformation"}); //回到个人详细页面
+                }
+                else{
+                  this.dialogFormVisible=false;
+                    vm.resetForm()
+                }
+             })
     },
   }
 }
