@@ -41,6 +41,8 @@ import UserHistory from '@/view/PersonalSpace/HisTory.vue'
 import UserCollection from '@/view/PersonalSpace/CollecTion.vue'
 import AdminInformation from '@/view/PersonalSpace/AdminInformation'
 import ChangeUserInfo from '@/view/PersonalSpace/ChangeUserInfo.vue'
+import ManageUser from '@/view/PersonalSpace/ManageUser.vue'
+
 export default new Router({
     //在这里声明路由规则
     routes: [
@@ -61,7 +63,9 @@ export default new Router({
                 { path: '/Admin/NoticeList', component: NoticeList },
                 { path: '/Admin/CreateNotice', component: CreateNotice },
                 { path: '/Admin/ShowNotice', component: ShowNotice },
-                { path: '/Admin/AdminInformation',component: AdminInformation}
+                { path: '/Admin/AdminInformation',component: AdminInformation},
+                { path: '/Admin/ManageUser',component:ManageUser}
+                
             ], props: true
         },
         //用户主页及其子页面
