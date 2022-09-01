@@ -121,6 +121,7 @@
 import global_msg from "../../utils/global.js";
 import { Changeprojectlist } from "@/api/Myprojectlist.js";
 import { Changerequirelist } from "@/api/Myprojectlist.js";
+import { get_project } from "@/api/ProjectDetail.js";
 import { get_require } from '@/api/ProjectDetail.js'
 
 export default {
@@ -259,7 +260,29 @@ export default {
       },
     };
   },
+  created() {
+    this.getlist();//页面一进入就加载表格
+  },
   methods: {
+    getlist(){
+      let para = {
+        id: this.$route.query.p_id
+      };
+      get_project(para).then(res => {
+        this.$set(this.ruleForm,'project_name',res.data.project_name);
+        this.$set(this.ruleForm,'project_background',res.data.project_background);
+        this.$set(this.ruleForm,'project_introduction',res.data.project_introduction);
+        this.$set(this.ruleForm,'project_content',res.data.project_content);
+        this.$set(this.ruleForm,'project_progress',res.data.project_progress);
+      })
+      get_require(para).then(res => {
+        this.$set(this.ruleForm,'purpose',res.data.purpose);
+        this.$set(this.ruleForm,'team_type',res.data.team_type);
+        this.$set(this.ruleForm,'team_limit',res.data.team_limit);
+        this.$set(this.ruleForm,'require_status',res.data.require_status);
+        this.$set(this.ruleForm,'details',res.data.details);
+      })
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

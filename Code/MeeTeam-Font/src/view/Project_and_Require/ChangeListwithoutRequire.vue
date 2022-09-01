@@ -77,7 +77,7 @@
 import global_msg from "../../utils/global.js";
 import { Changeprojectlist } from "@/api/Myprojectlist.js";
 import { Changerequirelist } from "@/api/Myprojectlist.js";
-
+import { get_project } from "@/api/ProjectDetail.js";
 export default {
   name: "ChangeProjectList",
   data() {
@@ -138,7 +138,22 @@ export default {
       },
     };
   },
+  created() {
+    this.getlist();//页面一进入就加载表格
+  },
   methods: {
+    getlist(){
+      let para = {
+        id: this.$route.query.p_id
+      };
+      get_project(para).then(res => {
+        this.$set(this.ruleForm,'project_name',res.data.project_name);
+        this.$set(this.ruleForm,'project_background',res.data.project_background);
+        this.$set(this.ruleForm,'project_introduction',res.data.project_introduction);
+        this.$set(this.ruleForm,'project_content',res.data.project_content);
+        this.$set(this.ruleForm,'project_progress',res.data.project_progress);
+      })
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
