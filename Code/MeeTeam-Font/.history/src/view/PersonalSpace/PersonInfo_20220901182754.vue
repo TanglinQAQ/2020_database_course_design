@@ -110,7 +110,7 @@ export default {
                 major:this.major,
                 introduction:this.introduction,
             }
-            console.log(param)
+            console.log()
              PullInfo(param).then(function(res){
            //     console.log(res)
                 if(res.data)

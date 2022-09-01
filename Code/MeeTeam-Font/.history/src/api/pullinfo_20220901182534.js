@@ -6,7 +6,7 @@ import request from '@/utils/request'
       url: '/Info/ChangeInfo',
       method: 'post',
       params:{
-        ID:params.ID,
+        ID:params.user_id,
         grade:params.grade,
         gender:params.gender,
         contact_info:params.contact_info,
