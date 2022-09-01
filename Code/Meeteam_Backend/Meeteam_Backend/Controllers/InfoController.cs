@@ -92,5 +92,29 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+        //加分
+        [HttpPost]
+        public bool UpdatePoint(string user_id)
+        {
+            //获取数据库连接
+            User_Info user = new User_Info();
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            //搜索条件，感觉可以改成检索的方式
+            user = db.Queryable<User_Info>().Where(it => it.user_id == user_id).First();
+            user.point +=10;
+            try
+            {
+                int result = db.Updateable<User_Info>(user).Where(it => it.user_id == user_id).ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
