@@ -315,6 +315,10 @@ export default {
           UpdatePoint(pa);
         }
       })
+      let pa0={
+          user_id:global_msg.nowuserid,
+      }
+      UpdatePoint(pa0);
       this.$message({
             type: "success",
             message: "项目已完结!",
