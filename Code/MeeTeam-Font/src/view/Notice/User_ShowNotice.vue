@@ -1,19 +1,17 @@
 <template>
-  <el-main>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
-        >首页</el-breadcrumb-item
-      >
-      <el-breadcrumb-item :to="{ path: '/users/NoticeList' }"
-        >平台通知</el-breadcrumb-item
-      >
-      <el-breadcrumb-item>通知详情</el-breadcrumb-item>
-    </el-breadcrumb>
-    <div id="app">
-      <h2 v-text="title"></h2>
-      <span v-text="content"></span>
-    </div>
-  </el-main>
+  <div id="body">
+    <el-main>
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/users/NoticeList' }">平台通知</el-breadcrumb-item>
+        <el-breadcrumb-item>通知详情</el-breadcrumb-item>
+      </el-breadcrumb>
+      <div id="app">
+        <h2 v-text="title"></h2>
+        <span v-text="content"></span>
+      </div>
+    </el-main>
+  </div>
 </template>
  
 <script>
@@ -51,5 +49,11 @@ export default {
 #breadcrumb {
   height: 30px;
   margin-bottom: 10px;
+}
+
+#body {
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
 }
 </style>

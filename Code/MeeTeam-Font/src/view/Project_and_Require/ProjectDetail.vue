@@ -63,24 +63,53 @@
         收藏{{ favorite_num
         }}
       </el-button>
-      <el-button
-        type="success"
-        plain
-        style="float: left;margin-left: 20px"
-        @click="handleevaluation()"
-      >
-        评论{{
-        evaluation_num
-        }}
-      </el-button>
+      <br><br>
+      <br><br>
+      <p align="left" class="eva"><strong>评论</strong>{{eva_num}}</p>
+      <br>
+      <el-form
+            :model="ruleForm"
+            :rules="rules"
+            ref="ruleForm"
+            label-width="160px"
+            label-position="left"
+            class="demo-ruleForm"
+            inline="true" 
+            align="left"
+          >
+            <el-form-item label="" prop="eva" label-width="20px" >
+              <font align="left" class="uid">{{username}}</font>
+              &nbsp;
+              <font>想说：</font>
+            </el-form-item>
+            <el-form-item label="" prop="eva_content" label-width="30px" >
+              <el-input v-model="ruleForm.eva_content" class="blank" placeholder="欢迎发表评论(.w.)"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                type="success"
+                plain
+                style="float: left;margin-left: 20px"
+                @click="handleevaluation('ruleForm')"
+              >评论{{evaluation_num}}
+              </el-button>
+            </el-form-item>
+      </el-form>
+      <hr />
       <br />
-      <br />
-      <br />
-      <el-tabs v-model="activeName">
-        <el-tab-pane label="展开评论列表" name="展开评论列表" @tab-click="handleClick">
           <el-dialog :visible.sync="dialogVisible">
-            <el-descriptions title="申请人信息" column="2">
-              <el-descriptions-item label="申请人" :model="his">
+            <div>
+              <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
+            </div>
+            <div>
+              <el-button type="primary" v-if='relation=="无"' @click="handlefollow">关注</el-button>
+              <el-button type="info" v-if='relation=="关注"' @click="handlefollow">取消关注</el-button>
+            </div>
+            <el-divider content-position="left">
+              <h4>用户信息</h4>
+            </el-divider>
+            <el-descriptions column="2">
+              <el-descriptions-item label="用户id">
                 <span v-text="this.his.user_id"></span>
               </el-descriptions-item>
               <el-descriptions-item label="性别">
@@ -143,24 +172,25 @@
               <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
             </div>
           </el-dialog>
-          <div>
+          <div class="table">
             <el-table
               @row-click="handlecheck"
               :data="tableData"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
+              :show-header="false"
+              :cell-style="{ 'text-align': 'left' }"
               :default-sort="{ prop: 'date', order: 'descending' }"
+              class="eltable"
             >
-              <el-table-column prop="evaluator_id" label="用户id" width="150"></el-table-column>
-              <el-table-column prop="eva_content" label="评论内容" width="750"></el-table-column>
-              <el-table-column prop="eva_time" label="评论时间" sortable width="150"></el-table-column>
+              <el-table-column prop="evaluator_id,eva_content,eva_time"  width="750">
+              <template slot-scope="scope">
+              <font class="evaid">{{scope.row.evaluator_id}}</font>&nbsp;
+              <font size="1px">说：</font>
+              <font>{{scope.row.eva_content}}</font><br>
+              <font size="1px">{{scope.row.eva_time}}</font>
+              </template>
+              </el-table-column>
             </el-table>
           </div>
-        </el-tab-pane>
-        <el-tab-pane label="收起评论列表" name="收起评论列表">
-          <div></div>
-        </el-tab-pane>
-      </el-tabs>
     </el-main>
   </div>
 </template>
@@ -184,10 +214,14 @@ import { GetUserInfor } from '@/api/MyInfor.js'
 import { my_project } from '@/api/MyInfor.js'
 import { GetMyCollection } from '@/api/MyInfor.js'
 import { getproject } from '@/api/MyInfor.js'
+import { openfile } from "@/api/file_load.js";
+import { getRe } from "@/api/followother.js"
+import { pullRe } from "@/api/followother.js"
 export default {
   data() {
     return {
       //项目
+      username: global_msg.nowuserid,
       user_id: '',
       create_time: '',
       project_name: '',
@@ -207,8 +241,21 @@ export default {
       region: '',
       team_type_details: '',
       //评论
-      activeName: "展开评论列表",
       tableData: [],
+      ruleForm: {
+        eva: ""
+      },
+      rules: {
+        eva_content: [
+          { required: true, message: "请输入评论内容", trigger: "blur" },
+          {
+            min: 3,
+            max: 80,
+            message: "长度在 3-80 个字符以内",
+            trigger: "blur",
+          },
+        ],
+      },
       //查看其他用户信息
       his: {
         user_id: "",
@@ -222,7 +269,9 @@ export default {
       dialogVisible: false,
       formLabelWidth: '120px',
       project_experience: [],
-      facorite: []
+      facorite: [],
+      relation: "无",
+      hisid: ""
     };
   },
   created() {
@@ -237,6 +286,23 @@ export default {
       let params = {
         user_id: his_id
       }
+      let params1 = {
+        target: "user",
+        id: his_id,
+      };
+      let params2 = {
+        MyID: global_msg.nowuserid,
+        ID: his_id
+      };
+      getRe(params2).then((res) => {
+        if (res.data == "关注")
+          this.relation = "关注";
+        else
+          this.relation = "无";
+      })
+      openfile(params1).then((res) => {
+        this.base64 = "data:;base64," + res.data;
+      });
       GetUserInfor(params).then((res) => {
         let item = res.data[0];
         this.his.user_id = item.user_id;
@@ -268,6 +334,31 @@ export default {
           })
         })
       })
+    },
+    handlefollow() {
+      if (this.relation == "关注") {
+        this.relation = "无";
+        let params = {
+          MyID: global_msg.nowuserid,
+          ID: this.hisid,
+          relationship:"无"
+        }
+        pullRe(params).then(function (res) {
+          if (res == 1)
+            console.log("关注成功");
+          else
+            console.log("失败！");
+        })
+      }
+      else {
+        this.relation = "关注";
+        let params = {
+          MyID: global_msg.nowuserid,
+          ID: this.hisid,
+          relationship:"关注"
+        }
+        pullRe(params);
+      }
     },
     project_detail(index) {
       //进入项目详情页面
@@ -383,12 +474,19 @@ export default {
         }
       })
     },
-    handleevaluation() { //评论操作
+    handleevaluation(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
       var vm = this;
-      var content = prompt("请输入评论", ""); // 弹出input框
       let param = {
         project_eva_id: global_msg.evaluationnum + 1,
-        eva_content: content,
+        eva_content: this.ruleForm.eva_content,
         evaluator_id: global_msg.nowuserid,
         project_id: vm.$route.query.p_id,
       }
@@ -432,7 +530,6 @@ export default {
   right: 30px;
   left: 30px;
 }
-
 .title {
   margin: 0;
   background: #f0f0f0;
@@ -440,5 +537,35 @@ export default {
   font-size: 25px;
   font-weight: bold;
   color: #000000;
+}
+
+.eva {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.uid {
+  margin: 0;
+  font-size: 20px;
+}
+
+.blank {
+    margin: 0px;
+    width: 800px;
+}
+
+.evaid {
+    padding:2px;
+    font-size:15px;
+    background:#545c64;
+    color:#ffffff;
+    border-radius: 5px;
+}
+
+.eltable{
+  border-collapse:separator;
+  background-color:#ffffff;
+  border-radius: 10px 10px 10px 10px;
 }
 </style>

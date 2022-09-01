@@ -87,7 +87,7 @@ export default {
       this.user_id = global_msg.nowuserid;
       let params = {
         target: "user",
-        id: "normal",
+        id: global_msg.nowuserid
       };
       openfile(params).then((res) => {
         this.base64 = "data:;base64," + res.data;
