@@ -23,6 +23,17 @@ export function get_username(params) {
     })
 }
 
+export function get_leader(params) {
+    /*根据id获取项目的发布者*/
+    return request({
+        url: '/User_Project/get_leader',
+        method: 'get',
+        params: {
+            id: params.id
+        }
+    })
+}
+
 export function get_member(params) {
     /*根据id获取项目相关的id和duty*/
     return request({
