@@ -101,7 +101,7 @@
                   <el-button
                     size="mini"
                     type="danger"
-                    @click="handlerun(scope.$index, scope.row)"
+                    @click="handleout(scope.$index, scope.row)"
                   >踢出团队</el-button>
                 </template>
               </el-table-column>
@@ -253,7 +253,7 @@ export default {
           let form = {//设置添加数据的格式
             teamember_id: '',
           }
-          //发布表
+          //组员表
           form.teamember_id = item.user_id;
           vm.tableData0.push(form);
         }
@@ -263,7 +263,7 @@ export default {
           let form = {//设置添加数据的格式
             applicant_id: '',
           }
-          //发布表
+          //申请表
           form.applicant_id = item.user_id;
           vm.tableData.push(form);
         }
@@ -285,6 +285,7 @@ export default {
         }
       })
       console.log(index, row);
+      location. reload();
     },
     refuse(index, row) { //同意操作
       var vm = this;
@@ -302,6 +303,25 @@ export default {
         }
       })
       console.log(index, row);
+      location. reload();
+    },
+    handleout(index, row) { //踢出操作
+      var vm = this;
+      let para = {
+        pid: vm.$route.query.p_id,
+        uid: vm.tableData0[index].teamember_id,
+        dy: "已踢出"
+      }
+      Audit(para).then(function (res) {
+        if (res.data === false) {
+          vm.$message.error("操作失败");
+        }
+        else {
+          vm.$message.success("操作成功");
+        }
+      })
+      console.log(index, row);
+      location. reload();
     },
     handlecheck1(index) {
       console.log(this);

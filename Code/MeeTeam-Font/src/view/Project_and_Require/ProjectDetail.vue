@@ -496,6 +496,7 @@ export default {
         }
         else {
           vm.$message.success("评论成功");
+          location. reload();
         }
       })
     },
