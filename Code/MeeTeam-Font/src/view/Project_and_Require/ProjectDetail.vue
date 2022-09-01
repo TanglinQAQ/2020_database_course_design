@@ -9,63 +9,156 @@
           <el-breadcrumb-item>项目详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <p class="title" align="center" label="项目名称">{{  project_name  }}</p>
+      <p class="title" align="center" label="项目名称">{{ project_name }}</p>
       <el-descriptions title="项目详情" :column="2" border style="margin-top: 20px;">
-        <el-descriptions-item label="项目发布者">{{  user_id  }}</el-descriptions-item>
-        <el-descriptions-item label="创建时间">{{  create_time  }}</el-descriptions-item>
-        <el-descriptions-item label="开始时间">{{  start_time  }}</el-descriptions-item>
-        <el-descriptions-item label="结束时间">{{  end_time  }}</el-descriptions-item>
-        <el-descriptions-item label="项目当前进展">{{  project_progress  }}</el-descriptions-item>
-        <el-descriptions-item label="是否有组队需求">{{  project_status  }}</el-descriptions-item>
+        <el-descriptions-item label="项目发布者">{{ user_id }}</el-descriptions-item>
+        <el-descriptions-item label="创建时间">{{ create_time }}</el-descriptions-item>
+        <el-descriptions-item label="开始时间">{{ start_time }}</el-descriptions-item>
+        <el-descriptions-item label="结束时间">{{ end_time }}</el-descriptions-item>
+        <el-descriptions-item label="项目当前进展">{{ project_progress }}</el-descriptions-item>
+        <el-descriptions-item label="是否有组队需求">{{ project_status }}</el-descriptions-item>
       </el-descriptions>
-      <el-descriptions title="" :column="1" border>
-        <el-descriptions-item label="项目背景">{{  project_background  }}</el-descriptions-item>
-        <el-descriptions-item label="项目简介">{{  project_introduction  }}</el-descriptions-item>
-        <el-descriptions-item label="项目内容">{{  project_content  }}</el-descriptions-item>
+      <el-descriptions title :column="1" border>
+        <el-descriptions-item label="项目背景">{{ project_background }}</el-descriptions-item>
+        <el-descriptions-item label="项目简介">{{ project_introduction }}</el-descriptions-item>
+        <el-descriptions-item label="项目内容">{{ project_content }}</el-descriptions-item>
       </el-descriptions>
-      <br>
+      <br />
       <el-descriptions title="需求详情" :column="2" border>
-        <el-descriptions-item label="组队类型">{{  team_type  }}</el-descriptions-item>
-        <el-descriptions-item label="类型细则">{{  team_type_details  }}</el-descriptions-item>
-        <el-descriptions-item label="组队人数">{{  team_limit  }}</el-descriptions-item>
-        <el-descriptions-item label="当前状态">{{  require_status  }}</el-descriptions-item>
+        <el-descriptions-item label="组队类型">{{ team_type }}</el-descriptions-item>
+        <el-descriptions-item label="类型细则">{{ team_type_details }}</el-descriptions-item>
+        <el-descriptions-item label="组队人数">{{ team_limit }}</el-descriptions-item>
+        <el-descriptions-item label="当前状态">{{ require_status }}</el-descriptions-item>
       </el-descriptions>
-      <el-descriptions title="" :column="1" border>
-        <el-descriptions-item label="所在校区">{{  region  }}</el-descriptions-item>
-        <el-descriptions-item label="需求目的">{{  purpose  }}</el-descriptions-item>
-        <el-descriptions-item label="组队细则">{{  details  }}</el-descriptions-item>
+      <el-descriptions title :column="1" border>
+        <el-descriptions-item label="所在校区">{{ region }}</el-descriptions-item>
+        <el-descriptions-item label="需求目的">{{ purpose }}</el-descriptions-item>
+        <el-descriptions-item label="组队细则">{{ details }}</el-descriptions-item>
       </el-descriptions>
-      <el-steps :space="500" :active="1" finish-status="success" align-center
-        style="margin-top: 100px;margin-bottom: 100px">
+      <el-steps
+        :space="500"
+        :active="1"
+        finish-status="success"
+        align-center
+        style="margin-top: 100px;margin-bottom: 100px"
+      >
         <el-step title="发布项目"></el-step>
         <el-step title="招募队友"></el-step>
         <el-step title="项目完结"></el-step>
       </el-steps>
-      <el-button type="success" plain style="float: right;margin-right: 80px" @click="handleApply()" v-if="this.project_status === '是'">申请加入</el-button>
+      <el-button
+        type="success"
+        plain
+        style="float: right;margin-right: 80px"
+        @click="handleApply()"
+        v-if="this.project_status === '是'"
+      >申请加入</el-button>
       <el-button type="info" plain style="float: right;margin-right: 30px">联系发起人</el-button>
-      <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">收藏{{  favorite_num 
-        }}</el-button>
-      <el-button type="success" plain style="float: left;margin-left: 20px" @click="handleevaluation()">评论{{
-         evaluation_num 
-        }}</el-button>
-      <br><br><br>
+      <el-button
+        type="submit"
+        plain
+        style="float: left;margin-left: 20px"
+        @click="handlefavorite()"
+      >
+        收藏{{ favorite_num
+        }}
+      </el-button>
+      <el-button
+        type="success"
+        plain
+        style="float: left;margin-left: 20px"
+        @click="handleevaluation()"
+      >
+        评论{{
+        evaluation_num
+        }}
+      </el-button>
+      <br />
+      <br />
+      <br />
       <el-tabs v-model="activeName">
         <el-tab-pane label="展开评论列表" name="展开评论列表" @tab-click="handleClick">
+          <el-dialog :visible.sync="dialogVisible">
+            <el-descriptions title="申请人信息" column="2">
+              <el-descriptions-item label="申请人" :model="his">
+                <span v-text="this.his.user_id"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="性别">
+                <span v-text="this.his.gender"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="联系方式">
+                <span v-text="this.his.contact_info"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="就读院校">
+                <span v-text="this.his.institution"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="专业">
+                <span v-text="this.his.major"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="年级">
+                <span v-text="this.his.grade"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="个人简介" span="2">
+                <span v-text="this.his.introduction"></span>
+              </el-descriptions-item>
+              <el-descriptions-item label="积分" span="2">
+                <span v-text="this.his.point"></span>
+              </el-descriptions-item>
+            </el-descriptions>
+            <el-divider content-position="left">
+              <h4>项目经历</h4>
+            </el-divider>
+            <el-table
+              :data="project_experience"
+              :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }"
+              height="200"
+            >
+              <el-table-column prop="project_name" label="项目名称"></el-table-column>
+              <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button size="mini" @click="project_detail(scope.$index)">查看详情</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-divider content-position="left">
+              <h4>收藏夹</h4>
+            </el-divider>
+            <el-table
+              :data="facorite"
+              :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }"
+              height="200"
+            >
+              <el-table-column prop="project_name" label="项目名称"></el-table-column>
+              <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button size="mini" @click="project_detail(scope.$index)">查看详情</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <div slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
+            </div>
+          </el-dialog>
           <div>
-            <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }" :default-sort="{ prop: 'date', order: 'descending' }">
-              <el-table-column prop="evaluator_id" label="用户id" width="150">
-              </el-table-column>
-              <el-table-column prop="eva_content" label="评论内容" width="750">
-              </el-table-column>
-              <el-table-column prop="eva_time" label="评论时间" sortable width="150">
-              </el-table-column>
+            <el-table
+              @row-click="handlecheck"
+              :data="tableData"
+              :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }"
+              :default-sort="{ prop: 'date', order: 'descending' }"
+            >
+              <el-table-column prop="evaluator_id" label="用户id" width="150"></el-table-column>
+              <el-table-column prop="eva_content" label="评论内容" width="750"></el-table-column>
+              <el-table-column prop="eva_time" label="评论时间" sortable width="150"></el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
         <el-tab-pane label="收起评论列表" name="收起评论列表">
-          <div>
-          </div>
+          <div></div>
         </el-tab-pane>
       </el-tabs>
     </el-main>
@@ -86,6 +179,10 @@ import { AddMyCollection } from '@/api/MyInfor.js'
 import { SelectAllCollection } from '@/api/MyInfor.js'
 import { Ifcollect } from '@/api/MyInfor.js'
 import { createuser_project } from '@/api/CreateList.js'
+import { GetUserInfor } from '@/api/MyInfor.js'
+import { my_project } from '@/api/MyInfor.js'
+import { GetMyCollection } from '@/api/MyInfor.js'
+import { getproject } from '@/api/MyInfor.js'
 export default {
   data() {
     return {
@@ -111,12 +208,75 @@ export default {
       //评论
       activeName: "展开评论列表",
       tableData: [],
+      //查看其他用户信息
+      his: {
+        user_id: "",
+        gender: "",
+        contact_info: "",
+        institution: "",
+        grade: "",
+        introduction: "",
+        point: ""
+      },
+      dialogVisible: false,
+      formLabelWidth: '120px',
+      project_experience: [],
+      facorite: []
     };
   },
   created() {
     this.get_Info();
   },
   methods: {
+    handlecheck(row) {
+      this.dialogVisible = true;
+      this.get_hisinfo(row.evaluator_id);
+    },
+    get_hisinfo(his_id) {
+      let params = {
+        user_id: his_id
+      }
+      GetUserInfor(params).then((res) => {
+        let item = res.data[0];
+        this.his.user_id = item.user_id;
+        if (item.gender === "0")
+          this.his.gender = "女"
+        else
+          this.his.gender = "男"
+        // this.his.gender = item.gender;
+        this.his.contact_info = item.contact_info;
+        this.his.institution = item.institution;
+        this.his.major = item.major;
+        this.his.grade = item.grade;
+        this.his.point = item.point;
+        this.his.introduction = item.introduction;
+        //console.log(res.data);
+      })
+      my_project(params).then((res1) => {
+        this.project_experience = res1.data;
+        //console.log(res1.data);
+      })
+      GetMyCollection(params).then((res2) => {
+        Object.keys(res2.data).forEach((v) => {
+          let params1 = {
+            project_id: res2.data[v].project_id
+          }
+          getproject(params1).then((res4) => {
+            this.facorite = res4.data;
+            //console.log(res4.data);
+          })
+        })
+      })
+    },
+    project_detail(index) {
+      //进入项目详情页面
+      var project_id = this.tabledata[index].project_id;
+      //console.log(index, row);
+      this.$router.push({
+        path: "/users/ProjectDetail",
+        query: { p_id: project_id },
+      });
+    },
     goback() {
       this.$router.push({ path: "/users/InforList" });
     },
@@ -245,13 +405,13 @@ export default {
       let param = {
         user_id: global_msg.nowuserid,
         project_id: vm.$route.query.p_id,
-        duty:"申请者",
+        duty: "申请者",
       }
       createuser_project(param).then(function (res) {
         if (res.data === false) {
           vm.$message.error("申请失败");
-        } 
-        else{
+        }
+        else {
           vm.$message.success("申请成功");
         }
       })
@@ -274,7 +434,7 @@ export default {
 
 .title {
   margin: 0;
-  background: #F0F0F0;
+  background: #f0f0f0;
   line-height: 50px;
   font-size: 25px;
   font-weight: bold;

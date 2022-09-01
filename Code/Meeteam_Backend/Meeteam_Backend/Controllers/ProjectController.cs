@@ -208,6 +208,21 @@ namespace Meeteam_Backend.Controllers
             var json = query.Select<ViewMode>().MergeTable().PartitionBy(it=>it.project_id).ToJson();
             return json;
         }
+
+
+        [HttpGet]
+        public List<Project> my_project(string user_id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();
+            var query= db.Queryable<Project, User_Project>(
+                (p, up) => new JoinQueryInfos(
+                    JoinType.Left, p.project_id == up.project_id
+                    ));
+            List<Project> res = new List<Project>();
+            res = query.Where((p, up) => up.user_id == user_id && p.audit_result == "1").Select<Project>().Distinct().ToList();
+            return res;
+        }
     }
 
     public class ViewMode:Project

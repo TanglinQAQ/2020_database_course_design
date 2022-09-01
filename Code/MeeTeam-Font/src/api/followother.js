@@ -20,7 +20,7 @@ export function pullRe(params) {
         params: {
             MyID: params.MyID,
             ID: params.ID,
-            relation: params.relation
+            relationship: params.relation
         }
     })
 }

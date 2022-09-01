@@ -13,6 +13,6 @@ namespace Meeteam_Backend
 
         public string related_user_id { get; set; }
         
-        public string related { get; set; }
+        public string relation { get; set; }
     }
 }
