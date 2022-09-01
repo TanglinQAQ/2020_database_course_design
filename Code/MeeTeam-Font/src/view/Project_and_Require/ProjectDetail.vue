@@ -79,8 +79,18 @@
       <el-tabs v-model="activeName">
         <el-tab-pane label="展开评论列表" name="展开评论列表" @tab-click="handleClick">
           <el-dialog :visible.sync="dialogVisible">
-            <el-descriptions title="申请人信息" column="2">
-              <el-descriptions-item label="申请人" :model="his">
+            <div>
+              <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
+            </div>
+            <div>
+              <el-button type="primary" v-if='relation=="无"' @click="handlefollow">关注</el-button>
+              <el-button type="info" v-if='relation=="关注"' @click="handlefollow">取消关注</el-button>
+            </div>
+            <el-divider content-position="left">
+              <h4>用户信息</h4>
+            </el-divider>
+            <el-descriptions column="2">
+              <el-descriptions-item label="用户id">
                 <span v-text="this.his.user_id"></span>
               </el-descriptions-item>
               <el-descriptions-item label="性别">
@@ -184,6 +194,9 @@ import { GetUserInfor } from '@/api/MyInfor.js'
 import { my_project } from '@/api/MyInfor.js'
 import { GetMyCollection } from '@/api/MyInfor.js'
 import { getproject } from '@/api/MyInfor.js'
+import { openfile } from "@/api/file_load.js";
+import { getRe } from "@/api/followother.js"
+import { pullRe } from "@/api/followother.js"
 export default {
   data() {
     return {
@@ -222,7 +235,9 @@ export default {
       dialogVisible: false,
       formLabelWidth: '120px',
       project_experience: [],
-      facorite: []
+      facorite: [],
+      relation: "无",
+      hisid: ""
     };
   },
   created() {
@@ -237,6 +252,23 @@ export default {
       let params = {
         user_id: his_id
       }
+      let params1 = {
+        target: "user",
+        id: his_id,
+      };
+      let params2 = {
+        MyID: global_msg.nowuserid,
+        ID: his_id
+      };
+      getRe(params2).then((res) => {
+        if (res.data == "关注")
+          this.relation = "关注";
+        else
+          this.relation = "无";
+      })
+      openfile(params1).then((res) => {
+        this.base64 = "data:;base64," + res.data;
+      });
       GetUserInfor(params).then((res) => {
         let item = res.data[0];
         this.his.user_id = item.user_id;
@@ -268,6 +300,31 @@ export default {
           })
         })
       })
+    },
+    handlefollow() {
+      if (this.relation == "关注") {
+        this.relation = "无";
+        let params = {
+          MyID: global_msg.nowuserid,
+          ID: this.hisid,
+          relationship:"无"
+        }
+        pullRe(params).then(function (res) {
+          if (res == 1)
+            console.log("关注成功");
+          else
+            console.log("失败！");
+        })
+      }
+      else {
+        this.relation = "关注";
+        let params = {
+          MyID: global_msg.nowuserid,
+          ID: this.hisid,
+          relationship:"关注"
+        }
+        pullRe(params);
+      }
     },
     project_detail(index) {
       //进入项目详情页面
