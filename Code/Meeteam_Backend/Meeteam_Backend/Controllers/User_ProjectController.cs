@@ -65,6 +65,22 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+        //查询发布者
+        [HttpGet]
+        public string get_leader(string id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                string name = db.Queryable<User_Project>().Where(it => it.project_id == id && it.duty == "发布者").First().user_id;
+                return name;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         //发布者审核
         [HttpPost]
         public bool Audit(string pid, string uid,string dy)
