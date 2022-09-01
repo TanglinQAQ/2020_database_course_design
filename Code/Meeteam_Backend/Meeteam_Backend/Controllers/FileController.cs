@@ -26,7 +26,7 @@ namespace Meeteam_Backend.Controllers
                 StreamReader reader = new StreamReader(file.OpenReadStream());
                 string content = reader.ReadToEnd();
                 string name = file.FileName;
-                path = @"C:\work_space\storage\" + path + @"\";
+                path = @"D:\work_space\storage\" + path + @"\";
                 string filename = path + name;
                 if (!System.IO.File.Exists(filename))
                 {
