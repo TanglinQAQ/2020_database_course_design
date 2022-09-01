@@ -189,8 +189,8 @@ export default {
         formLabelWidth: '80px',
         upload_data: {
         path: "head_img",
-        id: "1",
-        target:'project'
+        id: "normal",
+        target:'user',
       },
       fileList: [],
       base64:''
@@ -293,7 +293,8 @@ export default {
         console.log(res)
                 if(res.data === true){
                   this.dialogFormVisible=false;
-                    vm.$router.push({path: "/users/UserInformation"}); //回到个人详细页面
+                  location. reload(); //回到个人详细页面
+                  
                 }
                 else{
                   vm.$message.error("编辑失败");
@@ -302,6 +303,33 @@ export default {
              })
             
     },
+    handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
+        handleSuccess() {
+            location.reload();
+        },
+        handleExceed(files, fileList) {
+            this.$message.warning(
+                `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length
+                } 个文件`
+            );
+        },
+        beforeRemove(file, fileList) {
+            return this.$confirm(`确定移除 ${file.name}？`);
+        },
+        getimg() {
+            let params = {
+                target: 'user',
+                id: 'normal'
+            }
+            openfile(params).then((res) => {
+                this.base64 = 'data:;base64,' + res.data;
+            });
+        },
 
   }
 }
