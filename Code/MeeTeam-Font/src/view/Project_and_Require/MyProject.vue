@@ -119,7 +119,7 @@
               </el-table-column>
               <el-table-column
                 prop="project0_duty"
-                label="当前身份"
+                label="当前状态"
                 width="200"
               >
               </el-table-column>
@@ -224,6 +224,14 @@ export default {
             if (res.data.duty == "组员") {
               vm.tableData0.push(form);
               form.project0_duty = "组员";
+            }
+            if (res.data.duty == "已拒绝") {
+              vm.tableData0.push(form);
+              form.project0_duty = "已拒绝";
+            }
+            if (res.data.duty == "已踢出") {
+              vm.tableData0.push(form);
+              form.project0_duty = "已踢出";
             }
           });
         }
@@ -332,6 +340,7 @@ export default {
           });
         });
       console.log(index, row);
+      location. reload();
     },
     handleClick(tab, event) {
       console.log(tab, event);

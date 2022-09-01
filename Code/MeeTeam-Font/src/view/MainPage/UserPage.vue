@@ -119,9 +119,6 @@ export default {
           });
       }
     },
-    goto_content() {
-        this.$router.push({ path: "/users/UserPageContent" });
-    }
   },
 };
 </script>

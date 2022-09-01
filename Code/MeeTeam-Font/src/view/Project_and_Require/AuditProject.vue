@@ -4,7 +4,7 @@
       <el-main>
         <div id="breadcrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }"
+            <el-breadcrumb-item :to="{ path: '/Admin/AdminPageContent' }"
               >首页</el-breadcrumb-item
             >
             <el-breadcrumb-item>审核管理</el-breadcrumb-item>

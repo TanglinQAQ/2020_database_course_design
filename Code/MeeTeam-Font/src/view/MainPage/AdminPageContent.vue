@@ -75,6 +75,7 @@ import { getAdminInfo } from "@/api/getinfo.js";
 import { ref } from "vue";
 import { get_all } from "@/api/notice.js";
 import { fetchList } from "@/api/Querylist.js";
+import { openfile } from "@/api/file_load.js";
 
 export default {
   name: "AdminPageContent",
@@ -102,12 +103,12 @@ export default {
       },
       bannerheight: "",
       imageList: [
-        { id: 0, idView: require("@/assets/l1.jpg") },
+        /*{ id: 0, idView: require("@/assets/l1.jpg") },
         { id: 1, idView: require("@/assets/l2.jpg") },
         { id: 2, idView: require("@/assets/l4.jpg") },
         { id: 3, idView: require("@/assets/l1.jpg") },
         { id: 4, idView: require("@/assets/l2.jpg") },
-        { id: 5, idView: require("@/assets/l4.jpg") },
+        { id: 5, idView: require("@/assets/l4.jpg") },*/
       ],
     };
   },
@@ -129,6 +130,21 @@ export default {
   },
 
   methods: {
+    getimg() {
+      for (let i = 0; i < 6; i++) {
+        let param = {
+          target: "project",
+          id: i,
+        };
+        openfile(param).then((res) => {
+          if (res.data) {
+            this.imageList.push({ id: param.id, idView: "data:;base64," + res.data });
+          }
+        });
+      }
+
+      console.log(this.imageList);
+    },
     getproj() {
       var query = JSON.stringify(this.listQuery);
       fetchList(query).then((response) => {

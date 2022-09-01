@@ -3,7 +3,9 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/Admin/AdminPageContent' }"
+            >首页</el-breadcrumb-item
+          >
           <el-breadcrumb-item :to="{ path: '/Admin/AuditProject' }"
             >项目审核</el-breadcrumb-item
           >
@@ -56,17 +58,31 @@
         <el-step title="项目审核"></el-step>
         <el-step title="项目发布"></el-step>
       </el-steps>
+      <div class="auditoperation" style="text-align: center">
+        <el-button
+          v-if="!showAuditButton"
+          type="warning"
+          @click="
+            handleRecommend();
+            open1();
+          "
+          >推荐上榜</el-button
+        >
+      </div>
       <div class="auditoperation" style="display: flex  text-align: center">
         <el-button
+          v-if="showAuditButton"
           type="success"
           @click="
             handleAudit('1');
-            open();
+            open2();
           "
           style="margin-right: 66px"
           >审核通过</el-button
         >
-        <el-button type="danger" @click="dialogFormVisible = true">审核不通过</el-button>
+        <el-button v-if="showAuditButton" type="danger" @click="dialogFormVisible = true"
+          >审核不通过</el-button
+        >
         <el-dialog title="审核不通过" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="原因说明：">
@@ -98,9 +114,17 @@ import { get_require } from "@/api/ProjectDetail.js";
 import { get_username } from "@/api/ProjectDetail.js";
 import { detailnum } from "@/api/ProjectDetail.js";
 import { audit } from "@/api/audit.js";
+import { recommend } from "@/api/audit.js";
+import { fetchList } from "@/api/Querylist.js";
+
 export default {
   data() {
     return {
+      showAuditButton: false,
+      listQuery: {
+        project_id: this.$route.query.p_id,
+        audit_status: "",
+      },
       //项目
       user_id: "",
       create_time: "",
@@ -129,6 +153,7 @@ export default {
   },
   created() {
     this.get_Info();
+    this.triggerButton();
   },
   methods: {
     get_Info() {
@@ -149,9 +174,6 @@ export default {
         this.end_time = this.end_time.replace('"', "").replace('"', ""); //去掉时间格式的引号
         this.end_time = this.end_time.slice(20, 39);
         var judge = new String(this.project_status);
-        get_username(para).then((res) => {
-          this.user_id = res.data.user_id;
-        });
         if (judge == "是") {
           get_require(para).then((res) => {
             this.purpose = res.data.purpose;
@@ -177,7 +199,35 @@ export default {
         }
       });
     },
-    open() {
+    triggerButton() {
+      var query = JSON.stringify(this.listQuery);
+      fetchList(query).then((response) => {
+        this.showAuditButton = !parseInt(response.data[0].audit_status);
+        console.log(response.data[0]);
+        console.log(response.data[0].audit_status);
+        console.log(this.showAuditButton);
+      });
+    },
+    open1() {
+      this.$confirm("此操作将推荐该项目至首页, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "项目推荐成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消推荐。",
+          });
+        });
+    },
+    open2() {
       this.$confirm("此操作将审核通过并发布该项目, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -195,6 +245,12 @@ export default {
             message: "审核未通过！",
           });
         });
+    },
+    handleRecommend() {
+      let param = {
+        project_id: this.$route.query.p_id,
+      };
+      recommend(param);
     },
     handleAudit(param) {
       let params = {

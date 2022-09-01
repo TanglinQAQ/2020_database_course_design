@@ -81,3 +81,21 @@ export function my_project(params) {
     }
   })
 }
+
+export function BlockUser(params) {
+  return request({
+    url: '/User/BlockUser',
+    params: {
+      user_id: params.user_id,
+    }
+  })
+}
+
+export function UnblockUser(params) {
+  return request({
+    url: '/User/UnblockUser',
+    params: {
+      user_id: params.user_id,
+    }
+  })
+} 

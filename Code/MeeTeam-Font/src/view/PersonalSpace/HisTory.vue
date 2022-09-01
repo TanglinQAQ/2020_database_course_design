@@ -1,5 +1,6 @@
 <template>
-  <div>这里是我的历史记录</div>
+  <div>这里是我的浏览历史</div>
+  
 </template>
 
 <script>
