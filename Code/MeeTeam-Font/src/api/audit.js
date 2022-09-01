@@ -11,3 +11,13 @@ export function audit(params) {//获取查询列表结果
         }
     })
 }
+
+export function recommend(param) {
+    return request({
+        url: 'Project/Recommend_Project',
+        method: 'post',
+        param: {
+            project_id: param.project_id,
+        }
+    })
+}
