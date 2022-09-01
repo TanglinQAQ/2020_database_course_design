@@ -19,7 +19,7 @@ namespace Meeteam_Backend.Controllers
     public class FollowController : ControllerBase
     {
         [HttpGet]
-        public User_User getRe(string MyID, string ID)
+        public List<User_User> getRe(string MyID, string ID)
         {
             User_User my = new User_User();
             dbORM dborm = new dbORM();
