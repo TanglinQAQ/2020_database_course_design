@@ -25,7 +25,6 @@ import User_ShowNotice from '@/view/Notice/User_ShowNotice.vue'
 import ChangeListwithRequire from '@/view/Project_and_Require/ChangeListwithRequire.vue'
 import ChangeListwithoutRequire from '@/view/Project_and_Require/ChangeListwithoutRequire.vue'
 import AuditProject from '@/view/Project_and_Require/AuditProject.vue'
-import AuditRequire from '@/view/Project_and_Require/AuditRequire.vue'
 import DetailAudit from '@/view/Project_and_Require/DetailAudit.vue'
 import CreatList from '@/view/Project_and_Require//CreatList.vue'
 import MyProject from '@/view/Project_and_Require/MyProject.vue'
@@ -59,7 +58,6 @@ export default new Router({
                 { path: '/Admin/AdminPageContent', component: AdminPageContent },
                 { path: '/Admin/AuditProject', component: AuditProject },
                 { path: '/Admin/DetailAudit', component: DetailAudit },
-                { path: '/Admin/AuditRequire', component: AuditRequire },
                 { path: '/Admin/NoticeList', component: NoticeList },
                 { path: '/Admin/CreateNotice', component: CreateNotice },
                 { path: '/Admin/ShowNotice', component: ShowNotice },
