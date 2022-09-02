@@ -76,7 +76,45 @@ namespace Meeteam_Backend.Controllers
             {
                 return false;
             }
+        }
 
+        [HttpPost]
+        public bool BlockUser(string user_id)
+        {
+
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                int result = db.Updateable<User_Info>().SetColumns(it => it.account_status == "0").Where(it => it.user_id == user_id).ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public bool UnblockUser(string user_id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                int result = db.Updateable<User_Info>().SetColumns(it => it.account_status == "1").Where(it => it.user_id == user_id).ExecuteCommand();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

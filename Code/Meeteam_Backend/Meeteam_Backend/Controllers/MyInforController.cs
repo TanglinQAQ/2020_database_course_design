@@ -15,7 +15,7 @@ using System.Text.Unicode;
 
 namespace Meeteam_Backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class MyInforController : ControllerBase
     {
@@ -29,6 +29,24 @@ namespace Meeteam_Backend.Controllers
             {
                 List<User_Info> agrlist = db.Queryable<User_Info>().Where(it => it.user_id == user_id).ToList();
                 return agrlist;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        //查询用户账号状态
+        [HttpGet]
+        public string GetUserState(string user_id)
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                List<User_Info> agrlist = db.Queryable<User_Info>().Where(it => it.user_id == user_id).ToList();
+                User_Info u = agrlist.First();
+                return u.account_status;
             }
             catch (Exception ex)
             {
