@@ -23,11 +23,11 @@ namespace Meeteam_Backend.Controllers
         {
             User_Info info = new User_Info();
             dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
             List<User_Info> agrlist;
             //info.user_id = "admin";
             //info.user_name = "sbw";
             //info.point = 1;
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接
             try
             {
                 agrlist = db.Queryable<User_Info>().Where(it => it.user_id == ID).ToList();

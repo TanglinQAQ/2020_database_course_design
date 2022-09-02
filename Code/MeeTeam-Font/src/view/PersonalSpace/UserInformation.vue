@@ -206,6 +206,7 @@ export default {
       let params = {
         user_id: this.username,
       };
+      console.log(params);
       GetUserInfor(params).then(res => {
         let item = res.data[0];
         if(item.gender==="0")

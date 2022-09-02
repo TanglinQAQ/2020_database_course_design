@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
   export function getInfo(params) {
-    /*创建组队需求 */
+    //获取用户信息
     return request({
       url: '/Info/getInfo',
       method: 'get',
@@ -10,6 +10,7 @@ import request from '@/utils/request'
       }
     })
   }
+
   export function UpdatePoint(params) {
     /*创建组队需求 */
     return request({
