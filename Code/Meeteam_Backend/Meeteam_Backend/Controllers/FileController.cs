@@ -13,11 +13,12 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class FileController : ControllerBase
     {
+        //const string mypath = @"C:\workspace\storage\";
+        const string mypath = @"D:\work_space\storage\";
         [HttpPost]
         public void PostFile([FromForm] IFormCollection formCollection)
         {
             FormFileCollection fileCollection = (FormFileCollection)formCollection.Files;
-            string path = formCollection["path"];//存储路径
             string id = formCollection["id"];//表id
             string target = formCollection["target"];//目标表（project或user）
             //遍历文件列表，向磁盘指定路径存储文件
@@ -26,7 +27,13 @@ namespace Meeteam_Backend.Controllers
                 StreamReader reader = new StreamReader(file.OpenReadStream());
                 string content = reader.ReadToEnd();
                 string name = file.FileName;
-                path = @"D:\work_space\storage\" + path + @"\";
+                string path = mypath;
+                if (target == "user")
+                    path += @"head_img\";
+                else if (target == "project")
+                    path += @"project_img\";
+                else if (target == "temporary")
+                    path += @"temporary\";
                 string filename = path + name;
                 if (!System.IO.File.Exists(filename))
                 {
@@ -49,7 +56,7 @@ namespace Meeteam_Backend.Controllers
                     db.Updateable<User_Info>()
                         .SetColumns(it => new User_Info
                         {
-                            head_img = filename
+                            head_img = name
                         })
                         .Where(it => it.user_id == id)
                         .ExecuteCommand();
@@ -59,7 +66,7 @@ namespace Meeteam_Backend.Controllers
                     //修改project表，即项目宣传图
                     var entity = new Project_Img();
                     entity.project_id = id;
-                    entity.img_path = filename;
+                    entity.img_path = name;
                     db.Storageable(entity).ExecuteCommand();
                 }
             }
@@ -75,7 +82,7 @@ namespace Meeteam_Backend.Controllers
             {
                 //取用户头像
                 var q = db.Queryable<User_Info>().First(it => it.user_id == id);
-                filename = q.head_img;
+                filename = mypath+@"head_img\"+q.head_img;
                 if (filename == null)
                     return null;
             }
@@ -85,13 +92,13 @@ namespace Meeteam_Backend.Controllers
                 var q = db.Queryable<Project_Img>().First(it => it.project_id == id);
                 if (q == null)
                     return null;
-                filename = q.img_path;
+                filename = mypath + @"project_img\" + q.img_path;
                 if (filename == null)
                     return null;
             }
             if (target == "temporary")
             {
-                filename = @"D:\work_space\storage\temporary\" + id;
+                filename = mypath + @"temporary\" + id;
             }
             FileStream fs = System.IO.File.OpenRead(filename);
             var ms = new MemoryStream();
@@ -106,12 +113,12 @@ namespace Meeteam_Backend.Controllers
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
             var entity = new Project_Img();
             entity.project_id = project_id;
-            entity.img_path = @"D:\work_space\storage\project_img\"+filename;
+            entity.img_path = filename;
             if (!System.IO.File.Exists(entity.img_path))
             {
                 using (FileStream fs = System.IO.File.Create(entity.img_path))
                 {
-                    string src = @"D:\work_space\storage\temporary\" + filename;
+                    string src = mypath + @"temporary\" + filename;
                     FileStream file = System.IO.File.OpenRead(src);
                     // 复制文件
                     file.CopyTo(fs);

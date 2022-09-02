@@ -30,18 +30,39 @@ namespace Meeteam_Backend.Controllers
             bool have_a = db.Queryable<Administrator>().Any(it => it.admin_id == admin_id);
             if (!have_p || !have_a)
                 return 0;
+            string p_id = project_id;
+            List<Grouping_Requirement> have_r = db.Queryable<Grouping_Requirement>().Where(it => it.project_id == p_id).ToList();
             string time = DateTime.Now.ToString();
-            return db.Updateable<Project>()
-                .SetColumns(it => new Project
-                {
-                    audit_result = result,
-                    audit_time = time,
-                    admin_id = admin_id,
-                    audit_reason = reason,
-                    audit_status = "1"
-                })
-                .Where(it => it.project_id == project_id)
-                .ExecuteCommand();
+            if (have_r.Count!=0)
+            {
+                return db.Updateable<Project>()
+                    .SetColumns(it => new Project
+                    {
+                        project_progress = "招募中",
+                        audit_result = result,
+                        audit_time = time,
+                        admin_id = admin_id,
+                        audit_reason = reason,
+                        audit_status = "1"
+                    })
+                    .Where(it => it.project_id == project_id)
+                    .ExecuteCommand();
+            }
+            else
+            {
+                return db.Updateable<Project>()
+                     .SetColumns(it => new Project
+                     {
+                         project_progress = "已发布",
+                         audit_result = result,
+                         audit_time = time,
+                         admin_id = admin_id,
+                         audit_reason = reason,
+                         audit_status = "1"
+                     })
+                     .Where(it => it.project_id == project_id)
+                     .ExecuteCommand();
+            }
         }
     }
 }
