@@ -10,7 +10,7 @@ namespace Meeteam_Backend
     [SugarTable("Project")]
     public class Project
     {
-        [SugarColumn(IsPrimaryKey = true)]
+        [SugarColumn(IsPrimaryKey = true, OracleSequenceName = "PROJECT_SEQ", IsIdentity = true)]
         public string project_id { get; set; }
         public string project_name { get; set; }
         public string project_background { get; set; }

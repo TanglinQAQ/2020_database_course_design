@@ -4,9 +4,8 @@ import request from '@/utils/request'
     /*创建项目 */
     return request({
       url: '/Project/AddProject',
-      method: 'post',
+      method: 'get',
       params:{
-        project_id:params.project_id,
         project_name:params.project_name,
         project_background:params.project_background,
         project_introduction:params.project_introduction,

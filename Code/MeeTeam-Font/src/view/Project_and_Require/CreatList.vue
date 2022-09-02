@@ -4,9 +4,7 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
-            >首页</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>新建项目</el-breadcrumb-item>
         </el-breadcrumb>
@@ -44,14 +42,10 @@
                 style="float: left"
                 format="yyyy-MM-dd HH:mm:ss"
                 value-format="yyyy-MM-dd HH:mm:ss"
-              >
-              </el-date-picker>
+              ></el-date-picker>
             </el-form-item>
             <el-form-item label="是否有组队需求" prop="project_status">
-              <el-select
-                v-model="ruleForm.project_status"
-                placeholder="请选择是否有组队需求"
-              >
+              <el-select v-model="ruleForm.project_status" placeholder="请选择是否有组队需求">
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>
               </el-select>
@@ -80,10 +74,7 @@
                 ></el-cascader>
               </el-form-item>
               <el-form-item label="组队人数" prop="team_limit">
-                <el-select
-                  v-model="ruleForm.team_limit"
-                  placeholder="请选择组队人数"
-                >
+                <el-select v-model="ruleForm.team_limit" placeholder="请选择组队人数">
                   <el-option label="3" value="3"></el-option>
                   <el-option label="4" value="4"></el-option>
                   <el-option label="5" value="5"></el-option>
@@ -102,10 +93,7 @@
               </el-form-item>
             </div>
             <el-form-item label="是否上传项目宣传图" prop="project_img">
-              <el-select
-                v-model="ruleForm.project_img"
-                placeholder="请选择是否上传项目宣传图"
-              >
+              <el-select v-model="ruleForm.project_img" placeholder="请选择是否上传项目宣传图">
                 <el-option label="是" value="是"></el-option>
                 <el-option label="否" value="否"></el-option>
               </el-select>
@@ -134,9 +122,7 @@
               </el-form-item>
             </div>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')"
-                >立即创建</el-button
-              >
+              <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
@@ -162,12 +148,13 @@ export default {
     return {
       upload_data: {
         path: "temporary",
-        id: global_msg.projectnum,
+        id: global_msg.newprojectid,
         target: 'temporary'
       },
       fileList: [],
       img_name: '',
       base64: '',
+      pid: '',
       detailshow: false,
       props: { multiple: true }, //级联选择器确定选项选不选择
       options: [
@@ -204,15 +191,15 @@ export default {
       ],
       checkList: [],
       ruleForm: {
-        project_id: "",
+        pid: "",
         project_name: "",
         project_backgroud: "",
         project_introduction: "",
         project_content: "",
         due: "",
         project_status: "",
-        project_img:"",
-        img:"",
+        project_img: "",
+        img: "",
 
         require_id: "",
         purpose: "",
@@ -306,9 +293,6 @@ export default {
       },
     };
   },
-  created() {
-    this.getimg();
-  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -320,92 +304,129 @@ export default {
         }
       });
       //项目
-      global_msg.projectnum += 1; //全局项目个数+1
-      this.ruleForm.project_id = global_msg.projectnum; //得到全局项目个数
-      let vm = this;
       var Due = new String(this.ruleForm.due);
       //请求地址,this和vm指的是全局
-      let param0 = {
-        user_id: global_msg.nowuserid,
-        project_id: this.ruleForm.project_id,
-        duty: "发布者",
-      };
       var judge = new String(this.ruleForm.project_status);
       if (judge == "是") {
-        global_msg.requirenum += 1; //全局需求个数+1
-        this.ruleForm.require_id = global_msg.requirenum; //得到全局需求个数
-        this.ruleForm.require_status = "0/" + this.ruleForm.team_limit; //改成了0/人数
-        var RegionLast = this.ruleForm.region.join(","); // 把数组项拼接成字符串，以逗号,分隔;转换后的地区，需要转成字符串
-        var TeamDetailLast = this.ruleForm.team_type_detail.join("-");
-        var reg = new RegExp("1,", "g");
-        TeamDetailLast = TeamDetailLast.replace(reg, ""); //把父结点的值去掉
-        reg = new RegExp("6,", "g");
-        TeamDetailLast = TeamDetailLast.replace(reg, ""); //把父结点的值去掉
-        let param2 = {
-          require_id: this.ruleForm.require_id,
-          purpose: this.ruleForm.purpose,
-          team_type: this.ruleForm.team_type,
-          team_limit: this.ruleForm.team_limit,
-          details: this.ruleForm.details,
-          require_status: this.ruleForm.require_status,
-          project_id: this.ruleForm.project_id,
-          region: RegionLast,
-          team_type_detail: TeamDetailLast,
+        let param1 = {
+          project_name: this.ruleForm.project_name,
+          project_background: this.ruleForm.project_background,
+          project_introduction: this.ruleForm.project_introduction,
+          project_content: this.ruleForm.project_content,
+          due: Due,
+          project_progress: "未审核",
+          project_status: this.ruleForm.project_status,
         }
-        //添加数据进GroupRequirement表
-        createrequirelist(param2).then(function (res) {
-          if (res.data === false) {
-            vm.$message.error("提交需求失败");
-            vm.resetForm(formName);
+        createprojectlist(param1).then(res => {
+          if (res.data === "-1") {
+            this.$message.error("提交项目失败");
+            this.resetForm(formName);
+          }
+          else {
+            this.pid = res.data;
+            if (this.img_name != '') {
+              var vm = this;
+              let para = {
+                project_id: res.data,
+                filename: this.img_name
+              }
+              copyimg(para).then(function (res) {
+                if (res.data === false) {
+                  vm.$message.error("提交失败");
+                  vm.resetForm(formName);
+                }
+              });
+            }
+            let param0 = {
+              user_id: global_msg.nowuserid,
+              project_id: res.data,
+              duty: "发布者",
+            };
+            createuser_project(param0).then(function (res0) {
+              if (res0.data === false) {
+                this.$message.error("提交失败");
+                this.resetForm(formName);
+              }
+            });
+
+            global_msg.requirenum += 1; //全局需求个数+1
+            this.ruleForm.require_id = global_msg.requirenum; //得到全局需求个数
+            this.ruleForm.require_status = "0/" + this.ruleForm.team_limit; //改成了0/人数
+            var RegionLast = this.ruleForm.region.join(","); // 把数组项拼接成字符串，以逗号,分隔;转换后的地区，需要转成字符串
+            var TeamDetailLast = this.ruleForm.team_type_detail.join("-");
+            var reg = new RegExp("1,", "g");
+            TeamDetailLast = TeamDetailLast.replace(reg, ""); //把父结点的值去掉
+            reg = new RegExp("6,", "g");
+            TeamDetailLast = TeamDetailLast.replace(reg, ""); //把父结点的值去掉
+            let param2 = {
+              require_id: this.ruleForm.require_id,
+              purpose: this.ruleForm.purpose,
+              team_type: this.ruleForm.team_type,
+              team_limit: this.ruleForm.team_limit,
+              details: this.ruleForm.details,
+              require_status: this.ruleForm.require_status,
+              project_id: res.data,
+              region: RegionLast,
+              team_type_detail: TeamDetailLast,
+            }
+            //添加数据进GroupRequirement表
+            createrequirelist(param2).then(function (res1) {
+              if (res1.data === false) {
+                this.$message.error("提交需求失败");
+                this.resetForm(formName);
+              }
+            });
           }
         });
-        let param1 = {
-        project_id: this.ruleForm.project_id,
-        project_name: this.ruleForm.project_name,
-        project_background: this.ruleForm.project_background,
-        project_introduction: this.ruleForm.project_introduction,
-        project_content: this.ruleForm.project_content,
-        due: Due,
-        project_progress: "招募中",
-        project_status: this.ruleForm.project_status,
-        }
-        createprojectlist(param1).then(function (res) {
-        if (res.data === false) {
-          vm.$message.error("提交项目失败");
-          vm.resetForm(formName);
-        } 
-        });
+        this.$message.success("提交成功");
+        this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
       }
-      else{
+      else {
         let param1 = {
-        project_id: this.ruleForm.project_id,
-        project_name: this.ruleForm.project_name,
-        project_background: this.ruleForm.project_background,
-        project_introduction: this.ruleForm.project_introduction,
-        project_content: this.ruleForm.project_content,
-        due: Due,
-        project_progress: "已发布",
-        project_status: this.ruleForm.project_status,
+          project_name: this.ruleForm.project_name,
+          project_background: this.ruleForm.project_background,
+          project_introduction: this.ruleForm.project_introduction,
+          project_content: this.ruleForm.project_content,
+          due: Due,
+          project_progress: "未审核",
+          project_status: this.ruleForm.project_status,
         }
-        createprojectlist(param1).then(function (res) {
-        if (res.data === false) {
-          vm.$message.error("提交项目失败");
-          vm.resetForm(formName);
-        } 
+        createprojectlist(param1).then(res => {
+          if (res.data === "-1") {
+            this.$message.error("提交项目失败");
+            this.resetForm(formName);
+          }
+          else {
+            this.pid = res.data;
+            if (this.img_name != '') {
+              var vm = this;
+              let para = {
+                project_id: res.data,
+                filename: this.img_name
+              }
+              copyimg(para).then(function (res) {
+                if (res.data === false) {
+                  vm.$message.error("提交失败");
+                  vm.resetForm(formName);
+                }
+              });
+            }
+            let param0 = {
+              user_id: global_msg.nowuserid,
+              project_id: res.data,
+              duty: "发布者",
+            };
+            createuser_project(param0).then(function (res0) {
+              if (res0.data === false) {
+                this.$message.error("提交失败");
+                this.resetForm(formName);
+              }
+            });
+          }
         });
+        this.$message.success("提交成功");
+        this.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
       }
-      //添加数据进Project_User表
-      createuser_project(param0).then(function (res) {
-        if (res.data === false) {
-          vm.$message.error("提交失败");
-          vm.resetForm(formName);
-        }
-        else{
-           vm.$message.success("提交成功");
-          vm.$router.push({ path: "/users/InforList" }); //接下来进入到哪个路由
-        }
-      });
-      //添加数据进Project表
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

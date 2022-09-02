@@ -21,15 +21,14 @@ namespace Meeteam_Backend.Controllers
     public class ProjectController : ControllerBase
     {
         //上传项目
-        [HttpPost]
-        public bool AddProject(string project_id, string project_name, string project_background, string project_introduction, string project_content, string project_status, string due, string project_progress)
+        [HttpGet]
+        public string AddProject(string project_name, string project_background, string project_introduction, string project_content, string project_status, string due, string project_progress)
         {
             //获取数据库连接
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();
 
             Project pos = new Project();
-            pos.project_id = project_id;
             pos.project_name = project_name;
             pos.project_background = project_background;
             pos.project_introduction = project_introduction;
@@ -44,11 +43,10 @@ namespace Meeteam_Backend.Controllers
             pos.due = due;
             pos.project_progress = project_progress;
 
-            int count = db.Insertable(pos).ExecuteCommand();
-            if (count == 1)
-                return true;
-            else
-                return false;
+            long re_id = db.Insertable(pos).ExecuteReturnBigIdentity();//返回自增列
+
+            string resdata = re_id+"";
+            return resdata;
         }
         //查询全部组队需求，返回一个对象
         [HttpGet]
