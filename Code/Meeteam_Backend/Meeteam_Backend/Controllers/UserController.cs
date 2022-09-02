@@ -86,7 +86,7 @@ namespace Meeteam_Backend.Controllers
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
             try
             {
-                int result = db.Updateable<User_Info>().SetColumns(it => it.account_status == "0").Where(it => it.user_id == user_id).ExecuteCommand();
+                int result = db.Updateable<User_Info>().SetColumns(p=>new User_Info() { account_status = "0" }).Where(it => it.user_id == user_id).ExecuteCommand();
                 if (result == 1)
                     return true;
                 else
@@ -105,7 +105,7 @@ namespace Meeteam_Backend.Controllers
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
             try
             {
-                int result = db.Updateable<User_Info>().SetColumns(it => it.account_status == "1").Where(it => it.user_id == user_id).ExecuteCommand();
+                int result = db.Updateable<User_Info>().SetColumns(p => new User_Info() { account_status = "1" }).Where(it => it.user_id == user_id).ExecuteCommand();
                 if (result == 1)
                     return true;
                 else
@@ -114,6 +114,23 @@ namespace Meeteam_Backend.Controllers
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        //查询全部用户，返回一个对象
+        [HttpGet]
+        public List<User_Info> SelectAllStatus()
+        {
+            dbORM dborm = new dbORM();
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            try
+            {
+                List<User_Info> agrlist = db.Queryable<User_Info>().ToList();
+                return agrlist;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }

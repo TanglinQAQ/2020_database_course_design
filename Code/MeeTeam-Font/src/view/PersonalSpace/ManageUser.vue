@@ -8,7 +8,8 @@
                         <el-breadcrumb-item>用户管理</el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
-                <el-card>
+                <!--
+<el-card>
                     <div class="filter-container">
                         <el-input placeholder="用户名" style="width: 180px" class="filter-item"
                             v-model="listQuery.notice_title" @keyup.enter.native="handleFilter"></el-input>
@@ -21,22 +22,24 @@
                         </el-button>
                     </div>
                 </el-card>
+                -->
+
                 <br />
                 <el-card>
-                    <el-table :data="tableData" border @row-click="goto_ShowNotice" v-if="isAlive"
-                        :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }">
-                        <el-table-column v-if="false" prop="user_id" label="用户id">
+                    <el-table :data="tableData" border :header-cell-style="{ textAlign: 'center' }"
+                        :cell-style="{ 'text-align': 'center' }">
+                        <el-table-column prop="user_id" label="用户名" align="left" style="margin: 50px" min-width="35%">
                         </el-table-column>
-                        <el-table-column prop="notice_title" label="用户名" align="left" style="margin: 50px">
-                        </el-table-column>
-                        <el-table-column prop="operate_type" label="状态" align="center">
+                        <el-table-column prop="account_status" label="状态" align="center" min-width="20%">
                         </el-table-column>
                         <el-table-column label="操作" align="center">
                             <template slot-scope="scope">
                                 <el-button-group>
-                                    <el-button plain icon="el-icon-edit" @click="block_user(scope.row)"></el-button>
-                                    <el-button plain slot="reference" @click.native.stop icon="el-icon-delete">
-                                    </el-button>
+                                    <el-button plain type="info" icon="el-icon-remove" @click="block_user(scope.row)"
+                                        :disabled="scope.row.account_status == '封禁' ? true : false"> 封禁该用户</el-button>
+                                    <el-button plain type="success" icon="el-icon-success" @click="unblock_user(scope.row)"
+                                        style="margin-left:50px;"
+                                        :disabled="scope.row.account_status == '未封禁' ? true : false"> 解禁该用户 </el-button>
                                 </el-button-group>
                             </template>
                         </el-table-column>
@@ -51,28 +54,30 @@
 import { get_all } from "@/api/notice.js";
 import { delete_notice } from "@/api/notice.js";
 import { fetchList } from "@/api/notice.js";
-import { BlockUser, UnblockUser } from '@/api/MyInfor';
+import { BlockUser, UnblockUser } from '@/api/MyInfor.js';
+import { GetUserStatus } from "@/api/MyInfor.js";
 
 const operateOptions = [
-    { key: "blocked", display_name: "封禁" },
-    { key: "unblocked", display_name: "未封禁" },
+    { key: "0", display_name: "封禁" },
+    { key: "1", display_name: "未封禁" },
 ];
-
+/*
 const operateKeyValue = operateOptions.reduce((acc, cur) => {
     acc[cur.key] = cur.display_name;
     return acc;
 }, {});
-
+*/
 export default {
+    /*
     filters: {
         operateFilter(operate) {
             return operateKeyValue[operate];
         },
     },
+    */
     data() {
         return {
             tableData: [],
-            isAlive: true,
             listQuery: {
                 user_name: "",
                 user_id: "",
@@ -82,40 +87,73 @@ export default {
         };
     },
     created() {
-        this.getList();
+        this.getlist();
     },
     methods: {
+        getlist() {
+            var vm = this; //全局变量
+            GetUserStatus().then(function (res) {
+                //console.log(res);
+                for (let item of res.data) {
+                    //console.log(item);
+                    let form = {
+                        //设置添加数据的格式
+                        user_id: "",
+                        account_status: ""
+                    };
+
+                    form.user_id = item.user_id;
+                    if (item.account_status == '0') {
+                        form.account_status = "封禁";
+                    }
+                    else {
+                        form.account_status = "未封禁";
+                    }
+                    //form.account_status = item.account_status;
+
+                    vm.tableData.push(form);
+                    // console.log(form);
+                    // console.log(vm.table_Data);
+                }
+            });
+        },
+
+        /*
         getList() {
             this.tableData = [];
             var query = JSON.stringify(this.listQuery);
             fetchList(query).then((res) => {
                 Object.keys(res.data).forEach((v) => {
+                    console.log(res.data[v]);
                     let o = {};
                     o.aaccount_status = res.data[v].account_status;
                     o.user_name = res.data[v].user_name;
                     o.user_id = res.data[v].user_id;
-                    console.log(o.user_name);
+                    //console.log(o.user_name);
                     if (res.data[v].account_status == "blocked") {
                         o.operate_type = "封禁";
                     } else {
                         o.operate_type = "未封禁";
                     }
-                    console.log(o);
+                    //console.log(o);
                     this.tableData.push(o);
                 });
             });
         },
+        */
         handleFilter() {
-            this.getList();
+            this.getlist();
         },
         goback() {
             this.$router.push({ path: "/Admin/AdminPage" });
         },
         block_user(row) {
             let param = {
-                id: row.user_id,
+                user_id: row.user_id,
             };
-            BlockUser(param).then(function (res) {
+            console.log(param);
+            BlockUser(param).then(res => {
+                console.log(res);
                 if (res.data) {
                     alert("用户封禁成功");
                     location.reload();
@@ -126,9 +164,9 @@ export default {
         },
         unblock_user(row) {
             let param = {
-                id: row.user_id,
+                user_id: row.user_id,
             };
-            UnblockUser(param).then(function (res) {
+            UnblockUser(param).then(res => {
                 if (res.data) {
                     alert("用户解禁成功");
                     location.reload();

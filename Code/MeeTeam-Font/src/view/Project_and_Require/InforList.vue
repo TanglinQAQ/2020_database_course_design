@@ -98,6 +98,7 @@
           <el-row :glutter="10">
             <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
               <div style="margin-top: 15px">
+              
                 <!--这一层div的作用是什么-->
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
                   <img :src="o.Project_Imgimg_path" class="image" />
@@ -187,7 +188,7 @@ export default {
         .then((res) => {
           let vm = this;
           global_msg.projectnum = res.data.length; //改变全局requirenum
-          //console.log(res);
+          console.log(res);
           // console.log(res.data.length);
           // console.log(res.data[0]);
           // console.log(res.data[0].details);

@@ -82,9 +82,13 @@ export function my_project(params) {
   })
 }
 
+/*
+以下为封禁功能用到
+*/
 export function BlockUser(params) {
   return request({
     url: '/User/BlockUser',
+    method: 'post',
     params: {
       user_id: params.user_id,
     }
@@ -94,8 +98,16 @@ export function BlockUser(params) {
 export function UnblockUser(params) {
   return request({
     url: '/User/UnblockUser',
+    method: 'post',
     params: {
       user_id: params.user_id,
     }
   })
 } 
+
+export function GetUserStatus(){
+  return request({
+    url: '/User/SelectAllStatus',
+    method: 'get',
+  })
+}
