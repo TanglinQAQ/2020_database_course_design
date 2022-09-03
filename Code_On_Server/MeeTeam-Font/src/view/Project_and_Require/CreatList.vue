@@ -306,10 +306,7 @@ export default {
       });
       //项目
       var Due = new String(this.ruleForm.due);
-      //请求地址,this和vm指的是全局
-      var judge = new String(this.ruleForm.project_status);
-      if (judge == "是") {
-        let param1 = {
+      let param1 = {
           project_name: this.ruleForm.project_name,
           project_background: this.ruleForm.project_background,
           project_introduction: this.ruleForm.project_introduction,
@@ -325,11 +322,6 @@ export default {
           }
           else {
             this.pid = res.data;
-            let param0 = {
-              user_id: this.$route.query.id,
-              project_id: res.data,
-              duty: "发布者",
-            };
             if (this.img_name != '') {
               var vm = this;
               let para = {
@@ -343,15 +335,19 @@ export default {
                 }
               });
             }
+            let param0 = {
+              user_id: this.$route.query.id,
+              project_id: res.data,
+              duty: "发布者",
+            };
+            
             createuser_project(param0).then((res0) => {
               if (res0.data === false) {
                 this.$message.error("提交失败");
                 this.resetForm(formName);
               }
             });
-
-            global_msg.requirenum += 1; //全局需求个数+1
-            this.ruleForm.require_id = global_msg.requirenum; //得到全局需求个数
+            if(this.ruleForm.project_status=="是"){
             this.ruleForm.require_status = "0/" + this.ruleForm.team_limit; //改成了0/人数
             var RegionLast = this.ruleForm.region.join(","); // 把数组项拼接成字符串，以逗号,分隔;转换后的地区，需要转成字符串
             var TeamDetailLast = this.ruleForm.team_type_detail.join("-");
@@ -360,7 +356,6 @@ export default {
             reg = new RegExp("6,", "g");
             TeamDetailLast = TeamDetailLast.replace(reg, ""); //把父结点的值去掉
             let param2 = {
-              require_id: this.ruleForm.require_id,
               purpose: this.ruleForm.purpose,
               team_type: this.ruleForm.team_type,
               team_limit: this.ruleForm.team_limit,
@@ -377,57 +372,12 @@ export default {
                 this.resetForm(formName);
               }
             });
-          }
-        });
-        this.$message.success("提交成功");
-        this.$router.push({ path: "/users/InforList", query: { id: this.user } }); //接下来进入到哪个路由
-      }
-      else {
-        let param1 = {
-          project_name: this.ruleForm.project_name,
-          project_background: this.ruleForm.project_background,
-          project_introduction: this.ruleForm.project_introduction,
-          project_content: this.ruleForm.project_content,
-          due: Due,
-          project_progress: "未审核",
-          project_status: this.ruleForm.project_status,
-        }
-        createprojectlist(param1).then(res => {
-          if (res.data === "-1") {
-            this.$message.error("提交项目失败");
-            this.resetForm(formName);
-          }
-          else {
-            this.pid = res.data;
-            if (this.img_name != '') {
-              var vm = this;
-              let para = {
-                project_id: res.data,
-                filename: this.img_name
-              }
-              copyimg(para).then((res) => {
-                if (res.data === false) {
-                  vm.$message.error("提交失败");
-                  vm.resetForm(formName);
-                }
-              });
             }
-            let param0 = {
-              user_id: this.$route.query.id,
-              project_id: res.data,
-              duty: "发布者",
-            };
-            createuser_project(param0).then((res0) => {
-              if (res0.data === false) {
-                this.$message.error("提交失败");
-                this.resetForm(formName);
-              }
-            });
           }
         });
+
         this.$message.success("提交成功");
         this.$router.push({ path: "/users/InforList", query: { id: this.$route.query.id } }); //接下来进入到哪个路由
-      }
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
