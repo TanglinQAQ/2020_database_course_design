@@ -10,7 +10,7 @@ namespace Meeteam_Backend
     [SugarTable("grouping_requirement")]
     public class Grouping_Requirement
     {
-        [SugarColumn(IsPrimaryKey = true)]
+        [SugarColumn(IsPrimaryKey = true,OracleSequenceName = "REQUIRE_SEQ", IsIdentity = true)]
         public string require_id { get; set; }
 
         [SugarColumn(IsJson = true)]
