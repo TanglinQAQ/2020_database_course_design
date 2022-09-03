@@ -38,7 +38,6 @@ export function createrequirelist(params) {
     url: '/GroupRequirement/AddGroupRequirement',
     method: 'post',
     params: {
-      require_id: params.require_id,
       purpose: params.purpose,
       team_type: params.team_type,
       team_limit: params.team_limit,
@@ -52,7 +51,7 @@ export function createrequirelist(params) {
 }
 
 
-/*创建组队需求 */
+/*创建评论 */
 export function createevalist(params) {
   return request({
     url: '/Project_Evaluation/AddProject_Evaluation',
