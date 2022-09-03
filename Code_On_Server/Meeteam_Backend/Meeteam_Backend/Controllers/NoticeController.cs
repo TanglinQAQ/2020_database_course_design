@@ -20,12 +20,12 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class NoticeController : ControllerBase
     {
-        [HttpPost]
+
         //创建公告
+        [HttpPost]
         public bool post(string not)
         {
             //判断管理员是否存在
-
             //创建公告
             Notice notice = JsonSerializer.Deserialize<Notice>(not);
             dbORM dborm = new dbORM();
@@ -35,24 +35,11 @@ namespace Meeteam_Backend.Controllers
                 return true;
             else
                 return false;
-            /*
-            Notice notice = new Notice();
-            notice.admin_id = a_id;
-            notice.notice_id = n_id;
-            notice.notice_content = content;
-            notice.notice_title = title;
-            dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            notice.operate_time = DateTime.Now.ToString();
-            if (db.Insertable(notice).ExecuteCommand() > 0)
-                return true;
-            else
-                return false;
-            */
         }
 
-        [HttpGet]
+
         //获取单条公告
+        [HttpGet]
         public string get_by_id(string id)
         {
             Notice notice = new Notice();
@@ -63,8 +50,9 @@ namespace Meeteam_Backend.Controllers
             return JsonSerializer.Serialize(notice);
         }
 
-        [HttpGet]
+
         //获取全部公告
+        [HttpGet]
         public string get_all()
         {
             dbORM dborm = new dbORM();
@@ -74,8 +62,9 @@ namespace Meeteam_Backend.Controllers
             return JsonSerializer.Serialize(notice);
         }
 
-        [HttpDelete]
+
         //删除公告
+        [HttpDelete]
         public bool delete_by_id(string id)
         {
             Notice notice = new Notice();
@@ -100,14 +89,8 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
-        /*
-         测试用例：
-{
-    "admin_id": "",
-    "notice_title": "",
-    "operate": ""
-}
-         */
+
+
         [HttpGet]
         public string notice_query(string s)
         {

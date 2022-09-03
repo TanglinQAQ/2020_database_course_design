@@ -19,8 +19,8 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class UserController : ControllerBase
     {
-        [HttpPost]
         //添加浏览历史
+        [HttpPost]
         public bool AddViewHistory(string user_id, string project_id)
         {
             dbORM dborm = new dbORM();
@@ -42,41 +42,13 @@ namespace Meeteam_Backend.Controllers
                 {
                     return false;
                 }
-                /*
-                int count = db.Insertable(bh).ExecuteCommand();
-                if (count == 1)
-                    return true;
-                else
-                {
-                    
-                     * int count2 = db.Updateable<Browsehistory>()
-                        .SetColumns(p=>new Browsehistory() { browse_time = bh.browse_time })
-                        .Where(it => it.user_id == user_id && it.project_id == project_id)
-                        .ExecuteCommand();
-                     
-                    int count2 = db.Updateable<Browsehistory>()
-                        .SetColumns(it => new Browsehistory { browse_time = bh.browse_time })
-                        .Where(it => it.project_id == project_id&&it.user_id==user_id)
-                        .ExecuteCommand();
-
-                    //int count2 = db.Updateable(bh).ExecuteCommand();
-                    if (count2 == 1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                
-                }
-                    */
             }
             catch (Exception ex)
             {
                 return false;
             }
         }
+
 
         [HttpPost]
         public bool BlockUser(string user_id)
@@ -98,6 +70,7 @@ namespace Meeteam_Backend.Controllers
             }
         }
 
+
         [HttpPost]
         public bool UnblockUser(string user_id)
         {
@@ -116,6 +89,7 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
 
         //查询全部用户，返回一个对象
         [HttpGet]

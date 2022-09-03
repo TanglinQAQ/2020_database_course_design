@@ -41,6 +41,8 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
+
+
         //查询全部评论，返回一个对象
         [HttpGet]
         public List<Project_Evaluation> SelectAllProject_Evaluation()
@@ -57,6 +59,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+
+
         //查询id的项目评论
         [HttpGet]
         public string get_by_id(string id)
@@ -68,6 +72,8 @@ namespace Meeteam_Backend.Controllers
             project_eva = db.Queryable<Project_Evaluation>().Where(it => it.project_id == id).First();
             return JsonSerializer.Serialize(project_eva);
         }
+
+
         //删除评论
         [HttpDelete]
         public bool deleteProject(string id)

@@ -20,8 +20,8 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class AuditController : ControllerBase
     {
-        [HttpPost]
         //修改项目的审核状态
+        [HttpPost]
         public int Project_Audit(string project_id, string admin_id, string result, string reason)
         {
             dbORM dborm = new dbORM();

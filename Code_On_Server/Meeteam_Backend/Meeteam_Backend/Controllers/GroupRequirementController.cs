@@ -27,8 +27,6 @@ namespace Meeteam_Backend.Controllers
         {
             dbORM dborm = new dbORM();
             SqlSugarClient db = dborm.getInstance();//获取数据库连接
-                                                    //添加
-
             try
             {
                 Grouping_Requirement pos = new Grouping_Requirement();
@@ -53,6 +51,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //查询全部组队需求，返回一个对象
         [HttpGet]
         public List<Grouping_Requirement> SelectAllGroupRequirement()
@@ -69,6 +69,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+
+
         //查询id的需求
         [HttpGet]
         public string get_by_id(string id)
@@ -79,6 +81,8 @@ namespace Meeteam_Backend.Controllers
             re = db.Queryable<Grouping_Requirement>().Where(it => it.project_id == id).First();
             return JsonSerializer.Serialize(re);
         }
+
+
         //编辑更新需求
         [HttpPost]
         public bool Changerequirelist(string purpose, string team_type, string team_limit, string details, string require_status, string project_id, string region, string team_type_details)
@@ -109,12 +113,15 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //删除组队需求
         [HttpDelete]
         public bool deleteGroupRequirement(string require_id)
         {
             dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                      //删除
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            //删除操作
             try
             {
                 int count = db.Deleteable<Grouping_Requirement>().In(require_id).ExecuteCommand();

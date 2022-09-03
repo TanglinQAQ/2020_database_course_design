@@ -10,10 +10,7 @@ namespace MeeTeam_Backend
     [SugarTable("Browse_history")]
     public class Browsehistory
     {
-        /*
         //主码需要特殊说明
-        */
-
         [SugarColumn(IsPrimaryKey = true)]
         public string user_id { get; set; }
 

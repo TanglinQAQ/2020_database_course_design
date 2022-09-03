@@ -50,33 +50,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
-        /*//得到用户名，返回用户id
-        [HttpGet]
-        public string GetUserid(string user_name)
-        {
-            dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            //查询
-            var list = db.Queryable<User_Info>()
-                .Select(it => it.user_id)
-                .Where("user_name=@name", new { name = user_name })
-                .ToList();
-            return list[0].ToString();
-        }
-        //得到用户id，返回用户名
-        [HttpGet]
-        public string GetUsername(string user_id)
-        {
-            dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接
-            //查询
-            User_Info info = new User_Info();
-            var list = db.Queryable<User_Info>()
-               .Select(it => it.user_name)
-               .Where("user_id=@id", new { id = user_id })
-               .ToList();
-            return list[0].ToString();
-        }*/
+
+
         //查询此用户名是否存在
         [HttpGet]
         public bool IsUserUni(string user_id)
@@ -97,6 +72,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //用户登陆
         [HttpGet]
         public bool login(string user_id, string password)
@@ -119,6 +96,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //管理员登陆
         [HttpGet]
         public bool adminlogin(string admin_id, string password)
@@ -142,6 +121,8 @@ namespace Meeteam_Backend.Controllers
             }
 
         }
+
+
         //添加普通用户
         [HttpPost]
         public bool addnormal(string user_id, string password, string user_name, string gender, string contact_info, string institution, string major, string introduction)
@@ -174,6 +155,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //添加管理员
         [HttpPost]
         public bool addadmin(string admin_id, string password, string user_name, string gender, string contact_info)
@@ -201,12 +184,14 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //删除用户
         [HttpDelete]
         public bool deleteUser(string user_id)
         {
             dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                    //删除
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
             try
             {
                 int count = db.Deleteable<User_Info>().In(user_id).ExecuteCommand();
@@ -220,12 +205,15 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //删除管理员
         [HttpDelete]
         public bool deleteAdmin(string admin_id)
         {
             dbORM dborm = new dbORM();
-            SqlSugarClient db = dborm.getInstance();//获取数据库连接                                    //删除
+            SqlSugarClient db = dborm.getInstance();//获取数据库连接
+            //删除操作
             try
             {
                 int count = db.Deleteable<Administrator>().In(admin_id).ExecuteCommand();
@@ -239,7 +227,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        //bbdsekrrtjqqbggf
+
+
         //发送邮箱
         [HttpGet]
         public string SendMailUseZj(string aa)
@@ -271,6 +260,8 @@ namespace Meeteam_Backend.Controllers
             client.Send(message);
             return ts;//返回验证码
         }
+
+
         //更新密码
         [HttpPost]
         public bool UpdateUser(string user_id, string password)
@@ -293,6 +284,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //验证用户名和邮箱是否正确
         [HttpGet]
         public bool Iftruemail(string user_id, string contact_info)

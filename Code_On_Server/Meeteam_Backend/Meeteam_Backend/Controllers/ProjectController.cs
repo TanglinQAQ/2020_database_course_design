@@ -48,6 +48,8 @@ namespace Meeteam_Backend.Controllers
             string resdata = re_id+"";
             return resdata;
         }
+
+
         //查询全部组队需求，返回一个对象
         [HttpGet]
         public List<Project> SelectAllProject()
@@ -64,6 +66,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+
+
         //查询id的项目
         [HttpGet]
         public string get_by_id(string id)
@@ -75,6 +79,8 @@ namespace Meeteam_Backend.Controllers
             project = db.Queryable<Project>().Where(it => it.project_id == id).First();
             return JsonSerializer.Serialize(project);
         }
+
+
         //编辑更新项目
         [HttpPost]
         public bool Changeprojectlist(string project_id, string project_name, string project_background, string project_introduction, string project_content, string due)
@@ -103,6 +109,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //结束项目
         [HttpPost]
         public bool UpdateProgress(string project_id,string project_progress)
@@ -127,6 +135,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //删除项目
         [HttpDelete]
         public bool deleteProject(string project_id)
@@ -149,6 +159,7 @@ namespace Meeteam_Backend.Controllers
             }
         }
 
+
         [HttpPost]
         //修改推荐状态
         public int Recommend_Project(string project_id)
@@ -169,6 +180,7 @@ namespace Meeteam_Backend.Controllers
                 .ExecuteCommand();
         }
 
+
         [HttpGet]
         public List<Project> SelectAllRecommend()
         {
@@ -178,22 +190,9 @@ namespace Meeteam_Backend.Controllers
             return rec;
         }
 
+
         //查询项目
         [HttpGet]
-
-        /*测试用例
-{
-  "project_id": "",
-  "project_name": "",
-  "publisher": "",
-  "project_progess": "规划阶段",
-  "audit_status": "1",
-  "hav_require": "",
-  "require_id": "",
-  "require_status": "",
-  "team_type": ""
-}
-         */
         public string project_query(string s)
         {
             Project_Query q = JsonSerializer.Deserialize<Project_Query>(s);

@@ -20,7 +20,9 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class FacoriteController : ControllerBase
     {
-        //上传收藏
+        /**
+         * 上传收藏
+         */
         [HttpPost]
         public bool AddFacorite(string facorite_id, string owner_id, string project_id)
         {
@@ -43,7 +45,10 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        //通过user_id查询收藏
+
+        /**
+         * 通过user_id查询收藏
+         */
         [HttpGet]
         public List<Facorite> GetFacorite(string user_id)
         {
@@ -59,7 +64,10 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
-        //查询全部收藏，返回一个对象
+
+        /**
+         * 查询全部收藏，返回一个对象
+         */
         [HttpGet]
         public List<Facorite> SelectAllFacorite()
         {
@@ -75,7 +83,10 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
-        //根据id查询项目
+
+        /**
+         * 根据id查询项目
+         */
         [HttpGet]
         public List<Project> GetPorject(string project_id)
         {
@@ -91,7 +102,10 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
-        //判断是否已经收藏过了
+
+        /**
+         * 判断是否已经收藏过了
+         */
         [HttpGet]
         public bool IfCollect(string project_id,string owner_id)
         {
@@ -111,7 +125,10 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        //删除收藏
+
+        /**
+         * 删除收藏
+         */
         [HttpDelete]
         public bool deletecollect(string facorite_id)
         {
@@ -129,6 +146,5 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
-        //查询全部评论，返回一个对象
     }
 }

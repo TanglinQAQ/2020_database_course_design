@@ -19,6 +19,7 @@ namespace Meeteam_Backend.Controllers
     [EnableCors("any")]
     public class User_ProjectController : Controller
     {
+
         //上传Project_User
         [HttpPost]
         public bool AddUser_Project(string project_id, string user_id, string duty)
@@ -38,6 +39,8 @@ namespace Meeteam_Backend.Controllers
             else
                 return false;
         }
+
+
         //查询id的项目
         [HttpGet]
         public string get_by_id(string pid, string uid)
@@ -49,6 +52,8 @@ namespace Meeteam_Backend.Controllers
             project = db.Queryable<User_Project>().Where(it => it.project_id == pid && it.user_id == uid).First();
             return JsonSerializer.Serialize(project);
         }
+
+
         //查询申请者列表
         [HttpGet]
         public List<User_Project> get_member(string pid, string duty)
@@ -65,6 +70,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+
+
         //查询发布者
         [HttpGet]
         public string get_leader(string id)
@@ -81,6 +88,8 @@ namespace Meeteam_Backend.Controllers
                 return null;
             }
         }
+
+
         //发布者审核
         [HttpPost]
         public bool Audit(string pid, string uid,string dy)
@@ -101,6 +110,8 @@ namespace Meeteam_Backend.Controllers
                 return false;
             }
         }
+
+
         //删除申请
         [HttpDelete]
         public bool DeleteApply(string pid,string uid)
