@@ -53,7 +53,7 @@
     </div>
 </template>
    
-  <script scoped>
+<script scoped>
 import { get_all } from "@/api/notice.js";
 import { delete_notice } from "@/api/notice.js";
 import { BlockUser, UnblockUser } from '@/api/MyInfor.js';
