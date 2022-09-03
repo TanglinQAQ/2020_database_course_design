@@ -3,28 +3,17 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }"
-            >首页</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>通知管理</el-breadcrumb-item>
           <el-breadcrumb-item>新建通知</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <el-form :model="FormData" ref="FormData">
         <el-form-item>
-          <el-input
-            type="text"
-            v-model="FormData.title"
-            placeholder="请输入公告标题"
-          ></el-input>
+          <el-input type="text" v-model="FormData.title" placeholder="请输入公告标题"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input
-            type="textarea"
-            rows="10"
-            v-model="FormData.content"
-            placeholder="请输入公告内容"
-          ></el-input>
+          <el-input type="textarea" rows="10" v-model="FormData.content" placeholder="请输入公告内容"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="info" @click="onSubmit(0)">暂存公告</el-button>
@@ -42,19 +31,21 @@ import { create_notice } from "@/api/notice.js";
 export default {
   data() {
     return {
-      user:this.$route.query.id,
+      user: this.$route.query.id,
       FormData: {
         title: "",
         content: "",
       },
     };
   },
+
   created() {
     this.get_NoticeInfo();
   },
+
   methods: {
     goback() {
-      this.$router.push({ path: "/Admin/NoticeList",query: { id: this.user } });
+      this.$router.push({ path: "/Admin/NoticeList", query: { id: this.user } });
     },
     get_NoticeInfo() {
       if (this.$route.query.n_id) {
@@ -79,7 +70,7 @@ export default {
       var not = JSON.stringify(o);
       console.log(not);
 
-      create_notice(not).then( (res)=> {
+      create_notice(not).then((res) => {
         if (!res) {
           alert("公告修改失败！");
         } else {
@@ -94,6 +85,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 #breadcrumb {

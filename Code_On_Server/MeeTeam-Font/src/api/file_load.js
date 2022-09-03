@@ -11,6 +11,7 @@ export function openfile(params) {
     })
 }
 
+
 export function findimg(params) {
     return request({
         url: 'File/OpenFile',
@@ -22,6 +23,7 @@ export function findimg(params) {
     })
 }
 
+
 export function copyimg(params) {
     return request({
         url: 'File/CopyFile',
@@ -32,6 +34,7 @@ export function copyimg(params) {
         }
     })
 }
+
 
 export function copyhead(params) {
     return request({

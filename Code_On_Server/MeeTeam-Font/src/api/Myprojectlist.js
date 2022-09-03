@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export function deleteproject(params) {
-  /*删除组队需求 */
     return request({
       url: '/Project/deleteProject',
       method: 'delete',
@@ -11,8 +10,8 @@ export function deleteproject(params) {
     })
   }
 
+      /*删除组队需求 */
   export function deleteapply(params) {
-    /*删除组队需求 */
       return request({
         url: '/User_Project/DeleteApply',
         method: 'delete',
@@ -23,8 +22,8 @@ export function deleteproject(params) {
       })
     }
   
+
   export function Audit(params) {
-      /*删除组队需求 */
         return request({
           url: '/User_Project/Audit',
           method: 'post',
@@ -36,8 +35,8 @@ export function deleteproject(params) {
         })
   }
 
+
   export function UpdateProgress(params) {
-    /*创建组队需求 */
     return request({
       url: '/Project/UpdateProgress',
       method: 'post',
@@ -48,8 +47,8 @@ export function deleteproject(params) {
     })
   }
 
+
   export function Changeprojectlist(params) {
-    /*创建组队需求 */
     return request({
       url: '/Project/Changeprojectlist',
       method: 'post',
@@ -64,8 +63,8 @@ export function deleteproject(params) {
     })
   }
 
+  
   export function Changerequirelist(params) {
-    /*创建组队需求 */
     return request({
       url: '/GroupRequirement/Changerequirelist',
       method: 'post',

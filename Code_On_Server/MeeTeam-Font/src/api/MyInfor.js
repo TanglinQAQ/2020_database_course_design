@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
+/*由用户id得到用户信息 */
 export function GetUserInfor(params) {
-  /*由用户id得到用户信息 */
   return request({
     url: '/Info/getInfo',
     method: 'get',
@@ -10,8 +10,10 @@ export function GetUserInfor(params) {
     }
   })
 }
+
+
+/*得到我的收藏 */
 export function GetMyCollection(params) {
-  /*得到我的收藏 */
   return request({
     url: '/Facorite/GetFacorite',
     method: 'get',
@@ -20,8 +22,10 @@ export function GetMyCollection(params) {
     }
   })
 }
+
+
+/*添加收藏 */
 export function AddMyCollection(params) {
-  /*添加收藏 */
   return request({
     url: '/Facorite/AddFacorite',
     method: 'post',
@@ -32,15 +36,19 @@ export function AddMyCollection(params) {
     }
   })
 }
+
+
+/*查询所有收藏*/
 export function SelectAllCollection() {
-  /*查询所有收藏*/
   return request({
     url: '/Facorite/SelectAllFacorite',
     method: 'get',
   })
 }
+
+
+/*查询收藏对应的项目*/
 export function getproject(params) {
-  /*查询收藏对应的项目*/
   return request({
     url: '/Facorite/GetPorject',
     method: 'get',
@@ -49,8 +57,10 @@ export function getproject(params) {
     }
   })
 }
+
+
+/*判断改用户对应项目是否收藏过*/
 export function Ifcollect(params) {
-  /*判断改用户对应项目是否收藏过*/
   return request({
     url: '/Facorite/IfCollect',
     method: 'get',
@@ -60,8 +70,10 @@ export function Ifcollect(params) {
     }
   })
 }
+
+
+/*删除收藏*/
 export function deletecollect(params) {
-  /*删除收藏*/
   return request({
     url: '/Facorite/deletecollect',
     method: 'delete',
@@ -71,8 +83,9 @@ export function deletecollect(params) {
   })
 }
 
+
+/*返回参与过的所有过审的项目*/
 export function my_project(params) {
-  /*返回参与过的所有过审的项目*/
   return request({
     url: '/Project/my_project',
     method: 'GET',
@@ -82,8 +95,9 @@ export function my_project(params) {
   })
 }
 
+
 /*
-以下为封禁功能用到
+*以下为封禁功能用到
 */
 export function BlockUser(params) {
   return request({
@@ -95,6 +109,7 @@ export function BlockUser(params) {
   })
 }
 
+
 export function UnblockUser(params) {
   return request({
     url: '/User/UnblockUser',
@@ -103,9 +118,10 @@ export function UnblockUser(params) {
       user_id: params.user_id,
     }
   })
-} 
+}
 
-export function GetUserStatus(){
+
+export function GetUserStatus() {
   return request({
     url: '/User/SelectAllStatus',
     method: 'get',

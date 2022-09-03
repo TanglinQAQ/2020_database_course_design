@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div v-if="$route.meta.keepAlive">
-        <navTop></navTop>
-        <router-view></router-view>
+      <navTop></navTop>
+      <router-view></router-view>
     </div>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
@@ -11,9 +11,9 @@
 <script>
 import navTop from '@/components/common/nav.vue';
 export default {
-  name:"commonNav",
-  components:{
-     navTop
+  name: "commonNav",
+  components: {
+    navTop
   }
 }
 </script>

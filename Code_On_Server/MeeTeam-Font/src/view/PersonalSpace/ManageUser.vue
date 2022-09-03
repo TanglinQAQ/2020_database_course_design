@@ -14,20 +14,13 @@
                         <el-input placeholder="请在此处输入您想要搜索的用户名" style="width: 250px" class="filter-item"
                             v-model="listQuery.user_id" @keyup.enter.native="handleFilter"></el-input>
                         &nbsp;
-                        <!--
-                            <el-option v-for="item in operateOptions" :key="item.key" :label="item.display_name"
-                            :value="item.key" />
-                        &nbsp;
-                        -->
-
                         <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
                             搜索
                         </el-button>
                     </div>
                 </el-card>
-
-
                 <br />
+
                 <el-card>
                     <el-table :data="tableData" border :header-cell-style="{ textAlign: 'center' }"
                         :cell-style="{ 'text-align': 'center' }">
@@ -64,20 +57,8 @@ const operateOptions = [
     { key: "0", display_name: "封禁" },
     { key: "1", display_name: "未封禁" },
 ];
-/*
-const operateKeyValue = operateOptions.reduce((acc, cur) => {
-    acc[cur.key] = cur.display_name;
-    return acc;
-}, {});
-*/
+
 export default {
-    /*
-    filters: {
-        operateFilter(operate) {
-            return operateKeyValue[operate];
-        },
-    },
-    */
     data() {
         return {
             tableData: [],
@@ -89,13 +70,15 @@ export default {
             operateOptions,
         };
     },
+
     created() {
         this.getlist();
     },
+
     methods: {
         getlist() {
             var vm = this; //全局变量
-            GetUserStatus().then((res)=> {
+            GetUserStatus().then((res) => {
                 //console.log(res);
                 for (let item of res.data) {
                     //console.log(item);
@@ -104,7 +87,6 @@ export default {
                         user_id: "",
                         account_status: ""
                     };
-
                     form.user_id = item.user_id;
                     if (item.account_status == '0') {
                         form.account_status = "封禁";
@@ -112,8 +94,6 @@ export default {
                     else {
                         form.account_status = "未封禁";
                     }
-                    //form.account_status = item.account_status;
-
                     vm.tableData.push(form);
                     // console.log(form);
                     // console.log(vm.table_Data);
@@ -126,19 +106,13 @@ export default {
             var query = JSON.stringify(this.listQuery);
             var params = JSON.parse(query);
             console.log(query);
-            /*
-            let params={
-                user_id:query
-            }
-            console.log(params);
-            */
             GetUserInfor(params).then((res) => {
                 console.log(res.data);
                 Object.keys(res.data).forEach((v) => {
                     let o = {};
-                    o.user_id=res.data[v].user_id;
+                    o.user_id = res.data[v].user_id;
                     if (res.data[v].account_status == '0') {
-                        o.account_status= "封禁";
+                        o.account_status = "封禁";
                     }
                     else {
                         o.account_status = "未封禁";
@@ -151,29 +125,6 @@ export default {
             console.log(this.tableData);
         },
 
-        /*
-        getList() {
-            this.tableData = [];
-            var query = JSON.stringify(this.listQuery);
-            fetchList(query).then((res) => {
-                Object.keys(res.data).forEach((v) => {
-                    console.log(res.data[v]);
-                    let o = {};
-                    o.aaccount_status = res.data[v].account_status;
-                    o.user_name = res.data[v].user_name;
-                    o.user_id = res.data[v].user_id;
-                    //console.log(o.user_name);
-                    if (res.data[v].account_status == "blocked") {
-                        o.operate_type = "封禁";
-                    } else {
-                        o.operate_type = "未封禁";
-                    }
-                    //console.log(o);
-                    this.tableData.push(o);
-                });
-            });
-        },
-        */
         handleFilter() {
             this.getList2();
         },
@@ -212,19 +163,20 @@ export default {
 };
 </script>
   
-  <style>
-  .el-main {
-      margin-left: 8%;
-  }
-  
-  #body {
-      position: relative;
-      min-height: 100vh;
-      height: 100%;
-  }
-  
-  #breadcrumb {
-      height: 30px;
-      margin-bottom: 10px;
-  }
-  </style>
+
+<style>
+.el-main {
+    margin-left: 8%;
+}
+
+#body {
+    position: relative;
+    min-height: 100vh;
+    height: 100%;
+}
+
+#breadcrumb {
+    height: 30px;
+    margin-bottom: 10px;
+}
+</style>

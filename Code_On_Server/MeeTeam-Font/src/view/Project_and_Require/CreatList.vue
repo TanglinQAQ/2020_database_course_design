@@ -12,14 +12,8 @@
       <div>
         <el-card>
           <el-header>新建项目</el-header>
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="190px"
-            label-position="left"
-            class="demo-ruleForm"
-          >
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="190px" label-position="left"
+            class="demo-ruleForm">
             <el-form-item label="项目名称" prop="project_name">
               <el-input v-model="ruleForm.project_name"></el-input>
             </el-form-item>
@@ -33,16 +27,9 @@
               <el-input v-model="ruleForm.project_content"></el-input>
             </el-form-item>
             <el-form-item label="起止时间" prop="due">
-              <el-date-picker
-                v-model="ruleForm.due"
-                type="datetimerange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                style="float: left"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-              ></el-date-picker>
+              <el-date-picker v-model="ruleForm.due" type="datetimerange" range-separator="至" start-placeholder="开始日期"
+                end-placeholder="结束日期" style="float: left" format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
             </el-form-item>
             <el-form-item label="是否有组队需求" prop="project_status">
               <el-select v-model="ruleForm.project_status" placeholder="请选择是否有组队需求">
@@ -55,23 +42,12 @@
                 <el-input v-model="ruleForm.purpose"></el-input>
               </el-form-item>
               <el-form-item label="组队类型" prop="team_type">
-                <el-select
-                  v-model="ruleForm.team_type"
-                  placeholder="请选择组队类型"
-                  @change="teamtypecheck"
-                >
+                <el-select v-model="ruleForm.team_type" placeholder="请选择组队类型" @change="teamtypecheck">
                   <el-option label="竞赛组队" value="竞赛"></el-option>
                   <el-option label="课程项目组队" value="课程项目"></el-option>
                 </el-select>
-                <el-cascader
-                  :options="options"
-                  :props="props"
-                  :show-all-levels="false"
-                  clearable
-                  v-model="ruleForm.team_type_detail"
-                  v-show="detailshow"
-                  placeholder="请选择组队具体情况"
-                ></el-cascader>
+                <el-cascader :options="options" :props="props" :show-all-levels="false" clearable
+                  v-model="ruleForm.team_type_detail" v-show="detailshow" placeholder="请选择组队具体情况"></el-cascader>
               </el-form-item>
               <el-form-item label="组队人数" prop="team_limit">
                 <el-select v-model="ruleForm.team_limit" placeholder="请选择组队人数">
@@ -100,20 +76,10 @@
             </el-form-item>
             <div v-if="ruleForm.project_img === '是'">
               <el-form-item label="项目宣传图" prop="img">
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                <el-upload
-                  class="upload-demo"
-                  action="http://106.14.193.8:8090/File/PostFile/"
-                  :data="upload_data"
-                  :on-preview="handlePreview"
-                  :on-remove="handleRemove"
-                  :on-success="handleSuccess"
-                  :before-remove="beforeRemove"
-                  multiple
-                  :limit="1"
-                  :on-exceed="handleExceed"
-                  :file-list="fileList"
-                >
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件, 且不超过500kb</div>
+                <el-upload class="upload-demo" action="http://106.14.193.8:8090/File/PostFile/" :data="upload_data"
+                  :on-preview="handlePreview" :on-remove="handleRemove" :on-success="handleSuccess"
+                  :before-remove="beforeRemove" multiple :limit="1" :on-exceed="handleExceed" :file-list="fileList">
                   <el-button size="small" type="primary">点击上传</el-button>
                 </el-upload>
                 <div>
@@ -293,6 +259,7 @@ export default {
       },
     };
   },
+
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -330,7 +297,7 @@ export default {
                 project_id: res.data,
                 filename: this.img_name
               }
-              copyimg(para).then( (res)=> {
+              copyimg(para).then((res) => {
                 if (res.data === false) {
                   vm.$message.error("提交失败");
                   vm.resetForm(formName);
@@ -342,7 +309,7 @@ export default {
               project_id: res.data,
               duty: "发布者",
             };
-            createuser_project(param0).then( (res0)=> {
+            createuser_project(param0).then((res0) => {
               if (res0.data === false) {
                 this.$message.error("提交失败");
                 this.resetForm(formName);
@@ -370,7 +337,7 @@ export default {
               team_type_detail: TeamDetailLast,
             }
             //添加数据进GroupRequirement表
-            createrequirelist(param2).then( (res1)=> {
+            createrequirelist(param2).then((res1) => {
               if (res1.data === false) {
                 this.$message.error("提交需求失败");
                 this.resetForm(formName);
@@ -379,7 +346,7 @@ export default {
           }
         });
         this.$message.success("提交成功");
-        this.$router.push({ path: "/users/InforList" ,query: { id: this.user }}); //接下来进入到哪个路由
+        this.$router.push({ path: "/users/InforList", query: { id: this.user } }); //接下来进入到哪个路由
       }
       else {
         let param1 = {
@@ -404,7 +371,7 @@ export default {
                 project_id: res.data,
                 filename: this.img_name
               }
-              copyimg(para).then( (res)=> {
+              copyimg(para).then((res) => {
                 if (res.data === false) {
                   vm.$message.error("提交失败");
                   vm.resetForm(formName);
@@ -416,7 +383,7 @@ export default {
               project_id: res.data,
               duty: "发布者",
             };
-            createuser_project(param0).then( (res0)=> {
+            createuser_project(param0).then((res0) => {
               if (res0.data === false) {
                 this.$message.error("提交失败");
                 this.resetForm(formName);
@@ -425,7 +392,7 @@ export default {
           }
         });
         this.$message.success("提交成功");
-        this.$router.push({ path: "/users/InforList",query: { id: this.$route.query.id } }); //接下来进入到哪个路由
+        this.$router.push({ path: "/users/InforList", query: { id: this.$route.query.id } }); //接下来进入到哪个路由
       }
     },
     resetForm(formName) {
@@ -474,10 +441,12 @@ export default {
 };
 </script>
 
+
 <style scoped>
 #breadcrumb {
   margin-bottom: 10px;
 }
+
 .el-header {
   font-weight: 800;
   font-size: 24px;
@@ -486,21 +455,29 @@ export default {
   text-align: center;
   line-height: 10px;
 }
+
 .el-main {
   color: #333;
   text-align: left;
   line-height: 220px;
   height: 100%;
 }
+
 #home {
   width: 100%;
   min-height: 100vh;
   background-size: 100% 100%;
 }
-.demo-ruleForm >>> .el-form-item__label /*标题的字体大小 */ {
+
+.demo-ruleForm>>>.el-form-item__label
+/*标题的字体大小 */
+  {
   font-size: 18px;
 }
-#checkbox >>> .el-checkbox__label /*复选框的字体大小 */ {
+
+#checkbox>>>.el-checkbox__label
+/*复选框的字体大小 */
+  {
   font-size: 18px;
 }
 </style>

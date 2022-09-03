@@ -21,14 +21,8 @@
       <div id="side_menu">
         <el-row class="tac">
           <el-col>
-            <el-menu
-              default-active="2"
-              class="el-menu-vertical-demo"
-              background-color="#545c64"
-              text-color="#fff"
-              active-text-color="#ffd04b"
-              :router="true"
-            >
+            <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
+              active-text-color="#ffd04b" :router="true">
               <el-menu-item @click="goto_userpagecontent">
                 <i class="el-icon-s-home"></i>首页
               </el-menu-item>
@@ -38,10 +32,6 @@
               <el-menu-item @click="goto_history">
                 <i class="el-icon-time"></i>历史记录
               </el-menu-item>
-              <!-- <el-menu-item @click="goAnchor('#anchor1')">
-                                <i class="el-icon-star-off"></i>我的收藏
-                            </el-menu-item>
-              -->
             </el-menu>
           </el-col>
         </el-row>
@@ -64,9 +54,11 @@ export default {
       base64: ''
     }
   },
+
   created() {
     this.get_user();
   },
+  
   methods: {
     goto_userpagecontent() {
       this.$router.push({ path: "/users/UserPageContent", query: { id: this.user_id } });

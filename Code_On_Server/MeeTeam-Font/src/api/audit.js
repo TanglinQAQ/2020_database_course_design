@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 
-export function audit(params) {//获取查询列表结果
+//获取查询列表结果
+export function audit(params) {
     return request({
         url: '/Audit/Project_Audit',
         method: 'post',
@@ -11,6 +12,7 @@ export function audit(params) {//获取查询列表结果
         }
     })
 }
+
 
 export function recommend(param) {
     return request({

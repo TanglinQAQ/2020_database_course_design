@@ -13,9 +13,7 @@
             <el-dropdown-item icon="el-icon-user" command="a">
               个人中心
             </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-switch-button" command="b"
-              >退出登陆</el-dropdown-item
-            >
+            <el-dropdown-item icon="el-icon-switch-button" command="b">退出登陆</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -24,14 +22,8 @@
       <div id="side_menu">
         <el-row class="tac">
           <el-col>
-            <el-menu
-              default-active="2"
-              class="el-menu-vertical-demo"
-              background-color="#545c64"
-              text-color="#fff"
-              active-text-color="#ffd04b"
-              :router="true"
-            >
+            <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
+              active-text-color="#ffd04b" :router="true">
               <el-menu-item @click="goto_adminpagecontent">
                 <i class="el-icon-s-home"></i>首页
               </el-menu-item>
@@ -77,33 +69,33 @@ export default {
       admin_id: this.$route.query.id,
     };
   },
+
   created() {
     this.get_admin();
   },
+
   methods: {
     goto_adminpagecontent() {
-      this.$router.push({ path: "/Admin/AdminPageContent",query: { id: this.admin_id } });
+      this.$router.push({ path: "/Admin/AdminPageContent", query: { id: this.admin_id } });
     },
     goto_audit() {
-      this.$router.push({ path: "/Admin/AuditProject",query: { id: this.admin_id } });
+      this.$router.push({ path: "/Admin/AuditProject", query: { id: this.admin_id } });
     },
     goto_noticelist() {
-      this.$router.push({ path: "/Admin/NoticeList",query: { id: this.admin_id } });
+      this.$router.push({ path: "/Admin/NoticeList", query: { id: this.admin_id } });
     },
-    goto_createnotice()
-    {
-      this.$router.push({ path: "/Admin/CreateNotice",query: { id: this.admin_id } });
+    goto_createnotice() {
+      this.$router.push({ path: "/Admin/CreateNotice", query: { id: this.admin_id } });
     },
-    goto_manageuser()
-    {
-      this.$router.push({ path: "/Admin/ManageUser",query: { id: this.admin_id } });
+    goto_manageuser() {
+      this.$router.push({ path: "/Admin/ManageUser", query: { id: this.admin_id } });
     },
     get_admin() {
       this.admin_id = this.$route.query.id
     },
     handleCommand(command) {
       if (command == "a") {
-        this.$router.push({ path: "/Admin/AdminInformation" ,query: { id: this.admin_id }});
+        this.$router.push({ path: "/Admin/AdminInformation", query: { id: this.admin_id } });
       }
       if (command == "b") {
         this.$confirm("确定退出登陆吗", "提示", {
@@ -129,6 +121,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 #admin_page {

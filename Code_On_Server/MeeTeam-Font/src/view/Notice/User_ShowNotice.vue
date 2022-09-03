@@ -24,9 +24,11 @@ export default {
       content: "",
     };
   },
+
   created() {
     this.get_NoticeInfo();
   },
+  
   methods: {
     get_NoticeInfo() {
       let para = {

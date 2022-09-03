@@ -13,9 +13,7 @@
             <el-dropdown-item icon="el-icon-user" command="a">
               个人中心
             </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-switch-button" command="b"
-              >退出登陆</el-dropdown-item
-            >
+            <el-dropdown-item icon="el-icon-switch-button" command="b">退出登陆</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -23,18 +21,13 @@
         <el-avatar size="20" :fit="fit" :src="base64"></el-avatar>
       </span>
     </div>
+
     <div id="body">
       <div id="side_menu">
         <el-row class="tac">
           <el-col>
-            <el-menu
-              default-active="2"
-              class="el-menu-vertical-demo"
-              background-color="#545c64"
-              text-color="#fff"
-              active-text-color="#ffd04b"
-              :router="true"
-            >
+            <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
+              active-text-color="#ffd04b" :router="true">
               <el-menu-item @click="goto_userpagecontent">
                 <i class="el-icon-s-home"></i>首页
               </el-menu-item>
@@ -44,9 +37,7 @@
                   <span>项目管理</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item @click="goto_infolist"
-                    >平台项目列表</el-menu-item
-                  >
+                  <el-menu-item @click="goto_infolist">平台项目列表</el-menu-item>
                   <el-menu-item @click="goto_myproject">我的项目</el-menu-item>
                   <el-menu-item @click="goto_createlist">新建项目</el-menu-item>
                 </el-menu-item-group>
@@ -58,6 +49,7 @@
           </el-col>
         </el-row>
       </div>
+
       <div id="main">
         <el-main>
           <router-view></router-view>
@@ -66,6 +58,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { openfile } from "@/api/file_load.js";
@@ -76,24 +69,26 @@ export default {
       base64: "",
     };
   },
+
   created() {
-      this.get_user()
+    this.get_user()
   },
+
   methods: {
     goto_userpagecontent() {
-      this.$router.push({ path: "/users/UserPageContent",query: { id: this.user_id } });
+      this.$router.push({ path: "/users/UserPageContent", query: { id: this.user_id } });
     },
     goto_infolist() {
-      this.$router.push({ path: "/users/InforList",query: { id: this.user_id } });
+      this.$router.push({ path: "/users/InforList", query: { id: this.user_id } });
     },
     goto_myproject() {
-      this.$router.push({ path: "/users/MyProject",query: { id: this.user_id } });
+      this.$router.push({ path: "/users/MyProject", query: { id: this.user_id } });
     },
     goto_createlist() {
-      this.$router.push({ path: "/users/CreatList",query: { id: this.user_id } });
+      this.$router.push({ path: "/users/CreatList", query: { id: this.user_id } });
     },
     goto_noticelist() {
-      this.$router.push({ path: "/users/NoticeList",query: { id: this.user_id } });
+      this.$router.push({ path: "/users/NoticeList", query: { id: this.user_id } });
     },
     get_user() {
       this.user_id = this.$route.query.id;
@@ -107,7 +102,7 @@ export default {
     },
     handleCommand(command) {
       if (command == "a") {
-        this.$router.push({ path: "/users/UserInformation",query: { id: this.user_id } });
+        this.$router.push({ path: "/users/UserInformation", query: { id: this.user_id } });
       }
       if (command == "b") {
         // this.$router.push({ path: "/users/Logout" });
@@ -131,12 +126,14 @@ export default {
           });
       }
     },
+
     goto_content() {
-        this.$router.push({ path: "/users/UserPageContent" ,query: { id: this.user_id }});
+      this.$router.push({ path: "/users/UserPageContent", query: { id: this.user_id } });
     }
   },
 };
 </script>
+
 
 <style scoped>
 #user_page {

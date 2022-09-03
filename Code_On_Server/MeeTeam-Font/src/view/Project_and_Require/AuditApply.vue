@@ -5,8 +5,8 @@
         <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
       </div>
       <div>
-          <el-button type="primary" v-if='relation=="无"' @click="handlefollow">关注</el-button>
-          <el-button type="info" v-if='relation=="关注"' @click="handlefollow">取消关注</el-button>
+        <el-button type="primary" v-if='relation == "无"' @click="handlefollow">关注</el-button>
+        <el-button type="info" v-if='relation == "关注"' @click="handlefollow">取消关注</el-button>
       </div>
       <el-divider content-position="left">
         <h4>用户信息</h4>
@@ -40,12 +40,8 @@
       <el-divider content-position="left">
         <h4>项目经历</h4>
       </el-divider>
-      <el-table
-        :data="project_experience"
-        :header-cell-style="{ textAlign: 'center' }"
-        :cell-style="{ 'text-align': 'center' }"
-        height="200"
-      >
+      <el-table :data="project_experience" :header-cell-style="{ textAlign: 'center' }"
+        :cell-style="{ 'text-align': 'center' }" height="200">
         <el-table-column prop="project_name" label="项目名称"></el-table-column>
         <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
         <el-table-column label="操作">
@@ -57,12 +53,8 @@
       <el-divider content-position="left">
         <h4>收藏夹</h4>
       </el-divider>
-      <el-table
-        :data="facorite"
-        :header-cell-style="{ textAlign: 'center' }"
-        :cell-style="{ 'text-align': 'center' }"
-        height="200"
-      >
+      <el-table :data="facorite" :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }"
+        height="200">
         <el-table-column prop="project_name" label="项目名称" width="160"></el-table-column>
         <el-table-column prop="create_time" label="发布时间" sortable width="160"></el-table-column>
         <el-table-column label="操作">
@@ -88,21 +80,13 @@
       <el-tabs v-model="activeName">
         <el-tab-pane label="组员列表" name="组员列表" @tab-click="handleClick">
           <div>
-            <el-table
-              :data="tableData0"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
-              default-sort="{ prop: 'date', order: 'descending' }"
-            >
+            <el-table :data="tableData0" :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'date', order: 'descending' }">
               <el-table-column prop="teamember_id" label="组员id" width="200"></el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="handlecheck1(scope.row)">查看申请人主页</el-button>
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleout(scope.row)"
-                  >踢出团队</el-button>
+                  <el-button size="mini" type="danger" @click="handleout(scope.row)">踢出团队</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -110,12 +94,8 @@
         </el-tab-pane>
         <el-tab-pane label="申请人列表" name="申请人列表">
           <div>
-            <el-table
-              :data="tableData"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
-              default-sort="{ prop: 'date', order: 'descending' }"
-            >
+            <el-table :data="tableData" :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'date', order: 'descending' }">
               <el-table-column prop="applicant_id" label="申请人id" width="200"></el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -173,7 +153,7 @@ export default {
   },
   methods: {
     goback() {
-      this.$router.push({ path: "/users/InforList",query: { id: this.$route.query.id } }); //返回
+      this.$router.push({ path: "/users/InforList", query: { id: this.$route.query.id } }); //返回
     },
     get_hisinfo(his_id) {
       let params = {
@@ -233,7 +213,7 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id,id:this.$route.query.id },
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     getlist() {
@@ -246,7 +226,7 @@ export default {
         pid: vm.$route.query.p_id,
         duty: "申请者"
       };
-      get_member(para0).then( (res)=> {
+      get_member(para0).then((res) => {
         for (let item of res.data) {
           let form = {//设置添加数据的格式
             teamember_id: '',
@@ -256,7 +236,7 @@ export default {
           vm.tableData0.push(form);
         }
       })
-      get_member(para).then( (res)=> {
+      get_member(para).then((res) => {
         for (let item of res.data) {
           let form = {//设置添加数据的格式
             applicant_id: '',
@@ -274,7 +254,7 @@ export default {
         uid: row.applicant_id,
         dy: "组员"
       }
-      Audit(para).then( (res)=> {
+      Audit(para).then((res) => {
         if (res.data === false) {
           vm.$message.error("操作失败");
         }
@@ -282,7 +262,7 @@ export default {
           vm.$message.success("操作成功");
         }
       })
-      location. reload();
+      location.reload();
     },
     refuse(row) { //同意操作
       var vm = this;
@@ -291,7 +271,7 @@ export default {
         uid: row.applicant_id,
         dy: "已拒绝"
       }
-      Audit(para).then( (res)=> {
+      Audit(para).then((res) => {
         if (res.data === false) {
           vm.$message.error("操作失败");
         }
@@ -299,7 +279,7 @@ export default {
           vm.$message.success("操作成功");
         }
       })
-      location. reload();
+      location.reload();
     },
     handleout(row) { //踢出操作
       var vm = this;
@@ -308,7 +288,7 @@ export default {
         uid: row.teamember_id,
         dy: "已踢出"
       }
-      Audit(para).then( (res)=> {
+      Audit(para).then((res) => {
         if (res.data === false) {
           vm.$message.error("操作失败");
         }
@@ -316,7 +296,7 @@ export default {
           vm.$message.success("操作成功");
         }
       })
-      location. reload();
+      location.reload();
     },
     handlecheck1(row) {
       console.log(this);
@@ -336,9 +316,9 @@ export default {
         let params = {
           MyID: this.$route.query.id,
           ID: this.hisid,
-          relationship:"无"
+          relationship: "无"
         }
-        pullRe(params).then( (res)=> {
+        pullRe(params).then((res) => {
           if (res == 1)
             console.log("关注成功");
           else
@@ -350,7 +330,7 @@ export default {
         let params = {
           MyID: this.$route.query.id,
           ID: this.hisid,
-          relationship:"关注"
+          relationship: "关注"
         }
         pullRe(params);
       }

@@ -4,75 +4,40 @@
       <el-main>
         <div id="breadcrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
-              >首页</el-breadcrumb-item
-            >
+            <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>平台通知</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
+
         <el-card>
           <div class="filter-container">
-            <el-input
-              placeholder="公告名称"
-              style="width: 180px"
-              class="filter-item"
-              v-model="listQuery.notice_title"
-              @keyup.enter.native="handleFilter"
-            ></el-input>
+            <el-input placeholder="公告名称" style="width: 180px" class="filter-item" v-model="listQuery.notice_title"
+              @keyup.enter.native="handleFilter"></el-input>
             &nbsp;
-            <el-input
-              placeholder="发布人"
-              style="width: 180px"
-              class="filter-item"
-              v-model="listQuery.admin_id"
-              @keyup.enter.native="handleFilter"
-            ></el-input>
+            <el-input placeholder="发布人" style="width: 180px" class="filter-item" v-model="listQuery.admin_id"
+              @keyup.enter.native="handleFilter"></el-input>
             &nbsp;
-            <el-button
-              class="filter-item"
-              type="primary"
-              icon="el-icon-search"
-              @click="handleFilter"
-            >
+            <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
               搜索
             </el-button>
           </div>
         </el-card>
         <br />
+
         <el-card>
-          <el-table
-            :data="tableData"
-            border
-            @row-click="goto_user_ShowNotice"
-            v-if="isAlive"
-            :header-cell-style="{ textAlign: 'center' }"
-            :cell-style="{ 'text-align': 'center' }"
-          >
+          <el-table :data="tableData" border @row-click="goto_user_ShowNotice" v-if="isAlive"
+            :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }">
             <el-table-column v-if="false" prop="notice_id" label="公告id">
             </el-table-column>
-            <el-table-column
-              prop="notice_title"
-              label="公告标题"
-              align="left"
-              style="margin: 50px"
-            >
+            <el-table-column prop="notice_title" label="公告标题" align="left" style="margin: 50px">
             </el-table-column>
             <el-table-column prop="admin_id" label="发布者" align="center">
             </el-table-column>
-            <el-table-column
-              prop="operate_time"
-              label="发布时间"
-              align="center"
-              sortable
-            >
+            <el-table-column prop="operate_time" label="发布时间" align="center" sortable>
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="goto_user_ShowNotice(scope.row)"
-                  >查看详情</el-button
-                >
+                <el-button size="mini" @click="goto_user_ShowNotice(scope.row)">查看详情</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -88,7 +53,7 @@ import { fetchList } from "@/api/notice.js";
 export default {
   data() {
     return {
-      user:this.$route.query.id,
+      user: this.$route.query.id,
       tableData: [],
       isAlive: true,
       listQuery: {
@@ -97,9 +62,11 @@ export default {
       },
     };
   },
+
   created() {
     this.getList();
   },
+
   methods: {
     getList() {
       this.tableData = [];
@@ -121,20 +88,21 @@ export default {
       this.getList();
     },
     goback() {
-      this.$router.push({ path: "/users/UserPage",query: { id: this.user } });
+      this.$router.push({ path: "/users/UserPage", query: { id: this.user } });
     },
     goto_user_ShowNotice(row) {
       var notice_id = row.notice_id;
       this.$router.push({
         path: "/users/User_ShowNotice",
-        query: { n_id: notice_id ,id:this.user},
+        query: { n_id: notice_id, id: this.user },
       });
     },
   },
 };
 </script>
   
-  <style>
+
+<style>
 .el-main {
   margin-left: 8%;
 }

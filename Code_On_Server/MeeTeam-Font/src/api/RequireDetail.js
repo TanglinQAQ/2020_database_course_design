@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
+/*根据id获取单条公告内容*/
 export function id_require(params) {
-    /*根据id获取单条公告内容*/
     return request({
         url: '/GroupRequirement/SelectidGroupRequirement',
         method: 'get',
@@ -10,6 +10,8 @@ export function id_require(params) {
         }
     })
 }
+
+
 export function detailnum(num) {
     if (num === 2)
         return "创新创业";

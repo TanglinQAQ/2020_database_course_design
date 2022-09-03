@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
+/*根据id获取单条公告内容*/
 export function get_notice(params) {
-    /*根据id获取单条公告内容*/
     return request({
         url: '/notice/get_by_id',
         method: 'get',
@@ -11,8 +11,9 @@ export function get_notice(params) {
     })
 }
 
-export function get_all() {
+
     /*根据id获取单条公告内容*/
+export function get_all() {
     return request({
         url: '/notice/get_all',
         method: 'get',

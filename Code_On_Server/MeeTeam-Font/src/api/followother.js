@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
+/*获取用户关系 */
 export function getRe(params) {
-    /*获取用户关系 */
     return request({
         url: '/Follow/getRe',
         method: 'get',
@@ -12,8 +12,8 @@ export function getRe(params) {
     })
 }
 
+/*创建组队需求 */
 export function pullRe(params) {
-    /*创建组队需求 */
     return request({
         url: '/Follow/pullRe',
         method: 'get',

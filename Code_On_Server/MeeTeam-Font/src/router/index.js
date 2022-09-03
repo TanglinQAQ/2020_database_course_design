@@ -60,9 +60,9 @@ export default new Router({
                 { path: '/Admin/NoticeList', component: NoticeList },
                 { path: '/Admin/CreateNotice', component: CreateNotice },
                 { path: '/Admin/ShowNotice', component: ShowNotice },
-                { path: '/Admin/AdminInformation',component: AdminInformation},
-                { path: '/Admin/ManageUser',component:ManageUser}
-                
+                { path: '/Admin/AdminInformation', component: AdminInformation },
+                { path: '/Admin/ManageUser', component: ManageUser }
+
             ], props: true
         },
         //用户主页及其子页面
@@ -77,9 +77,9 @@ export default new Router({
                 { path: '/users/ProjectDetail', component: ProjectDetail },
                 { path: '/users/UserPageContent', component: UserPageContent },
                 { path: '/users/ProjList', component: ProjList },
-                { path:'/users/AuditApply',component:AuditApply},
-                { path:'/users/ChangeListwithRequire',component:ChangeListwithRequire},
-                { path:'/users/ChangeListwithoutRequire',component:ChangeListwithoutRequire}
+                { path: '/users/AuditApply', component: AuditApply },
+                { path: '/users/ChangeListwithRequire', component: ChangeListwithRequire },
+                { path: '/users/ChangeListwithoutRequire', component: ChangeListwithoutRequire }
             ], props: true
         },
         //个人信息主页及其子页面

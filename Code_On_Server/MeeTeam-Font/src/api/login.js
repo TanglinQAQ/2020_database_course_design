@@ -1,27 +1,7 @@
 import request from '@/utils/request'
 
-// export function getusername(params) {
-//   /*组队需求的表格*/
-//   return request({
-//     url: '/Login/GetUsername',
-//     method: 'get',
-//     params: {
-//       user_id: params.user_id,
-//     }
-//   })
-// }
-
-// export function getuserid(params) {
-//   return request({
-//     url: '/Login/GetUserid',
-//     method: 'get',
-//     params: {
-//       user_name: params.user_name,
-//     }
-//   })
-// }
+/*用户登录*/
 export function login(params) {
-  /*登陆 */
   return request({
     url: '/Login/login',
     method: 'get',
@@ -31,8 +11,10 @@ export function login(params) {
     }
   })
 }
+
+
+/*登陆 */
 export function adminlogin(params) {
-  /*登陆 */
   return request({
     url: '/Login/adminlogin',
     method: 'get',
@@ -42,8 +24,10 @@ export function adminlogin(params) {
     }
   })
 }
+
+
+/*用户注册*/
 export function adduser(params) {
-  /*用户注册*/
   return request({
     url: '/Login/addnormal',
     method: 'post',
@@ -59,6 +43,8 @@ export function adduser(params) {
     }
   })
 }
+
+
 export function getuser() {
   return request({
     url: '/Login/SelectAlluser',
@@ -66,8 +52,9 @@ export function getuser() {
   })
 }
 
+
+/*组队需求的表格*/
 export function isUseruni(params) {
-  /*组队需求的表格*/
   return request({
     url: '/Login/IsUserUni',
     method: 'get',
@@ -77,8 +64,9 @@ export function isUseruni(params) {
   })
 }
 
+
+/*需要发送验证码*/
 export function SendMail(params) {
-  /*需要发送验证码*/
   return request({
     url: '/Login/SendMailUseZj',
     method: 'get',
@@ -88,8 +76,9 @@ export function SendMail(params) {
   })
 }
 
+
+/*修改密码*/
 export function ChangePass(params) {
-  /*修改密码*/
   return request({
     url: '/Login/UpdateUser',
     method: 'post',
@@ -100,8 +89,9 @@ export function ChangePass(params) {
   })
 }
 
+
+/*验证邮箱用户是否正确*/
 export function IftrueMail(params) {
-  /*验证邮箱用户是否正确*/
   return request({
     url: '/Login/Iftruemail',
     method: 'get',

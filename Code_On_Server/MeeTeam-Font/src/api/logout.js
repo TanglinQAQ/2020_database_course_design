@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-  export function logout() {
-    /*注销 */
-    return request({
-      url: '/Logout/logout',
-      method: 'get',
-    })
-  }
+/*注销 */
+export function logout() {
+  return request({
+    url: '/Logout/logout',
+    method: 'get',
+  })
+}

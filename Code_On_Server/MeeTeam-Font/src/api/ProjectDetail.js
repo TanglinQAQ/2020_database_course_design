@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
+/*根据id获取单条公告内容*/
 export function get_project(params) {
-    /*根据id获取单条公告内容*/
     return request({
         url: '/Project/get_by_id',
         method: 'get',
@@ -11,8 +11,9 @@ export function get_project(params) {
     })
 }
 
+
+/*根据id获取项目相关的id和duty*/
 export function get_username(params) {
-    /*根据id获取项目相关的id和duty*/
     return request({
         url: '/User_Project/get_by_id',
         method: 'get',
@@ -23,8 +24,9 @@ export function get_username(params) {
     })
 }
 
+
+/*根据id获取项目的发布者*/
 export function get_leader(params) {
-    /*根据id获取项目的发布者*/
     return request({
         url: '/User_Project/get_leader',
         method: 'get',
@@ -34,8 +36,9 @@ export function get_leader(params) {
     })
 }
 
+
+/*根据id获取项目相关的id和duty*/
 export function get_member(params) {
-    /*根据id获取项目相关的id和duty*/
     return request({
         url: '/User_Project/get_member',
         method: 'get',
@@ -46,8 +49,9 @@ export function get_member(params) {
     })
 }
 
+
+/*根据id获取单条公告内容*/
 export function get_require(params) {
-    /*根据id获取单条公告内容*/
     return request({
         url: '/GroupRequirement/get_by_id',
         method: 'get',
@@ -57,8 +61,9 @@ export function get_require(params) {
     })
 }
 
+
+/*获取评论*/
 export function get_eva() {
-    /*获取评论*/
     return request({
         url: '/Project_Evaluation/SelectAllProject_Evaluation',
         method: 'get',

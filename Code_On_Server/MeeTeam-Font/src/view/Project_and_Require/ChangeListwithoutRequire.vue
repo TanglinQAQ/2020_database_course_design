@@ -3,25 +3,18 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
-            >首页</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>我的项目</el-breadcrumb-item>
           <el-breadcrumb-item>编辑</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
       <div>
         <el-card>
           <el-header>编辑项目信息</el-header>
-          <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="160px"
-            label-position="left"
-            class="demo-ruleForm"
-          >
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px" label-position="left"
+            class="demo-ruleForm">
             <el-form-item label="项目名称" prop="project_name">
               <el-input v-model="ruleForm.project_name"></el-input>
             </el-form-item>
@@ -35,22 +28,13 @@
               <el-input v-model="ruleForm.project_content"></el-input>
             </el-form-item>
             <el-form-item label="起止时间" prop="due">
-              <el-date-picker
-                v-model="ruleForm.due"
-                type="datetimerange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                style="float: left"
-                format="yyyy-MM-dd HH:mm:ss"
-                value-format="yyyy-MM-dd HH:mm:ss"
-              >
+              <el-date-picker v-model="ruleForm.due" type="datetimerange" range-separator="至" start-placeholder="开始日期"
+                end-placeholder="结束日期" style="float: left" format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss">
               </el-date-picker>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')"
-                >立即创建</el-button
-              >
+              <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
@@ -120,19 +104,21 @@ export default {
       },
     };
   },
+
   created() {
     this.getlist();//页面一进入就加载表格
   },
+
   methods: {
-    getlist(){
+    getlist() {
       let para = {
         id: this.$route.query.p_id
       };
       get_project(para).then(res => {
-        this.$set(this.ruleForm,'project_name',res.data.project_name);
-        this.$set(this.ruleForm,'project_background',res.data.project_background);
-        this.$set(this.ruleForm,'project_introduction',res.data.project_introduction);
-        this.$set(this.ruleForm,'project_content',res.data.project_content);
+        this.$set(this.ruleForm, 'project_name', res.data.project_name);
+        this.$set(this.ruleForm, 'project_background', res.data.project_background);
+        this.$set(this.ruleForm, 'project_introduction', res.data.project_introduction);
+        this.$set(this.ruleForm, 'project_content', res.data.project_content);
       })
     },
     submitForm(formName) {
@@ -145,7 +131,7 @@ export default {
         }
       });
       //项目
-      var vm=this;
+      var vm = this;
       var Due = new String(this.ruleForm.due);
       //请求地址,this和vm指的是全局
       let param1 = {
@@ -156,13 +142,13 @@ export default {
         project_content: this.ruleForm.project_content,
         due: Due,
       }
-      Changeprojectlist(param1).then( (res)=> {
+      Changeprojectlist(param1).then((res) => {
         if (res.data === false) {
           vm.$message.error("编辑失败");
           vm.resetForm(formName);
         } else {
           vm.$message.success("编辑成功");
-          vm.$router.push({ path: "/users/Myproject",query: { id: this.$route.query.id } }); //接下来进入到哪个路由
+          vm.$router.push({ path: "/users/Myproject", query: { id: this.$route.query.id } }); //接下来进入到哪个路由
         }
       });
       //添加数据进Project表
@@ -188,6 +174,7 @@ export default {
 #breadcrumb {
   margin-bottom: 10px;
 }
+
 .el-header {
   font-weight: 800;
   font-size: 24px;
@@ -196,21 +183,31 @@ export default {
   text-align: center;
   line-height: 10px;
 }
+
 .el-main {
   color: #333;
   text-align: left;
   line-height: 220px;
   height: 100%;
 }
+
 #home {
   width: 100%;
   min-height: 100vh;
   background-size: 100% 100%;
 }
-.demo-ruleForm >>> .el-form-item__label /*标题的字体大小 */ {
+
+.demo-ruleForm>>>.el-form-item__label
+
+/*标题的字体大小 */
+  {
   font-size: 18px;
 }
-#checkbox >>> .el-checkbox__label /*复选框的字体大小 */ {
+
+#checkbox>>>.el-checkbox__label
+
+/*复选框的字体大小 */
+  {
   font-size: 18px;
 }
 </style>

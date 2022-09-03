@@ -1,151 +1,65 @@
 <template>
   <div id="myproject-container">
-    <!-- <el-header style="text-align: right; font-size: 15px; top:50%;">
-        <el-badge :value="0" class="item">
-          <el-button>聊天</el-button>
-        </el-badge>
-        <el-badge :value="3" class="item">
-          <el-button>评论</el-button>
-        </el-badge>
-        <el-badge :value="1" class="item" type="primary">
-          <el-button>申请</el-button>
-        </el-badge>
-        <span>{{ username }}</span>
-      </el-header> -->
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/users/UserPage' }"
-            >首页</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/users/UserPage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>项目管理</el-breadcrumb-item>
           <el-breadcrumb-item>我的项目</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
       <el-tabs v-model="activeName">
         <el-tab-pane label="我发布的" name="我发布的" @tab-click="handleClick">
           <div>
-            <el-table
-              :data="tableData"
-              :header-cell-style="{ textAlign: 'left' }"
-              :cell-style="{ 'text-align': 'left' }"
-              default-sort="{ prop: 'date', order: 'descending' }"
-            >
+            <el-table :data="tableData" :header-cell-style="{ textAlign: 'left' }"
+              :cell-style="{ 'text-align': 'left' }" default-sort="{ prop: 'date', order: 'descending' }">
               <el-table-column prop="project_name" label="项目名称" width="200">
               </el-table-column>
-              <el-table-column
-                prop="project_progress"
-                label="项目当前进度"
-                width="200"
-              >
+              <el-table-column prop="project_progress" label="项目当前进度" width="200">
               </el-table-column>
-              <el-table-column
-                prop="create_time"
-                label="发布时间"
-                sortable
-                width="200"
-              >
+              <el-table-column prop="create_time" label="发布时间" sortable width="200">
               </el-table-column>
-              <el-table-column
-                prop="project_status"
-                label="是否有组队需求"
-                width="200"
-              >
+              <el-table-column prop="project_status" label="是否有组队需求" width="200">
               </el-table-column>
-              <el-table-column label="操作" >
+              <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    @click="handleDetail(scope.row),addhistory(username,scope.row.project_id)"
-                    >查看详情</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="primary"
-                    @click="handleEditwithRequire(scope.row)"
-                    v-if="scope.row.project_status === '是'"
-                    >编辑</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="primary"
-                    @click="handleEditwithoutRequire(scope.row)"
-                    v-if="scope.row.project_status === '否'"
-                    >编辑</el-button
-                  >
+                  <el-button size="mini" @click="handleDetail(scope.row), addhistory(username, scope.row.project_id)">查看详情
+                  </el-button>
+                  <el-button size="mini" type="primary" @click="handleEditwithRequire(scope.row)"
+                    v-if="scope.row.project_status === '是'">编辑</el-button>
+                  <el-button size="mini" type="primary" @click="handleEditwithoutRequire(scope.row)"
+                    v-if="scope.row.project_status === '否'">编辑</el-button>
                   <br /><br />
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.row)"
-                    >删除</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="warning"
-                    @click="handleEndProgress(scope.row)"
-                    v-if="scope.row.project_progress != '已完结'"
-                    >完结项目</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="success"
-                    @click="handleApply(scope.row)"
-                    v-if="scope.row.project_progress === '招募中'"
-                    >管理团队</el-button
-                  >
+                  <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                  <el-button size="mini" type="warning" @click="handleEndProgress(scope.row)"
+                    v-if="scope.row.project_progress != '已完结'">完结项目</el-button>
+                  <el-button size="mini" type="success" @click="handleApply(scope.row)"
+                    v-if="scope.row.project_progress === '招募中'">管理团队</el-button>
                 </template>
               </el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
+
         <el-tab-pane label="我申请的" name="我申请的">
           <div>
-            <el-table
-              :data="tableData0"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
-              default-sort="{ prop: 'date', order: 'descending' }"
-            >
-              <el-table-column
-                prop="project0_name"
-                label="项目名称"
-                width="200"
-              >
+            <el-table :data="tableData0" :header-cell-style="{ textAlign: 'center' }"
+              :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'date', order: 'descending' }">
+              <el-table-column prop="project0_name" label="项目名称" width="200">
               </el-table-column>
-              <el-table-column
-                prop="project0_progress"
-                label="项目当前进度"
-                width="200"
-              >
+              <el-table-column prop="project0_progress" label="项目当前进度" width="200">
               </el-table-column>
-              <el-table-column
-                prop="create0_time"
-                label="发布时间"
-                sortable
-                width="200"
-              >
+              <el-table-column prop="create0_time" label="发布时间" sortable width="200">
               </el-table-column>
-              <el-table-column
-                prop="project0_duty"
-                label="当前状态"
-                width="200"
-              >
+              <el-table-column prop="project0_duty" label="当前状态" width="200">
               </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    @click="handleDetail0(scope.row),addhistory(username,scope.row.project0_id)"
-                    >查看详情</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDeleteApply(scope.row)"
-                    v-if="scope.row.project0_duty === '申请者'"
-                    >取消申请</el-button
-                  >
+                  <el-button size="mini" @click="handleDetail0(scope.row), addhistory(username, scope.row.project0_id)">
+                    查看详情</el-button>
+                  <el-button size="mini" type="danger" @click="handleDeleteApply(scope.row)"
+                    v-if="scope.row.project0_duty === '申请者'">取消申请</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -155,6 +69,7 @@
     </el-main>
   </div>
 </template>
+
 
 <script>
 import global_msg from "../../utils/global.js";
@@ -177,16 +92,18 @@ export default {
       tableData0: [],
     };
   },
+
   mounted() {
     this.getlist(); //页面一进入就加载表格
   },
+
   methods: {
     goback() {
-      this.$router.push({ path: "/users/InforList" ,query: { id: this.$route.query.id }}); //返回
+      this.$router.push({ path: "/users/InforList", query: { id: this.$route.query.id } }); //返回
     },
     getlist() {
       var vm = this; //全局变量
-      getlistInfor().then( (res)=> {
+      getlistInfor().then((res) => {
         for (let item of res.data) {
           let form = {
             //设置添加数据的格式
@@ -253,7 +170,7 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id ,id:this.$route.query.id},
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     handleDetail0(row) {
@@ -261,7 +178,7 @@ export default {
       var project_id = row.project0_id;
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id ,id:this.$route.query.id},
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     handleApply(row) {
@@ -269,7 +186,7 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/AuditApply",
-        query: { p_id: project_id,id:this.$route.query.id },
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     handleEditwithRequire(row) {
@@ -277,7 +194,7 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/ChangeListwithRequire",
-        query: { p_id: project_id,id:this.$route.query.id },
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     handleEditwithoutRequire(row) {
@@ -285,15 +202,15 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/ChangeListwithoutRequire",
-        query: { p_id: project_id ,id:this.$route.query.id},
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
-    handleEndProgress(row){
+    handleEndProgress(row) {
       //完结项目操作
       var project_id = row.project_id;
-      let para={
-        project_id:row.project_id,
-        project_progress:"已完结"
+      let para = {
+        project_id: row.project_id,
+        project_progress: "已完结"
       }
       UpdateProgress(para);
       location.reload();
@@ -301,22 +218,22 @@ export default {
         pid: row.project_id,
         duty: "组员"
       };
-      get_member(para0).then( (res)=> {
+      get_member(para0).then((res) => {
         for (let item of res.data) {
-          let pa={
-            user_id:item.user_id
+          let pa = {
+            user_id: item.user_id
           }
           UpdatePoint(pa);
         }
       })
-      let pa0={
-          user_id:this.$route.query.id,
+      let pa0 = {
+        user_id: this.$route.query.id,
       }
       UpdatePoint(pa0);
       this.$message({
-            type: "success",
-            message: "项目已完结!",
-          });
+        type: "success",
+        message: "项目已完结!",
+      });
     },
     handleDelete(row) {
       //删除操作
@@ -333,7 +250,7 @@ export default {
             project_id: id,
           };
           deleteproject(param);
-          this.tableData.splice(row.index,1); //删除下标为index的内容
+          this.tableData.splice(row.index, 1); //删除下标为index的内容
           this.$message({
             type: "success",
             message: "删除成功!",
@@ -378,11 +295,11 @@ export default {
       console.log(tab, event);
     },
 
-     /*触发添加浏览历史*/
-     addhistory(user_id,proj_id){
-      let params={
-        user_id:this.$route.query.id,
-        project_id:proj_id
+    /*触发添加浏览历史*/
+    addhistory(user_id, proj_id) {
+      let params = {
+        user_id: this.$route.query.id,
+        project_id: proj_id
       };
       console.log(params);
       addviewhistory(params);

@@ -10,9 +10,10 @@
             <template slot="title">我的工作台</template>
             <el-menu-item index="2-1">我的项目</el-menu-item>
         </el-submenu>
-        <span style="margin-right:35px;color:white" @click="personal" >{{username}}</span>
+        <span style="margin-right:35px;color:white" @click="personal">{{ username }}</span>
     </el-menu>
 </template>
+
 
 <script>
 import global_msg from '@/utils/global.js'
@@ -33,12 +34,13 @@ export default {
             if (key === "2-1")
                 this.$router.push({ path: "/users/MyProject" });
         },
-        personal(){
-               this.$router.push({ path: "/users/UserInformation" });
+        personal() {
+            this.$router.push({ path: "/users/UserInformation" });
         }
     }
 }
 </script>
+
 
 <style scoped>
 .el-menu-demo {

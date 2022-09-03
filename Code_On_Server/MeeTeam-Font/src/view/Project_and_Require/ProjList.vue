@@ -13,14 +13,13 @@
                 <el-row :glutter="10">
                     <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
                         <div style="margin-top:15px">
-                            <!--这一层div的作用是什么-->
                             <el-card :body-style="{ padding: '0px' }" shadow="hover">
                                 <img :src=o.project_img class="image" />
                                 <div class="text">
-                                    {{  o.project_name  }}<br />
-                                    发起时间：{{  o.create_time  }}<br />
-                                    项目进度：{{  o.project_progress  }}<br />
-                                    当前是否有组队需求：{{o.project_status}}<br/><br/>
+                                    {{ o.project_name }}<br />
+                                    发起时间：{{ o.create_time }}<br />
+                                    项目进度：{{ o.project_progress }}<br />
+                                    当前是否有组队需求：{{ o.project_status }}<br /><br />
                                     <template>
                                         <el-button type="success" plain size="mini" style="float:right"
                                             @click="handleLook(index, o.row)">了解更多</el-button>
@@ -53,14 +52,8 @@ export default {
             pagesize: 8
         }
     },
+
     methods: {
-        /*
-                refresh() {
-            location.reload();
-        },
-        */
-
-
         gettable() {
             getlistInfor().then(res => {
                 let vm = this;
@@ -110,7 +103,7 @@ export default {
 
         handleLook(index, row) {//进入项目详情页面
             var project_id = row.project_id;
-            this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id ,id:this.$route.query.id} });
+            this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id, id: this.$route.query.id } });
         }
     },
 
@@ -153,8 +146,6 @@ export default {
     margin-right: 20px;
     transition: all .5s;
 }
-
-
 </style>
 
 <style scoped>

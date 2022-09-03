@@ -15,7 +15,7 @@
                 <el-form-item label="验证码" prop="word">
                     <el-input v-model="word" style="width:170px;margin-right:15px;"></el-input>
                     <el-button v-if="isSend" @click="sendMsg">发送验证码</el-button>
-                    <el-button v-else>{{  num  }}重新获取</el-button>
+                    <el-button v-else>{{ num }}重新获取</el-button>
                 </el-form-item>
                 <el-button type="primary" round @click="firststep" style="width:100px">返回登录</el-button>
                 <el-button type="primary" round @click="nextstep" style="width:100px">下一步</el-button>
@@ -40,6 +40,7 @@
     </div>
 
 </template>
+
 
 <script>
 import { IftrueMail } from '@/api/login.js'
@@ -83,12 +84,13 @@ export default {
             user: "",
             mail: "",
             word: "",
-            isSend: true,                //发送验证码
+            isSend: true, //发送验证码
             num: 60,
             rightword: "",
             ifnext: true,
         };
     },
+
     methods: {
         sendMsg() {
             let vm = this;
@@ -96,7 +98,7 @@ export default {
                 user_id: this.user,
                 contact_info: this.mail
             }
-            IftrueMail(pa).then( (res) =>{
+            IftrueMail(pa).then((res) => {
                 if (res.data === true) {//邮箱密码正确
                     vm.isSend = false
                     let timer = setInterval(() => {//倒计时
@@ -110,7 +112,7 @@ export default {
                     let pa2 = {
                         mail_id: vm.mail
                     }
-                    SendMail(pa2).then( (res2) =>{
+                    SendMail(pa2).then((res2) => {
                         vm.rightword = res2.data;//获得正确验证码
                         alert(vm.rightword)
                     })
@@ -129,27 +131,28 @@ export default {
             }
         },
         finishstep() {
-            let vm=this;
+            let vm = this;
             let pa3 = {
                 user_id: this.user,
                 password: this.ruleForm.pass,
             }
-            ChangePass(pa3).then( (res) =>{
+            ChangePass(pa3).then((res) => {
                 if (res.data === true) {
                     vm.$message.success("修改成功");
                     vm.$router.push({ path: "/login" }); //接下来进入到哪个路由
                 }
-                else{
+                else {
                     vm.$message.error("修改失败");
                 }
             })
         },
-        firststep(){
+        firststep() {
             this.$router.push({ path: "/login" }); //接下来进入到哪个路由
         }
     }
 }
 </script>
+
 
 <style>
 #contain {

@@ -6,7 +6,7 @@
     </vue-particles>
     <div id="login-container">
       <div style="text-align: center;height: 50px;font-size: 25px">
-        {{  toptest  }}
+        {{ toptest }}
       </div>
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="账号" prop="user">
@@ -19,13 +19,14 @@
           <el-button type="primary" @click="submitForm('ruleForm')" style="float:right">提交</el-button>
           <el-button @click="resetForm('ruleForm')" style="float:right;margin-right:10px;">重置</el-button>
         </el-form-item>
-        <el-button type="text" class="testleft" @click="adminlo" style="color:black">{{  globaltest  }}</el-button>
+        <el-button type="text" class="testleft" @click="adminlo" style="color:black">{{ globaltest }}</el-button>
         <el-button type="text" class="testright" @click="adduser" style="color:black">注册</el-button>
         <el-button type="text" class="testright " @click="forgetkey" style="color:black">忘记密码？</el-button>
       </el-form>
     </div>
   </div>
 </template>
+
 
 <script>
 import global_msg from '../../utils/global.js'
@@ -43,6 +44,7 @@ export default {
       isLogin: false,
     };
   },
+
   methods: {
     adminlo() {
       this.ifadmin = !this.ifadmin;//取反
@@ -75,7 +77,7 @@ export default {
         pass: vm.pass
       }
       if (this.ifadmin == false) {
-        login(params).then((res)=> {
+        login(params).then((res) => {
           if (res.data === false) {
             vm.$message.error("登录失败");
             vm.resetForm(formName);
@@ -86,14 +88,14 @@ export default {
           }
         })
       } else {
-        adminlogin(params).then((res)=> {
+        adminlogin(params).then((res) => {
           if (res.data === false) {
             vm.$message.error("登录失败");
             vm.resetForm(formName);
           } else {
             global_msg.nowadminid = vm.user;//改变全局nowusername
             vm.$message.success("登录成功");
-            vm.$router.push({ path: "/Admin/AdminPageContent",query:{id:this.user} }); //接下来进入到哪个路由
+            vm.$router.push({ path: "/Admin/AdminPageContent", query: { id: this.user } }); //接下来进入到哪个路由
           }
         })
       }

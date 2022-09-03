@@ -45,13 +45,7 @@
       <template>
         <el-carousel :interval="4000" type="card" :height="bannerheight + 'px'">
           <el-carousel-item v-for="item in imageList" :key="item.id">
-            <img
-              ref="bannerheight"
-              :src="item.idView"
-              class="image"
-              @load="imgLoad"
-              style="width:100%"
-            />
+            <img ref="bannerheight" :src="item.idView" class="image" @load="imgLoad" style="width:100%" />
           </el-carousel-item>
         </el-carousel>
       </template>
@@ -90,17 +84,10 @@ export default {
       user_id: '',
       bannerheight: '',
       imageList: [],
-      /*
-{ id: 0, idView: require("@/assets/l1.jpg") },
-{ id: 1, idView: require("@/assets/l2.jpg") },
-{ id: 2, idView: require("@/assets/l4.jpg") },
-{ id: 3, idView: require("@/assets/l1.jpg") },
-{ id: 4, idView: require("@/assets/l2.jpg") },
-{ id: 5, idView: require("@/assets/l4.jpg") },
-*/
       value: new Date()
     };
   },
+
   created() {
     this.getid();
     this.getname();
@@ -208,16 +195,12 @@ export default {
   width: 450px;
   height: 500px;
 }
-</style>
 
-<style>
 .test /deep/ .el-calendar-table .el-calendar-day {
   height: 50%;
   width: 100%;
 }
-</style>
 
-<style>
 ._index {
   background: #c8cfd8;
   width: 80%;

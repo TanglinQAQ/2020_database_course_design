@@ -11,94 +11,26 @@
 
       <div style="height: 50px">
         <div class="filter-container">
-          <el-input
-            v-model="listQuery.project_name"
-            placeholder="项目名称"
-            style="width: 180px"
-            class="filter-item"
-            @keyup.enter.native="handleFilter"
-          ></el-input>&nbsp;
-          <el-input
-            v-model="listQuery.publisher"
-            placeholder="项目发布者"
-            style="width: 180px"
-            class="filter-item"
-            @keyup.enter.native="handleFilter"
-          ></el-input>&nbsp;
-          <el-select
-            v-model="listQuery.hav_require"
-            placeholder="是否有组队需求"
-            clearable
-            style="width: 180px"
-            class="filter-item"
-          >
-            <el-option
-              v-for="item in havreqOptions"
-              :key="item.key"
-              :label="item.display_name"
-              :value="item.key"
-            />
+          <el-input v-model="listQuery.project_name" placeholder="项目名称" style="width: 180px" class="filter-item"
+            @keyup.enter.native="handleFilter"></el-input>&nbsp;
+          <el-input v-model="listQuery.publisher" placeholder="项目发布者" style="width: 180px" class="filter-item"
+            @keyup.enter.native="handleFilter"></el-input>&nbsp;
+          <el-select v-model="listQuery.hav_require" placeholder="是否有组队需求" clearable style="width: 180px"
+            class="filter-item">
+            <el-option v-for="item in havreqOptions" :key="item.key" :label="item.display_name" :value="item.key" />
           </el-select>&nbsp;
-          <el-button
-            class="filter-item"
-            type="primary"
-            icon="el-icon-search"
-            @click="searchContList"
-            style="float: right"
-          >搜索</el-button>
+          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="searchContList"
+            style="float: right">搜索</el-button>
         </div>
       </div>
-
-      <!--
- <div style="height: 50px;">
-      <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="项目名称"
-        @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-      <el-autocomplete class="inline-input" v-model="state1" :fetch-suggestions="querySearch" placeholder="项目发布人"
-        @select="handleSelect" style="float:left;margin-right:30px;width:150px;"></el-autocomplete>
-      <el-select v-model="value2" multiple placeholder="项目当前进度" style="float:left;margin-right:30px;width:150px;">
-        <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
-      <el-select v-model="value2" multiple placeholder="是否有组队需求" style="float:left;margin-right:30px;width:150px;">
-        <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="searchContList" style="float:left">
-        搜索
-      </el-button>
-    </div>
-      -->
-
       <br />
-      <!--
-    <div>
-      <el-table :data="table_Data" :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }"
-        default-sort="{ prop: 'create_time', order: 'descending' }">
-        <el-table-column prop="project_name" label="项目名称" width="100">
-        </el-table-column>
-        <el-table-column prop="project_introduction" label="项目简介" width="350">
-        </el-table-column>
-        <el-table-column prop="project_progress" label="项目当前进度" width="150">
-        </el-table-column>
-        <el-table-column prop="create_time" label="发布时间" sortable width="150">
-        </el-table-column>
-        <el-table-column prop="project_status" label="是否有组队需求" width="150">
-        </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button size="mini" @click="handleLook(scope.$index, scope.row)">查看详情</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-      -->
 
       <template>
         <div>
           <el-row :glutter="10">
             <el-col :span="6" v-for="(o, index) in tabledata" :key="index" :offset="2">
               <div style="margin-top: 15px">
-              
+
                 <!--这一层div的作用是什么-->
                 <el-card :body-style="{ padding: '0px' }" shadow="hover">
                   <img :src="o.Project_Imgimg_path" class="image" />
@@ -113,13 +45,8 @@
                     <br />
                     <br />
                     <template>
-                      <el-button
-                        type="success"
-                        plain
-                        size="mini"
-                        style="float: right"
-                        @click="handleLook(index, o.row),addhistory(username,o.project_id)"
-                      >了解更多</el-button>
+                      <el-button type="success" plain size="mini" style="float: right"
+                        @click="handleLook(index, o.row), addhistory(username, o.project_id)">了解更多</el-button>
                     </template>
                     <br />
                   </div>
@@ -134,6 +61,7 @@
     </el-main>
   </div>
 </template>
+
 
 <script>
 import global_msg from "../../utils/global.js";
@@ -157,9 +85,7 @@ export default {
       table_Data: [],
       tabledata: [],
 
-      /*
-      以下供检索功能用
-      */
+      //以下供检索功能用
       listQuery: {
         page: 1,
         //limit: 20,
@@ -244,7 +170,7 @@ export default {
       //console.log(index, row);
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id,id:this.$route.query.id },
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
 
@@ -269,38 +195,29 @@ export default {
       });
     },
 
-    /*
-   handleLook(index, row) {//进入项目详情页面
- var project_id = this.table_Data[index].project_id;
- console.log(index, row);
- this.$router.push({ path: "/users/ProjectDetail", query: { p_id: project_id } });
-},
-*/
-
     /*搜索功能的完善*/
     searchContList() {
       this.listQuery.page = 1;
       this.getList2();
     },
 
-    /*
-    以下为旧版本里的methods,可能有些调用在html中被注释了
-    */
+    //以下为旧版本里的methods,可能有些调用在html中被注释了
+
     handleClick(tab, event) {
       console.log(tab, event);
     },
     additem: function () {
-      this.$router.push({ path: "/users/CreatList" ,query: { id: this.$route.query.id }}); //接下来进入到CreatList
+      this.$router.push({ path: "/users/CreatList", query: { id: this.$route.query.id } }); //接下来进入到CreatList
     },
     myitem: function () {
-      this.$router.push({ path: "/users/MyProject" ,query: { id: this.$route.query.id }}); //接下来进入到MyProject
+      this.$router.push({ path: "/users/MyProject", query: { id: this.$route.query.id } }); //接下来进入到MyProject
     },
     getlist() {
       var vm = this; //全局变量
-      getrequireInfor().then( (res1)=> {
+      getrequireInfor().then((res1) => {
         global_msg.requirenum = res1.data.length; //改变全局projectnum
       });
-      getlistInfor().then((res)=> {
+      getlistInfor().then((res) => {
         global_msg.projectnum = res.data.length; //改变全局requirenum
         // console.log(res);
         // console.log(res.data.length);

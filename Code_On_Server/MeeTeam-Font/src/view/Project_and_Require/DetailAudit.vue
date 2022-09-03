@@ -3,12 +3,8 @@
     <el-main>
       <div id="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/Admin/AdminPageContent' }"
-            >首页</el-breadcrumb-item
-          >
-          <el-breadcrumb-item :to="{ path: '/Admin/AuditProject' }"
-            >项目审核</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/Admin/AdminPageContent' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/Admin/AuditProject' }">项目审核</el-breadcrumb-item>
           <el-breadcrumb-item>审核详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -21,23 +17,23 @@
       </el-descriptions>
       <el-descriptions title="" :column="1" border>
         <el-descriptions-item label="项目背景">{{
-          project_background
+            project_background
         }}</el-descriptions-item>
         <el-descriptions-item label="项目简介">{{
-          project_introduction
+            project_introduction
         }}</el-descriptions-item>
         <el-descriptions-item label="项目内容">{{
-          project_content
+            project_content
         }}</el-descriptions-item>
         <el-descriptions-item label="是否有组队需求">{{
-          project_status
+            project_status
         }}</el-descriptions-item>
       </el-descriptions>
       <br />
       <el-descriptions title="需求详情" :column="2" border>
         <el-descriptions-item label="组队类型">{{ team_type }}</el-descriptions-item>
         <el-descriptions-item label="类型细则">{{
-          team_type_details
+            team_type_details
         }}</el-descriptions-item>
         <el-descriptions-item label="组队人数">{{ team_limit }}</el-descriptions-item>
         <el-descriptions-item label="当前状态">{{ require_status }}</el-descriptions-item>
@@ -47,42 +43,24 @@
         <el-descriptions-item label="需求目的">{{ purpose }}</el-descriptions-item>
         <el-descriptions-item label="组队细则">{{ details }}</el-descriptions-item>
       </el-descriptions>
-      <el-steps
-        :space="500"
-        :active="1"
-        finish-status="success"
-        align-center
-        style="margin-top: 100px; margin-bottom: 100px"
-      >
+      <el-steps :space="500" :active="1" finish-status="success" align-center
+        style="margin-top: 100px; margin-bottom: 100px">
         <el-step title="创建项目"></el-step>
         <el-step title="项目审核"></el-step>
         <el-step title="项目发布"></el-step>
       </el-steps>
       <div class="auditoperation" style="text-align: center">
-        <el-button
-          v-if="!showAuditButton"
-          type="warning"
-          @click="
-            handleRecommend();
-            open1();
-          "
-          >推荐上榜</el-button
-        >
+        <el-button v-if="!showAuditButton" type="warning" @click="
+          handleRecommend();
+        open1();
+        ">推荐上榜</el-button>
       </div>
       <div class="auditoperation" style="display: flex  text-align: center">
-        <el-button
-          v-if="showAuditButton"
-          type="success"
-          @click="
-            handleAudit('1');
-            open2();
-          "
-          style="margin-right: 66px"
-          >审核通过</el-button
-        >
-        <el-button v-if="showAuditButton" type="danger" @click="dialogFormVisible = true"
-          >审核不通过</el-button
-        >
+        <el-button v-if="showAuditButton" type="success" @click="
+          handleAudit('1');
+        open2();
+        " style="margin-right: 66px">审核通过</el-button>
+        <el-button v-if="showAuditButton" type="danger" @click="dialogFormVisible = true">审核不通过</el-button>
         <el-dialog title="审核不通过" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="原因说明：">
@@ -91,20 +69,17 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button
-              type="primary"
-              @click="
-                dialogFormVisible = false;
-                handleAudit('0');
-              "
-              >确 定</el-button
-            >
+            <el-button type="primary" @click="
+              dialogFormVisible = false;
+            handleAudit('0');
+            ">确 定</el-button>
           </div>
         </el-dialog>
       </div>
     </el-main>
   </div>
 </template>
+
 
 <script>
 /* global Vue */
@@ -150,10 +125,12 @@ export default {
       formLabelWidth: "120px",
     };
   },
+
   created() {
     this.get_Info();
     this.triggerButton();
   },
+
   methods: {
     get_Info() {
       let para = {
@@ -268,6 +245,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 .auditdiv {

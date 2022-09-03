@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export function getProject(params) {
-    /*创建组队需求 */
     return request({
         url: '/UserProject/GetProjectID',
         method: 'get',
@@ -11,8 +10,8 @@ export function getProject(params) {
     })
 }
 
+
 export function getProjectname(params) {
-    /*创建组队需求 */
     return request({
         url: '/UserProject/GetProjectName',
         method: 'get',
@@ -22,7 +21,8 @@ export function getProjectname(params) {
     })
 }
 
-export function getfacorite(params){
+
+export function getfacorite(params) {
     return request({
         url: '/UserProject/GetFacorite',
         method: 'get',

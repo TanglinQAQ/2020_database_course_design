@@ -67,6 +67,7 @@
     </div>
 </template>
 
+
 <script>
 import global_msg from '../../utils/global.js'
 import { adduser } from '@/api/login.js'
@@ -82,7 +83,7 @@ export default {
                 let params = {
                     user_id: value,
                 }
-                isUseruni(params).then( (res) =>{
+                isUseruni(params).then((res) => {
                     if (res.data === false) {
                         callback(new Error('此用户名已经被使用过'));
                     } else {
@@ -159,9 +160,11 @@ export default {
             }
         };
     },
+
     created() {
         this.getimg();
     },
+
     methods: {
         goback() {
             this.$router.push({ path: "/login" }); //返回
@@ -186,7 +189,7 @@ export default {
                 major: this.ruleForm.major,
                 introduction: this.ruleForm.introduction
             }
-            adduser(param).then( (res)=> {
+            adduser(param).then((res) => {
                 if (res.data === false) {
                     vm.$message.error("提交失败");
                     vm.resetForm(formName);
@@ -229,6 +232,8 @@ export default {
     }
 }
 </script>
+
+
 <style scoped>
 .el-header,
 .el-footer {

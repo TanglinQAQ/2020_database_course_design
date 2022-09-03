@@ -16,19 +16,9 @@
                 <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
               </div>
               <div>
-                <el-upload
-                  class="upload-demo"
-                  action="http://106.14.193.8:8090/File/PostFile/"
-                  :data="upload_data"
-                  :on-preview="handlePreview"
-                  :on-remove="handleRemove"
-                  :on-success="handleSuccess"
-                  :before-remove="beforeRemove"
-                  multiple
-                  :limit="1"
-                  :on-exceed="handleExceed"
-                  :file-list="fileList"
-                >
+                <el-upload class="upload-demo" action="http://106.14.193.8:8090/File/PostFile/" :data="upload_data"
+                  :on-preview="handlePreview" :on-remove="handleRemove" :on-success="handleSuccess"
+                  :before-remove="beforeRemove" multiple :limit="1" :on-exceed="handleExceed" :file-list="fileList">
                   <el-button size="small" type="primary">点击上传</el-button>
                 </el-upload>
               </div>
@@ -55,10 +45,12 @@
               <el-input v-model="form.introduction" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
+
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
             <el-button type="primary" @click="submit()">确 定</el-button>
           </div>
+
         </el-dialog>
         <el-descriptions class="margin-top" title=" " :column="3" :size="size" border>
           <template slot="extra"></template>
@@ -133,13 +125,10 @@
           <el-breadcrumb-item>我的收藏</el-breadcrumb-item>
         </el-breadcrumb>
         <br />
+
         <div>
-          <el-table
-            :data="tableData1"
-            :header-cell-style="{ textAlign: 'center' }"
-            :cell-style="{ 'text-align': 'center' }"
-            default-sort="{ prop: 'create_time', order: 'descending' }"
-          >
+          <el-table :data="tableData1" :header-cell-style="{ textAlign: 'center' }"
+            :cell-style="{ 'text-align': 'center' }" default-sort="{ prop: 'create_time', order: 'descending' }">
             <el-table-column prop="project_name" label="项目名称" width="150"></el-table-column>
             <el-table-column prop="project_introduction" label="项目简介" width="350"></el-table-column>
             <el-table-column prop="facorite_time" label="收藏时间" sortable width="150"></el-table-column>
@@ -206,10 +195,12 @@ export default {
       img_name: ''
     };
   },
+
   mounted() {
     this.getlist() //页面一进入就加载表格
     this.getcollect()
   },
+
   methods: {
     editInfo() {
       let params1 = {
@@ -367,7 +358,7 @@ export default {
       );
     },
     beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
+      return this.$confirm(`确定移除 ${file.name}?`);
     },
     getimg() {
       let params = {
@@ -382,6 +373,7 @@ export default {
   }
 }
 </script>
+
 
 <style>
 #creatteam-container {

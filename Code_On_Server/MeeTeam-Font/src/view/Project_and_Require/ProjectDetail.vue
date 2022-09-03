@@ -9,6 +9,7 @@
           <el-breadcrumb-item>项目详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+
       <p class="title" align="center" label="项目名称">{{ project_name }}</p>
       <el-descriptions title="项目详情" :column="2" border style="margin-top: 20px;">
         <el-descriptions-item label="项目发布者">{{ user_id }}</el-descriptions-item>
@@ -35,161 +36,123 @@
         <el-descriptions-item label="需求目的">{{ purpose }}</el-descriptions-item>
         <el-descriptions-item label="组队细则">{{ details }}</el-descriptions-item>
       </el-descriptions>
-      <el-steps
-        :space="500"
-        :active="active"
-        finish-status="success"
-        align-center
-        style="margin-top: 100px;margin-bottom: 100px"
-      >
+      <el-steps :space="500" :active="active" finish-status="success" align-center
+        style="margin-top: 100px;margin-bottom: 100px">
         <el-step title="发布项目"></el-step>
         <el-step title="招募队友"></el-step>
         <el-step title="项目完结"></el-step>
       </el-steps>
-      <el-button
-        type="success"
-        plain
-        style="float: right;margin-right: 80px"
-        @click="handleApply()"
-        v-if="this.project_progress === '招募中'"
-      >申请加入</el-button>
-      <el-button
-        type="submit"
-        plain
-        style="float: left;margin-left: 20px"
-        @click="handlefavorite()"
-      >
+      <el-button type="success" plain style="float: right;margin-right: 80px" @click="handleApply()"
+        v-if="this.project_progress === '招募中'">申请加入</el-button>
+      <el-button type="submit" plain style="float: left;margin-left: 20px" @click="handlefavorite()">
         收藏{{ favorite_num
         }}
       </el-button>
-      <br><br>
-      <br><br>
-      <p align="left" class="eva"><strong>评论</strong>{{eva_num}}</p>
+      <br><br><br><br>
+
+      <p align="left" class="eva"><strong>评论</strong>{{ eva_num }}</p>
       <br>
-      <el-form
-            :model="ruleForm"
-            :rules="rules"
-            ref="ruleForm"
-            label-width="160px"
-            label-position="left"
-            class="demo-ruleForm"
-            inline="true" 
-            align="left"
-          >
-            <el-form-item label="" prop="eva" label-width="20px" >
-              <font align="left" class="uid">{{username}}</font>
-              &nbsp;
-              <font>想说：</font>
-            </el-form-item>
-            <el-form-item label="" prop="eva_content" label-width="30px" >
-              <el-input v-model="ruleForm.eva_content" class="blank" placeholder="欢迎发表评论(.w.)"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button
-                type="success"
-                plain
-                style="float: left;margin-left: 20px"
-                @click="handleevaluation('ruleForm')"
-              >评论{{evaluation_num}}
-              </el-button>
-            </el-form-item>
+
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px" label-position="left"
+        class="demo-ruleForm" inline="true" align="left">
+        <el-form-item label="" prop="eva" label-width="20px">
+          <font align="left" class="uid">{{ username }}</font>
+          &nbsp;
+          <font>想说：</font>
+        </el-form-item>
+        <el-form-item label="" prop="eva_content" label-width="30px">
+          <el-input v-model="ruleForm.eva_content" class="blank" placeholder="欢迎发表评论(.w.)"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" plain style="float: left;margin-left: 20px" @click="handleevaluation('ruleForm')">
+            评论{{ evaluation_num }}
+          </el-button>
+        </el-form-item>
       </el-form>
       <hr />
       <br />
-          <el-dialog :visible.sync="dialogVisible">
-            <div>
-              <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
-            </div>
-            <div>
-              <el-button type="primary" v-if='relation=="无"' @click="handlefollow">关注</el-button>
-              <el-button type="info" v-if='relation=="关注"' @click="handlefollow">取消关注</el-button>
-            </div>
-            <el-divider content-position="left">
-              <h4>用户信息</h4>
-            </el-divider>
-            <el-descriptions column="2">
-              <el-descriptions-item label="用户id">
-                <span v-text="this.his.user_id"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="性别">
-                <span v-text="this.his.gender"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="联系方式">
-                <span v-text="this.his.contact_info"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="就读院校">
-                <span v-text="this.his.institution"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="专业">
-                <span v-text="this.his.major"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="年级">
-                <span v-text="this.his.grade"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="个人简介" span="2">
-                <span v-text="this.his.introduction"></span>
-              </el-descriptions-item>
-              <el-descriptions-item label="积分" span="2">
-                <span v-text="this.his.point"></span>
-              </el-descriptions-item>
-            </el-descriptions>
-            <el-divider content-position="left">
-              <h4>项目经历</h4>
-            </el-divider>
-            <el-table
-              :data="project_experience"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
-              height="200"
-            >
-              <el-table-column prop="project_name" label="项目名称"></el-table-column>
-              <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="project_detail(scope.row)">查看详情</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-divider content-position="left">
-              <h4>收藏夹</h4>
-            </el-divider>
-            <el-table
-              :data="facorite"
-              :header-cell-style="{ textAlign: 'center' }"
-              :cell-style="{ 'text-align': 'center' }"
-              height="200"
-            >
-              <el-table-column prop="project_name" label="项目名称"></el-table-column>
-              <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="project_detail(scope.row)">查看详情</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <div slot="footer" class="dialog-footer">
-              <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
-            </div>
-          </el-dialog>
-          <div class="table">
-            <el-table
-              @row-click="handlecheck"
-              :data="tableData"
-              :show-header="false"
-              :cell-style="{ 'text-align': 'left' }"
-              :default-sort="{ prop: 'date', order: 'descending' }"
-              class="eltable"
-            >
-              <el-table-column prop="evaluator_id,eva_content,eva_time"  width="750">
-              <template slot-scope="scope">
-              <font class="evaid">{{scope.row.evaluator_id}}</font>&nbsp;
+
+      <el-dialog :visible.sync="dialogVisible">
+        <div>
+          <el-avatar :size="90" :fit="fit" :src="base64"></el-avatar>
+        </div>
+        <div>
+          <el-button type="primary" v-if='relation == "无"' @click="handlefollow">关注</el-button>
+          <el-button type="info" v-if='relation == "关注"' @click="handlefollow">取消关注</el-button>
+        </div>
+        <el-divider content-position="left">
+          <h4>用户信息</h4>
+        </el-divider>
+        <el-descriptions column="2">
+          <el-descriptions-item label="用户id">
+            <span v-text="this.his.user_id"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="性别">
+            <span v-text="this.his.gender"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="联系方式">
+            <span v-text="this.his.contact_info"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="就读院校">
+            <span v-text="this.his.institution"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="专业">
+            <span v-text="this.his.major"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="年级">
+            <span v-text="this.his.grade"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="个人简介" span="2">
+            <span v-text="this.his.introduction"></span>
+          </el-descriptions-item>
+          <el-descriptions-item label="积分" span="2">
+            <span v-text="this.his.point"></span>
+          </el-descriptions-item>
+        </el-descriptions>
+        <el-divider content-position="left">
+          <h4>项目经历</h4>
+        </el-divider>
+        <el-table :data="project_experience" :header-cell-style="{ textAlign: 'center' }"
+          :cell-style="{ 'text-align': 'center' }" height="200">
+          <el-table-column prop="project_name" label="项目名称"></el-table-column>
+          <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button size="mini" @click="project_detail(scope.row)">查看详情</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-divider content-position="left">
+          <h4>收藏夹</h4>
+        </el-divider>
+        <el-table :data="facorite" :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }"
+          height="200">
+          <el-table-column prop="project_name" label="项目名称"></el-table-column>
+          <el-table-column prop="create_time" label="发布时间" sortable></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button size="mini" @click="project_detail(scope.row)">查看详情</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
+        </div>
+      </el-dialog>
+
+      <div class="table">
+        <el-table @row-click="handlecheck" :data="tableData" :show-header="false" :cell-style="{ 'text-align': 'left' }"
+          :default-sort="{ prop: 'date', order: 'descending' }" class="eltable">
+          <el-table-column prop="evaluator_id,eva_content,eva_time" width="750">
+            <template slot-scope="scope">
+              <font class="evaid">{{ scope.row.evaluator_id }}</font>&nbsp;
               <font size="1px">说：</font>
-              <font>{{scope.row.eva_content}}</font><br>
-              <font size="1px">{{scope.row.eva_time}}</font>
-              </template>
-              </el-table-column>
-            </el-table>
-          </div>
+              <font>{{ scope.row.eva_content }}</font><br>
+              <font size="1px">{{ scope.row.eva_time }}</font>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </el-main>
   </div>
 </template>
@@ -228,7 +191,7 @@ export default {
       project_introduction: '',
       project_content: '',
       project_progress: '',
-      active:0,
+      active: 0,
       project_status: '',
       start_time: '',
       end_time: '',
@@ -274,6 +237,7 @@ export default {
       hisid: ""
     };
   },
+
   created() {
     this.get_Info();
   },
@@ -341,9 +305,9 @@ export default {
         let params = {
           MyID: this.$route.query.id,
           ID: this.hisid,
-          relationship:"无"
+          relationship: "无"
         }
-        pullRe(params).then((res)=> {
+        pullRe(params).then((res) => {
           if (res == 1)
             console.log("关注成功");
           else
@@ -355,7 +319,7 @@ export default {
         let params = {
           MyID: this.$route.query.id,
           ID: this.hisid,
-          relationship:"关注"
+          relationship: "关注"
         }
         pullRe(params);
       }
@@ -365,14 +329,14 @@ export default {
       var project_id = row.project_id;
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id,id:this.$route.query.id },
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     goback() {
-      this.$router.push({ path: "/users/InforList",id:this.$route.query.id });
+      this.$router.push({ path: "/users/InforList", id: this.$route.query.id });
     },
     get_Info() {
-      get_eva().then( (res0)=> {
+      get_eva().then((res0) => {
         global_msg.evaluationnum = res0.data.length;//改变全局projectnum
       })
       let para = {
@@ -385,12 +349,12 @@ export default {
         this.project_introduction = res.data.project_introduction;
         this.project_content = res.data.project_content;
         this.project_progress = res.data.project_progress;
-        if(this.project_progress=="已发布")
-          this.active=1;
-        else if(this.project_progress=='招募中')
-          this.active="2";
-        else if(this.project_progress=='已完结')
-          this.active="3";
+        if (this.project_progress == "已发布")
+          this.active = 1;
+        else if (this.project_progress == '招募中')
+          this.active = "2";
+        else if (this.project_progress == '已完结')
+          this.active = "3";
         this.project_status = res.data.project_status;
         this.start_time = res.data.due;
         this.start_time = this.start_time.replace("\"", "").replace("\"", "");//去掉时间格式的引号
@@ -428,7 +392,7 @@ export default {
         }
       })
       var vm = this;//全局变量
-      get_eva().then((res)=> {
+      get_eva().then((res) => {
         for (let item of res.data) {
           let form = {//设置添加数据的格式
             eve_time: '',
@@ -448,7 +412,7 @@ export default {
       })
     },
     handlefavorite(row) { //收藏操作,需要间隔时间长一点，否则会收藏失败
-      SelectAllCollection().then((res1)=> {
+      SelectAllCollection().then((res1) => {
         global_msg.facoritenum = res1.data.length + 1;//改变全局facoritenum
       })
       var vm = this;
@@ -457,7 +421,7 @@ export default {
         owner_id: this.$route.query.id,
         project_id: vm.$route.query.p_id
       }
-      Ifcollect(pp).then((res)=> {
+      Ifcollect(pp).then((res) => {
         aa = res.data;
         if (aa === false) {//被收藏过
           vm.$message.error("已经被收藏过");
@@ -468,7 +432,7 @@ export default {
             owner_id: this.$route.query.id,
             project_id: vm.$route.query.p_id
           }
-          AddMyCollection(pa).then((res)=> {
+          AddMyCollection(pa).then((res) => {
             if (res.data === false) {
               vm.$message.error("收藏失败");
             }
@@ -495,13 +459,13 @@ export default {
         evaluator_id: this.$route.query.id,
         project_id: vm.$route.query.p_id,
       }
-      createevalist(param).then((res)=> {
+      createevalist(param).then((res) => {
         if (res.data === false) {
           vm.$message.error("评论失败");
         }
         else {
           vm.$message.success("评论成功");
-          location. reload();
+          location.reload();
         }
       })
     },
@@ -512,7 +476,7 @@ export default {
         project_id: vm.$route.query.p_id,
         duty: "申请者",
       }
-      createuser_project(param).then((res)=> {
+      createuser_project(param).then((res) => {
         if (res.data === false) {
           vm.$message.error("申请失败");
         }
@@ -528,6 +492,7 @@ export default {
 }
 </script>
 
+
 <style scoped>
 .detaildiv {
   /* position: absolute; */
@@ -536,6 +501,7 @@ export default {
   right: 30px;
   left: 30px;
 }
+
 .title {
   margin: 0;
   background: #f0f0f0;
@@ -557,21 +523,21 @@ export default {
 }
 
 .blank {
-    margin: 0px;
-    width: 800px;
+  margin: 0px;
+  width: 800px;
 }
 
 .evaid {
-    padding:2px;
-    font-size:15px;
-    background:#545c64;
-    color:#ffffff;
-    border-radius: 5px;
+  padding: 2px;
+  font-size: 15px;
+  background: #545c64;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
-.eltable{
-  border-collapse:separator;
-  background-color:#ffffff;
+.eltable {
+  border-collapse: separator;
+  background-color: #ffffff;
   border-radius: 10px 10px 10px 10px;
 }
 </style>

@@ -4,104 +4,51 @@
       <el-main>
         <div id="breadcrumb">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }"
-              >首页</el-breadcrumb-item
-            >
+            <el-breadcrumb-item :to="{ path: '/Admin/AdminPage' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>通知管理</el-breadcrumb-item>
             <el-breadcrumb-item>通知总览</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
+
         <el-card>
           <div class="filter-container">
-            <el-input
-              placeholder="公告名称"
-              style="width: 180px"
-              class="filter-item"
-              v-model="listQuery.notice_title"
-              @keyup.enter.native="handleFilter"
-            ></el-input>
+            <el-input placeholder="公告名称" style="width: 180px" class="filter-item" v-model="listQuery.notice_title"
+              @keyup.enter.native="handleFilter"></el-input>
             &nbsp;
-            <el-input
-              placeholder="管理员"
-              style="width: 180px"
-              class="filter-item"
-              v-model="listQuery.admin_id"
-              @keyup.enter.native="handleFilter"
-            ></el-input>
+            <el-input placeholder="管理员" style="width: 180px" class="filter-item" v-model="listQuery.admin_id"
+              @keyup.enter.native="handleFilter"></el-input>
             &nbsp;
-            <el-select
-              placeholder="发布状态"
-              clearable
-              style="width: 180px"
-              class="filter-item"
-              v-model="listQuery.operate"
-            >
-              <el-option
-                v-for="item in operateOptions"
-                :key="item.key"
-                :label="item.display_name"
-                :value="item.key"
-              />
+            <el-select placeholder="发布状态" clearable style="width: 180px" class="filter-item"
+              v-model="listQuery.operate">
+              <el-option v-for="item in operateOptions" :key="item.key" :label="item.display_name" :value="item.key" />
             </el-select>
             &nbsp;
-            <el-button
-              class="filter-item"
-              type="primary"
-              icon="el-icon-search"
-              @click="handleFilter"
-            >
+            <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
               搜索
             </el-button>
           </div>
         </el-card>
         <br />
+
         <el-card>
-          <el-table
-            :data="tableData"
-            border
-            @row-click="goto_ShowNotice"
-            v-if="isAlive"
-            :header-cell-style="{ textAlign: 'center' }"
-            :cell-style="{ 'text-align': 'center' }"
-          >
+          <el-table :data="tableData" border @row-click="goto_ShowNotice" v-if="isAlive"
+            :header-cell-style="{ textAlign: 'center' }" :cell-style="{ 'text-align': 'center' }">
             <el-table-column v-if="false" prop="notice_id" label="公告id">
             </el-table-column>
-            <el-table-column
-              prop="notice_title"
-              label="公告标题"
-              align="left"
-              style="margin: 50px"
-            >
+            <el-table-column prop="notice_title" label="公告标题" align="left" style="margin: 50px">
             </el-table-column>
             <el-table-column prop="admin_id" label="管理员" align="center">
             </el-table-column>
             <el-table-column prop="operate_type" label="状态" align="center">
             </el-table-column>
-            <el-table-column
-              prop="operate_time"
-              label="发布时间"
-              align="center"
-              sortable
-            >
+            <el-table-column prop="operate_time" label="发布时间" align="center" sortable>
             </el-table-column>
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button-group>
-                  <el-button
-                    plain
-                    icon="el-icon-edit"
-                    @click="goto_edit(scope.row)"
-                  ></el-button>
-                  <el-popconfirm
-                    @confirm="delete_not(scope.row)"
-                    title="确定删除吗？"
-                  >
-                    <el-button
-                      plain
-                      slot="reference"
-                      @click.native.stop
-                      icon="el-icon-delete"
-                    ></el-button>
+                  <el-button plain icon="el-icon-edit" @click="goto_edit(scope.row)"></el-button>
+                  <el-popconfirm @confirm="delete_not(scope.row)" title="确定删除吗？">
+                    <el-button plain slot="reference" @click.native.stop icon="el-icon-delete"></el-button>
                   </el-popconfirm>
                 </el-button-group>
               </template>
@@ -134,9 +81,10 @@ export default {
       return operateKeyValue[operate];
     },
   },
+
   data() {
     return {
-      user:this.$route.query.id,
+      user: this.$route.query.id,
       tableData: [],
       isAlive: true,
       listQuery: {
@@ -147,9 +95,11 @@ export default {
       operateOptions,
     };
   },
+
   created() {
     this.getList();
   },
+  
   methods: {
     getList() {
       this.tableData = [];
@@ -175,28 +125,28 @@ export default {
       this.getList();
     },
     goback() {
-      this.$router.push({ path: "/Admin/AdminPage",query: { id: this.user } });
+      this.$router.push({ path: "/Admin/AdminPage", query: { id: this.user } });
     },
     goto_ShowNotice(row) {
       this.$router.push({
         path: "/Admin/ShowNotice",
         query: {
           n_id: row.notice_id,
-          id:this.user
-         },
+          id: this.user
+        },
       });
     },
     goto_edit(row) {
       this.$router.push({
         path: "/Admin/CreateNotice",
-        query: { n_id: row.notice_id,id:this.user },
+        query: { n_id: row.notice_id, id: this.user },
       });
     },
     delete_not(row) {
       let param = {
         id: row.notice_id,
       };
-      delete_notice(param).then((res) =>{
+      delete_notice(param).then((res) => {
         if (res.data) {
           alert("公告删除成功");
           location.reload();
@@ -224,5 +174,4 @@ export default {
   height: 30px;
   margin-bottom: 10px;
 }
-
 </style>

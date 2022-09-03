@@ -1,18 +1,8 @@
 <template>
   <el-main>
-    <el-upload
-      class="upload-demo"
-      action="http://106.14.193.8:8090/File/PostFile/"
-      :data="upload_data"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :on-success="handleSuccess"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="1"
-      :on-exceed="handleExceed"
-      :file-list="fileList"
-    >
+    <el-upload class="upload-demo" action="http://106.14.193.8:8090/File/PostFile/" :data="upload_data"
+      :on-preview="handlePreview" :on-remove="handleRemove" :on-success="handleSuccess" :before-remove="beforeRemove"
+      multiple :limit="1" :on-exceed="handleExceed" :file-list="fileList">
       <el-button size="small" type="primary">点击上传</el-button>
       <div slot="tip" class="el-upload__tip">
         只能上传jpg/png文件，且不超过500kb
@@ -31,15 +21,17 @@ export default {
       upload_data: {
         path: "head_img",
         id: this.$route.query.id,
-        target:'user'
+        target: 'user'
       },
       fileList: [],
-      base64:''
+      base64: ''
     };
   },
+
   created() {
     this.getimg();
   },
+  
   methods: {
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -52,8 +44,7 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
+        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length
         } 个文件`
       );
     },

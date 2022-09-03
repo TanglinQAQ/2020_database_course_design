@@ -1,10 +1,7 @@
 <template>
   <div class="block">
     <p1 class="head">以下内容为个人浏览记录</p1>
-    <br />
-    <br />
-    <br />
-    <br />
+    <br /><br /><br /><br />
     <el-timeline v-for="o in datalist" :key="o.user_id">
       <el-timeline-item placement="top" class="item" color="#409EFF" type="primary">
         <div id="card">
@@ -19,20 +16,6 @@
           </el-card>
         </div>
       </el-timeline-item>
-      <!--
-<el-timeline-item timestamp="2018/4/3" placement="top">
-      <el-card>
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/3 20:46</p>
-      </el-card>
-    </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/2" placement="top">
-      <el-card>
-        <h4>更新 Github 模板</h4>
-        <p>王小虎 提交于 2018/4/2 20:46</p>
-      </el-card>
-    </el-timeline-item>
-      -->
     </el-timeline>
   </div>
 </template>
@@ -57,7 +40,7 @@ export default {
       var project_id = o.proj_id;
       this.$router.push({
         path: "/users/ProjectDetail",
-        query: { p_id: project_id ,id:this.$route.query.id},
+        query: { p_id: project_id, id: this.$route.query.id },
       });
     },
     getlist() {
@@ -66,7 +49,7 @@ export default {
       };
       //console.log(params);
       gethistory(params).then((res) => {
-        console.log(res);
+        //console.log(res);
         let vm = this;
         for (let item of res.data) {
           let form = {
@@ -89,13 +72,12 @@ export default {
           });
         }
       })
-      //.catch(console.log("something wrong"));
-
-      console.log(this.datalist);
+      //console.log(this.datalist);
     }
   }
 }
 </script>
+
 
 <style>
 .block {
@@ -114,6 +96,7 @@ export default {
   margin-left: 25px;
   font-size: 15px;
 }
+
 .content {
   margin-bottom: 5px;
 }
@@ -123,6 +106,7 @@ export default {
   width: 50%;
   height: 150px;
 }
+
 #card:hover {
   margin-right: -10px;
   margin: 30px;

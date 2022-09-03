@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {//获取查询列表结果
+//获取查询列表结果
+export function fetchList(query) {
     return request({
         url: '/Project/project_query',
         method: 'get',
